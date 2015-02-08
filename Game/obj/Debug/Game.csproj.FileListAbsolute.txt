@@ -1,0 +1,6 @@
+c:\users\ico\documents\visual studio 2013\Projects\LarkspurPinkOOPGame\Game\bin\Debug\Game.exe.config
+c:\users\ico\documents\visual studio 2013\Projects\LarkspurPinkOOPGame\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
+c:\users\ico\documents\visual studio 2013\Projects\LarkspurPinkOOPGame\Game\bin\Debug\Game.exe
+c:\users\ico\documents\visual studio 2013\Projects\LarkspurPinkOOPGame\Game\bin\Debug\Game.pdb
+c:\users\ico\documents\visual studio 2013\Projects\LarkspurPinkOOPGame\Game\obj\Debug\Game.exe
+c:\users\ico\documents\visual studio 2013\Projects\LarkspurPinkOOPGame\Game\obj\Debug\Game.pdb
