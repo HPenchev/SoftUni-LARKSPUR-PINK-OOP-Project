@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.Characters.Interfaces;
-
-namespace Game.Characters
+﻿namespace Game.Characters
 {
-    public abstract class Character : GameObject 
-    {
-        public int GameXCoordinate { get; set; }
+    using Game.Characters.Interfaces;
 
-        public int GameYCoordinate { get; set; }
+    public abstract class Character : GameObject 
+    {        
+        public Character(string id, Position mapPosition)
+            : base(id)
+        {
+            this.MapPosition = mapPosition;
+        }
+
+        public Position MapPosition { get; set; }              
     }
-}
+} 

@@ -45,10 +45,12 @@
     <Compile Include="Characters\Interfaces\IAttack.cs" />
     <Compile Include="Characters\Interfaces\IHeal.cs" />
     <Compile Include="Characters\InterractableCharacters\AttackCharacter.cs" />
+    <Compile Include="Characters\InterractableCharacters\Direction.cs" />
     <Compile Include="Characters\InterractableCharacters\InterractableCharacter.cs" />
     <Compile Include="Characters\Interfaces\IInterractable.cs" />
     <Compile Include="Characters\Team.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

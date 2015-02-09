@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.Characters.Interfaces;
-
-namespace Game.Characters.InterractableCharacters
+﻿namespace Game.Characters.InterractableCharacters
 {
+    using Game.Characters.Interfaces;
+
     public abstract class AttackCharacter : InterractableCharacter, IAttack
     {
-        private int attackPoints;
+        private int attackPoints = 0;
 
-        public AttackCharacter(int hitPoints, int defensePoints, Team team, int range)
-            : base(hitPoints, defensePoints, team, range)
+        public AttackCharacter(string id, Position mapPosition, Team team, int hitPoints, int defensePoints, int range, int attackPoints)
+            : base(id, mapPosition, team, hitPoints, defensePoints, range)
         {
+            this.AttackPoints = attackPoints;
         }      
 
-        public int AttackPoints { 
+        public int AttackPoints
+        { 
             get
             {
                 return this.attackPoints;
@@ -24,7 +21,7 @@ namespace Game.Characters.InterractableCharacters
 
             set
             {
-                value = UpdatePoints(value);
+                this.attackPoints = this.UpdatePoints(value);
             }           
         }           
 
