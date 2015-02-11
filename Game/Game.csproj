@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\InterractableCharacters\HealingCharacter.cs" />
     <Compile Include="Characters\Interfaces\IAttack.cs" />
     <Compile Include="Characters\Interfaces\IHeal.cs" />
     <Compile Include="Characters\InterractableCharacters\AttackCharacter.cs" />

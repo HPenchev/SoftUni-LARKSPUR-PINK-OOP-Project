@@ -4,6 +4,6 @@
     {
         int HealingPoints { get; set; }
 
-        void Healing();
+        void Heal();
     }
 }

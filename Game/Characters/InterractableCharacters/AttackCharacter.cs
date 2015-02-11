@@ -6,7 +6,14 @@
     {
         private int attackPoints = 0;
 
-        public AttackCharacter(string id, Position mapPosition, Team team, int hitPoints, int defensePoints, int range, int attackPoints)
+        public AttackCharacter(
+            string id, 
+            Position mapPosition,
+            Team team, 
+            int hitPoints, 
+            int defensePoints,
+            int range, 
+            int attackPoints)
             : base(id, mapPosition, team, hitPoints, defensePoints, range)
         {
             this.AttackPoints = attackPoints;
@@ -25,7 +32,7 @@
             }           
         }           
 
-        public void Attack()
+        public override void InterractWithTarget()
         {
             int damage = this.AttackPoints - this.Target.DefensePoints;
 
