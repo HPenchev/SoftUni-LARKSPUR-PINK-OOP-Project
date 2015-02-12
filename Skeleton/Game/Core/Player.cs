@@ -12,9 +12,10 @@ namespace Game.Core
         private decimal experience;
         private decimal gold;
         private List<IItem> inventory;
-        private int mana;
+        private double mana;
         private double attackSpeed;
         private double allResistance;
+        private double critDmg;
         private double critChance;
         private double chanceToDoge;
 
@@ -28,6 +29,7 @@ namespace Game.Core
             this.Inventory = new List<IItem>();
             this.X = PlayerConstants.PlayerStartingX;
             this.Y = PlayerConstants.PlayerStartingY;
+            this.critDmg = CritDmg;
         }
 
         public int InventorySize
@@ -57,7 +59,7 @@ namespace Game.Core
             set { this.gold = value; }
         }
 
-        public int Mana
+        public double Mana
         {
             get { return this.mana; }
             set { this.mana = value; }
@@ -67,6 +69,12 @@ namespace Game.Core
         {
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
+        }
+
+        public double CritDmg
+        {
+            get { return this.critDmg; }
+            set { this.critDmg = value; }
         }
 
         public double AllResistance
