@@ -54,6 +54,7 @@
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\Spell.cs" />
     <Compile Include="Core\Weapon.cs" />
+    <Compile Include="Draw\ImageDrawer.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Example.cs" />
@@ -68,8 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />
