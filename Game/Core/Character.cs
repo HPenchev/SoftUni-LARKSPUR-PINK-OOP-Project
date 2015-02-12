@@ -5,9 +5,9 @@ namespace Game.Core
     public abstract class Character : GameObject, ICharacter
     {
         protected bool isAlive = true;
-        private int healthPoints;
-        private int attackPoints;
-        private int defencePoints;
+        private double healthPoints;
+        private double attackPoints;
+        private double defencePoints;
         private double range;
         private double x;
         private double y;
@@ -23,19 +23,19 @@ namespace Game.Core
             set { this.isAlive = value; }
         }
 
-        public int HealthPoints
+        public double HealthPoints
         {
             get { return this.healthPoints; }
             set { this.healthPoints = value; }
         }
 
-        public int AttackPoints
+        public double AttackPoints
         {
             get { return this.attackPoints; }
             set { this.attackPoints = value; }
         }
 
-        public int DefencePoints
+        public double DefencePoints
         {
             get { return this.defencePoints; }
             set { this.defencePoints = value; }

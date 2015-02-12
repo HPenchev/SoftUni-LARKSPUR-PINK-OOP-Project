@@ -12,7 +12,7 @@ namespace Game.Core
         private decimal experience;
         private decimal gold;
         private List<IItem> inventory;
-        private int mana;
+        private double mana;
         private double attackSpeed;
         private double allResistance;
         private double critChance;
@@ -57,7 +57,7 @@ namespace Game.Core
             set { this.gold = value; }
         }
 
-        public int Mana
+        public double Mana
         {
             get { return this.mana; }
             set { this.mana = value; }
