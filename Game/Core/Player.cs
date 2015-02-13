@@ -5,18 +5,15 @@ using Game.Interfaces;
 
 namespace Game.Core
 {
-    public abstract class Player : Character, IPlayer, IStatsable
+    public abstract class Player : Character, IPlayer
     {
         private int inventorySize;
         private int level;
         private decimal experience;
         private decimal gold;
         private List<IItem> inventory;
-        private double mana;
-        private double attackSpeed;
-        private double allResistance;
-        private double critChance;
-        private double chanceToDoge;
+        private double mana;        
+        private double allResistance;       
 
         protected Player(string id)
             : base(id)
@@ -26,15 +23,26 @@ namespace Game.Core
             this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Gold = PlayerConstants.PlayerStartingGold;
             this.Inventory = new List<IItem>();
-            this.X = PlayerConstants.PlayerStartingX;
-            this.Y = PlayerConstants.PlayerStartingY;
+            this.MapPosition = new Position(PlayerConstants.playerStartingX, PlayerConstants.playerStartingY);
         }
 
         public int InventorySize
         {
-            get { return this.inventorySize; }
-            set { this.inventorySize = value; }
+            get 
+            { 
+                return this.inventorySize;
+            }
+            set
+            {
+                if (value < PlayerConstants.PlayerStartingInventorySize)
+                {
+                    value = PlayerConstants.PlayerStartingInventorySize;
+                }
+
+                this.inventorySize = value;
+            }
         }
+
         public int Level
         {
             get { return this.level; }
@@ -46,11 +54,13 @@ namespace Game.Core
             get { return this.experience; }
             set { this.experience = value; }
         }
+
         public List<IItem> Inventory
         {
             get { return this.inventory; }
             set { this.inventory = value; }
         }
+
         public decimal Gold
         {
             get { return this.gold; }
@@ -61,44 +71,22 @@ namespace Game.Core
         {
             get { return this.mana; }
             set { this.mana = value; }
-        }
-
-        public double AttackSpeed
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
+        }                
 
         public double AllResistance
         {
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
-        }
+        }        
 
-        public double CritChance
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public double ChanceToDoge
-        {
-            get { return this.chanceToDoge; }
-            set { this.chanceToDoge = value; }
-        }
-
-        public void Attack(ICharacter enemy)
-        {
-            calculateAllStats();
-            throw new NotImplementedException();
-        }
-
-        private void calculateAllStats()
+        private void CalculateAllStats()
         {
             //calc attackSpeed , cacl crit, doge
             //deff with allres will be taken in the engine
             throw new NotImplementedException();
         }
+
+        
 
         public void CastSpell(IItem item)
         {

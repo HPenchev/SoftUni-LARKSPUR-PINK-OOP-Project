@@ -11,7 +11,7 @@ namespace Game.Characters
             : base(id)
         {
             this.HealthPoints = MageConstants.HealthPoints;
-            this.DefencePoints = MageConstants.DefencePoints;
+            this.DefensePoints = MageConstants.DefencePoints;
             this.AttackPoints = MageConstants.AttackPoints;
             this.Mana = MageConstants.Mana;
             this.Range = MageConstants.Range;

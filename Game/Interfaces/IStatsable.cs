@@ -4,9 +4,9 @@
     {
         //depend on items;
         double AttackSpeed { get; set; }
-        double AllResistance { get; set; }
-        double CritChance { get; set; }
-        double ChanceToDoge { get; set; }
+        //double AllResistance { get; set; }
+        int CriticalChance { get; set; }
+        int ChanceToDoge { get; set; }
 
     }
 }

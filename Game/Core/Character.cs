@@ -7,10 +7,9 @@ namespace Game.Core
         protected bool isAlive = true;
         private double healthPoints;
         private double attackPoints;
-        private double defencePoints;
+        private double defensePoints;
         private double range;
-        private double x;
-        private double y;
+       
         protected Character(string id)
             : base(id)
         {
@@ -35,29 +34,60 @@ namespace Game.Core
             set { this.attackPoints = value; }
         }
 
-        public double DefencePoints
+        public double DefensePoints
         {
-            get { return this.defencePoints; }
-            set { this.defencePoints = value; }
-        }
-
-
-        public double X
-        {
-            get { return this.x; }
-            set { this.x = value; }
-        }
-
-        public double Y
-        {
-            get { return this.y; }
-            set { this.y = value; }
-        }
+            get { return this.defensePoints; }
+            set { this.defensePoints = value; }
+        }       
 
         public double Range
         {
             get { return this.range; }
             set { this.range = value; }
+        }
+
+        public int CriticalChance { get; set; } //Chance to do double damage in %
+
+        public double AttackSpeed { get; set; }
+
+        public int ChanceToDoge { get; set; } //Chence to avoid enemy hit in %               
+
+        public Position MapPosition { get; set; }
+
+        public Position BattleMapPosition { get; set; }
+
+        public void Attack(ICharacter enemy)
+        {
+            double damage = CalculateDamage(this.AttackPoints, enemy.DefensePoints, this.AttackSpeed, this.CriticalChance, enemy.ChanceToDoge);
+            enemy.HealthPoints -= damage;
+            if (enemy.HealthPoints <= 0)
+            {
+                enemy.IsAlive = false;
+            }
+        }
+
+        private double CalculateDamage(double attackPoints, double defensePoints, double attackSpeed, int chanceToCritical, int chanceToDoge)
+        {
+            double damage = (attackPoints - defensePoints);
+            if (damage < 1)
+            {
+                damage = 1;
+            }
+
+            int criticalHitRandom = Randomizer.rand.Next(100) + 1;
+            if (chanceToCritical >= criticalHitRandom)
+            {
+                damage *= 2; 
+            }
+
+            int dodgeRandom = Randomizer.rand.Next(100) + 1;
+
+            if (chanceToDoge >= dodgeRandom)
+            {
+                damage = 0;
+            }
+
+            return damage;
         }
     }
 }

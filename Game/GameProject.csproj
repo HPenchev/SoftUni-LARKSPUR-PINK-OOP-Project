@@ -53,6 +53,8 @@
     <Compile Include="Core\Item.cs" />
     <Compile Include="Core\Map.cs" />
     <Compile Include="Core\Player.cs" />
+    <Compile Include="Core\Position.cs" />
+    <Compile Include="Core\Randomizer.cs" />
     <Compile Include="Core\Spell.cs" />
     <Compile Include="Core\Weapon.cs" />
     <Compile Include="Draw\DrawImg.cs" />
@@ -71,6 +73,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Engine\" />

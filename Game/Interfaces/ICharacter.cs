@@ -1,12 +1,10 @@
 ﻿namespace Game.Interfaces
 {
-    public interface ICharacter
+    public interface ICharacter : IStatsable
     {
         bool IsAlive { get; set; }
         double HealthPoints { get; set; }
         double AttackPoints { get; set; }
-        double DefencePoints { get; set; }
-        double X { get; set; }
-        double Y { get; set; }
+        double DefensePoints { get; set; }        
     }
 }
