@@ -11,14 +11,14 @@
         private double attackSpeed;
         private double criticalChance;
         private double criticalDamage;
-        private double chanceToDoge;
+        private double chanceToDodge;
         private bool isEquiped;
         protected Equipment(string id) : base(id)
         {
             this.AttackSpeed = attackSpeed;
             this.CriticalChance = criticalChance;
             this.CriticalDamage = criticalDamage;
-            this.ChanceToDoge = chanceToDoge;
+            this.ChanceToDodge = chanceToDodge;
             this.IsEquiped = isEquiped;
         }
 
@@ -58,16 +58,16 @@
                 this.criticalDamage = value;
             }
         }
-        public double ChanceToDoge
+        public double ChanceToDodge
         {
             get
             {
-                return this.chanceToDoge;
+                return this.chanceToDodge;
             }
 
             set
             {
-                this.chanceToDoge = value;
+                this.chanceToDodge = value;
             }
         }
         public bool IsEquiped

@@ -28,3 +28,9 @@ C:\Users\Ico\Documents\Visual Studio 2013\Projects\LarkspurPinkOOPGame\SoftUni-L
 C:\Users\Ico\Documents\Visual Studio 2013\Projects\LarkspurPinkOOPGame\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\obj\Debug\GameProject.csprojResolveAssemblyReference.cache
 C:\Users\Ico\Documents\Visual Studio 2013\Projects\LarkspurPinkOOPGame\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\bin\Debug\Game.exe
 C:\Users\Ico\Documents\Visual Studio 2013\Projects\LarkspurPinkOOPGame\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\bin\Debug\Game.pdb
+H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\bin\Debug\Game.exe.config
+H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\obj\Debug\Game.exe
+H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\obj\Debug\Game.pdb
+H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\bin\Debug\Game.exe
+H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\bin\Debug\Game.pdb
+H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\obj\Debug\GameProject.csprojResolveAssemblyReference.cache

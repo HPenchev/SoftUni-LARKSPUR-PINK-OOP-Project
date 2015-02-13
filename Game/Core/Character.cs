@@ -50,7 +50,7 @@ namespace Game.Core
 
         public double AttackSpeed { get; set; }
 
-        public int ChanceToDoge { get; set; } //Chence to avoid enemy hit in %               
+        public int ChanceToDodge { get; set; } //Chence to avoid enemy hit in %               
 
         public Position MapPosition { get; set; }
 
@@ -58,7 +58,7 @@ namespace Game.Core
 
         public void Attack(ICharacter enemy)
         {
-            double damage = CalculateDamage(this.AttackPoints, enemy.DefensePoints, this.AttackSpeed, this.CriticalChance, enemy.ChanceToDoge);
+            double damage = CalculateDamage(this.AttackPoints, enemy.DefensePoints, this.AttackSpeed, this.CriticalChance, enemy.ChanceToDodge);
             enemy.HealthPoints -= damage;
             if (enemy.HealthPoints <= 0)
             {

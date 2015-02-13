@@ -17,7 +17,7 @@
             this.Id = "The Armor of Gandalf the gray.";
             this.AttackPoints = 0;
             this.AttackSpeed = 2;
-            this.ChanceToDoge = 2;
+            this.ChanceToDodge = 2;
             this.CriticalChance = 1;
             this.CriticalDamage = 10;
             this.DefencePoints = 50;

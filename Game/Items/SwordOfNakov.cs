@@ -16,7 +16,7 @@
             this.Id = "The Sword of Justice";
             this.AttackPoints = 100;
             this.AttackSpeed = 1;
-            this.ChanceToDoge = 0;
+            this.ChanceToDodge = 0;
             this.CriticalChance = 1;
             this.CriticalDamage = 1;
             this.DefencePoints = 0;
