@@ -42,12 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\Mage.cs" />
+    <Compile Include="Characters\NonPlayableCharacters\Ghost.cs" />
+    <Compile Include="Characters\NonPlayableCharacters\Vampire.cs" />
+    <Compile Include="Characters\NonPlayableCharacters\Witch.cs" />
+    <Compile Include="Characters\PlayableCharacters\Amazon.cs" />
+    <Compile Include="Characters\PlayableCharacters\Barbarian.cs" />
+    <Compile Include="Characters\PlayableCharacters\Druid.cs" />
+    <Compile Include="Characters\PlayableCharacters\Mage.cs" />
     <Compile Include="Core\Armor.cs" />
     <Compile Include="Core\Character.cs" />
+    <Compile Include="Core\Data\Constants\EnemyCharacters.cs" />
+    <Compile Include="Core\Data\Constants\PlayerConstatns\AmazonConstants.cs" />
+    <Compile Include="Core\Data\Constants\PlayerConstatns\BarbarianConstants.cs" />
+    <Compile Include="Core\Data\Constants\PlayerConstatns\DruidConstants.cs" />
+    <Compile Include="Core\Data\Constants\PlayerConstatns\GhostConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\MageConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\PlayerConstants.cs" />
+    <Compile Include="Core\Data\Constants\PlayerConstatns\VampiraConstants.cs" />
+    <Compile Include="Core\Data\Constants\PlayerConstatns\WitchConstants.cs" />
     <Compile Include="Core\Data\Enums\ArmorType.cs" />
+    <Compile Include="Core\Data\Enums\Team.cs" />
     <Compile Include="Core\Data\Enums\WeaponType.cs" />
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />

@@ -1,10 +1,10 @@
-﻿using Game.Interfaces;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
+    using Game.Interfaces;
+    using Game.Core.Data.Enums;
     public abstract class Character : GameObject, ICharacter
     {
-        protected bool isAlive = true;
+        private bool isAlive = true;
         private double healthPoints;
         private double attackPoints;
         private double defensePoints;
@@ -64,17 +64,19 @@ namespace Game.Core
             set { this.range = value; }
         }
 
-        public int CriticalChance { get; set; } //Chance to do double damage in %
+        public int CriticalChance { get; set; } // Chance to do double damage in %
 
         public double AttackSpeed { get; set; }
 
-        public int ChanceToDodge { get; set; } //Chence to avoid enemy hit in %               
+        public int ChanceToDodge { get; set; } // Chence to avoid enemy hit in %               
         
         public Position BattleMapPosition { get; set; }
 
+        public Team Team { get; set; }
+
         public void Attack(ICharacter enemy)
         {
-            double damage = CalculateDamage(this.AttackPoints, enemy.DefensePoints, this.AttackSpeed, this.CriticalChance, enemy.ChanceToDodge);
+            double damage = this.CalculateDamage(this.AttackPoints, enemy.DefensePoints, this.AttackSpeed, this.CriticalChance, enemy.ChanceToDodge);
             enemy.HealthPoints -= damage;
             if (enemy.HealthPoints <= 0)
             {
@@ -84,7 +86,7 @@ namespace Game.Core
 
         private double CalculateDamage(double attackPoints, double defensePoints, double attackSpeed, int chanceToCritical, int chanceToDoge)
         {
-            double damage = (attackPoints - defensePoints);
+            double damage = attackPoints - defensePoints;
             if (damage < 1)
             {
                 damage = 1;

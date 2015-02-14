@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Core.Data.Constants.PlayerConstatns;
 using Game.Interfaces;
+using Game.Core.Data.Enums;
 
 namespace Game.Core
 {
@@ -12,7 +13,6 @@ namespace Game.Core
         private decimal gold;
         private List<IItem> inventory;
         private double mana;        
-        private double allResistance;
 
         protected Player(string id,
             double healthPoints,
@@ -30,7 +30,8 @@ namespace Game.Core
             this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Gold = PlayerConstants.PlayerStartingGold;
             this.Inventory = new List<IItem>();
-            this.MapPosition = new Position(PlayerConstants.playerStartingX, PlayerConstants.playerStartingY);
+            this.MapPosition = new Position(PlayerConstants.PlayerStartingX, PlayerConstants.PlayerStartingY);
+            this.Team = Team.Light;
         }
 
         public int InventorySize

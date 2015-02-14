@@ -13,6 +13,7 @@
         private double criticalDamage;
         private double chanceToDodge;
         private bool isEquiped;
+
         protected Equipment(string id) : base(id)
         {
             this.AttackSpeed = attackSpeed;
@@ -34,6 +35,7 @@
                 this.attackSpeed = value;
             }
         }
+
         public double CriticalChance
         {
             get
@@ -46,6 +48,7 @@
                 this.criticalChance = value;
             }
         }
+
         public double CriticalDamage
         {
             get
@@ -58,6 +61,7 @@
                 this.criticalDamage = value;
             }
         }
+
         public double ChanceToDodge
         {
             get
@@ -70,6 +74,7 @@
                 this.chanceToDodge = value;
             }
         }
+
         public bool IsEquiped
         {
             get

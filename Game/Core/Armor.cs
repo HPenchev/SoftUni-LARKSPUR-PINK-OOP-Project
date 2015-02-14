@@ -6,14 +6,16 @@
     using System.Text;
     using System.Threading.Tasks;
     using Core.Data.Enums;
+
     public abstract class Armor : Equipment
     {
         private ArmorType armorType;
 
         protected Armor(string id) : base(id)
         {
-            this.ArmorType = armorType;
+            this.ArmorType = armorType; // This makes no sensce, Check it again!
         }
+
         public ArmorType ArmorType
         {
             get
