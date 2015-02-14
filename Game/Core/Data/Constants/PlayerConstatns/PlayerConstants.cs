@@ -6,7 +6,7 @@
         public const int playerStartingX = 0;
         public const int playerStartingY = 0;
         public const int PlayerStartingInventorySize = 20;
-        public const int PlayerStartingLevel = 0;
+        public const int PlayerStartingLevel = 1;
         public const decimal PlayerStartingExperience = 0;
     }
 }

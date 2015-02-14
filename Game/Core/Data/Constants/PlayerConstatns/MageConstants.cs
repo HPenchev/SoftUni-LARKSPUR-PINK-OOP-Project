@@ -8,5 +8,8 @@
         public const int AttackPoints = 50;
         public const int Mana = 400;
         public const int Range = 10;
+        public const double AttackSpeed = 1.5;
+        public const int CriticalChance = 3;
+        public const int ChanceToDoge = 4;
     }
 }

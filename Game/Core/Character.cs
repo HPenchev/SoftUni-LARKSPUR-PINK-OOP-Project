@@ -9,11 +9,27 @@ namespace Game.Core
         private double attackPoints;
         private double defensePoints;
         private double range;
-       
-        protected Character(string id)
+        
+        protected Character(
+            string id, 
+            double healthPoints,
+            double defensePoints, 
+            double range, 
+            double attackPoints = 0, 
+            double attackSpeed = 1,
+            int criticalChance = 0,
+            int chanceToDoge = 0,
+            int level = 1)
             : base(id)
         {
             this.IsAlive = true;
+            this.Level = level;
+            this.HealthPoints = healthPoints;
+            this.AttackPoints = attackPoints;
+            this.DefensePoints = defensePoints;
+            this.Range = range;
+            this.CriticalChance = criticalChance;
+            this.ChanceToDodge = chanceToDoge;
         }
 
         public bool IsAlive
@@ -21,6 +37,8 @@ namespace Game.Core
             get { return this.isAlive; }
             set { this.isAlive = value; }
         }
+
+        public int Level { get; set; }
 
         public double HealthPoints
         {
@@ -51,9 +69,7 @@ namespace Game.Core
         public double AttackSpeed { get; set; }
 
         public int ChanceToDodge { get; set; } //Chence to avoid enemy hit in %               
-
-        public Position MapPosition { get; set; }
-
+        
         public Position BattleMapPosition { get; set; }
 
         public void Attack(ICharacter enemy)

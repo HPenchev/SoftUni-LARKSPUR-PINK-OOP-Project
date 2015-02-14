@@ -7,19 +7,26 @@ namespace Game.Core
 {
     public abstract class Player : Character, IPlayer
     {
-        private int inventorySize;
-        private int level;
+        private int inventorySize;    
         private decimal experience;
         private decimal gold;
         private List<IItem> inventory;
         private double mana;        
-        private double allResistance;       
+        private double allResistance;
 
-        protected Player(string id)
-            : base(id)
+        protected Player(string id,
+            double healthPoints,
+            double defensePoints,
+            double range,
+            double attackPoints = 0,
+            double attackSpeed = 1,
+            int criticalChance = 0,
+            int chanceToDoge = 0
+            )
+            : base(id, healthPoints, defensePoints, range, attackPoints, attackSpeed, criticalChance, chanceToDoge)
         {
-            this.InventorySize = PlayerConstants.PlayerStartingInventorySize;
             this.Level = PlayerConstants.PlayerStartingLevel;
+            this.InventorySize = PlayerConstants.PlayerStartingInventorySize;            
             this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Gold = PlayerConstants.PlayerStartingGold;
             this.Inventory = new List<IItem>();
@@ -41,13 +48,7 @@ namespace Game.Core
 
                 this.inventorySize = value;
             }
-        }
-
-        public int Level
-        {
-            get { return this.level; }
-            set { this.level = value; }
-        }
+        }       
 
         public decimal Experience
         {
@@ -77,21 +78,12 @@ namespace Game.Core
         {
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
-        }        
-
-        private void CalculateAllStats()
-        {
-            //calc attackSpeed , cacl crit, doge
-            //deff with allres will be taken in the engine
-            throw new NotImplementedException();
         }
 
-        
+        public Position MapPosition { get; set; }
 
-        public void CastSpell(IItem item)
-        {
-            throw new NotImplementedException();
-            // NotEnoughManaException
+        public virtual void CastSpell(IItem item)
+        {            
         }
 
         public void Display(string args)
@@ -104,7 +96,7 @@ namespace Game.Core
             //todo check size of the inventory, if space is available pick item 
             // NotEnoughSpaceException
         }
-
+        
         public void RemoveItem(IItem item)
         {
             throw new NotImplementedException(); // ItemNotFoundException
