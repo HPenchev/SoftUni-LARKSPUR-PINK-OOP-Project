@@ -73,6 +73,7 @@
     <Compile Include="Core\Weapon.cs" />
     <Compile Include="Draw\DrawImg.cs" />
     <Compile Include="Exceptions\InsufficienInventorySpaceException.cs" />
+    <Compile Include="Exceptions\InsufficientGoldException.cs" />
     <Compile Include="Exceptions\ItemNotInStashException.cs" />
     <Compile Include="Exceptions\LevelException.cs" />
     <Compile Include="Exceptions\WeaponNotSupportedException.cs" />

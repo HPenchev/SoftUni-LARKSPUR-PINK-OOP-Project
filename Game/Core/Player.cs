@@ -143,6 +143,23 @@ namespace Game.Core
             }
         }
 
+        public void BuyItem(Item item)
+        {
+            if (this.Gold < item.Price)
+            {
+                throw new InsufficientGoldException("Not enough gold");
+            }
+            
+            this.PickUpItem(item);
+            this.Gold -= item.Price;
+        }
+
+        public void SellItem(Item item)
+        {
+            this.RemoveItem(item);
+            this.Gold += item.Price;
+        }
+
         protected virtual void EquipWeapon(IItem item)
         {
             CheckLevelEquipability(item);

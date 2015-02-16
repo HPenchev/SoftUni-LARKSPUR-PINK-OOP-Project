@@ -1,7 +1,8 @@
 ﻿namespace Game.Core
 {
-    using Game.Interfaces;
     using Game.Core.Data.Enums;
+    using Game.Interfaces;
+
     public abstract class Character : GameObject, ICharacter
     {
         private bool isAlive = true;

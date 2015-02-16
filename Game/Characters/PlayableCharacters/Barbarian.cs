@@ -33,6 +33,7 @@
             {
                 throw new WeaponNotSupportedException("Amazon can support only bows");
             }
+
             base.EquipWeapon(item);
         }
     }

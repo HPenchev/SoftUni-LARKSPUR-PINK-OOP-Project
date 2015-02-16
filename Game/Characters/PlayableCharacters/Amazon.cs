@@ -7,7 +7,6 @@
     using Game.Exceptions;
     using Game.Interfaces;
 
-
     public class Amazon : Player
     {
         public Amazon(string id)
