@@ -6,7 +6,7 @@
         // todo inventory - first item 
         public const int HealthPoints = 20;
         public const int DefencePoints = 5;
-        public const int AttackPoints = 7;
+        public const int AttackPoints = 220;
         public const int Range = 10;
         public const double AttackSpeed = 1.2;
         public const int CriticalChance = 3;

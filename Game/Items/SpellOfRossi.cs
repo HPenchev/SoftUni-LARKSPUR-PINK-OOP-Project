@@ -15,7 +15,7 @@
         {
             this.ManaCost = 5;
             this.AttackPoints = 100;
-            this.DefencePoints = 0;
+            this.DefensePoints = 0;
             this.HealthPoints = 0;
             this.Level = 2;
             this.Price = 100;

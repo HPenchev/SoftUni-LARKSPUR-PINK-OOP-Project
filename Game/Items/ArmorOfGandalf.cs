@@ -20,7 +20,7 @@
             this.ChanceToDodge = 2;
             this.CriticalChance = 1;
             this.CriticalDamage = 10;
-            this.DefencePoints = 50;
+            this.DefensePoints = 50;
             this.HealthPoints = 100;
             this.Level = 2;
             this.Price = 200;

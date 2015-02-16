@@ -10,7 +10,7 @@
     {
         private double attackPoints;
         private double healthPoints;
-        private double defencePoints;
+        private double defensePoints;
         private int level;
         private decimal price;
         private int size;
@@ -21,7 +21,7 @@
             this.Price = price;
             this.Size = size;
             this.HealthPoints = healthPoints;
-            this.DefencePoints = defencePoints;
+            this.DefensePoints = defensePoints;
         }
         public double AttackPoints
         {
@@ -47,16 +47,16 @@
                 this.healthPoints = value;
             }
         }
-        public double DefencePoints
+        public double DefensePoints
         {
             get
             {
-                return this.defencePoints;
+                return this.defensePoints;
             }
 
             set
             {
-                this.defencePoints = value;
+                this.defensePoints = value;
             }
         }
         public int Level

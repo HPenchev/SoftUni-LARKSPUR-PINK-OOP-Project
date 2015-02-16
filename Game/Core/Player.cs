@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Core.Data.Constants.PlayerConstatns;
 using Game.Interfaces;
 using Game.Core.Data.Enums;
+using Game.Exceptions;
 
 namespace Game.Core
 {
@@ -83,6 +84,8 @@ namespace Game.Core
 
         public Position MapPosition { get; set; }
 
+        public List<IItem> Equipment { get; set; }
+
         public virtual void CastSpell(IItem item)
         {            
         }
@@ -94,18 +97,117 @@ namespace Game.Core
 
         public void PickUpItem(IItem item)
         {
-            //todo check size of the inventory, if space is available pick item 
-            // NotEnoughSpaceException
+            if (this.InventorySize < item.Size)
+            {
+                throw new InsufficientExecutionStackException("Not enough space in inventory");
+            }
+
+            this.Inventory.Add(item);
+            this.inventorySize -= item.Size;
         }
         
         public void RemoveItem(IItem item)
         {
-            throw new NotImplementedException(); // ItemNotFoundException
+            for (int i = 0; i < this.Inventory.Count; i++)
+            {
+                if (this.Inventory[i].Id == item.Id)
+                {
+                    this.InventorySize += this.Inventory[i].Size;
+                    if(this.InventorySize > PlayerConstants.PlayerStartingInventorySize)
+                    {
+                        this.InventorySize = PlayerConstants.PlayerStartingInventorySize;
+                    }
+
+                    this.Inventory.RemoveAt(i);
+                    return;
+                }
+            }
+            
+            throw new ItemNotInStashException("Item not in stash");  
         }
 
         public ICharacter FindTarget(ICharacter enemy)
         {
             throw new NotImplementedException(); // TargetNotFoundException
+        }
+
+        public void EquipItem(IItem item)
+        {
+            if (item is Armor)
+            {
+                EquipArmor(item);
+            }
+            else
+            {
+                EquipWeapon(item);
+            }
+        }
+
+        protected virtual void EquipWeapon(IItem item)
+        {
+            CheckLevelEquipability(item);
+
+            Weapon itemRemoved = null;
+            for (int i = 0; i < this.Equipment.Count; i++)
+            {
+                if (this.Equipment[i] is Weapon)
+                {
+                    itemRemoved = (Weapon)this.Equipment[i];
+                    this.Equipment.RemoveAt(i);
+                }
+            }
+            SwitchBetweenStashAndEquipment(item, itemRemoved);
+        }
+        
+        private void EquipArmor(IItem item)
+        {
+            CheckLevelEquipability(item);
+
+            Armor itemRemoved = null;
+            for (int i = 0; i < this.Equipment.Count; i++)
+            {
+                if((this.Equipment[i] is Armor) && ((Armor)this.Equipment[i]).ArmorType == ((Armor)item).ArmorType)
+                {
+                    itemRemoved = (Armor)this.Equipment[i];                    
+                    this.Equipment.RemoveAt(i);                    
+                }               
+            }
+            SwitchBetweenStashAndEquipment(item, itemRemoved);
+        }
+
+        private void CheckLevelEquipability(IItem item)
+        {
+            if (item.Level > this.Level)
+            {
+                throw new LevelException("You don't have the level needed yet");
+            }
+        }
+
+        private void SwitchBetweenStashAndEquipment(IItem item, Item itemRemoved)
+        {
+
+            this.Equipment.Add(item);
+            ApplyItemEffects(item);
+            this.RemoveItem(item);
+            if (itemRemoved != null)
+            {
+                this.RemoveItemEffects(itemRemoved);
+                this.PickUpItem(itemRemoved);
+            }
+        }
+
+        private void ApplyItemEffects(IItem item)
+        {
+            this.AttackPoints += item.AttackPoints;
+            this.DefensePoints += item.DefensePoints;
+            this.HealthPoints += item.HealthPoints;
+        }
+
+        private void RemoveItemEffects(IItem item)
+        {
+            this.AttackPoints -= item.AttackPoints;
+            this.DefensePoints -= item.DefensePoints;
+            this.HealthPoints -= item.HealthPoints;
         }
     }
 }
