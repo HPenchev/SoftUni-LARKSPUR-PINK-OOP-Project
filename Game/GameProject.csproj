@@ -85,8 +85,17 @@
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IStatsable.cs" />
     <Compile Include="Items\ArmorOfGandalf.cs" />
+    <Compile Include="Items\AxeOfNakov.cs" />
+    <Compile Include="Items\BeltOfGandalf.cs" />
+    <Compile Include="Items\BootsOfGandalf.cs" />
+    <Compile Include="Items\BowOfNakov.cs" />
+    <Compile Include="Items\GlovesOfGandalf.cs" />
+    <Compile Include="Items\HelmetOfGandalf.cs" />
+    <Compile Include="Items\PantsOfGandalf.cs" />
+    <Compile Include="Items\ShieldOfGandalf.cs" />
     <Compile Include="Items\SpellOfRossi.cs" />
     <Compile Include="Items\SwordOfNakov.cs" />
+    <Compile Include="Items\WandOfNakov.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

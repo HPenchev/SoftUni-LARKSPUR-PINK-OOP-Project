@@ -1,4 +1,5 @@
-﻿namespace Game.Core
+﻿using System.Text;
+namespace Game.Core
 {
     public abstract class GameObject
     {
@@ -13,6 +14,11 @@
             get { return this.id; }
 
             set { this.id = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.Id;
         }
     }
 }

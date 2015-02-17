@@ -2,12 +2,12 @@
 {
     public enum ArmorType
     {
-        Helmet,
-        Shield,
+        Belt,
+        Boots,
         ChestArmor,
         Gloves,
-        Belts,
+        Helmet,
         Pants,
-        Boots
+        Shield
     }
 }

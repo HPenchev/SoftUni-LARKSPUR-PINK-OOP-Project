@@ -13,7 +13,7 @@
 
         protected Armor(string id) : base(id)
         {
-            this.ArmorType = armorType; // This makes no sensce, Check it again!
+            this.ArmorType = armorType; 
         }
 
         public ArmorType ArmorType
@@ -27,6 +27,10 @@
             {
                 this.armorType = value;
             }
+        }
+        public override string ToString()
+        {
+            return base.ToString() + string.Format("Armor type: {0}", this.ArmorType);
         }
     }
 }

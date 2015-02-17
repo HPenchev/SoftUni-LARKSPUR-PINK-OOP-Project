@@ -1,0 +1,32 @@
+﻿namespace Game.Items
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Core;
+    using Core.Data.Enums;
+    using Characters;
+    using Interfaces;
+    public class BeltOfGandalf : Armor
+    {
+        public BeltOfGandalf(string id)
+            : base(id)
+        {
+
+            this.Id = "The Belt of Gandalf the gray.";
+            this.AttackPoints = 0;
+            this.AttackSpeed = 2;
+            this.ChanceToDodge = 1;
+            this.CriticalChance = 3;
+            this.CriticalDamage = 20;
+            this.DefensePoints = 50;
+            this.HealthPoints = 100;
+            this.Level = 3;
+            this.Price = 75;
+            this.Size = 1;
+            this.ArmorType = ArmorType.Belt;
+        }
+    }
+}

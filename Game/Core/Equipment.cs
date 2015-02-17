@@ -14,7 +14,8 @@
         private double chanceToDodge;
         private bool isEquiped;
 
-        protected Equipment(string id) : base(id)
+        protected Equipment(string id)
+            : base(id)
         {
             this.AttackSpeed = attackSpeed;
             this.CriticalChance = criticalChance;
@@ -86,6 +87,12 @@
             {
                 this.isEquiped = value;
             }
+        }
+        public override string ToString()
+        {
+            return base.ToString() 
+                + string.Format("Attack Speed: {0}\nCritical Chance: {1}\nCritical Damage: {2}\nDodge chance: {3}"
+                ,this.AttackSpeed, this.CriticalChance, this.CriticalDamage, this.ChanceToDodge );
         }
     }
 }

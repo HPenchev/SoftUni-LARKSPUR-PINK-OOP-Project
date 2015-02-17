@@ -93,5 +93,11 @@
                 this.size = value;
             }
         }
+        public override string ToString()
+        {
+            return base.ToString() 
+                + string.Format("\nAttack Points: {0}\nLevel: {1}\nPrice: {2}\nSize: {3}\nHealth Points: {4}\nDefencePoints: {5}",
+                this.AttackPoints, this.Level, this.Price);
+        }
     }
 }
