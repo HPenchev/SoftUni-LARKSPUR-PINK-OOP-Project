@@ -1,8 +1,8 @@
 ﻿namespace Game.Core
 {
-    using System.Text;
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using Data.Constants.PlayerConstatns;
     using Interfaces;
 
@@ -45,6 +45,7 @@
                 this.killCounter = value;
             }
         }
+
         public int InventorySize
         {
             get
@@ -107,7 +108,6 @@
             set
             {
                 this.mana = value;
-
             }
         }
 
@@ -188,6 +188,7 @@
                 this.allResistance = value;
             }
         }
+
         public void Attack(ICharacter enemy)
         {
             throw new NotImplementedException();
@@ -225,8 +226,17 @@
             int avavailableSpaceInInventory = this.InventorySize - this.Inventory.Count;
             basePlayer.AppendFormat(
                 "Kils: {10},\nFree space in inventory: {0},\nLevel: {1},\nExperience: {2},\nGold: {3}\nMana: {4},\nAttack speed: {5},\nAllresistance: {6},\nCritical damage: {7},\nCritical chance: {8},\nChance to dodge {9}.",
-                avavailableSpaceInInventory, this.Level, this.Experience, this.Gold, this.Mana, this.AttackSpeed,
-                this.AllResistance, this.CritDamage, this.CriticalChance, this.ChanceToDodge, this.KillCounter);
+                avavailableSpaceInInventory,
+                this.Level,
+                this.Experience,
+                this.Gold,
+                this.Mana,
+                this.AttackSpeed,
+                this.AllResistance,
+                this.CritDamage,
+                this.CriticalChance,
+                this.ChanceToDodge,
+                this.KillCounter);
             return basePlayer.ToString();
         }
     }

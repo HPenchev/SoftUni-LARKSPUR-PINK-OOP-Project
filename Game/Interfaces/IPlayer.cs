@@ -16,6 +16,7 @@
         double Mana { get; set; }
 
         List<IItem> Inventory { get; set; }
+
         void Attack(ICharacter enemy);
 
         void CastSpell(Spell id);

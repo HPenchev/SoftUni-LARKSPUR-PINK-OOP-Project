@@ -8,9 +8,9 @@
         private decimal gold;
         private List<Item> inventory = new List<Item>();
 
-        protected Enemy(string id) : base(id)
+        protected Enemy(string id)
+            : base(id)
         {
-
         }
 
         public decimal Gold

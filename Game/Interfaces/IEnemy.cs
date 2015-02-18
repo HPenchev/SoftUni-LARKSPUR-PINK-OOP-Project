@@ -2,7 +2,7 @@
 {
     public interface IEnemy
     {
-        ICharacter FindTarget(ICharacter player); //target not found exception
+        ICharacter FindTarget(ICharacter player); ////target not found exception
 
         void Attack(ICharacter player);
 

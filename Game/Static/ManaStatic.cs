@@ -1,8 +1,7 @@
-﻿using Game.Interfaces;
-
-namespace Game.Static
+﻿namespace Game.Static
 {
     using Core;
+    using Game.Interfaces;
 
     public class ManaStatic : GameObject, IStatic
     {

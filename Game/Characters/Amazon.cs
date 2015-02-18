@@ -1,10 +1,9 @@
 ﻿namespace Game.Characters
 {
-    using System;
     using System.Text;
     using Core;
     using Core.Data.Constants.PlayerConstatns;
-    using Interfaces;
+   
     public class Amazon : Player
     {
         public Amazon(string id)

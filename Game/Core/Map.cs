@@ -144,7 +144,8 @@
                     xRandom = random.Next(0, this.Size);
                     yRandom = random.Next(0, this.Size);
                     this.Map[xRandom, yRandom] = 'm';
-                } while (this.Map[xRandom, yRandom] == 'e' &&
+                }
+                while (this.Map[xRandom, yRandom] == 'e' &&
                          this.Map[xRandom, yRandom] == 'H' &&
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');
@@ -161,7 +162,8 @@
                     xRandom = random.Next(0, this.Size);
                     yRandom = random.Next(0, this.Size);
                     this.Map[xRandom, yRandom] = 'h';
-                } while (this.Map[xRandom, yRandom] == 'e' &&
+                } 
+                while (this.Map[xRandom, yRandom] == 'e' &&
                          this.Map[xRandom, yRandom] == 'H' &&
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');
@@ -178,7 +180,8 @@
                     xRandom = random.Next(0, this.Size);
                     yRandom = random.Next(0, this.Size);
                     this.Map[xRandom, yRandom] = 'c';
-                } while (this.Map[xRandom, yRandom] == 'e' &&
+                }
+                while (this.Map[xRandom, yRandom] == 'e' &&
                          this.Map[xRandom, yRandom] == 'H' &&
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');
@@ -195,7 +198,8 @@
                     xRandom = random.Next(0, this.Size);
                     yRandom = random.Next(0, this.Size);
                     this.Map[xRandom, yRandom] = 'M';
-                } while (this.Map[xRandom, yRandom] == 'e' &&
+                }
+                while (this.Map[xRandom, yRandom] == 'e' &&
                          this.Map[xRandom, yRandom] == 'H' &&
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');

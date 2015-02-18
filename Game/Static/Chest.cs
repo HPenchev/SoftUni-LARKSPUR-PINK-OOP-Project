@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using Game.Core;
-using Game.Interfaces;
-
-namespace Game.Static
+﻿namespace Game.Static
 {
+    using System.Collections.Generic;
+    using Core;
+    using Interfaces;
+
     public class Chest : GameObject, IStatic
     {
         private List<Item> items;
         private bool isUsed;
 
-        public Chest(string id) : base(id)
+        public Chest(string id)
+            : base(id)
         {
             this.items = new List<Item>();
         }

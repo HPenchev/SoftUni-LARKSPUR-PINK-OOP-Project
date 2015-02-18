@@ -1,15 +1,15 @@
-﻿using Game.Interfaces;
-
-namespace Game.Static
+﻿namespace Game.Static
 {
     using Core;
+    using Interfaces;
 
     public class HealthStatic : GameObject, IStatic
     {
         private double health;
         private bool isUsed;
 
-        public HealthStatic(string id) : base(id)
+        public HealthStatic(string id)
+            : base(id)
         {
             this.Health = 100;
         }

@@ -10,7 +10,8 @@
         #endregion
 
         #region Constructors
-        protected Armor(string id) : base(id)
+        protected Armor(string id)
+            : base(id)
         {
             this.ArmorType = armorType;
         }

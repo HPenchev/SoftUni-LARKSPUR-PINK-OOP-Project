@@ -3,10 +3,13 @@
     public abstract class Spell : Item
     {
         private double manaCost;
-        protected Spell(string id) : base(id)
+
+        protected Spell(string id)
+            : base(id)
         {
             this.ManaCost = manaCost;
         }
+
         public double ManaCost
         {
             get

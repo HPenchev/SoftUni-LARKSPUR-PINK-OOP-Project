@@ -10,7 +10,7 @@
         public static void Draw(string imagePath, string endString)
         {
             Image picture = Image.FromFile(imagePath);
-            Console.SetBufferSize((picture.Width * 0x2), (picture.Height * 0x2));
+            Console.SetBufferSize(picture.Width * 0x2, picture.Height * 0x2);
             FrameDimension dimension = new FrameDimension(picture.FrameDimensionsList[0x0]);
             int frameCount = picture.GetFrameCount(dimension);
             int left = Console.WindowLeft, top = Console.WindowTop;

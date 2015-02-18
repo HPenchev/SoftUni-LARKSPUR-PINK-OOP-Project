@@ -2,6 +2,6 @@
 {
     public class EngineConst
     {
-        public static readonly string[] TypeOfHeroes = {"Amazon", "Barbarian", "Druid", "Mage"};
+        public static readonly string[] TypeOfHeroes = { "Amazon", "Barbarian", "Druid", "Mage" };
     }
 }

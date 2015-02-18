@@ -1,5 +1,4 @@
 ﻿namespace Game.Exceptions.CharacterException
-
 {
     using System;
     using System.Runtime.Serialization;

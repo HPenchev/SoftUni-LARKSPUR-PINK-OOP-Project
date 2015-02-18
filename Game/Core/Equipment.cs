@@ -27,7 +27,10 @@
         #region Properties
         public double AttackSpeed
         {
-            get { return this.attackSpeed; }
+            get
+            {
+                return this.attackSpeed;
+            }
 
             set
             {
@@ -42,7 +45,10 @@
 
         public double CriticalChance
         {
-            get { return this.criticalChance; }
+            get
+            {
+                return this.criticalChance;
+            }
 
             set
             {
@@ -57,7 +63,10 @@
 
         public double CriticalDamage
         {
-            get { return this.criticalDamage; }
+            get
+            {
+                return this.criticalDamage;
+            }
 
             set
             {
@@ -72,7 +81,10 @@
 
         public double ChanceToDodge
         {
-            get { return this.chanceToDodge; }
+            get
+            {
+                return this.chanceToDodge;
+            }
 
             set
             {
@@ -87,9 +99,15 @@
 
         public bool IsEquiped
         {
-            get { return this.isEquiped; }
+            get
+            {
+                return this.isEquiped;
+            }
 
-            set { this.isEquiped = value; }
+            set
+            {
+                this.isEquiped = value;
+            }
         }
         #endregion
 

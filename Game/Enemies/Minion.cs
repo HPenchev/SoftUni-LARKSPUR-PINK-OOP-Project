@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Interfaces;
-using Game.Items;
-
-namespace Game.Enemies
+﻿namespace Game.Enemies
 {
     using Core;
+    using Interfaces;
+
     public class Minion : Enemy
     {
-
-        public Minion(string id) : base(id)
+        public Minion(string id)
+            : base(id)
         {
-           
         }
 
         public override ICharacter FindTarget(ICharacter player)
@@ -23,7 +19,7 @@ namespace Game.Enemies
         {
             throw new System.NotImplementedException();
         }
-        
+
         public override void DropReward()
         {
         }
