@@ -12,7 +12,7 @@ namespace Game.Engine
         private bool isInBattle;
         private bool isInTown;
 
-        public static void Run()
+        public void Run()
         {
             MainMenu();
         }

@@ -56,15 +56,19 @@
     <Compile Include="Core\Data\Constants\PlayerConstatns\PlayerConstants.cs" />
     <Compile Include="Core\Data\Enums\ArmorType.cs" />
     <Compile Include="Core\Data\Enums\WeaponType.cs" />
+    <Compile Include="Core\Enemy.cs" />
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />
     <Compile Include="Core\Map.cs" />
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\Position.cs" />
+    <Compile Include="Core\RandomGenerator\RandomGenerator.cs" />
     <Compile Include="Core\Randomizer.cs" />
     <Compile Include="Core\Spell.cs" />
     <Compile Include="Core\Weapon.cs" />
     <Compile Include="Draw\DrawImg.cs" />
+    <Compile Include="Enemies\Boss.cs" />
+    <Compile Include="Enemies\Minion.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Exceptions\IdIsNullOrEmptyException.cs" />
     <Compile Include="Exceptions\GameException.cs" />
@@ -93,8 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Core\Data\Constants\EnemyConstants\" />
     <Folder Include="Exceptions\CharacterException\" />
   </ItemGroup>
   <ItemGroup>

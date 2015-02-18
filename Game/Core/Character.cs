@@ -12,8 +12,7 @@
         private double defensePoints;
         private double range;
 
-        protected Character(string id)
-            : base(id)
+        protected Character(string id) : base(id)
         {
             this.IsAlive = PlayerConstants.IsAlive;
         }
