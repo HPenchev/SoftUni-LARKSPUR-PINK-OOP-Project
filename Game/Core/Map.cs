@@ -22,7 +22,7 @@
             this.ManaWellCount = manaWellCount;
             this.ChestCount = chestCount;
             this.MinionCount = minionCount;
-            CreateMap(this.Size);
+            this.CreateMap(this.Size);
         }
         #endregion
 
@@ -36,36 +36,62 @@
 
         public int Size
         {
-            get { return this.size; }
-            set { this.size = value; }
+            get
+            {
+                return this.size;
+            }
+
+            set
+            {
+                if (value % 2 == 0)
+                {
+                    value++;
+                }
+
+                this.size = value;
+            }
         }
 
         public int ManaWellCount
         {
-            get { return manaWellCount; }
-            set { manaWellCount = value; }
+            get { return this.manaWellCount; }
+            set { this.manaWellCount = value; }
         }
 
         public int HealthWellCount
         {
-            get { return healthWellCount; }
-            set { healthWellCount = value; }
+            get { return this.healthWellCount; }
+            set { this.healthWellCount = value; }
         }
 
         public int ChestCount
         {
-            get { return chestCount; }
-            set { chestCount = value; }
+            get { return this.chestCount; }
+            set { this.chestCount = value; }
         }
 
         public int MinionCount
         {
-            get { return minionCount; }
-            set { minionCount = value; }
+            get { return this.minionCount; }
+            set { this.minionCount = value; }
         }
         #endregion
 
         #region Methods
+        public void PrintMap()
+        {
+            for (int i = 0; i < this.Size - 1; i++)
+            {
+                string line = string.Empty;
+                for (int j = 0; j < this.Size; j++)
+                {
+                    line += this.Map[i, j];
+                }
+
+                Console.WriteLine(line);
+            }
+        }
+
         private void CreateMap(int size)
         {
             char[,] array = new char[size, size];
@@ -76,21 +102,22 @@
                     array[i, j] = 'e';
                 }
             }
-            int ShopPosition = this.size/2;
-            array[ShopPosition, ShopPosition] = 'H';
-            array[ShopPosition, ShopPosition - 1] = 'P';
+
+            int shopPosition = this.size / 2;
+            array[shopPosition, shopPosition] = 'H';
+            array[shopPosition, shopPosition - 1] = 'P';
             this.Map = array;
-            RandomTheMap(this.Map);
+            this.RandomTheMap(this.Map);
         }
 
         private void RandomTheMap(char[,] map)
         {
             Random random = new Random(DateTime.Now.Millisecond);
-            GenerateBoss(random);
-            GenerateManaWells(random);
-            GenerateHealthWells(random);
-            GenerateChests(random);
-            GenerateMinions(random);
+            this.GenerateBoss(random);
+            this.GenerateManaWells(random);
+            this.GenerateHealthWells(random);
+            this.GenerateChests(random);
+            this.GenerateMinions(random);
         }
 
         private void GenerateBoss(Random random)
@@ -99,9 +126,9 @@
             Position[] validPositions =
             {
                 new Position(0, 0),
-                new Position(Size - 2, Size - 1),
-                new Position(0, Size - 1),
-                new Position(Size - 2, 0)
+                new Position(this.Size - 2, this.Size - 1),
+                new Position(0, this.Size - 1),
+                new Position(this.Size - 2, 0)
             };
             Position bossPosition = validPositions[random.Next(0, validPositions.Length)];
             this.Map[bossPosition.X, bossPosition.Y] = 'B';
@@ -172,19 +199,6 @@
                          this.Map[xRandom, yRandom] == 'H' &&
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');
-            }
-        }
-
-        public void PrintMap()
-        {
-            for (int i = 0; i < size - 1; i++)
-            {
-                string line = "";
-                for (int j = 0; j < size; j++)
-                {
-                    line += this.Map[i, j];
-                }
-                Console.WriteLine(line);
             }
         }
         #endregion

@@ -21,7 +21,7 @@ public class Example
         //Console.WriteLine(asd.AttackPoints);
         while (true)
         {
-            MapGenerator map = new MapGenerator(30, 2, 2, 2, 10);
+            MapGenerator map = new MapGenerator(11, 2, 2, 2, 10);
             map.PrintMap();
             Console.WriteLine();
         }
