@@ -8,5 +8,9 @@ namespace Game.Core.RandomGenerator
 {
     public static class RandomGenerator
     {
+        public static Random random = new Random();
+
+
+
     }
 }

@@ -70,6 +70,7 @@
     <Compile Include="Enemies\Boss.cs" />
     <Compile Include="Enemies\Minion.cs" />
     <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Exceptions\CharacterException\CharacterException.cs" />
     <Compile Include="Exceptions\IdIsNullOrEmptyException.cs" />
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="Exceptions\ItemException\ItemException.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Interfaces\IItem.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IStatsable.cs" />
+    <Compile Include="Interfaces\IStatic.cs" />
     <Compile Include="Items\ArmorOfGandalf.cs" />
     <Compile Include="Items\AxeOfNakov.cs" />
     <Compile Include="Items\BeltOfGandalf.cs" />
@@ -94,6 +96,9 @@
     <Compile Include="Items\SwordOfNakov.cs" />
     <Compile Include="Items\WandOfNakov.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Static\Chest.cs" />
+    <Compile Include="Static\HealthStatic.cs" />
+    <Compile Include="Static\ManaStatic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -101,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Data\Constants\EnemyConstants\" />
-    <Folder Include="Exceptions\CharacterException\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\GameOver.jpg" />

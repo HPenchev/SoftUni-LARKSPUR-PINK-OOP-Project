@@ -11,14 +11,22 @@ using Game.Items;
 
 public class Example
 {
-    static void Main()
+    private static void Main()
     {
-         //Engine engine = new Engine();
-         //engine.Run();
-        Minion asd = new Minion("asd");
-        Console.WriteLine(asd.Id);
-        Console.WriteLine(asd.IsAlive);
-        Console.WriteLine(asd.AttackPoints);
+        //Engine engine = new Engine();
+        //engine.Run();
+        //Minion asd = new Minion("asd");
+        //Console.WriteLine(asd.Id);
+        //Console.WriteLine(asd.IsAlive);
+        //Console.WriteLine(asd.AttackPoints);
+        while (true)
+        {
+            MapGenerator map = new MapGenerator(30, 2, 2, 2, 10);
+            map.PrintMap();
+            Console.WriteLine();
+        }
+          
+
 
         //List<GameObject>dae.
 
