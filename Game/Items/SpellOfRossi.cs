@@ -1,7 +1,7 @@
-﻿using Game.Core;
-
-namespace Game.Items
+﻿namespace Game.Items
 {
+    using Core;
+
     public class SpellOfRossi : Spell
     {
         public SpellOfRossi(string id) : base(id)

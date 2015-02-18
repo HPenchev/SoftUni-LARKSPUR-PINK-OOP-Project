@@ -1,8 +1,8 @@
-﻿using Game.Core;
-using Game.Core.Data.Enums;
-
-namespace Game.Items
+﻿namespace Game.Items
 {
+    using Core;
+    using Core.Data.Enums;
+
     public class SwordOfNakov : Weapon
     {
         public SwordOfNakov(string id) : base(id)

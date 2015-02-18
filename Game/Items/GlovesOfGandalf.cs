@@ -1,14 +1,12 @@
-﻿using Game.Core;
-using Game.Core.Data.Enums;
-
-namespace Game.Items
+﻿namespace Game.Items
 {
+    using Core;
+    using Core.Data.Enums;
+
     public class GlovesOfGandalf : Armor
     {
-        public GlovesOfGandalf(string id)
-            : base(id)
+        public GlovesOfGandalf(string id) : base(id)
         {
-
             this.Id = "The Gloves of Gandalf the gray.";
             this.AttackPoints = 0;
             this.AttackSpeed = 1;

@@ -1,6 +1,6 @@
 ﻿namespace Game.Core
 {
-    public abstract class Map :GameObject
+    public abstract class Map : GameObject
     {
         public double minX { get; set; }
         public double maxX{ get; set; }

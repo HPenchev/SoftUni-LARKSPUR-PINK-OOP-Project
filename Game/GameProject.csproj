@@ -48,18 +48,13 @@
     <Compile Include="Characters\Mage.cs" />
     <Compile Include="Core\Armor.cs" />
     <Compile Include="Core\Character.cs" />
-    <Compile Include="Core\Data\Constants\EnemyCharacters.cs" />
     <Compile Include="Core\Data\Constants\EngineConstants\EngineConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\AmazonConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\BarbarianConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\DruidConstants.cs" />
-    <Compile Include="Core\Data\Constants\PlayerConstatns\GhostConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\MageConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\PlayerConstants.cs" />
-    <Compile Include="Core\Data\Constants\PlayerConstatns\VampiraConstants.cs" />
-    <Compile Include="Core\Data\Constants\PlayerConstatns\WitchConstants.cs" />
     <Compile Include="Core\Data\Enums\ArmorType.cs" />
-    <Compile Include="Core\Data\Enums\Team.cs" />
     <Compile Include="Core\Data\Enums\WeaponType.cs" />
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />
@@ -71,11 +66,10 @@
     <Compile Include="Core\Weapon.cs" />
     <Compile Include="Draw\DrawImg.cs" />
     <Compile Include="Engine\Engine.cs" />
-    <Compile Include="Exceptions\InsufficienInventorySpaceException.cs" />
-    <Compile Include="Exceptions\InsufficientGoldException.cs" />
-    <Compile Include="Exceptions\ItemNotInStashException.cs" />
-    <Compile Include="Exceptions\LevelException.cs" />
-    <Compile Include="Exceptions\WeaponNotSupportedException.cs" />
+    <Compile Include="Exceptions\IdIsNullOrEmptyException.cs" />
+    <Compile Include="Exceptions\GameException.cs" />
+    <Compile Include="Exceptions\ItemException\ItemException.cs" />
+    <Compile Include="Exceptions\ItemException\ValueIsNegativeException.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Example.cs" />
@@ -100,7 +94,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Exceptions\CharacterException\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Images\GameOver.jpg" />
   </ItemGroup>

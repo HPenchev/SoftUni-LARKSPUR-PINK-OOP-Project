@@ -1,14 +1,12 @@
-﻿using Game.Core;
-using Game.Core.Data.Enums;
-
-namespace Game.Items
+﻿namespace Game.Items
 {
+    using Core;
+    using Core.Data.Enums;
+
     public class ArmorOfGandalf : Armor
     {
-        public ArmorOfGandalf(string id)
-            : base(id)
+        public ArmorOfGandalf(string id) : base(id)
         {
-
             this.Id = "The Armor of Gandalf the gray.";
             this.AttackPoints = 0;
             this.AttackSpeed = 2;
@@ -21,10 +19,6 @@ namespace Game.Items
             this.Price = 250;
             this.Size = 3;
             this.ArmorType = ArmorType.ChestArmor;
-        }
-        public override string ToString()
-        {
-            return base.ToString();
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using Game.Core;
-using Game.Core.Data.Enums;
-
-namespace Game.Items
+﻿namespace Game.Items
 {
+    using Core;
+    using Core.Data.Enums;
+
     public class BowOfNakov : Weapon
     {
-        public BowOfNakov(string id)
-            : base(id)
+        public BowOfNakov(string id) : base(id)
         {
             this.Id = "The Bow of Justice";
             this.AttackPoints = 100;
