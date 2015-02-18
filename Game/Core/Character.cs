@@ -1,9 +1,9 @@
-﻿using Game.Core.Data.Constants.PlayerConstatns;
-using Game.Core.Data.Enums;
-using Game.Interfaces;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
+    using System.Text;
+    using Data.Constants.PlayerConstatns;
+    using Interfaces;
+
     public abstract class Character : GameObject, ICharacter
     {
         private bool isAlive;
@@ -46,6 +46,14 @@ namespace Game.Core
         {
             get { return this.range; }
             set { this.range = value; }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder baseCharacter = new StringBuilder();
+            baseCharacter.AppendFormat(
+                "Status: {0},\nHealth points: {1},\nAttack points: {2},\nDefence points: {3},\nRange: {4},\n", this.IsAlive ? "Alive" : "Dead", this.HealthPoints, this.AttackPoints, this.DefensePoints, this.Range);
+            return baseCharacter.ToString();
         }
     }
 }

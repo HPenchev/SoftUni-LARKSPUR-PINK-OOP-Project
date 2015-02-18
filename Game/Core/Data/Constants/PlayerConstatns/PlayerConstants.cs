@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Game.Core.Data.Constants.PlayerConstatns
+﻿namespace Game.Core.Data.Constants.PlayerConstatns
 {
     public struct PlayerConstants
     {
@@ -12,5 +10,6 @@ namespace Game.Core.Data.Constants.PlayerConstatns
         public const decimal PlayerStartingExperience = 0;
         public const int StartingLvl = 1;
         public const bool IsAlive = true;
+        public const int KillCounter = 0;
     }
 }

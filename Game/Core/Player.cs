@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Core.Data.Constants.PlayerConstatns;
-using Game.Core.Data.Enums;
-using Game.Exceptions;
-using Game.Interfaces;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
+    using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using Data.Constants.PlayerConstatns;
+    using Interfaces;
+
     public abstract class Player : Character, IPlayer, IStatsable
     {
+        private int killCounter;
         private int inventorySize;
         private int level;
         private decimal experience;
@@ -17,103 +17,184 @@ namespace Game.Core
         private double mana;
         private double attackSpeed;
         private double allResistance;
-        private double critChance;
+        private double criticalChance;
         private double critDamage;
-        private double chanceToDoge;
-
-        public int InventorySize
-        {
-            get { return inventorySize; }
-            set { inventorySize = value; }
-        }
-
-        public int Level
-        {
-            get { return level; }
-            set { level = value; }
-        }
-
-        public decimal Experience
-        {
-            get { return experience; }
-            set { experience = value; }
-        }
-
-        public decimal Gold
-        {
-            get { return gold; }
-            set { gold = value; }
-        }
-
-        public List<IItem> Inventory
-        {
-            get { return inventory; }
-            set { inventory = value; }
-        }
-
-        public double Mana
-        {
-            get { return mana; }
-            set { mana = value; }
-        }
-
-        public double AttackSpeed
-        {
-            get { return attackSpeed; }
-            set { attackSpeed = value; }
-        }
-
-        public int CriticalChance
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public int ChanceToDodge
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public double AllResistance
-        {
-            get { return allResistance; }
-            set { allResistance = value; }
-        }
-
-        public double CritChance
-        {
-            get { return critChance; }
-            set { critChance = value; }
-        }
-
-        public double CritDamage
-        {
-            get { return critDamage; }
-            set { critDamage = value; }
-        }
-
-        public double ChanceToDoge
-        {
-            get { return chanceToDoge; }
-            set { chanceToDoge = value; }
-        }
+        private double chanceToDodge;
 
         protected Player(string id)
             : base(id)
         {
+            this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Level = PlayerConstants.PlayerStartingLevel;
             this.InventorySize = PlayerConstants.PlayerStartingInventorySize;
             this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Gold = PlayerConstants.PlayerStartingGold;
             this.Inventory = new List<IItem>();
+            this.KillCounter = PlayerConstants.KillCounter;
         }
 
-        public abstract void Attack(ICharacter enemy);
-        
+        public int KillCounter
+        {
+            get
+            {
+                return this.killCounter;
+            }
+
+            set
+            {
+                this.killCounter = value;
+            }
+        }
+        public int InventorySize
+        {
+            get
+            {
+                return this.inventorySize;
+            }
+
+            set
+            {
+                this.inventorySize = value;
+            }
+        }
+
+        public decimal Gold
+        {
+            get
+            {
+                return this.gold;
+            }
+
+            set
+            {
+                this.gold = value;
+            }
+        }
+
+        public decimal Experience
+        {
+            get
+            {
+                return this.experience;
+            }
+
+            set
+            {
+                this.experience = value;
+            }
+        }
+
+        public int Level
+        {
+            get
+            {
+                return this.level;
+            }
+
+            set
+            {
+                this.level = value;
+            }
+        }
+
+        public double Mana
+        {
+            get
+            {
+                return this.mana;
+            }
+
+            set
+            {
+                this.mana = value;
+
+            }
+        }
+
+        public List<IItem> Inventory
+        {
+            get
+            {
+                return this.inventory;
+            }
+
+            set
+            {
+                this.inventory = value;
+            }
+        }
+
+        public double AttackSpeed
+        {
+            get
+            {
+                return this.attackSpeed;
+            }
+
+            set
+            {
+                this.attackSpeed = value;
+            }
+        }
+
+        public double CriticalChance
+        {
+            get
+            {
+                return this.criticalChance;
+            }
+
+            set
+            {
+                this.criticalChance = value;
+            }
+        }
+
+        public double ChanceToDodge
+        {
+            get
+            {
+                return this.chanceToDodge;
+            }
+
+            set
+            {
+                this.chanceToDodge = value;
+            }
+        }
+
+        public double CritDamage
+        {
+            get
+            {
+                return this.critDamage;
+            }
+
+            set
+            {
+                this.critDamage = value;
+            }
+        }
+
+        public double AllResistance
+        {
+            get
+            {
+                return this.allResistance;
+            }
+
+            set
+            {
+                this.allResistance = value;
+            }
+        }
+        public void Attack(ICharacter enemy)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CastSpell(Spell id)
         {
-            //todo
             throw new NotImplementedException();
         }
 
@@ -135,6 +216,18 @@ namespace Game.Core
         public ICharacter FindTarget(ICharacter enemy)
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder basePlayer = new StringBuilder();
+            basePlayer.Append(base.ToString());
+            int avavailableSpaceInInventory = this.InventorySize - this.Inventory.Count;
+            basePlayer.AppendFormat(
+                "Kils: {10},\nFree space in inventory: {0},\nLevel: {1},\nExperience: {2},\nGold: {3}\nMana: {4},\nAttack speed: {5},\nAllresistance: {6},\nCritical damage: {7},\nCritical chance: {8},\nChance to dodge {9}.",
+                avavailableSpaceInInventory, this.Level, this.Experience, this.Gold, this.Mana, this.AttackSpeed,
+                this.AllResistance, this.CritDamage, this.CriticalChance, this.ChanceToDodge, this.KillCounter);
+            return basePlayer.ToString();
         }
     }
 }

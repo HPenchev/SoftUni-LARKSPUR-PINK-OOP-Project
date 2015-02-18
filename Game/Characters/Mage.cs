@@ -1,15 +1,13 @@
-﻿using System;
-using Game.Core;
-using Game.Core.Data.Constants.PlayerConstatns;
-using Game.Interfaces;
-
-namespace Game.Characters
+﻿namespace Game.Characters
 {
+    using System.Text;
+    using Core;
+    using Core.Data.Constants.PlayerConstatns;
+
     public class Mage : Player
     {
         public Mage(string id)
-            : base(
-            id)           
+            : base(id)
         {
             this.HealthPoints = MageConstants.HealthPoints;
             this.DefensePoints = MageConstants.DefencePoints;
@@ -18,10 +16,12 @@ namespace Game.Characters
             this.Range = MageConstants.Range;
         }
 
-
-        public override void Attack(ICharacter enemy)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            StringBuilder playerToString = new StringBuilder();
+            playerToString.Append("Player Type: Mage,\n");
+            playerToString.Append(base.ToString());
+            return playerToString.ToString();
         }
     }
 }

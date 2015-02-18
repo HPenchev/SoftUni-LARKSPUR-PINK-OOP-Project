@@ -1,11 +1,11 @@
-﻿using Game.Core;
-using Game.Core.Data.Constants.PlayerConstatns;
-using Game.Core.Data.Enums;
-using Game.Exceptions;
-using Game.Interfaces;
-
-namespace Game.Characters
+﻿namespace Game.Characters
 {
+    using System;
+    using System.Text;
+    using Core;
+    using Core.Data.Constants.PlayerConstatns;
+    using Interfaces;
+
     public class Barbarian : Player
     {
         public Barbarian(string id)
@@ -19,10 +19,12 @@ namespace Game.Characters
             this.Range = BarbarianConstants.Range;
         }
 
-
-        public override void Attack(ICharacter enemy)
+        public override string ToString()
         {
-            throw new System.NotImplementedException();
+            StringBuilder playerToString = new StringBuilder();
+            playerToString.Append("Player Type: Barberian,\n");
+            playerToString.Append(base.ToString());
+            return playerToString.ToString();
         }
     }
 }

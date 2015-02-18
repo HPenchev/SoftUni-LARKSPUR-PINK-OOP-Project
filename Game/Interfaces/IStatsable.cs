@@ -2,13 +2,14 @@
 {
     public interface IStatsable
     {
-        //depend on items;
         double AttackSpeed { get; set; }
-        //double AllResistance { get; set; }
-        int CriticalChance { get; set; }
-        int ChanceToDodge { get; set; }
+
+        double CriticalChance { get; set; }
+
+        double ChanceToDodge { get; set; }
+
         double CritDamage { get; set; }
 
-
+        double AllResistance { get; set; }
     }
 }

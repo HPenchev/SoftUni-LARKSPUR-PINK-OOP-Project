@@ -2,7 +2,6 @@
 using Game.Characters;
 using Game.Core;
 using Game.Core.Data.Constants.EngineConstants;
-using Game.Draw;
 using Game.Interfaces;
 
 namespace Game.Engine
@@ -12,7 +11,6 @@ namespace Game.Engine
         public static ICharacter player;
         private bool isInBattle;
         private bool isInTown;
-        private bool isPlayerCreated;
 
         public static void Run()
         {
@@ -21,7 +19,7 @@ namespace Game.Engine
 
         private static void MainMenu()
         {
-            DrawImg.Draw(@"..\..\Images\menu.jpg", "");
+            //   DrawImg.Draw(@"..\..\Images\menu.jpg", "");
             Console.WriteLine("Please choose an option:");
             Console.WriteLine("1 ---> New Game \n2 ---> Load Game \nOr type Exit for quit");
             string inputParams = Console.ReadLine();
@@ -110,6 +108,7 @@ namespace Game.Engine
             }
             string playerType = player.GetType().ToString().Replace("Game.Characters.", "");
             Console.WriteLine("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id);
+            Console.WriteLine(player.ToString());
         }
     }
 }

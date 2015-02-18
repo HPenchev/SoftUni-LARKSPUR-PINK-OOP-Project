@@ -1,15 +1,31 @@
-﻿using Game.Core;
-
-namespace Game.Interfaces
+﻿namespace Game.Interfaces
 {
+    using System.Collections.Generic;
+    using Core;
+
     public interface IPlayer
     {
+        int InventorySize { get; set; }
+
+        decimal Gold { get; set; }
+
+        decimal Experience { get; set; }
+
+        int Level { get; set; }
+
+        double Mana { get; set; }
+
+        List<IItem> Inventory { get; set; }
         void Attack(ICharacter enemy);
+
         void CastSpell(Spell id);
+
         void Display(string args); // string args === stats || items
+
         void PickUpItem(IItem item);
-        void RemoveItem(string Id);
+
+        void RemoveItem(string id);
+
         ICharacter FindTarget(ICharacter enemy);
-        //void Talk(ICharacter);
     }
 }

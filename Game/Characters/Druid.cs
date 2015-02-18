@@ -1,9 +1,11 @@
-﻿using Game.Core;
-using Game.Core.Data.Constants.PlayerConstatns;
-using Game.Interfaces;
-
-namespace Game.Characters
+﻿namespace Game.Characters
 {
+    using System;
+    using System.Text;
+    using Core;
+    using Core.Data.Constants.PlayerConstatns;
+    using Interfaces;
+
     public class Druid : Player
     {
         public Druid(string id)
@@ -17,9 +19,12 @@ namespace Game.Characters
             this.Range = DruidConstants.Range;
         }
 
-        public override void Attack(ICharacter enemy)
+        public override string ToString()
         {
-            throw new System.NotImplementedException();
+            StringBuilder playerToString = new StringBuilder();
+            playerToString.Append("Player Type: Driud,\n");
+            playerToString.Append(base.ToString());
+            return playerToString.ToString();
         }
     }
 }
