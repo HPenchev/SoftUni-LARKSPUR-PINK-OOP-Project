@@ -68,7 +68,6 @@
         #region Methods
         private void CreateMap(int size)
         {
-            Random random = new Random();
             char[,] array = new char[size, size];
             for (int i = 0; i < size; i++)
             {
@@ -87,17 +86,30 @@
         private void RandomTheMap(char[,] map)
         {
             Random random = new Random(DateTime.Now.Millisecond);
+            GenerateBoss(random);
+            GenerateManaWells(random);
+            GenerateHealthWells(random);
+            GenerateChests(random);
+            GenerateMinions(random);
+        }
+
+        private void GenerateBoss(Random random)
+        {
             int xRandom, yRandom;
-            Position[] validPositions = 
+            Position[] validPositions =
             {
                 new Position(0, 0),
-                new Position(Size-2, Size-1),
-                new Position(0, Size-1),
-                new Position(Size-2, 0) 
+                new Position(Size - 2, Size - 1),
+                new Position(0, Size - 1),
+                new Position(Size - 2, 0)
             };
             Position bossPosition = validPositions[random.Next(0, validPositions.Length)];
             this.Map[bossPosition.X, bossPosition.Y] = 'B';
-            
+        }
+
+        private void GenerateManaWells(Random random)
+        {
+            int xRandom, yRandom;
             for (int i = 0; i < this.ManaWellCount; i++)
             {
                 do
@@ -110,6 +122,11 @@
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');
             }
+        }
+
+        private void GenerateHealthWells(Random random)
+        {
+            int xRandom, yRandom;
             for (int i = 0; i < this.HealthWellCount; i++)
             {
                 do
@@ -122,6 +139,11 @@
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');
             }
+        }
+
+        private void GenerateChests(Random random)
+        {
+            int xRandom, yRandom;
             for (int i = 0; i < this.ChestCount; i++)
             {
                 do
@@ -134,6 +156,11 @@
                          this.Map[xRandom, yRandom] == 'P' &&
                          this.Map[xRandom, yRandom] == 'B');
             }
+        }
+
+        private void GenerateMinions(Random random)
+        {
+            int xRandom, yRandom;
             for (int i = 0; i < this.MinionCount; i++)
             {
                 do
