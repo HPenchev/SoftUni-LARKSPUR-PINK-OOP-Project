@@ -1,5 +1,4 @@
-﻿using System.Text;
-namespace Game.Core
+﻿namespace Game.Core
 {
     public abstract class GameObject
     {

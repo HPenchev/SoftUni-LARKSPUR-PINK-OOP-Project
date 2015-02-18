@@ -1,4 +1,6 @@
-﻿namespace Game.Core.Data.Constants.PlayerConstatns
+﻿using System.Runtime.InteropServices;
+
+namespace Game.Core.Data.Constants.PlayerConstatns
 {
     public struct PlayerConstants
     {
@@ -8,5 +10,7 @@
         public const int PlayerStartingInventorySize = 20;
         public const int PlayerStartingLevel = 1;
         public const decimal PlayerStartingExperience = 0;
+        public const int StartingLvl = 1;
+        public const bool IsAlive = true;
     }
 }

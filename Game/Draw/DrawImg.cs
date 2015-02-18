@@ -1,10 +1,10 @@
-﻿using System.Threading;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Threading;
 
 namespace Game.Draw
 {
-    using System;
-    using System.Drawing;
-    using System.Drawing.Imaging;
     class DrawImg
     {
         //put @beforePath

@@ -42,16 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\NonPlayableCharacters\Ghost.cs" />
-    <Compile Include="Characters\NonPlayableCharacters\Vampire.cs" />
-    <Compile Include="Characters\NonPlayableCharacters\Witch.cs" />
-    <Compile Include="Characters\PlayableCharacters\Amazon.cs" />
-    <Compile Include="Characters\PlayableCharacters\Barbarian.cs" />
-    <Compile Include="Characters\PlayableCharacters\Druid.cs" />
-    <Compile Include="Characters\PlayableCharacters\Mage.cs" />
+    <Compile Include="Characters\Amazon.cs" />
+    <Compile Include="Characters\Barbarian.cs" />
+    <Compile Include="Characters\Druid.cs" />
+    <Compile Include="Characters\Mage.cs" />
     <Compile Include="Core\Armor.cs" />
     <Compile Include="Core\Character.cs" />
     <Compile Include="Core\Data\Constants\EnemyCharacters.cs" />
+    <Compile Include="Core\Data\Constants\EngineConstants\EngineConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\AmazonConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\BarbarianConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\DruidConstants.cs" />
@@ -72,6 +70,7 @@
     <Compile Include="Core\Spell.cs" />
     <Compile Include="Core\Weapon.cs" />
     <Compile Include="Draw\DrawImg.cs" />
+    <Compile Include="Engine\Engine.cs" />
     <Compile Include="Exceptions\InsufficienInventorySpaceException.cs" />
     <Compile Include="Exceptions\InsufficientGoldException.cs" />
     <Compile Include="Exceptions\ItemNotInStashException.cs" />
@@ -100,12 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Engine\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Images\GameOver.jpg" />
   </ItemGroup>

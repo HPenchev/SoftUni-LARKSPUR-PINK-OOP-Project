@@ -1,11 +1,7 @@
-﻿namespace Game.Core
+﻿using Game.Interfaces;
+
+namespace Game.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Interfaces;
     public abstract class Item : GameObject, IItem 
     {
         private double attackPoints;

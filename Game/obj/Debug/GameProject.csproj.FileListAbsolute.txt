@@ -34,3 +34,9 @@ H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\obj\Debug\Game.pdb
 H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\bin\Debug\Game.exe
 H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\bin\Debug\Game.pdb
 H:\SoftUni-LARKSPUR-PINK-OOP-Project\trunk\Game\obj\Debug\GameProject.csprojResolveAssemblyReference.cache
+C:\Users\Bakyrdjiev\Desktop\TeamWorkOOP\trunk\Game\bin\Debug\Game.exe.config
+C:\Users\Bakyrdjiev\Desktop\TeamWorkOOP\trunk\Game\obj\Debug\Game.exe
+C:\Users\Bakyrdjiev\Desktop\TeamWorkOOP\trunk\Game\obj\Debug\Game.pdb
+C:\Users\Bakyrdjiev\Desktop\TeamWorkOOP\trunk\Game\bin\Debug\Game.exe
+C:\Users\Bakyrdjiev\Desktop\TeamWorkOOP\trunk\Game\bin\Debug\Game.pdb
+C:\Users\Bakyrdjiev\Desktop\TeamWorkOOP\trunk\Game\obj\Debug\GameProject.csprojResolveAssemblyReference.cache

@@ -1,14 +1,8 @@
-﻿namespace Game.Items
+﻿using Game.Core;
+using Game.Core.Data.Enums;
+
+namespace Game.Items
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Core;
-    using Core.Data.Enums;
-    using Characters;
-    using Interfaces;
     public class ShieldOfGandalf : Armor
     {
         public ShieldOfGandalf(string id)

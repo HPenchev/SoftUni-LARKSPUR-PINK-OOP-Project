@@ -1,14 +1,7 @@
-﻿namespace Game.Items
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Game.Core;
-    using Game.Interfaces;
-    using Game.Core.Data.Enums;
+﻿using Game.Core;
 
+namespace Game.Items
+{
     public class SpellOfRossi : Spell
     {
         public SpellOfRossi(string id) : base(id)

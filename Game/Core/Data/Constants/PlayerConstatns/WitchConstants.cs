@@ -1,6 +1,7 @@
-﻿namespace Game.Core.Data.Constants.PlayerConstatns
+﻿using Game.Core.Data.Enums;
+
+namespace Game.Core.Data.Constants.PlayerConstatns
 {
-    using Game.Core.Data.Enums;
     public struct WitchConstants
     {
         // todo inventory - first item 
