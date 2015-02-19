@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
 using Game.Characters;
 using Game.Core;
@@ -14,6 +15,7 @@ namespace Game.Engine
         private static ICharacter player;
         private static MapGenerator map;
         private static Position playerPos;
+
         public void Run()
         {
             MainMenu();
@@ -47,7 +49,7 @@ namespace Game.Engine
                 default: throw new Exception("Invalid Command");
             }
         }
-
+        //map creation position
         private static void MainMenuUserInput()
         {
             bool isValid = false;
@@ -58,7 +60,7 @@ namespace Game.Engine
                 if (player == null && EngineConst.TypeOfHeroes.Contains(userParams[0].ToLower()))
                 {
                     isValid = true;
-                    map = new MapGenerator(10, 5, 3, 2, 2);
+                    map = new MapGenerator(11, 5, 3, 2, 2);
                     CreatePlayer(userParams);
                 }
 
@@ -129,11 +131,11 @@ namespace Game.Engine
         private static void NewGame()
         {
             MainMenuUserInput();
-            setPlayerPos();
+            SetPlayerPos();
             ExecuteCommand();
         }
 
-        private static void setPlayerPos()
+        private static void SetPlayerPos()
         {
             map.PrintMap();
             for (int i = 0; i < map.Size; i++)
@@ -163,6 +165,9 @@ namespace Game.Engine
                         break;
                     case "move":
                         Move(inputParams[1]);
+                        break;
+                    default:
+                        Console.WriteLine("invalid direction.");
                         break;
                 }
             }
@@ -208,6 +213,7 @@ namespace Game.Engine
             }
             return null;
         }
+
         private bool CheckForBounds(int indexX, int indexY)
         {
             return true;
@@ -241,150 +247,102 @@ namespace Game.Engine
             }
         }
 
-        private static void MoveDown()
+        private static void MoveUp()
         {
-            if (map.Map[playerPos.X + 1, playerPos.Y] == 'e')
+            if (playerPos.X <= 0)
             {
-                map.Map[playerPos.X, playerPos.Y] = 'e';
-                playerPos.X++;
+                Console.WriteLine("wall");
             }
-            if (map.Map[playerPos.X + 1, playerPos.Y] == 'H')
+
+            else
             {
-                Shop();
-                playerPos.X++;
-            }
-            if (map.Map[playerPos.X + 1, playerPos.Y] == 'm')
-            {
-                useManaWell();
-                playerPos.X++;
-            }
-            if (map.Map[playerPos.X + 1, playerPos.Y] == 'h')
-            {
-                useHealthWell();
-                playerPos.X++;
-            }
-            if (map.Map[playerPos.X + 1, playerPos.Y] == 'M')
-            {
-                fightMinions();
-                //todo double check
-                playerPos.X++;
-                map.Map[playerPos.X, playerPos.Y] = 'e';
+                char currmapChar = map.Map[playerPos.X - 1, playerPos.Y];
+                ProceedMapElement(currmapChar);
+                //map.Map[playerPos.X - 1, playerPos.Y] = '*';
+                map.PrintMap();
+                playerPos.X--;
             }
         }
 
-        private static void MoveUp()
+        private static void MoveDown()
         {
-            if (map.Map[playerPos.X - 1, playerPos.Y] == 'e')
+            if (playerPos.X > map.Size - 2)
             {
-                map.Map[playerPos.X, playerPos.Y] = 'e';
-                playerPos.X--;
+                Console.WriteLine("wall");
             }
-            if (map.Map[playerPos.X - 1, playerPos.Y] == 'H')
+
+            else
             {
-                Shop();
-                playerPos.X--;
+                char currmapChar = map.Map[playerPos.X + 1, playerPos.Y];
+                ProceedMapElement(currmapChar);
+                map.PrintMap();
+                playerPos.X++;
             }
-            if (map.Map[playerPos.X - 1, playerPos.Y] == 'm')
+        }
+
+        private static void MoveLeft()
+        {
+
+            if (playerPos.Y <= 0)
             {
-                useManaWell();
-                playerPos.X--;
+                Console.WriteLine("wall");
             }
-            if (map.Map[playerPos.X - 1, playerPos.Y] == 'h')
+
+            else
             {
-                useHealthWell();
-                playerPos.X--;
-            }
-            if (map.Map[playerPos.X - 1, playerPos.Y] == 'M')
-            {
-                fightMinions();
-                playerPos.X--;
-                map.Map[playerPos.X, playerPos.Y] = 'e';
+                char currmapChar = map.Map[playerPos.X, playerPos.Y - 1];
+                ProceedMapElement(currmapChar);
+                //  map.Map[playerPos.X, playerPos.Y -1] = '*';
+                map.PrintMap();
+                playerPos.Y--;
             }
         }
 
         private static void MoveRight()
         {
-            if (playerPos.Y > map.Size - 1)
+            if (playerPos.Y >= map.Size - 1)
             {
                 Console.WriteLine("wall");
             }
+
             else
             {
-                map.Map[playerPos.X, playerPos.Y + 1] = '*';
+                char currmapChar = map.Map[playerPos.X, playerPos.Y + 1];
+                ProceedMapElement(currmapChar);
                 map.PrintMap();
                 playerPos.Y++;
-
             }
-            //if (map.Map[playerPos.X, playerPos.Y + 1] == 'e')
-            //{
-            //    map.Map[playerPos.X, playerPos.Y] = 'e';
-            //    playerPos.Y++;
-            //}
-            //if (map.Map[playerPos.X, playerPos.Y + 1] == 'H')
-            //{
-            //    Shop();
-            //    playerPos.Y++;
-            //}
-            //if (map.Map[playerPos.X, playerPos.Y + 1] == 'm')
-            //{
-            //    useManaWell();
-            //    playerPos.Y++;
-            //}
-            //if (map.Map[playerPos.X, playerPos.Y + 1] == 'h')
-            //{
-            //    useHealthWell();
-            //    playerPos.Y++;
-            //}
-            //if (map.Map[playerPos.X, playerPos.Y + 1] == 'M')
-            //{
-            //    fightMinions();
-
-            //    playerPos.Y++;
-            //    map.Map[playerPos.X, playerPos.Y] = 'e';
-            //}
         }
 
-        private static void MoveLeft()
+        private static void ProceedMapElement(char currmapChar)
         {
-            if (map.Map[playerPos.X, playerPos.Y - 1] == 'e')
+            switch (currmapChar)
             {
-                map.Map[playerPos.X, playerPos.Y] = 'e';
-                playerPos.Y--;
-            }
-            if (map.Map[playerPos.X, playerPos.Y - 1] == 'H')
-            {
-                Shop();
-                playerPos.Y--;
-            }
-            if (map.Map[playerPos.X, playerPos.Y - 1] == 'm')
-            {
-                useManaWell();
-                playerPos.Y--;
-            }
-            if (map.Map[playerPos.X, playerPos.Y - 1] == 'h')
-            {
-                useHealthWell();
-                playerPos.Y--;
-            }
-            if (map.Map[playerPos.X, playerPos.Y - 1] == 'M')
-            {
-                fightMinions();
-                playerPos.Y--;
-                map.Map[playerPos.X, playerPos.Y] = 'e';
+                case 'H': Shop();
+                    break;
+                case 'm': UseManaWell();
+                    break;
+                case 'h': UseHealthWell();
+                    break;
+                case 'M': FightMinions();
+                    map.Map[playerPos.X, playerPos.Y] = 'e';
+                    break;
+
+                default: break;
             }
         }
 
-        private static void fightMinions()
+        private static void FightMinions()
         {
             Console.WriteLine("fight");
         }
 
-        private static void useHealthWell()
+        private static void UseHealthWell()
         {
             Console.WriteLine("health using");
         }
 
-        private static void useManaWell()
+        private static void UseManaWell()
         {
             Console.WriteLine("mana well");
         }

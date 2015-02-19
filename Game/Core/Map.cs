@@ -80,7 +80,7 @@
         #region Methods
         public void PrintMap()
         {
-            for (int i = 0; i < this.Size - 1; i++)
+            for (int i = 0; i < this.Size; i++)
             {
                 string line = string.Empty;
                 for (int j = 0; j < this.Size; j++)
@@ -161,7 +161,7 @@
                     xRandom = random.Next(0, this.Size);
                     yRandom = random.Next(0, this.Size);
                     this.Map[xRandom, yRandom] = 'h';
-                } 
+                }
                 while (this.Map[xRandom, yRandom] == 'e' &&
                          this.Map[xRandom, yRandom] == 'H' &&
                          this.Map[xRandom, yRandom] == 'P' &&
