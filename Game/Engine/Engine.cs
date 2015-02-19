@@ -1,17 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.WebSockets;
-using System.Runtime.CompilerServices;
-using Game.Characters;
-using Game.Core;
-using Game.Core.Data.Constants.EngineConstants;
-using Game.Interfaces;
-
-namespace Game.Engine
+﻿namespace Game.Engine
 {
+    using System;
+    using System.Linq;
+    using Characters;
+    using Core;
+    using Core.Data.Constants.EngineConstants;
+    using Interfaces;
+
     public class Engine
     {
+        //todo map showing?
         private static ICharacter player;
         private static MapGenerator map;
         private static Position playerPos;
@@ -166,6 +164,9 @@ namespace Game.Engine
                     case "move":
                         Move(inputParams[1]);
                         break;
+                    case "help":
+                        DisplayCommands();
+                        break;
                     default:
                         Console.WriteLine("invalid direction.");
                         break;
@@ -173,16 +174,87 @@ namespace Game.Engine
             }
         }
 
+        private static void DisplayCommands()
+        {
+            throw new NotImplementedException();
+        }
+
         private static void DisplaySurroundings()
         {
             int x = playerPos.X;
             int y = playerPos.Y;
-            //todo validation
-            Console.WriteLine("RIGHT {0}", PrintGameGameObjectPosition(map.Map[x, y + 1])); //right
-            Console.WriteLine("LEFT {0}", PrintGameGameObjectPosition(map.Map[x, y - 1])); //left
-            Console.WriteLine("UP {0}", PrintGameGameObjectPosition(map.Map[x - 1, y])); //up
-            Console.WriteLine("DOWN {0}", PrintGameGameObjectPosition(map.Map[x + 1, y])); //down
-            PrintGameGameObjectPosition('a');
+
+            if (y == 0 && x != 0 && x != map.Size - 1)
+            {
+                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: Wall");
+                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+            }
+
+            else if (y == map.Size - 1 && x != 0 && x != map.Size - 1)
+            {
+                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: wall");
+            }
+
+            else if (x == 0 && y != 0 && y != map.Size - 1)
+            {
+                Console.WriteLine("Up: wall");
+                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+            }
+
+            else if (x == map.Size - 1 && y != 0 && y != map.Size - 1)
+            {
+                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: wall");
+                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+            }
+
+            else if (x == map.Size - 1 && y == map.Size - 1)
+            {
+                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: wall");
+                Console.WriteLine("Lelft: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: wall");
+            }
+
+            else if (x == map.Size - 1 && y == 0)
+            {
+                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: wall");
+                Console.WriteLine("Left: wall");
+                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+            }
+
+            else if (x == 0 && y == map.Size - 1)
+            {
+                Console.WriteLine("Up: wall");
+                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: wall");
+            }
+
+            else if (x == 0 && y == 0)
+            {
+                Console.WriteLine("Up: wall");
+                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: wall");
+                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+            }
+
+            else
+            {
+                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+            }
         }
 
         private static string PrintGameGameObjectPosition(char mapChar)
@@ -221,8 +293,8 @@ namespace Game.Engine
 
         private static void Move(string direction)
         {
-            Console.WriteLine(playerPos.X);
-            Console.WriteLine(playerPos.Y);
+            Console.WriteLine("X = " + playerPos.X);
+            Console.WriteLine("Y = " + playerPos.Y);
             switch (direction)
             {
                 case "left":
@@ -258,7 +330,11 @@ namespace Game.Engine
             {
                 char currmapChar = map.Map[playerPos.X - 1, playerPos.Y];
                 ProceedMapElement(currmapChar);
-                //map.Map[playerPos.X - 1, playerPos.Y] = '*';
+                if (currmapChar == 'M')
+                {
+                    map.Map[playerPos.X - 1, playerPos.Y] = 'e';
+                }
+                map.Map[playerPos.X - 1, playerPos.Y] = 'e';
                 map.PrintMap();
                 playerPos.X--;
             }
@@ -275,6 +351,11 @@ namespace Game.Engine
             {
                 char currmapChar = map.Map[playerPos.X + 1, playerPos.Y];
                 ProceedMapElement(currmapChar);
+                if (currmapChar == 'M')
+                {
+                    map.Map[playerPos.X + 1, playerPos.Y] = 'e';
+                }
+                map.Map[playerPos.X + 1, playerPos.Y] = '*';
                 map.PrintMap();
                 playerPos.X++;
             }
@@ -292,7 +373,13 @@ namespace Game.Engine
             {
                 char currmapChar = map.Map[playerPos.X, playerPos.Y - 1];
                 ProceedMapElement(currmapChar);
-                //  map.Map[playerPos.X, playerPos.Y -1] = '*';
+                if (currmapChar == 'M')
+                {
+                    map.Map[playerPos.X, playerPos.Y - 1] = 'e';
+                }
+
+                map.Map[playerPos.X, playerPos.Y - 1] = '*';
+
                 map.PrintMap();
                 playerPos.Y--;
             }
@@ -309,6 +396,11 @@ namespace Game.Engine
             {
                 char currmapChar = map.Map[playerPos.X, playerPos.Y + 1];
                 ProceedMapElement(currmapChar);
+                if (currmapChar == 'M')
+                {
+                    map.Map[playerPos.X, playerPos.Y + 1] = 'e';
+                }
+                map.Map[playerPos.X, playerPos.Y + 1] = '*';
                 map.PrintMap();
                 playerPos.Y++;
             }
@@ -325,7 +417,7 @@ namespace Game.Engine
                 case 'h': UseHealthWell();
                     break;
                 case 'M': FightMinions();
-                    map.Map[playerPos.X, playerPos.Y] = 'e';
+                    //  map.Map[playerPos.X, playerPos.Y] = 'e';
                     break;
 
                 default: break;
