@@ -1,23 +1,23 @@
-﻿namespace Game.Items.ArmorOfGandalf
+﻿namespace Game.Items.ArmorOfDragon
 {
     using Core;
     using Core.Data.Enums;
 
-    public class ShieldOfGandalf : Armor
+    public class ShieldOfDragon : Armor 
     {
-        public ShieldOfGandalf(string id)
+        public ShieldOfDragon(string id)
             : base(id)
         {
-            this.Id = "The Shield of Gandalf the gray.";
+            this.Id = "Shield forged by fire-breathing dragon.";
             this.AttackPoints = 0;
-            this.AttackSpeed = -2;
-            this.ChanceToDodge = 15;
+            this.AttackSpeed = -4;
+            this.ChanceToDodge = 23;
             this.CriticalChance = 0;
             this.CriticalDamage = 0;
-            this.DefensePoints = 300;
+            this.DefensePoints = 350;
             this.HealthPoints = 0;
             this.Level = 9;
-            this.Price = 275;
+            this.Price = 350;
             this.Size = 3;
             this.ArmorType = ArmorType.Shield;
         }
