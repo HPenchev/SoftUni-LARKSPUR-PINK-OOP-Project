@@ -1,4 +1,4 @@
-﻿namespace Game.Items
+﻿namespace Game.Items.WeaponOfNakov
 {
     using Core;
     using Core.Data.Enums;

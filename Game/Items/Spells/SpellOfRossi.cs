@@ -1,4 +1,4 @@
-﻿namespace Game.Items
+﻿namespace Game.Items.Spells
 {
     using Core;
 
@@ -12,7 +12,7 @@
             this.HealthPoints = 0;
             this.Level = 2;
             this.Price = 100;
-            this.Size = 4;
+            this.Size = 2;
         }
     }
 }

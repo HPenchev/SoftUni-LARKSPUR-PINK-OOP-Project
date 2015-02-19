@@ -1,11 +1,12 @@
-﻿namespace Game.Items
+﻿namespace Game.Items.ArmorOfGandalf
 {
     using Core;
     using Core.Data.Enums;
 
     public class PantsOfGandalf : Armor
     {
-        public PantsOfGandalf(string id) : base(id)
+        public PantsOfGandalf(string id)
+            : base(id)
         {
             this.Id = "The Pants of Gandalf the gray.";
             this.AttackPoints = 0;
