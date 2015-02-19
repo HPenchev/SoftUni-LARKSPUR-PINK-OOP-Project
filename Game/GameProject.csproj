@@ -60,7 +60,9 @@
     <Compile Include="Core\Enemy.cs" />
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />
-    <Compile Include="Core\Map.cs" />
+    <Compile Include="Core\Map.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\Position.cs" />
     <Compile Include="Core\RandomGenerator\RandomGenerator.cs" />
@@ -73,7 +75,6 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Exceptions\CharacterException\CharacterException.cs" />
-    <Compile Include="Exceptions\CharacterException\InvalidCharacterSelected.cs" />
     <Compile Include="Exceptions\IdIsNullOrEmptyException.cs" />
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="Exceptions\ItemException\ItemException.cs" />
@@ -88,18 +89,23 @@
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IStatsable.cs" />
     <Compile Include="Interfaces\IStatic.cs" />
-    <Compile Include="Items\ArmorOfGandalf.cs" />
-    <Compile Include="Items\AxeOfNakov.cs" />
-    <Compile Include="Items\BeltOfGandalf.cs" />
-    <Compile Include="Items\BootsOfGandalf.cs" />
-    <Compile Include="Items\BowOfNakov.cs" />
-    <Compile Include="Items\GlovesOfGandalf.cs" />
-    <Compile Include="Items\HelmetOfGandalf.cs" />
-    <Compile Include="Items\PantsOfGandalf.cs" />
-    <Compile Include="Items\ShieldOfGandalf.cs" />
-    <Compile Include="Items\SpellOfRossi.cs" />
-    <Compile Include="Items\SwordOfNakov.cs" />
-    <Compile Include="Items\WandOfNakov.cs" />
+    <Compile Include="Items\ArmorOfDragon\BeltOfDragon.cs" />
+    <Compile Include="Items\ArmorOfDragon\ChestArmorOfDragon.cs" />
+    <Compile Include="Items\ArmorOfGandalf\BeltOfGandalf.cs" />
+    <Compile Include="Items\ArmorOfGandalf\BootsOfGandalf.cs" />
+    <Compile Include="Items\ArmorOfGandalf\ChestArmorOfGandalf.cs" />
+    <Compile Include="Items\ArmorOfGandalf\GlovesOfGandalf.cs" />
+    <Compile Include="Items\ArmorOfGandalf\HelmetOfGandalf.cs" />
+    <Compile Include="Items\ArmorOfGandalf\PantsOfGandalf.cs" />
+    <Compile Include="Items\ArmorOfGandalf\ShieldOfGandalf.cs" />
+    <Compile Include="Items\Spells\SpellOfDefence.cs" />
+    <Compile Include="Items\Spells\SpellOfHealth.cs" />
+    <Compile Include="Items\Spells\SpellOfInvulnerability.cs" />
+    <Compile Include="Items\Spells\SpellOfRossi.cs" />
+    <Compile Include="Items\WeaponOfNakov\AxeOfNakov.cs" />
+    <Compile Include="Items\WeaponOfNakov\BowOfNakov.cs" />
+    <Compile Include="Items\WeaponOfNakov\SwordOfNakov.cs" />
+    <Compile Include="Items\WeaponOfNakov\WandOfNakov.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static\Chest.cs" />
     <Compile Include="Static\HealthStatic.cs" />

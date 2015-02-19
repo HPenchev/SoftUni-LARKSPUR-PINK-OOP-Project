@@ -1,7 +1,8 @@
 ﻿namespace Game.Items.Spells
 {
     using Core;
-    class SpellOfHealth : Spell
+
+    public class SpellOfHealth : Spell
     {
         public SpellOfHealth(string id)
             : base(id)

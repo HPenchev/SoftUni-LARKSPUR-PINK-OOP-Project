@@ -2,7 +2,7 @@
 {
     using Core;
 
-    class SpellOfDefence : Spell
+    public class SpellOfDefence : Spell
     {
         public SpellOfDefence(string id)
             : base(id)

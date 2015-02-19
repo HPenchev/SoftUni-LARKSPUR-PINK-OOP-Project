@@ -13,6 +13,7 @@
         private static ICharacter player;
         private static MapGenerator map;
         private static Position playerPos;
+        private static int world = 1;
 
         public void Run()
         {
@@ -47,7 +48,7 @@
                 default: throw new Exception("Invalid Command");
             }
         }
-        //map creation position
+
         private static void MainMenuUserInput()
         {
             bool isValid = false;
@@ -58,7 +59,7 @@
                 if (player == null && EngineConst.TypeOfHeroes.Contains(userParams[0].ToLower()))
                 {
                     isValid = true;
-                    map = new MapGenerator(11, 5, 3, 2, 2);
+                    map = GenerateMapByWord();
                     CreatePlayer(userParams);
                 }
 
@@ -67,13 +68,13 @@
                     Console.WriteLine("Goodbye");
                     Environment.Exit(0);
                 }
+
                 if (!isValid && !userParams.Contains("exit"))
                 {
                     Console.Clear();
                     Console.WriteLine("Ivalid input.");
                     DisplayAveilabeHeroes();
                     Console.WriteLine("Please enter: [hero type] [name]");
-
                 }
             }
         }
@@ -101,7 +102,8 @@
                 default:
                     break;
             }
-            string playerType = player.GetType().ToString().Replace("Game.Characters.", "");
+
+            string playerType = player.GetType().ToString().Replace("Game.Characters.", string.Empty);
             Console.Clear();
             Console.WriteLine("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id);
         }
@@ -186,78 +188,70 @@
 
             if (y == 0 && x != 0 && x != map.Size - 1)
             {
-                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
                 Console.WriteLine("Left: Wall");
-                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
-
             else if (y == map.Size - 1 && x != 0 && x != map.Size - 1)
             {
-                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
                 Console.WriteLine("Right: wall");
             }
-
             else if (x == 0 && y != 0 && y != map.Size - 1)
             {
                 Console.WriteLine("Up: wall");
-                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
-
             else if (x == map.Size - 1 && y != 0 && y != map.Size - 1)
             {
-                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
                 Console.WriteLine("Down: wall");
-                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
-
             else if (x == map.Size - 1 && y == map.Size - 1)
             {
-                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
                 Console.WriteLine("Down: wall");
-                Console.WriteLine("Lelft: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Lelft: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
                 Console.WriteLine("Right: wall");
             }
-
             else if (x == map.Size - 1 && y == 0)
             {
-                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
                 Console.WriteLine("Down: wall");
                 Console.WriteLine("Left: wall");
-                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
-
             else if (x == 0 && y == map.Size - 1)
             {
                 Console.WriteLine("Up: wall");
-                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
                 Console.WriteLine("Right: wall");
             }
-
             else if (x == 0 && y == 0)
             {
                 Console.WriteLine("Up: wall");
-                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
                 Console.WriteLine("Left: wall");
-                Console.WriteLine("Right: {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
-
             else
             {
-                Console.WriteLine("Up: {0}", PrintGameGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: {0}", PrintGameGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right {0}", PrintGameGameObjectPosition(map.Map[x, y + 1]));
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
         }
 
-        private static string PrintGameGameObjectPosition(char mapChar)
+        private static string PrintGameObjectPosition(char mapChar)
         {
             switch (mapChar)
             {
@@ -278,17 +272,12 @@
 
                 case 'h':
                     return "Health well";
-                    break;
+
                 case 'c':
                     return "Chest";
-
             }
-            return null;
-        }
 
-        private bool CheckForBounds(int indexX, int indexY)
-        {
-            return true;
+            return null;
         }
 
         private static void Move(string direction)
@@ -325,7 +314,6 @@
             {
                 Console.WriteLine("wall");
             }
-
             else
             {
                 char currmapChar = map.Map[playerPos.X - 1, playerPos.Y];
@@ -334,6 +322,7 @@
                 {
                     map.Map[playerPos.X - 1, playerPos.Y] = 'e';
                 }
+
                 map.Map[playerPos.X - 1, playerPos.Y] = 'e';
                 map.PrintMap();
                 playerPos.X--;
@@ -346,7 +335,6 @@
             {
                 Console.WriteLine("wall");
             }
-
             else
             {
                 char currmapChar = map.Map[playerPos.X + 1, playerPos.Y];
@@ -355,6 +343,7 @@
                 {
                     map.Map[playerPos.X + 1, playerPos.Y] = 'e';
                 }
+
                 map.Map[playerPos.X + 1, playerPos.Y] = '*';
                 map.PrintMap();
                 playerPos.X++;
@@ -363,12 +352,10 @@
 
         private static void MoveLeft()
         {
-
             if (playerPos.Y <= 0)
             {
                 Console.WriteLine("wall");
             }
-
             else
             {
                 char currmapChar = map.Map[playerPos.X, playerPos.Y - 1];
@@ -391,7 +378,6 @@
             {
                 Console.WriteLine("wall");
             }
-
             else
             {
                 char currmapChar = map.Map[playerPos.X, playerPos.Y + 1];
@@ -400,6 +386,7 @@
                 {
                     map.Map[playerPos.X, playerPos.Y + 1] = 'e';
                 }
+
                 map.Map[playerPos.X, playerPos.Y + 1] = '*';
                 map.PrintMap();
                 playerPos.Y++;
@@ -417,11 +404,18 @@
                 case 'h': UseHealthWell();
                     break;
                 case 'M': FightMinions();
-                    //  map.Map[playerPos.X, playerPos.Y] = 'e';
+                    break;
+                case 'B':
+                    FightBoss();
                     break;
 
                 default: break;
             }
+        }
+
+        private static void FightBoss()
+        {
+            world++;
         }
 
         private static void FightMinions()
@@ -442,6 +436,18 @@
         private static void Shop()
         {
             Console.WriteLine("you are in the shop");
+        }
+
+        private static MapGenerator GenerateMapByWord()
+        {
+            Random random = new Random();
+            int size = 5 * random.Next(world, world * 5);
+            int healtWellCount = random.Next(world + 1, world * 5);
+            int manaWellCount = random.Next(world, world * 4);
+            int chestCount = random.Next(world, world * (5 - 2));
+            int minionCount = random.Next(world * 2, world * 4);
+            var map = new MapGenerator(size, healtWellCount, manaWellCount, chestCount, minionCount);
+            return map;
         }
     }
 }
