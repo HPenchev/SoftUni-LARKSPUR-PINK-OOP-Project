@@ -72,6 +72,7 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Exceptions\CharacterException\CharacterException.cs" />
+    <Compile Include="Exceptions\CharacterException\InvalidCharacterSelected.cs" />
     <Compile Include="Exceptions\IdIsNullOrEmptyException.cs" />
     <Compile Include="Exceptions\GameException.cs" />
     <Compile Include="Exceptions\ItemException\ItemException.cs" />
@@ -105,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Data\Constants\EnemyConstants\" />

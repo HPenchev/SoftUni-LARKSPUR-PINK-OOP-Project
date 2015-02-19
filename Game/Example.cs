@@ -13,30 +13,14 @@ public class Example
 {
     private static void Main()
     {
-        //Engine engine = new Engine();
-        //engine.Run();
-        //Minion asd = new Minion("asd");
-        //Console.WriteLine(asd.Id);
-        //Console.WriteLine(asd.IsAlive);
-        //Console.WriteLine(asd.AttackPoints);
-        while (true)
-        {
-            MapGenerator map = new MapGenerator(11, 2, 2, 2, 10);
-            map.PrintMap();
-            Console.WriteLine();
-        }
-          
+
+        Engine engine = new Engine();
+        engine.Run();
+     
 
 
-        //List<GameObject>dae.
 
-        //int enemyCount = 5;
-        //for (int < enemyCount)
-        //{
-        //    new enemy Random size of karta
-        // poziciqta se zadava ot kartata
-        //        dae.add
-        //}
+
 
     }
 }

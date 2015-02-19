@@ -122,7 +122,6 @@
 
         private void GenerateBoss(Random random)
         {
-            int xRandom, yRandom;
             Position[] validPositions =
             {
                 new Position(0, 0),
