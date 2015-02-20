@@ -9,7 +9,9 @@
 
     public class Engine
     {
-        //todo map showing?
+        //todo map showing ??
+        //todo map testing
+        //todo map update - wells chests, new minions
         private static ICharacter player;
         private static MapGenerator map;
         private static Position playerPos;
@@ -49,6 +51,7 @@
             }
         }
 
+        //todo shop generate
         private static void MainMenuUserInput()
         {
             bool isValid = false;
@@ -59,7 +62,7 @@
                 if (player == null && EngineConst.TypeOfHeroes.Contains(userParams[0].ToLower()))
                 {
                     isValid = true;
-                    map = GenerateMapByWord();
+                    GenerateMapByWord();
                     CreatePlayer(userParams);
                 }
 
@@ -160,7 +163,7 @@
                 {
                     case "exit": Environment.Exit(0);
                         break;
-                    case "display":
+                    case "display area":
                         DisplaySurroundings();
                         break;
                     case "move":
@@ -169,6 +172,7 @@
                     case "help":
                         DisplayCommands();
                         break;
+
                     default:
                         Console.WriteLine("invalid direction.");
                         break;
@@ -399,6 +403,9 @@
             {
                 case 'H': Shop();
                     break;
+                case 'c':
+                    UseChest();
+                    break;
                 case 'm': UseManaWell();
                     break;
                 case 'h': UseHealthWell();
@@ -411,6 +418,11 @@
 
                 default: break;
             }
+        }
+
+        private static void UseChest()
+        {
+            Console.WriteLine("chest found");
         }
 
         private static void FightBoss()
@@ -438,16 +450,17 @@
             Console.WriteLine("you are in the shop");
         }
 
-        private static MapGenerator GenerateMapByWord()
+        public static void GenerateMapByWord()
         {
+            //todo
             Random random = new Random();
-            int size = 5 * random.Next(world, world * 5);
+            int size = 8 * random.Next(world, world * 5);
             int healtWellCount = random.Next(world + 1, world * 5);
             int manaWellCount = random.Next(world, world * 4);
             int chestCount = random.Next(world, world * (5 - 2));
             int minionCount = random.Next(world * 2, world * 4);
-            var map = new MapGenerator(size, healtWellCount, manaWellCount, chestCount, minionCount);
-            return map;
+            var generatedMap = new MapGenerator(size, healtWellCount, manaWellCount, chestCount, minionCount);
+            map = generatedMap;
         }
     }
 }

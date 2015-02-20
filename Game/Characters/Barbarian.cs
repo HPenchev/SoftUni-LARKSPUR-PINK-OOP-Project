@@ -1,10 +1,8 @@
 ﻿namespace Game.Characters
 {
-    using System;
     using System.Text;
     using Core;
     using Core.Data.Constants.PlayerConstatns;
-    using Interfaces;
 
     public class Barbarian : Player
     {

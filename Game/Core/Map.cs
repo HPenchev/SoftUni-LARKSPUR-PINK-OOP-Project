@@ -5,6 +5,7 @@
     public class MapGenerator
     {
         /* UNFINISHED */
+        //todo check
         #region Fields
         private char[,] map;
         private int size;
@@ -78,19 +79,6 @@
         #endregion
 
         #region Methods
-        public void PrintMap()
-        {
-            for (int i = 0; i < this.Size; i++)
-            {
-                string line = string.Empty;
-                for (int j = 0; j < this.Size; j++)
-                {
-                    line += this.Map[i, j];
-                }
-
-                Console.WriteLine(line);
-            }
-        }
 
         private void CreateMap(int size)
         {
@@ -107,7 +95,7 @@
             array[shopPosition, shopPosition] = 'H';
             array[shopPosition, shopPosition - 1] = 'P';
             this.Map = array;
-            this.RandomTheMap(this.Map);
+            RandomTheMap(this.Map);
         }
 
         private void RandomTheMap(char[,] map)
@@ -138,16 +126,16 @@
             int xRandom, yRandom;
             for (int i = 0; i < this.ManaWellCount; i++)
             {
-                do
+                xRandom = random.Next(0, this.Size);
+                yRandom = random.Next(0, this.Size);
+                if (this.Map[xRandom, yRandom] != 'e')
                 {
-                    xRandom = random.Next(0, this.Size);
-                    yRandom = random.Next(0, this.Size);
+                    SetNewPosition('m');
+                }
+                else
+                {
                     this.Map[xRandom, yRandom] = 'm';
                 }
-                while (this.Map[xRandom, yRandom] == 'e' &&
-                         this.Map[xRandom, yRandom] == 'H' &&
-                         this.Map[xRandom, yRandom] == 'P' &&
-                         this.Map[xRandom, yRandom] == 'B');
             }
         }
 
@@ -156,16 +144,16 @@
             int xRandom, yRandom;
             for (int i = 0; i < this.HealthWellCount; i++)
             {
-                do
+                xRandom = random.Next(0, this.Size);
+                yRandom = random.Next(0, this.Size);
+                if (this.Map[xRandom, yRandom] != 'e')
                 {
-                    xRandom = random.Next(0, this.Size);
-                    yRandom = random.Next(0, this.Size);
+                    SetNewPosition('h');
+                }
+                else
+                {
                     this.Map[xRandom, yRandom] = 'h';
                 }
-                while (this.Map[xRandom, yRandom] == 'e' &&
-                         this.Map[xRandom, yRandom] == 'H' &&
-                         this.Map[xRandom, yRandom] == 'P' &&
-                         this.Map[xRandom, yRandom] == 'B');
             }
         }
 
@@ -174,34 +162,85 @@
             int xRandom, yRandom;
             for (int i = 0; i < this.ChestCount; i++)
             {
-                do
+                xRandom = random.Next(0, this.Size);
+                yRandom = random.Next(0, this.Size);
+                if (this.Map[xRandom, yRandom] != 'e')
                 {
-                    xRandom = random.Next(0, this.Size);
-                    yRandom = random.Next(0, this.Size);
+                    SetNewPosition('c');
+                }
+                else
+                {
                     this.Map[xRandom, yRandom] = 'c';
                 }
-                while (this.Map[xRandom, yRandom] == 'e' &&
-                         this.Map[xRandom, yRandom] == 'H' &&
-                         this.Map[xRandom, yRandom] == 'P' &&
-                         this.Map[xRandom, yRandom] == 'B');
             }
         }
+        //todo HighLightCharacters
 
         private void GenerateMinions(Random random)
         {
             int xRandom, yRandom;
             for (int i = 0; i < this.MinionCount; i++)
             {
-                do
+                xRandom = random.Next(0, this.Size);
+                yRandom = random.Next(0, this.Size);
+                if (this.Map[xRandom, yRandom] != 'e')
                 {
-                    xRandom = random.Next(0, this.Size);
-                    yRandom = random.Next(0, this.Size);
+                    SetNewPosition('M');
+                }
+                else
+                {
                     this.Map[xRandom, yRandom] = 'M';
                 }
-                while (this.Map[xRandom, yRandom] == 'e' &&
-                         this.Map[xRandom, yRandom] == 'H' &&
-                         this.Map[xRandom, yRandom] == 'P' &&
-                         this.Map[xRandom, yRandom] == 'B');
+            }
+        }
+
+        private void SetNewPosition(char type)
+        {
+            Random random = new Random();
+            int xRandom, yRandom;
+            xRandom = random.Next(0, this.Size);
+            yRandom = random.Next(0, this.Size);
+            while (this.Map[xRandom, yRandom] != 'e')
+            {
+                int x = random.Next(0, this.Size);
+                int y = random.Next(0, this.Size);
+                if (this.Map[x, y] == 'e')
+                {
+                    xRandom = x;
+                    yRandom = y;
+                    break;
+                }
+            }
+            this.Map[xRandom, yRandom] = type;
+        }
+
+        public void PrintMap()
+        {
+            bool isFound = false;
+            for (int i = 0; i < this.Size; i++)
+            {
+                string line = string.Empty;
+                for (int j = 0; j < this.Size; j++)
+                {
+                    line += this.Map[i, j];
+                }
+
+                for (int j = 0; j < line.Length; j++)
+                {
+                    if (line[j] == 'P')
+                    {
+                        isFound = true;
+                        Console.BackgroundColor = ConsoleColor.DarkRed;
+                        Console.Write(line[j]);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.Write(line[j]);
+
+                    }
+                }
+                Console.WriteLine();
             }
         }
         #endregion
