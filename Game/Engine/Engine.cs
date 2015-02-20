@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Game.Items.ArmorOfGandalf;
+using Game.Static;
 
 namespace Game.Engine
 {
@@ -465,12 +466,32 @@ namespace Game.Engine
 
         private static void UseHealthWell()
         {
-            Console.WriteLine("A health well has been used.");
+            double wellPoints = HealthWell.UseHealthWell();
+            if (wellPoints == 0)
+            {
+                Console.WriteLine("This well has been used and It is empty.");
+            }
+            else
+            {
+                Console.WriteLine("I feel stronger already.");
+                Console.WriteLine("{0} gained {1} health points by using a Health well.", player.Id, wellPoints);
+                player.HealthPoints += wellPoints;
+            }
         }
 
         private static void UseManaWell()
         {
-            Console.WriteLine("A mana well has been used.");
+            double wellPoints = ManaWell.UseManaWell();
+            if (wellPoints == 0)
+            {
+                Console.WriteLine("This well has been used and It is empty.");
+            }
+            else
+            {
+                Console.WriteLine("I feel more powerful already.");
+                Console.WriteLine("{0} gained {1} mana points by using a Mana well.", player.Id, wellPoints);
+                player.Mana += wellPoints;
+            }
         }
 
         private static void Shop()
