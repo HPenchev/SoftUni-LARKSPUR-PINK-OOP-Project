@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Deployment.Internal;
+using System.Runtime.CompilerServices;
 using Game.Items.ArmorOfGandalf;
 using Game.Static;
 
@@ -336,16 +337,19 @@ namespace Game.Engine
             else
             {
                 char currmapChar = map.Map[playerPos.X - 1, playerPos.Y];
-                ProceedMapElement(currmapChar); 
-                if (currmapChar == 'M') // if currmapChar != e INTERACT(  ProceedMapElement  )
+                if (currmapChar != 'e') // if currmapChar != e INTERACT(  ProceedMapElement  )
                 {
-                    map.Map[playerPos.X - 1, playerPos.Y] = 'e';
+                    ProceedMapElement(currmapChar); 
+                    //map.Map[playerPos.X - 1, playerPos.Y] = 'e';
+                }
+                else
+                {
+                    map.Map[playerPos.X - 1, playerPos.Y] = 'P';
+                    map.Map[playerPos.X, playerPos.Y] = currmapChar; //// return the original element to the map
+                    map.PrintMap();                                  //// need to check
+                    playerPos.X--;
                 }
 
-                map.Map[playerPos.X - 1, playerPos.Y] = 'P';
-                map.Map[playerPos.X, playerPos.Y] = currmapChar; //// return the original element to the map
-                map.PrintMap();                                  //// need to check
-                playerPos.X--;
             }
         }
 
@@ -427,8 +431,19 @@ namespace Game.Engine
                     UseChest();
                     break;
 
-                case 'm': 
-                    UseManaWell();
+                case 'm':
+                    Console.WriteLine("You have stumbled upon a Mana Well.");
+                    Console.WriteLine("Do you want to drink from it?");
+                    string answer = Console.ReadLine();
+                    if (answer.ToLower().Contains("yes"))
+                    {
+                        UseManaWell();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Good choice, this can be useful later on.");
+                        map.PrintMap(); 
+                    }
                     break;
 
                 case 'h':
