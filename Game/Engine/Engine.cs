@@ -65,7 +65,7 @@ namespace Game.Engine
             while (!isValid)
             {
                 userParams = SplitUserInput(Console.ReadLine().Trim());
-                if (player == null && EngineConst.TypeOfHeroes.Contains(userParams[0].ToLower()))
+                if (player == null && EngineConst.TypeOfHeroes.Contains(userParams[0].ToLower()) && userParams.Length >= 2)
                 {
                     isValid = true;
                     GenerateMapByWord();
@@ -442,8 +442,8 @@ namespace Game.Engine
                     else
                     {
                         Console.WriteLine("Good choice, this can be useful later on.");
-                        map.PrintMap(); 
                     }
+                    map.PrintMap(); 
                     break;
 
                 case 'h':
