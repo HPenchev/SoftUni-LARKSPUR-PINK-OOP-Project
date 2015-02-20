@@ -1,50 +1,29 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Game.Static
+﻿namespace Game.Static
 {
     using Core;
     using Interfaces;
 
-    public static class HealthWell
+    public class HealthWell : GameObject, IStatic
     {
-        private static double health;
-        private static bool isUsed;
+        private double health;
+        private bool isUsed;
 
-        static HealthWell()
+        public HealthWell(string id)
+            : base(id)
         {
-            Health = 100;
+            this.Health = 100;
         }
 
-        private static double Health
+        public double Health
         {
-            get
-            {
-                return health;
-            }
-
-            set
-            {
-                health = value;
-            }
+            get { return this.health; }
+            set { this.health = value; }
         }
 
-        private static bool IsUsed
+        public bool IsUsed
         {
-            get { return isUsed; }
-            set { isUsed = value; }
-        }
-
-        public static double UseHealthWell()
-        {
-            if (IsUsed)
-            {
-                return 0;
-            }
-            else
-            {
-                IsUsed = true;
-                return Health;   
-            }
+            get { return this.isUsed; }
+            set { this.isUsed = value; }
         }
     }
 }

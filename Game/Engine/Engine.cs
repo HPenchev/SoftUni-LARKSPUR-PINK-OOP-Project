@@ -336,8 +336,8 @@ namespace Game.Engine
             else
             {
                 char currmapChar = map.Map[playerPos.X - 1, playerPos.Y];
-                ProceedMapElement(currmapChar);
-                if (currmapChar == 'M') // detect if enemy start battle engine OR if currmapChar != e INTERACT
+                ProceedMapElement(currmapChar); 
+                if (currmapChar == 'M') // if currmapChar != e INTERACT(  ProceedMapElement  )
                 {
                     map.Map[playerPos.X - 1, playerPos.Y] = 'e';
                 }
@@ -466,16 +466,17 @@ namespace Game.Engine
 
         private static void UseHealthWell()
         {
-            double wellPoints = HealthWell.UseHealthWell();
-            if (wellPoints == 0)
+            HealthWell well = new HealthWell(DateTime.Now.ToString());
+            if (well.IsUsed)
             {
-                Console.WriteLine("This well has been used and It is empty.");
+                Console.WriteLine("This Health well has been used and It is empty.");
             }
             else
             {
                 Console.WriteLine("I feel stronger already.");
-                Console.WriteLine("{0} gained {1} health points by using a Health well.", player.Id, wellPoints);
-                player.HealthPoints += wellPoints;
+                Console.WriteLine("{0} gained {1} health points by using a Health well.", player.Id, well.Health);
+                player.HealthPoints += well.Health;
+                well.IsUsed = true;
             }
         }
 
@@ -484,7 +485,7 @@ namespace Game.Engine
             double wellPoints = ManaWell.UseManaWell();
             if (wellPoints == 0)
             {
-                Console.WriteLine("This well has been used and It is empty.");
+                Console.WriteLine("This Mana well has been used and It is empty.");
             }
             else
             {
