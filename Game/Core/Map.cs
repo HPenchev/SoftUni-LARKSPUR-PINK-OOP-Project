@@ -1,4 +1,7 @@
-﻿namespace Game.Core
+﻿using System.Reflection;
+using System.Text;
+
+namespace Game.Core
 {
     using System;
 
@@ -216,7 +219,6 @@
 
         public void PrintMap()
         {
-            bool isFound = false;
             for (int i = 0; i < this.Size; i++)
             {
                 string line = string.Empty;
@@ -224,24 +226,60 @@
                 {
                     line += this.Map[i, j];
                 }
-
-                for (int j = 0; j < line.Length; j++)
-                {
-                    if (line[j] == 'P')
-                    {
-                        isFound = true;
-                        Console.BackgroundColor = ConsoleColor.DarkRed;
-                        Console.Write(line[j]);
-                        Console.BackgroundColor = ConsoleColor.Black;
-                    }
-                    else
-                    {
-                        Console.Write(line[j]);
-
-                    }
-                }
-                Console.WriteLine();
+                PrintHighlightedMap(line);
             }
+        }
+
+        private void PrintHighlightedMap(string line)
+        {
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line[i] == 'P')
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.Write(line[i]);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (line[i] == 'M')
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.Write(line[i]);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (line[i] == 'B')
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.Write(line[i]);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (line[i] == 'H')
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write(line[i]);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (line[i] == 'm')
+                {
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                    Console.Write(line[i]);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (line[i] == 'h')
+                {
+                    Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write(line[i]);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Console.Write(line[i]);
+                }
+            }
+            Console.WriteLine();
         }
         #endregion
     }

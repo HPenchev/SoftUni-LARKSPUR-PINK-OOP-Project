@@ -1,4 +1,7 @@
-﻿namespace Game.Engine
+﻿using System.Runtime.CompilerServices;
+using Game.Items.ArmorOfGandalf;
+
+namespace Game.Engine
 {
     using System;
     using System.Linq;
@@ -12,7 +15,7 @@
         //todo map showing ??
         //todo map testing
         //todo map update - wells chests, new minions
-        private static ICharacter player;
+        private static Player player;
         private static MapGenerator map;
         private static Position playerPos;
         private static int world = 1;
@@ -26,7 +29,7 @@
         {
             //   DrawImg.Draw(@"..\..\Images\menu.jpg", "");
             Console.WriteLine("Please choose an option:");
-            Console.WriteLine("1 ---> New Game \n2 ---> Load Game \nOr type Exit for quit");
+            Console.WriteLine("1 ---> New Game\n2 ---> Load Game");
             string inputParams = Console.ReadLine();
             Console.Clear();
             ExecuteMainMenu(inputParams);
@@ -37,7 +40,7 @@
             switch (inputParams)
             {
                 case "1":
-                    Console.WriteLine("Please enter type of Hero and his/her name");
+                    Console.WriteLine("Please enter Hero class and the Hero's name.");
                     DisplayAveilabeHeroes();
                     NewGame();
                     break;
@@ -45,9 +48,10 @@
                     LoadGame();
                     break;
                 case "exit":
+                    Console.WriteLine("Goodbye.");
                     Environment.Exit(0);
                     break;
-                default: throw new Exception("Invalid Command");
+                default: throw new Exception("Invalid command.");
             }
         }
 
@@ -75,7 +79,7 @@
                 if (!isValid && !userParams.Contains("exit"))
                 {
                     Console.Clear();
-                    Console.WriteLine("Ivalid input.");
+                    Console.WriteLine("Invalid input.");
                     DisplayAveilabeHeroes();
                     Console.WriteLine("Please enter: [hero type] [name]");
                 }
@@ -113,10 +117,9 @@
 
         private static void DisplayAveilabeHeroes()
         {
-            Console.WriteLine("Please choose hero type:");
             for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
             {
-                Console.WriteLine("{0} --> {1}", EngineConst.TypeOfHeroes[i], EngineConst.HeroDesc[i]);
+                Console.WriteLine("{0} -------> {1}", EngineConst.TypeOfHeroes[i], EngineConst.HeroDesc[i]);
             }
         }
 
@@ -161,20 +164,32 @@
                 string[] inputParams = SplitUserInput(Console.ReadLine());
                 switch (inputParams[0])
                 {
-                    case "exit": Environment.Exit(0);
+                    case "exit":
+                        Environment.Exit(0);
                         break;
-                    case "display area":
+
+                    case "display-area":
                         DisplaySurroundings();
                         break;
+
+                    case "stats":
+                        Console.WriteLine(player.ToString());
+                        break;
+
+                    case "items":
+                        player.Inventory.ForEach(n => Console.WriteLine(n.ToString()));
+                        break;
+
                     case "move":
                         Move(inputParams[1]);
                         break;
+
                     case "help":
                         DisplayCommands();
                         break;
 
                     default:
-                        Console.WriteLine("invalid direction.");
+                        Console.WriteLine("Invalid command.");
                         break;
                 }
             }
@@ -194,7 +209,7 @@
             {
                 Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
                 Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: Wall");
+                Console.WriteLine("Left: Sea");
                 Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
             else if (y == map.Size - 1 && x != 0 && x != map.Size - 1)
@@ -202,11 +217,11 @@
                 Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
                 Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
                 Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: wall");
+                Console.WriteLine("Right: Sea");
             }
             else if (x == 0 && y != 0 && y != map.Size - 1)
             {
-                Console.WriteLine("Up: wall");
+                Console.WriteLine("Up: Sea");
                 Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
                 Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
                 Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
@@ -214,36 +229,36 @@
             else if (x == map.Size - 1 && y != 0 && y != map.Size - 1)
             {
                 Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: wall");
+                Console.WriteLine("Down: Sea");
                 Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
                 Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
             else if (x == map.Size - 1 && y == map.Size - 1)
             {
                 Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: wall");
+                Console.WriteLine("Down: Sea");
                 Console.WriteLine("Lelft: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: wall");
+                Console.WriteLine("Right: Sea");
             }
             else if (x == map.Size - 1 && y == 0)
             {
                 Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: wall");
-                Console.WriteLine("Left: wall");
+                Console.WriteLine("Down: Sea");
+                Console.WriteLine("Left: Sea");
                 Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
             else if (x == 0 && y == map.Size - 1)
             {
-                Console.WriteLine("Up: wall");
+                Console.WriteLine("Up: Sea");
                 Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
                 Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: wall");
+                Console.WriteLine("Right: Sea");
             }
             else if (x == 0 && y == 0)
             {
-                Console.WriteLine("Up: wall");
+                Console.WriteLine("Up: Sea");
                 Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: wall");
+                Console.WriteLine("Left: Sea");
                 Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
             else
@@ -280,7 +295,6 @@
                 case 'c':
                     return "Chest";
             }
-
             return null;
         }
 
@@ -305,9 +319,9 @@
                 case "down":
                     MoveDown();
                     break;
+
                 default:
-                    //todo
-                    Console.WriteLine("invalid direction please try again");
+                    Console.WriteLine("Invalid direction. Please try again.");
                     break;
             }
         }
@@ -316,19 +330,20 @@
         {
             if (playerPos.X <= 0)
             {
-                Console.WriteLine("wall");
+                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
             }
             else
             {
                 char currmapChar = map.Map[playerPos.X - 1, playerPos.Y];
                 ProceedMapElement(currmapChar);
-                if (currmapChar == 'M')
+                if (currmapChar == 'M') // detect if enemy start battle engine OR if currmapChar != e INTERACT
                 {
                     map.Map[playerPos.X - 1, playerPos.Y] = 'e';
                 }
 
-                map.Map[playerPos.X - 1, playerPos.Y] = 'e';
-                map.PrintMap();
+                map.Map[playerPos.X - 1, playerPos.Y] = 'P';
+                map.Map[playerPos.X, playerPos.Y] = currmapChar; //// return the original element to the map
+                map.PrintMap();                                  //// need to check
                 playerPos.X--;
             }
         }
@@ -337,7 +352,7 @@
         {
             if (playerPos.X > map.Size - 2)
             {
-                Console.WriteLine("wall");
+                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
             }
             else
             {
@@ -348,7 +363,8 @@
                     map.Map[playerPos.X + 1, playerPos.Y] = 'e';
                 }
 
-                map.Map[playerPos.X + 1, playerPos.Y] = '*';
+                map.Map[playerPos.X + 1, playerPos.Y] = 'P';
+                map.Map[playerPos.X, playerPos.Y] = currmapChar;
                 map.PrintMap();
                 playerPos.X++;
             }
@@ -358,7 +374,7 @@
         {
             if (playerPos.Y <= 0)
             {
-                Console.WriteLine("wall");
+                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
             }
             else
             {
@@ -369,8 +385,8 @@
                     map.Map[playerPos.X, playerPos.Y - 1] = 'e';
                 }
 
-                map.Map[playerPos.X, playerPos.Y - 1] = '*';
-
+                map.Map[playerPos.X, playerPos.Y - 1] = 'P';
+                map.Map[playerPos.X, playerPos.Y] = currmapChar;
                 map.PrintMap();
                 playerPos.Y--;
             }
@@ -380,7 +396,7 @@
         {
             if (playerPos.Y >= map.Size - 1)
             {
-                Console.WriteLine("wall");
+                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
             }
             else
             {
@@ -391,7 +407,8 @@
                     map.Map[playerPos.X, playerPos.Y + 1] = 'e';
                 }
 
-                map.Map[playerPos.X, playerPos.Y + 1] = '*';
+                map.Map[playerPos.X, playerPos.Y + 1] = 'P';
+                map.Map[playerPos.X, playerPos.Y] = currmapChar;
                 map.PrintMap();
                 playerPos.Y++;
             }
@@ -401,53 +418,64 @@
         {
             switch (currmapChar)
             {
-                case 'H': Shop();
+                case 'H':
+                    Shop();
                     break;
+
                 case 'c':
                     UseChest();
                     break;
-                case 'm': UseManaWell();
+
+                case 'm': 
+                    UseManaWell();
                     break;
-                case 'h': UseHealthWell();
+
+                case 'h':
+                    UseHealthWell();
                     break;
-                case 'M': FightMinions();
+
+                case 'M': 
+                    FightMinions();
                     break;
+
                 case 'B':
                     FightBoss();
                     break;
 
-                default: break;
+                default: 
+                    break;
             }
         }
 
         private static void UseChest()
         {
-            Console.WriteLine("chest found");
+            Console.WriteLine("Chest found.");
         }
 
         private static void FightBoss()
         {
+            Console.WriteLine("BOSS!!!!");
             world++;
         }
 
         private static void FightMinions()
         {
-            Console.WriteLine("fight");
+            Console.WriteLine("Fight");
         }
 
         private static void UseHealthWell()
         {
-            Console.WriteLine("health using");
+            Console.WriteLine("A health well has been used.");
         }
 
         private static void UseManaWell()
         {
-            Console.WriteLine("mana well");
+            Console.WriteLine("A mana well has been used.");
         }
 
         private static void Shop()
         {
-            Console.WriteLine("you are in the shop");
+            Console.WriteLine("You are in the Shop!");
         }
 
         public static void GenerateMapByWord()
