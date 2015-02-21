@@ -221,7 +221,6 @@ namespace Game.Core
                     else
                     {
                         this.inventory.Add(items[i]);
-                        this.InventorySize -= items[i].Size;
                         Console.WriteLine("You have added {0} to your inventory.", items[i].Id);
                     }
                 }
@@ -238,7 +237,7 @@ namespace Game.Core
         public void UpdateInventorySpace()
         {
             int itemsSize = this.Inventory.Sum(n => n.Size);
-            this.InventorySize -= itemsSize;
+            this.InventorySize = PlayerConstants.PlayerStartingInventorySize - itemsSize;
         }
 
         public void RemoveItem(Item item)
@@ -246,6 +245,7 @@ namespace Game.Core
             if (inventory.Contains(item))
             {
                 this.inventory.Remove(item);
+                Console.WriteLine("{0} has been removed.", item.Id);
             }
             else
             {
@@ -262,10 +262,9 @@ namespace Game.Core
         {
             StringBuilder basePlayer = new StringBuilder();
             basePlayer.Append(base.ToString());
-            int avavailableSpaceInInventory = this.InventorySize - this.Inventory.Count;
             basePlayer.AppendFormat(
                 "Kils: {10},\nFree space in inventory: {0},\nLevel: {1},\nExperience: {2},\nGold: {3}\nMana: {4},\nAttack speed: {5},\nAllresistance: {6},\nCritical damage: {7},\nCritical chance: {8},\nChance to dodge {9}.",
-                avavailableSpaceInInventory,
+                this.InventorySize,
                 this.Level,
                 this.Experience,
                 this.Gold,

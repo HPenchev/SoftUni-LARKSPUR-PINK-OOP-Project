@@ -576,6 +576,7 @@ namespace Game.Engine
             if (input.ToLower().Contains("yes"))
             {
                 UseChest();
+                player.UpdateInventorySpace();
             }
             else
             {
