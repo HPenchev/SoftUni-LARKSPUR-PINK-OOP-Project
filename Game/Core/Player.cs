@@ -19,7 +19,7 @@
         private double allResistance;
         private double criticalChance;
         private double critDamage;
-        private double chanceToDodge;
+        private double chanceToDodge; 
 
         protected Player(string id)
             : base(id)

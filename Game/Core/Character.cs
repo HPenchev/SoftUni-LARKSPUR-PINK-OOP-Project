@@ -7,6 +7,8 @@
     public abstract class Character : GameObject, ICharacter
     {
         private bool isAlive;
+
+        private double maxHealthPoints;
         private double healthPoints;
         private double attackPoints;
         private double defensePoints;
@@ -15,6 +17,12 @@
         protected Character(string id) : base(id)
         {
             this.IsAlive = PlayerConstants.IsAlive;
+        }
+
+        public double MaxHealthPoints
+        {
+            get { return this.maxHealthPoints; }
+            set { this.maxHealthPoints = value; }
         }
 
         public bool IsAlive

@@ -1,6 +1,10 @@
-﻿using System.Deployment.Internal;
+﻿using System.Collections.Generic;
+using System.Deployment.Internal;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using Game.Items.ArmorOfDragon;
 using Game.Items.ArmorOfGandalf;
+using Game.Items.Spells;
 using Game.Static;
 
 namespace Game.Engine
@@ -29,63 +33,92 @@ namespace Game.Engine
 
         private static void MainMenu()
         {
-            //   DrawImg.Draw(@"..\..\Images\menu.jpg", "");
-            Console.WriteLine("Please choose an option:");
-            Console.WriteLine("1 ---> New Game\n2 ---> Load Game");
-            string inputParams = Console.ReadLine();
-            Console.Clear();
-            ExecuteMainMenu(inputParams);
+            while(true)
+            {
+                PrintMainMenu();
+                var mainMenuInput = Console.ReadLine();
+                Console.Clear();
+                if (String.IsNullOrWhiteSpace(mainMenuInput))
+                {
+                    PrintTextSlowedDown("Invalid Menu Choice.");
+                }
+                else
+                {
+                    ExecuteMainMenu(mainMenuInput);    
+                }
+            }
         }
 
-        private static void ExecuteMainMenu(string inputParams)
+        private static void PrintMainMenu()
         {
-            switch (inputParams)
+            PrintTextSlowedDown("Please choose an option:");
+            PrintTextSlowedDown("1 ---> New Game\n" +
+                                "2 ---> Load Game");
+        }
+
+        private static void ExecuteMainMenu(string mainMenuInput)
+        {
+            if (mainMenuInput.Contains("1"))
             {
-                case "1":
-                    Console.WriteLine("Please enter Hero class and the Hero's name.");
-                    DisplayAveilabeHeroes();
-                    NewGame();
-                    break;
-                case "2":
-                    LoadGame();
-                    break;
-                case "exit":
-                    Console.WriteLine("Goodbye.");
-                    Environment.Exit(0);
-                    break;
-                default: throw new Exception("Invalid command.");
+                PrintTextSlowedDown("Please enter Hero class and the Hero's name. [mage] [Gandalf]");
+                DisplayAvailableHeroes();
+                NewGame();
+            }
+            else if (mainMenuInput.Contains("2"))
+            {
+                LoadGame();
+            }
+            else if (mainMenuInput.ToLower().Contains("exit"))
+            {
+                PrintTextSlowedDown("Goodbye.");
+                Environment.Exit(0);
             }
         }
 
         //todo shop generate
-        private static void MainMenuUserInput()
+        private static void NewGameUserInput()
         {
             bool isValid = false;
-            string[] userParams;
             while (!isValid)
             {
-                userParams = SplitUserInput(Console.ReadLine().Trim());
-                if (player == null && EngineConst.TypeOfHeroes.Contains(userParams[0].ToLower()) && userParams.Length >= 2)
+                string newGameMenuUserInput = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(newGameMenuUserInput))
                 {
-                    isValid = true;
-                    GenerateMapByWord();
-                    CreatePlayer(userParams);
+                    PrintNewGameMenuInvalidInputMessage();
                 }
-
-                if (userParams.Contains("exit"))
+                else
                 {
-                    Console.WriteLine("Goodbye");
-                    Environment.Exit(0);
-                }
+                    string[] heroParameters = SplitUserInput(newGameMenuUserInput.Trim());
+                    if (player == null && heroParameters.Length >= 2 &&
+                        EngineConst.TypeOfHeroes.Contains(heroParameters[0].ToLower()))
+                    {
+                        isValid = true;
+                        GenerateMapByWord();
+                        CreatePlayer(heroParameters);
+                    }
 
-                if (!isValid && !userParams.Contains("exit"))
-                {
-                    Console.Clear();
-                    Console.WriteLine("Invalid input.");
-                    DisplayAveilabeHeroes();
-                    Console.WriteLine("Please enter: [hero type] [name]");
+                    if (heroParameters.Contains("exit"))
+                    {
+                        Console.WriteLine();
+                        PrintTextSlowedDown("Goodbye");
+                        Environment.Exit(0);
+                    }
+
+                    if (!isValid && !heroParameters.Contains("exit"))
+                    {
+                        PrintNewGameMenuInvalidInputMessage();
+                    }
                 }
             }
+        }
+
+        private static void PrintNewGameMenuInvalidInputMessage()
+        {
+            Console.Clear();
+            PrintTextSlowedDown("Invalid input.");
+            PrintTextSlowedDown("Please enter: [hero type] [name]");
+            DisplayAvailableHeroes();
+            Console.WriteLine();
         }
 
         private static void CreatePlayer(string[] inputParams)
@@ -117,11 +150,12 @@ namespace Game.Engine
             Console.WriteLine("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id);
         }
 
-        private static void DisplayAveilabeHeroes()
+        private static void DisplayAvailableHeroes()
         {
             for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
             {
-                Console.WriteLine("{0} -------> {1}", EngineConst.TypeOfHeroes[i], EngineConst.HeroDesc[i]);
+                PrintTextSlowedDown(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
+                PrintTextSlowedDown(EngineConst.HeroDesc[i]);
             }
         }
 
@@ -138,7 +172,7 @@ namespace Game.Engine
 
         private static void NewGame()
         {
-            MainMenuUserInput();
+            NewGameUserInput();
             SetPlayerPos();
             ExecuteCommand();
         }
@@ -164,7 +198,7 @@ namespace Game.Engine
             while (true)
             {
                 string[] inputParams = SplitUserInput(Console.ReadLine());
-                switch (inputParams[0])
+                switch (inputParams[0].ToLower())
                 {
                     case "exit":
                         Environment.Exit(0);
@@ -190,8 +224,12 @@ namespace Game.Engine
                         DisplayCommands();
                         break;
 
+                    case "print": // OR A SCROLL WHICH WILL SHOW THE MAP ONE TIME 
+                        map.PrintMap();
+                        break;
+
                     default:
-                        Console.WriteLine("Invalid command.");
+                        PrintTextSlowedDown("Invalid command.");
                         break;
                 }
             }
@@ -199,7 +237,19 @@ namespace Game.Engine
 
         private static void DisplayCommands()
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+            Console.WriteLine("{0}", new string('-', 10));
+            PrintTextSlowedDown("move up");
+            PrintTextSlowedDown("move left");
+            PrintTextSlowedDown("move down");
+            PrintTextSlowedDown("move left");
+            PrintTextSlowedDown("display-area");
+            PrintTextSlowedDown("items");
+            PrintTextSlowedDown("stats");
+            PrintTextSlowedDown("help");
+            PrintTextSlowedDown("exit");
+            Console.WriteLine("{0}", new string('-', 10));
+            Console.WriteLine();
         }
 
         private static void DisplaySurroundings()
@@ -302,8 +352,8 @@ namespace Game.Engine
 
         private static void Move(string direction)
         {
-            Console.WriteLine("X = " + playerPos.X);
-            Console.WriteLine("Y = " + playerPos.Y);
+            Console.WriteLine("X = " + playerPos.X); //// TEST OUTPUT
+            Console.WriteLine("Y = " + playerPos.Y); //// TEST OUTPUT
             switch (direction)
             {
                 case "left":
@@ -332,24 +382,22 @@ namespace Game.Engine
         {
             if (playerPos.X <= 0)
             {
-                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
+                PrintMapBoarderReachedMessage();
             }
             else
             {
-                char currmapChar = map.Map[playerPos.X - 1, playerPos.Y];
-                if (currmapChar != 'e') // if currmapChar != e INTERACT(  ProceedMapElement  )
+                char currentMapObject = map.Map[playerPos.X - 1, playerPos.Y];
+                if (currentMapObject != 'e')
                 {
-                    ProceedMapElement(currmapChar); 
-                    //map.Map[playerPos.X - 1, playerPos.Y] = 'e';
+                    ProceesMapElement(currentMapObject);
                 }
                 else
                 {
                     map.Map[playerPos.X - 1, playerPos.Y] = 'P';
-                    map.Map[playerPos.X, playerPos.Y] = currmapChar; //// return the original element to the map
-                    map.PrintMap();                                  //// need to check
+                    map.Map[playerPos.X, playerPos.Y] = currentMapObject; //// return the original element to the map
+                    map.PrintMap();                                  
                     playerPos.X--;
                 }
-
             }
         }
 
@@ -357,12 +405,12 @@ namespace Game.Engine
         {
             if (playerPos.X > map.Size - 2)
             {
-                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
+                PrintMapBoarderReachedMessage();
             }
             else
             {
                 char currmapChar = map.Map[playerPos.X + 1, playerPos.Y];
-                ProceedMapElement(currmapChar);
+                ProceesMapElement(currmapChar);
                 if (currmapChar == 'M')
                 {
                     map.Map[playerPos.X + 1, playerPos.Y] = 'e';
@@ -379,12 +427,12 @@ namespace Game.Engine
         {
             if (playerPos.Y <= 0)
             {
-                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
+                PrintMapBoarderReachedMessage();
             }
             else
             {
                 char currmapChar = map.Map[playerPos.X, playerPos.Y - 1];
-                ProceedMapElement(currmapChar);
+                ProceesMapElement(currmapChar);
                 if (currmapChar == 'M')
                 {
                     map.Map[playerPos.X, playerPos.Y - 1] = 'e';
@@ -401,12 +449,12 @@ namespace Game.Engine
         {
             if (playerPos.Y >= map.Size - 1)
             {
-                Console.WriteLine("There is only the vast ocean in front of you.\nYou shall not pass.");
+                PrintMapBoarderReachedMessage();
             }
             else
             {
                 char currmapChar = map.Map[playerPos.X, playerPos.Y + 1];
-                ProceedMapElement(currmapChar);
+                ProceesMapElement(currmapChar);
                 if (currmapChar == 'M')
                 {
                     map.Map[playerPos.X, playerPos.Y + 1] = 'e';
@@ -419,7 +467,14 @@ namespace Game.Engine
             }
         }
 
-        private static void ProceedMapElement(char currmapChar)
+        private static void PrintMapBoarderReachedMessage()
+        {
+            Console.Beep(100, 100);
+            //// !!!!COUPLING!!!! or Console.ReadLine();
+            PrintTextSlowedDown("There is only the vast ocean in front of you.\nYou shall not pass.");
+        }
+
+        private static void ProceesMapElement(char currmapChar)
         {
             switch (currmapChar)
             {
@@ -432,22 +487,14 @@ namespace Game.Engine
                     break;
 
                 case 'm':
-                    Console.WriteLine("You have stumbled upon a Mana Well.");
-                    Console.WriteLine("Do you want to drink from it?");
-                    string answer = Console.ReadLine();
-                    if (answer.ToLower().Contains("yes"))
-                    {
-                        UseManaWell();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Good choice, this can be useful later on.");
-                    }
-                    map.PrintMap(); 
+                    //toInteract = new ManaWell()
+
+                    ///generate na klasovete
+                    InteractWithManaWell();
                     break;
 
                 case 'h':
-                    UseHealthWell();
+                    InteractWithHealthWell();
                     break;
 
                 case 'M': 
@@ -461,11 +508,70 @@ namespace Game.Engine
                 default: 
                     break;
             }
+            map.PrintMap();
+        }
+
+        private static void InteractWithHealthWell()
+        {
+            PlayAudio.YouLuckyBastard(); // AUDIO TEST
+            PrintTextSlowedDown("You lucky bastard...");
+            PrintTextSlowedDown("You have stumbled upon a Health Well.");
+            PrintTextSlowedDown("Do you want to drink from it?");
+            string answer = Console.ReadLine();
+            if (answer.ToLower().Contains("yes"))
+            {
+                UseHealthWell();
+                //todo UPDATE PLAYER POSITION
+            }
+            else
+            {
+                PrintTextSlowedDown("Good choice, this health well can be useful later on.");
+            }
+            Console.WriteLine();
+        }
+
+        private static void InteractWithManaWell()
+        {
+            PlayAudio.YouLuckyBastard();  // AUDIO TEST
+            PrintTextSlowedDown("You lucky bastard...");
+            PrintTextSlowedDown("You have stumbled upon a Mana Well.");
+            PrintTextSlowedDown("Do you want to drink from it?");
+            string answer = Console.ReadLine();
+            if (answer.ToLower().Contains("yes"))
+            {
+                UseManaWell();
+                //todo UPDATE PLAYER POSITION
+            }
+            else
+            {
+                PrintTextSlowedDown("Good choice, this mana well can be useful later on.");
+            }
+            Console.WriteLine();
+        }
+
+        private static void PrintTextSlowedDown(string text)
+        {
+            ////todo Key Listener, Play music
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            for (int i = 0; i < text.Length; i++)
+            {
+                Thread.Sleep(1);
+                Console.Write(text[i]);
+            }
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
         private static void UseChest()
         {
-            Console.WriteLine("Chest found.");
+            Chest chest = new Chest("Chest");
+            List<IStatic> items = new List<IStatic>()
+            {
+
+            };
+
+        PrintTextSlowedDown(".");
         }
 
         private static void FightBoss()
@@ -484,14 +590,21 @@ namespace Game.Engine
             HealthWell well = new HealthWell(DateTime.Now.ToString());
             if (well.IsUsed)
             {
-                Console.WriteLine("This Health well has been used and It is empty.");
+                PrintTextSlowedDown("This Health well has been used and It is empty.");
+                Console.WriteLine();
+            }
+            else if (player.HealthPoints == player.MaxHealthPoints)
+            {
+                PrintTextSlowedDown("Your health is full and you can not use that health well.");
+                Console.WriteLine();
             }
             else
             {
-                Console.WriteLine("I feel stronger already.");
-                Console.WriteLine("{0} gained {1} health points by using a Health well.", player.Id, well.Health);
                 player.HealthPoints += well.Health;
                 well.IsUsed = true;
+                Console.WriteLine("I feel stronger already.");
+                Console.WriteLine("{0} gained {1} health points by using a Health well.", player.Id, well.Health);
+                Console.WriteLine();
             }
         }
 
@@ -504,9 +617,9 @@ namespace Game.Engine
             }
             else
             {
+                player.Mana += wellPoints;
                 Console.WriteLine("I feel more powerful already.");
                 Console.WriteLine("{0} gained {1} mana points by using a Mana well.", player.Id, wellPoints);
-                player.Mana += wellPoints;
             }
         }
 

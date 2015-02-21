@@ -3,9 +3,9 @@
     using Core;
     using Core.Data.Enums;
 
-    public class ArmorOfGandalf : Armor
+    public class ChestArmorOfGandalf : Armor
     {
-        public ArmorOfGandalf(string id)
+        public ChestArmorOfGandalf(string id)
             : base(id)
         {
             this.Id = "The Armor of Gandalf the gray.";
