@@ -15,7 +15,7 @@
 
         double Mana { get; set; }
 
-        List<IItem> Inventory { get; set; }
+        List<Item> Inventory { get; set; }
 
         void Attack(ICharacter enemy);
 
@@ -23,9 +23,9 @@
 
         void Display(string args); // string args === stats || items
 
-        void PickUpItem(IItem item);
+        void PickUpItem(List<Item> item);
 
-        void RemoveItem(string id);
+        void RemoveItem(Item item);
 
         ICharacter FindTarget(ICharacter enemy);
     }

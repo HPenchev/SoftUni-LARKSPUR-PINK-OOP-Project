@@ -1,4 +1,5 @@
-﻿using Game.Items.ArmorOfGandalf;
+﻿using Game.Core.Data;
+using Game.Items.ArmorOfGandalf;
 using Game.Items.Spells;
 using Game.Items.WeaponOfNakov;
 
@@ -30,10 +31,9 @@ namespace Game.Characters
 
         private void AddStartingItems()
         {
-           //this.Inventory.Add(new ArmorOfGandalf("Gandi's Chest"));
-            this.Inventory.Add(new WandOfNakov("Nakov's middle finger"));
-            this.Inventory.Add(new BootsOfGandalf("Gandi's dirty shoes."));
-            this.Inventory.Add(new SpellOfHealth("Gandalf's apple"));
+            RandomItemGenerator itemGenerator = new RandomItemGenerator(this.Level);
+            this.Inventory.AddRange(itemGenerator.List);
+            this.UpdateInventorySpace();
         }
     }
 }

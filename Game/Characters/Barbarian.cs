@@ -1,4 +1,5 @@
-﻿using Game.Items.ArmorOfDragon;
+﻿using Game.Core.Data;
+using Game.Items.ArmorOfDragon;
 using Game.Items.ArmorOfGandalf;
 using Game.Items.WeaponOfNakov;
 
@@ -30,10 +31,9 @@ namespace Game.Characters
 
         private void AddStartingItems()
         {
-            this.Inventory.Add(new SwordOfNakov("Sword"));
-            this.Inventory.Add(new ShieldOfGandalf("Shield"));
-            this.Inventory.Add(new ChestArmorOfDragon("Armor"));
-            this.Inventory.Add(new BootsOfGandalf("Boots"));
+            RandomItemGenerator itemGenerator = new RandomItemGenerator(this.Level);
+            this.Inventory.AddRange(itemGenerator.List);
+            this.UpdateInventorySpace();
         }
     }
 }

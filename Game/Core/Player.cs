@@ -1,4 +1,6 @@
-﻿namespace Game.Core
+﻿using System.Linq;
+
+namespace Game.Core
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +15,7 @@
         private int level;
         private decimal experience;
         private decimal gold;
-        private List<IItem> inventory;
+        private List<Item> inventory;
         private double mana;
         private double attackSpeed;
         private double allResistance;
@@ -21,15 +23,14 @@
         private double critDamage;
         private double chanceToDodge; 
 
-        protected Player(string id)
-            : base(id)
+        protected Player(string id) : base(id)
         {
             this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Level = PlayerConstants.PlayerStartingLevel;
             this.InventorySize = PlayerConstants.PlayerStartingInventorySize;
             this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Gold = PlayerConstants.PlayerStartingGold;
-            this.Inventory = new List<IItem>();
+            this.Inventory = new List<Item>();
             this.KillCounter = PlayerConstants.KillCounter;
         }
 
@@ -111,7 +112,7 @@
             }
         }
 
-        public List<IItem> Inventory
+        public List<Item> Inventory
         {
             get
             {
@@ -204,14 +205,52 @@
             throw new NotImplementedException();
         }
 
-        public void PickUpItem(IItem item)
+        public void PickUpItem(List<Item> items)
         {
-            throw new NotImplementedException();
+            string answer = string.Empty;
+            for (int i = 0; i < items.Count; i++)
+            {
+                Console.WriteLine("Do you want to add {0} to your inventory.", items[i].Id);
+                answer = Console.ReadLine();
+                if (answer.ToLower().Contains("yes"))
+                {
+                    if (this.InventorySize - items[i].Size <= 0)
+                    {
+                        Console.WriteLine("Your Inventory is Full.\nPlease remove something.");
+                    }
+                    else
+                    {
+                        this.inventory.Add(items[i]);
+                        this.InventorySize -= items[i].Size;
+                        Console.WriteLine("You have added {0} to your inventory.", items[i].Id);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("It's crap anyway.");
+                    continue;
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
         }
 
-        public void RemoveItem(string id)
+        public void UpdateInventorySpace()
         {
-            throw new NotImplementedException();
+            int itemsSize = this.Inventory.Sum(n => n.Size);
+            this.InventorySize -= itemsSize;
+        }
+
+        public void RemoveItem(Item item)
+        {
+            if (inventory.Contains(item))
+            {
+                this.inventory.Remove(item);
+            }
+            else
+            {
+                Console.WriteLine("No such Item in Inventory.");
+            }
         }
 
         public ICharacter FindTarget(ICharacter enemy)

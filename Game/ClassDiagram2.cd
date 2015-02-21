@@ -348,6 +348,7 @@
       <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQQACA=</HashCode>
       <FileName>Static\ManaWell.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Struct Name="Game.Core.Position" Collapsed="true">
     <Position X="62.75" Y="4.75" Width="1.5" />

@@ -1,4 +1,5 @@
-﻿using Game.Items.ArmorOfGandalf;
+﻿using Game.Core.Data;
+using Game.Items.ArmorOfGandalf;
 using Game.Items.Spells;
 using Game.Items.WeaponOfNakov;
 
@@ -18,6 +19,7 @@ namespace Game.Characters
             this.Mana = AmazonConstants.Mana;
             this.Range = AmazonConstants.Range;
             AddStartingItems();
+            
         }
 
         public override string ToString()
@@ -30,10 +32,9 @@ namespace Game.Characters
 
         private void AddStartingItems()
         {
-            this.Inventory.Add(new BowOfNakov("Nakov's Bow."));
-            this.Inventory.Add(new BeltOfGandalf("Nakov's belt."));
-            this.Inventory.Add(new SpellOfDefence("Defence spell."));
-            this.Inventory.Add(new GlovesOfGandalf("Gloves."));
+            RandomItemGenerator itemGenerator = new RandomItemGenerator(this.Level);
+            this.Inventory.AddRange(itemGenerator.List);
+            this.UpdateInventorySpace();
         }
     }
 }

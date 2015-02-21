@@ -8,8 +8,7 @@
         private double health;
         private bool isUsed;
 
-        public HealthWell(string id)
-            : base(id)
+        public HealthWell(string id) : base(id)
         {
             this.Health = 100;
         }

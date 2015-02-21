@@ -2,6 +2,7 @@
 using System.Deployment.Internal;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Game.Core.Data;
 using Game.Items.ArmorOfDragon;
 using Game.Items.ArmorOfGandalf;
 using Game.Items.Spells;
@@ -25,6 +26,7 @@ namespace Game.Engine
         private static MapGenerator map;
         private static Position playerPos;
         private static int world = 1;
+        private static char prevMapElement = 'e';
 
         public void Run()
         {
@@ -391,13 +393,13 @@ namespace Game.Engine
                 {
                     ProceesMapElement(currentMapObject);
                 }
-                else
-                {
-                    map.Map[playerPos.X - 1, playerPos.Y] = 'P';
-                    map.Map[playerPos.X, playerPos.Y] = currentMapObject; //// return the original element to the map
-                    map.PrintMap();                                  
-                    playerPos.X--;
-                }
+
+                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
+                prevMapElement = map.Map[playerPos.X - 1, playerPos.Y];
+                map.Map[playerPos.X - 1, playerPos.Y] = 'P';
+                playerPos.X--;
+                map.PrintMap();
+                Console.WriteLine();
             }
         }
 
@@ -409,16 +411,17 @@ namespace Game.Engine
             }
             else
             {
-                char currmapChar = map.Map[playerPos.X + 1, playerPos.Y];
-                ProceesMapElement(currmapChar);
-                if (currmapChar == 'M')
+                char currentMapObject = map.Map[playerPos.X + 1, playerPos.Y];
+                if (currentMapObject != 'e')
                 {
-                    map.Map[playerPos.X + 1, playerPos.Y] = 'e';
+                    ProceesMapElement(currentMapObject);
                 }
 
+                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
+                prevMapElement = map.Map[playerPos.X + 1, playerPos.Y];
                 map.Map[playerPos.X + 1, playerPos.Y] = 'P';
-                map.Map[playerPos.X, playerPos.Y] = currmapChar;
                 map.PrintMap();
+                Console.WriteLine();
                 playerPos.X++;
             }
         }
@@ -431,17 +434,18 @@ namespace Game.Engine
             }
             else
             {
-                char currmapChar = map.Map[playerPos.X, playerPos.Y - 1];
-                ProceesMapElement(currmapChar);
-                if (currmapChar == 'M')
+                char currentMapObject = map.Map[playerPos.X, playerPos.Y - 1];
+                if (currentMapObject != 'e')
                 {
-                    map.Map[playerPos.X, playerPos.Y - 1] = 'e';
+                    ProceesMapElement(currentMapObject);
                 }
 
+                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
+                prevMapElement = map.Map[playerPos.X, playerPos.Y - 1];
                 map.Map[playerPos.X, playerPos.Y - 1] = 'P';
-                map.Map[playerPos.X, playerPos.Y] = currmapChar;
-                map.PrintMap();
                 playerPos.Y--;
+                map.PrintMap();
+                Console.WriteLine();
             }
         }
 
@@ -453,17 +457,19 @@ namespace Game.Engine
             }
             else
             {
-                char currmapChar = map.Map[playerPos.X, playerPos.Y + 1];
-                ProceesMapElement(currmapChar);
-                if (currmapChar == 'M')
+                char currentMapObject = map.Map[playerPos.X, playerPos.Y + 1];
+                Console.WriteLine(currentMapObject);
+                if (currentMapObject != 'e')
                 {
-                    map.Map[playerPos.X, playerPos.Y + 1] = 'e';
+                    ProceesMapElement(currentMapObject);
                 }
 
+                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
+                prevMapElement = map.Map[playerPos.X, playerPos.Y + 1];
                 map.Map[playerPos.X, playerPos.Y + 1] = 'P';
-                map.Map[playerPos.X, playerPos.Y] = currmapChar;
-                map.PrintMap();
                 playerPos.Y++;
+                map.PrintMap();
+                Console.WriteLine();
             }
         }
 
@@ -483,13 +489,10 @@ namespace Game.Engine
                     break;
 
                 case 'c':
-                    UseChest();
+                    InteractWithChest();
                     break;
 
                 case 'm':
-                    //toInteract = new ManaWell()
-
-                    ///generate na klasovete
                     InteractWithManaWell();
                     break;
 
@@ -549,7 +552,7 @@ namespace Game.Engine
             Console.WriteLine();
         }
 
-        private static void PrintTextSlowedDown(string text)
+        public static void PrintTextSlowedDown(string text)
         {
             ////todo Key Listener, Play music
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -563,15 +566,32 @@ namespace Game.Engine
             Console.WriteLine();
         }
 
+        private static void InteractWithChest()
+        {
+            PlayAudio.YouLuckyBastard();  // AUDIO TEST
+            PrintTextSlowedDown("You lucky bastard...");
+            PrintTextSlowedDown("You have stumbled upon a Chest.");
+            PrintTextSlowedDown("Do you want to open it?");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("yes"))
+            {
+                UseChest();
+            }
+            else
+            {
+                PrintTextSlowedDown("Good choice, this chest can be useful later on.");
+            }
+            Console.WriteLine();
+        }
+
+
         private static void UseChest()
         {
             Chest chest = new Chest("Chest");
-            List<IStatic> items = new List<IStatic>()
-            {
-
-            };
-
-        PrintTextSlowedDown(".");
+            RandomItemGenerator itemGenerator = new RandomItemGenerator(player.Level);
+            chest.Items.AddRange(itemGenerator.List);
+            PrintTextSlowedDown("The chest has droped " + chest.Items.Count() + " items.");
+            player.PickUpItem(chest.Items);
         }
 
         private static void FightBoss()
@@ -587,7 +607,7 @@ namespace Game.Engine
 
         private static void UseHealthWell()
         {
-            HealthWell well = new HealthWell(DateTime.Now.ToString());
+            HealthWell well = new HealthWell(DateTime.Now.Millisecond.ToString());
             if (well.IsUsed)
             {
                 PrintTextSlowedDown("This Health well has been used and It is empty.");
@@ -610,16 +630,16 @@ namespace Game.Engine
 
         private static void UseManaWell()
         {
-            double wellPoints = ManaWell.UseManaWell();
-            if (wellPoints == 0)
+            ManaWell manaWell = new ManaWell(DateTime.Now.Millisecond.ToString());
+            if (manaWell.IsUsed)
             {
                 Console.WriteLine("This Mana well has been used and It is empty.");
             }
             else
             {
-                player.Mana += wellPoints;
+                player.Mana += manaWell.Mana;
                 Console.WriteLine("I feel more powerful already.");
-                Console.WriteLine("{0} gained {1} mana points by using a Mana well.", player.Id, wellPoints);
+                Console.WriteLine("{0} gained {1} mana points by using a Mana well.", player.Id, manaWell.Mana);
             }
         }
 

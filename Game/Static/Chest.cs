@@ -9,8 +9,7 @@
         private List<Item> items;
         private bool isUsed;
 
-        public Chest(string id)
-            : base(id)
+        public Chest(string id) : base(id)
         {
             this.items = new List<Item>();
         }

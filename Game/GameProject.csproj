@@ -58,7 +58,7 @@
     <Compile Include="Core\Data\Constants\PlayerConstatns\PlayerConstants.cs" />
     <Compile Include="Core\Data\Enums\ArmorType.cs" />
     <Compile Include="Core\Data\Enums\WeaponType.cs" />
-    <Compile Include="Core\Data\ItemsList.cs" />
+    <Compile Include="Core\Data\RandomItemGenerator.cs" />
     <Compile Include="Core\Enemy.cs" />
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />

@@ -3,38 +3,38 @@
     using Core;
     using Game.Interfaces;
 
-    public static class ManaWell
+    public class ManaWell : GameObject, IStatic
     {
-        private static double mana;
-        private static bool isUsed;
+        private double mana;
+        private bool isUsed;
 
-        static ManaWell()
+        public ManaWell(string id) : base(id)
         {
-            Mana = 100;
+            this.Mana = 100;
         }
 
-        private static double Mana
+        public double Mana
         {
-            get { return mana; }
-            set { mana = value; }
+            get { return this.mana; }
+            set { this.mana = value; }
         }
 
-        private static bool IsUsed
+        public bool IsUsed
         {
-            get { return isUsed; }
-            set { isUsed = value; }
+            get { return this.isUsed; }
+            set { this.isUsed = value; }
         }
 
-        public static double UseManaWell()
+        public double UseManaWell()
         {
-            if (IsUsed)
+            if (this.IsUsed)
             {
                 return 0;
             }
             else
             {
-                IsUsed = true;
-                return Mana;
+                this.IsUsed = true;
+                return this.Mana;
             }
         }
     }
