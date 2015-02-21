@@ -3,11 +3,12 @@ using System.Deployment.Internal;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Game.Core.Data;
+using Game.Enemies;
 using Game.Items.ArmorOfDragon;
 using Game.Items.ArmorOfGandalf;
 using Game.Items.Spells;
 using Game.Static;
-
+/////todo 284
 namespace Game.Engine
 {
     using System;
@@ -22,6 +23,11 @@ namespace Game.Engine
         //todo map showing ??
         //todo map testing
         //todo map update - wells chests, new minions
+        //todo change item
+        //todo update hero stat when euqip
+        //todo Penchev`s methdod for using the potions
+        //todo mapCreepChanging 
+
         private static Player player;
         private static MapGenerator map;
         private static Position playerPos;
@@ -35,7 +41,7 @@ namespace Game.Engine
 
         private static void MainMenu()
         {
-            while(true)
+            while (true)
             {
                 PrintMainMenu();
                 var mainMenuInput = Console.ReadLine();
@@ -46,7 +52,7 @@ namespace Game.Engine
                 }
                 else
                 {
-                    ExecuteMainMenu(mainMenuInput);    
+                    ExecuteMainMenu(mainMenuInput);
                 }
             }
         }
@@ -241,7 +247,7 @@ namespace Game.Engine
             }
         }
 
-        private static void Inventory() 
+        private static void Inventory()
         {
             PrintInventory();
             while (true)
@@ -276,14 +282,14 @@ namespace Game.Engine
                 }
                 else if (command.ToLower().Contains("unequip"))
                 {
-                    
+
                 }
                 else if (command.ToLower().Contains("equip")) // todo refactor this to a method
                 {
                     index = int.Parse(inputParams[1]); //// todo exception handling
                     if (index >= 0 && index < player.Inventory.Count)
                     {
-                        Item item = player.Inventory[index]; 
+                        Item item = player.Inventory[index];
                         if (item is Weapon || item is Armor)
                         {
                             player.EquipItem(item);
@@ -605,7 +611,7 @@ namespace Game.Engine
                     InteractWithHealthWell();
                     break;
 
-                case 'M': 
+                case 'M':
                     FightMinions();
                     break;
 
@@ -613,7 +619,7 @@ namespace Game.Engine
                     FightBoss();
                     break;
 
-                default: 
+                default:
                     break;
             }
         }
@@ -700,12 +706,21 @@ namespace Game.Engine
         private static void FightBoss()
         {
             Console.WriteLine("BOSS!!!!");
+            List<Enemy> bosses = new List<Enemy>();
+            string bossName = String.Format("Evil boss level {0}", world);
+            Enemy boss = new Boss(bossName);
+            bosses.Add(boss);
+            BattleEngine battleEngine = new BattleEngine(player, bosses);
+            battleEngine.Run();
             world++;
         }
 
         private static void FightMinions()
         {
-            Console.WriteLine("Fight");
+            Minion minion = new Minion("Minion");
+            List<Enemy> minions = new List<Enemy>();
+            BattleEngine battleEngine = new BattleEngine(player, minions);
+            battleEngine.Run();
         }
 
         private static void UseHealthWell()

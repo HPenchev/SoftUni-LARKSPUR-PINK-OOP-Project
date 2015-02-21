@@ -6,8 +6,8 @@ using Game.Core.RandomGenerator;
 
 namespace Game.Engine
 {
-    class BattleEngine
-    {        
+    public class BattleEngine
+    {
         public BattleEngine(Player player, List<Enemy> enemies)
         {
             this.Player = player;
@@ -16,7 +16,7 @@ namespace Game.Engine
 
         private Player Player { get; set; }
 
-        private List<Enemy> Enemies{ get; set; }
+        private List<Enemy> Enemies { get; set; }
 
         public void Run()
         {
@@ -52,12 +52,12 @@ namespace Game.Engine
         private bool CheckWhetherAllEnemiesAreDead(List<Enemy> enemies)
         {
             foreach (Enemy enemy in enemies)
-	        {
-		        if (enemy.IsAlive)
+            {
+                if (enemy.IsAlive)
                 {
                     return false;
-                }                
-	        }
+                }
+            }
 
             return true;
         }
@@ -71,7 +71,7 @@ namespace Game.Engine
 
             string playersChoise = Console.ReadLine();
 
-            switch(playersChoise)
+            switch (playersChoise)
             {
                 case "1": InitiateAttack();
                     break;
@@ -90,10 +90,10 @@ namespace Game.Engine
             Console.WriteLine("Please enter the ID of the enemy you want to hit");
             string id = Console.ReadLine();
 
-            Character targetedEnemy = 
+            Character targetedEnemy =
                 (Character)from enemy in this.Enemies
-                where enemy.Id == id
-                select enemy;
+                           where enemy.Id == id
+                           select enemy;
 
             this.Player.Attack(targetedEnemy);
         }
@@ -102,9 +102,9 @@ namespace Game.Engine
         {
             List<Spell> spells = GetSpells(this.Player);
             if (spells == null || spells.Count == 0)
-            {                
+            {
                 Console.WriteLine("There are no spells to cast");
-                PlayerMove();                
+                PlayerMove();
             }
 
             Console.WriteLine("Please enter the id of the spell you want to cast:");

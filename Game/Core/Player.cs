@@ -22,9 +22,10 @@ namespace Game.Core
         private double allResistance;
         private double criticalChance;
         private double critDamage;
-        private double chanceToDodge; 
+        private double chanceToDodge;
 
-        protected Player(string id) : base(id)
+        protected Player(string id)
+            : base(id)
         {
             this.Experience = PlayerConstants.PlayerStartingExperience;
             this.Level = PlayerConstants.PlayerStartingLevel;
@@ -191,7 +192,6 @@ namespace Game.Core
             }
         }
 
-
         public void EquipItem(Item item)
         {
             if (item is Weapon)
@@ -205,6 +205,7 @@ namespace Game.Core
                     (item as Weapon).IsEquiped = true;
                     this.inventory.Add(item);
                     Console.WriteLine("{0} has been equiped.", item.Id);
+                    UpdateHeroStats();
                 }
                 else
                 {
@@ -222,6 +223,7 @@ namespace Game.Core
                     (item as Armor).IsEquiped = true;
                     this.inventory.Add(item);
                     Console.WriteLine("{0} has been equiped.", item.Id);
+                    UpdateHeroStats();
                 }
                 else
                 {
@@ -233,6 +235,7 @@ namespace Game.Core
                 Console.WriteLine("This item can not be equiped");
             }
         }
+
         public void Attack(ICharacter enemy)
         {
             throw new NotImplementedException();
@@ -289,6 +292,7 @@ namespace Game.Core
             {
                 this.inventory.Remove(item);
                 Console.WriteLine("{0} has been removed.", item.Id);
+                UpdateHeroStats();
             }
             else
             {
@@ -303,6 +307,7 @@ namespace Game.Core
 
         public override string ToString()
         {
+            UpdateHeroStats();
             StringBuilder basePlayer = new StringBuilder();
             basePlayer.Append(base.ToString());
             basePlayer.AppendFormat(
@@ -319,6 +324,26 @@ namespace Game.Core
                 this.ChanceToDodge,
                 this.KillCounter);
             return basePlayer.ToString();
+        }
+
+        private void UpdateHeroStats()
+        {
+            foreach (var item in inventory)
+            {
+                if ((item is Equipment))
+                {
+                    if ((item as Equipment).IsEquiped)
+                    {
+                        this.AttackPoints += item.AttackPoints;
+                        this.HealthPoints += item.HealthPoints;
+                        this.DefensePoints = item.DefensePoints;
+                        this.AttackSpeed += (item as Equipment).AttackSpeed;
+                        this.CriticalChance += (item as Equipment).CriticalChance;
+                        this.CritDamage += (item as Equipment).CriticalDamage;
+                        this.ChanceToDodge += (item as Equipment).ChanceToDodge;
+                    }
+                }
+            }
         }
     }
 }
