@@ -73,6 +73,7 @@
     <Compile Include="Draw\DrawImg.cs" />
     <Compile Include="Enemies\Boss.cs" />
     <Compile Include="Enemies\Minion.cs" />
+    <Compile Include="Engine\BattleEngine.cs" />
     <Compile Include="Engine\Engine.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>

@@ -1,6 +1,7 @@
 ﻿namespace Game.Core
 {
     using System.Text;
+    using System.Collections.Generic;
     using Data.Constants.PlayerConstatns;
     using Interfaces;
 
@@ -53,6 +54,12 @@
         {
             get { return this.range; }
             set { this.range = value; }
+        }
+
+        public virtual List<Item> Inventory { get; set; } //To be implemented
+
+        public virtual void CastSpell(Spell spell) //To be implemented
+        {
         }
 
         public override string ToString()
