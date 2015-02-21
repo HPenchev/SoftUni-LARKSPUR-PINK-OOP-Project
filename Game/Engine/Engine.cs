@@ -218,6 +218,10 @@ namespace Game.Engine
                         player.Inventory.ForEach(n => Console.WriteLine(n.ToString()));
                         break;
 
+                    case "inventory":
+                        Inventory();
+                        break;
+
                     case "move":
                         Move(inputParams[1]);
                         break;
@@ -237,6 +241,100 @@ namespace Game.Engine
             }
         }
 
+        private static void Inventory() 
+        {
+            PrintInventory();
+            while (true)
+            {
+                PrintInventoryCommands();
+                string[] inputParams = Console.ReadLine().Split();
+                string command = inputParams[0];
+                int index;
+                if (command.ToLower().Contains("inspect"))
+                {
+                    index = int.Parse(inputParams[1]); // todo try-catch or try.Parse
+                    if (index >= 0 && index < player.Inventory.Count)
+                    {
+                        Console.WriteLine(player.Inventory[index].ToString());
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid item index.");
+                    }
+                }
+                else if (command.ToLower().Contains("remove"))
+                {
+                    index = int.Parse(inputParams[1]);
+                    if (index >= 0 && index < player.Inventory.Count)
+                    {
+                        player.RemoveItem(player.Inventory[index]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid item index.");
+                    }
+                }
+                else if (command.ToLower().Contains("equip")) // todo refactor this to a method
+                {
+                    index = int.Parse(inputParams[1]);
+                    if (index >= 0 && index < player.Inventory.Count)
+                    {
+                        Item item = player.Inventory[index]; 
+                        if (item is Weapon || item is Armor)
+                        {
+                            (item as Equipment).IsEquiped = true;
+                            PrintTextSlowedDown(item.Id + " is now equiped.");
+                        }
+                        else
+                        {
+                            PrintTextSlowedDown("You can not equip that item.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid item index.");
+                    }
+                }
+                else if (command.ToLower().Contains("print"))
+                {
+                    PrintInventory();
+                }
+                else if (command.Contains("exit"))
+                {
+                    break;
+                }
+            }
+        }
+
+        private static void PrintInventoryCommands()
+        {
+            PrintTextSlowedDown("Available Commands:");
+            PrintTextSlowedDown("inspect [index]");
+            PrintTextSlowedDown("equip [index]");
+            PrintTextSlowedDown("remove [index]");
+            PrintTextSlowedDown("print");
+            PrintTextSlowedDown("exit");
+        }
+
+        private static void PrintInventory()
+        {
+            if (player.Inventory.Count == 0)
+            {
+                PrintTextSlowedDown("Your Inventory is Empty.");
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("{0}", new String('-', 10));
+                PrintTextSlowedDown("I-N-V-E-N-T-O-R-Y");
+                for (int i = 0; i < player.Inventory.Count; i++)
+                {
+                    Console.WriteLine("{0} ---> {1}", player.Inventory[i].Id, i);
+                }
+                Console.WriteLine("{0}", new String('-', 10));
+            }
+        }
+
         private static void DisplayCommands()
         {
             Console.WriteLine();
@@ -246,9 +344,11 @@ namespace Game.Engine
             PrintTextSlowedDown("move down");
             PrintTextSlowedDown("move left");
             PrintTextSlowedDown("display-area");
+            PrintTextSlowedDown("inventory");
             PrintTextSlowedDown("items");
             PrintTextSlowedDown("stats");
             PrintTextSlowedDown("help");
+            PrintTextSlowedDown("print");
             PrintTextSlowedDown("exit");
             Console.WriteLine("{0}", new string('-', 10));
             Console.WriteLine();
@@ -584,7 +684,6 @@ namespace Game.Engine
             }
             Console.WriteLine();
         }
-
 
         private static void UseChest()
         {

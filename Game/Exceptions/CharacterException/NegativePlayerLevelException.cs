@@ -4,7 +4,7 @@
     using System.Runtime.Serialization;
 
     [Serializable]
-    public class NegativePlayerLevelException : GameException
+    public class NegativePlayerLevelException : CharacterException
     {
         /// <summary>
         /// When the Player's level is negative this Exception is thrown.

@@ -49,7 +49,10 @@ namespace Game.Core.Data
                 int randomItemIndex = random.Next(0, this.allItems.Count);
                 Item item = this.allItems[randomItemIndex];
                 item.Level = playerLevel;
-                this.list.Add(item);
+                while (!list.Contains(item)) ////todo same item type check
+                {
+                    this.list.Add(item);
+                }
             }
         }
 

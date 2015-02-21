@@ -117,7 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Data\Constants\EnemyConstants\" />
