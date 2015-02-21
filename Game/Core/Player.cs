@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Game.Core.Data.Enums;
 
 namespace Game.Core
 {
@@ -190,6 +191,48 @@ namespace Game.Core
             }
         }
 
+
+        public void EquipItem(Item item)
+        {
+            if (item is Weapon)
+            {
+                WeaponType currentWeaponType = (item as Weapon).WeaponType;
+                var query = this.Inventory
+                    .Where(n => n is Weapon && (n as Weapon).IsEquiped)
+                    .Select(n => n);
+                if (!query.Any())
+                {
+                    (item as Weapon).IsEquiped = true;
+                    this.inventory.Add(item);
+                    Console.WriteLine("{0} has been equiped.", item.Id);
+                }
+                else
+                {
+                    Console.WriteLine("You can not equip two items of the same type.");
+                }
+            }
+            else if (item is Armor)
+            {
+                ArmorType currentArmorType = (item as Armor).ArmorType;
+                var query = this.Inventory
+                    .Where(n => n is Armor && (n as Armor).IsEquiped && currentArmorType == (n as Armor).ArmorType)
+                    .Select(n => n);
+                if (!query.Any())
+                {
+                    (item as Armor).IsEquiped = true;
+                    this.inventory.Add(item);
+                    Console.WriteLine("{0} has been equiped.", item.Id);
+                }
+                else
+                {
+                    Console.WriteLine("You can not equip two items of the same type.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("This item can not be equiped");
+            }
+        }
         public void Attack(ICharacter enemy)
         {
             throw new NotImplementedException();

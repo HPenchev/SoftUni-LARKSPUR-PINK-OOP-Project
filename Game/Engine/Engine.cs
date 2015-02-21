@@ -274,15 +274,19 @@ namespace Game.Engine
                         Console.WriteLine("Invalid item index.");
                     }
                 }
+                else if (command.ToLower().Contains("unequip"))
+                {
+                    
+                }
                 else if (command.ToLower().Contains("equip")) // todo refactor this to a method
                 {
-                    index = int.Parse(inputParams[1]);
+                    index = int.Parse(inputParams[1]); //// todo exception handling
                     if (index >= 0 && index < player.Inventory.Count)
                     {
                         Item item = player.Inventory[index]; 
                         if (item is Weapon || item is Armor)
                         {
-                            (item as Equipment).IsEquiped = true;
+                            player.EquipItem(item);
                             PrintTextSlowedDown(item.Id + " is now equiped.");
                         }
                         else
@@ -295,6 +299,7 @@ namespace Game.Engine
                         Console.WriteLine("Invalid item index.");
                     }
                 }
+
                 else if (command.ToLower().Contains("print"))
                 {
                     PrintInventory();
@@ -611,7 +616,6 @@ namespace Game.Engine
                 default: 
                     break;
             }
-            map.PrintMap();
         }
 
         private static void InteractWithHealthWell()
@@ -624,7 +628,6 @@ namespace Game.Engine
             if (answer.ToLower().Contains("yes"))
             {
                 UseHealthWell();
-                //todo UPDATE PLAYER POSITION
             }
             else
             {
