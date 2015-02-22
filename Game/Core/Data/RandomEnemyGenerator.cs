@@ -24,7 +24,7 @@
         #endregion
 
         #region Properties
-        private List<Enemy> EnemiesList
+        public List<Enemy> EnemiesList
         {
             get
             {
@@ -37,7 +37,7 @@
             }
         }
 
-        private int PlayerLevel
+        public int PlayerLevel
         {
             get
             {
@@ -50,7 +50,7 @@
             }
         }
 
-        private char EnemyType
+        public char EnemyType
         {
             get
             {

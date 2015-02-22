@@ -476,6 +476,9 @@ namespace Game.Engine
 
                 case 'c':
                     return "Chest";
+
+                case 'O':
+                    return "Mob";
             }
             return null;
         }
@@ -629,14 +632,15 @@ namespace Game.Engine
                     break;
 
                 case 'M':
-                    FightMinions();
+                    InteractWithMinions();
                     break;
 
                 case 'B':
-                    FightBoss();
+                    InteractWithBoss();
                     break;
 
-                default:
+                case 'O':
+                    InteractWithMob();
                     break;
             }
         }
@@ -719,26 +723,71 @@ namespace Game.Engine
             player.PickUpItem(chest.Items);
         }
 
-        private static void FightBoss()
+        private static void InteractWithBoss()
         {
-            Console.WriteLine("BOSS!!!!");
-            List<Enemy> bosses = new List<Enemy>();
-            string bossName = String.Format("Evil boss level {0}", world);
-            Enemy boss = new Boss(bossName);
-            bosses.Add(boss);
-            BattleEngine battleEngine = new BattleEngine(player, bosses);
-            battleEngine.Run();
-            world++;
-            player.CalculateLevelByExperience();
+            PlayAudio.YouAreFucked(); // AUDIO TEST
+            PrintTextSlowedDown("You have encountered a BOSS!");
+            PrintTextSlowedDown("Do you want to fight?");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("yes"))
+            {
+                RandomEnemyGenerator enemyGenerator = new RandomEnemyGenerator(player.Level, 'B');
+                List<Enemy> bosses = enemyGenerator.EnemiesList;
+                BattleEngine battleEngine = new BattleEngine(player, bosses);
+                battleEngine.Run();
+                world++;
+                player.CalculateLevelByExperience();
+            }
+            else
+            {
+                PlayAudio.Laugh();
+                PlayAudio.YouPussy();
+                PrintTextSlowedDown("You will live to fight another day, you coward!");
+            }
         }
 
-        private static void FightMinions()
+        private static void InteractWithMinions()
         {
-            Minion minion = new Minion("Minion");
-            List<Enemy> minions = new List<Enemy>();
-            BattleEngine battleEngine = new BattleEngine(player, minions);
-            battleEngine.Run();
-            player.CalculateLevelByExperience();
+            PlayAudio.YouAreFucked(); // AUDIO TEST
+            PrintTextSlowedDown("You have encountered a Minion!");
+            PrintTextSlowedDown("Do you want to fight?");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("yes"))
+            {
+                RandomEnemyGenerator enemyGenerator = new RandomEnemyGenerator(player.Level, 'M');
+                List<Enemy> minions = enemyGenerator.EnemiesList;
+                BattleEngine battleEngine = new BattleEngine(player, minions);
+                battleEngine.Run();
+                player.CalculateLevelByExperience();
+            }
+            else
+            {
+                PlayAudio.Laugh();
+                PlayAudio.YouPussy();
+                PrintTextSlowedDown("You will live to fight another day, you coward!");
+            }
+        }
+
+        private static void InteractWithMob()
+        {
+            PlayAudio.YouAreFucked(); // AUDIO TEST
+            PrintTextSlowedDown("You have encountered a Mob!");
+            PrintTextSlowedDown("Do you want to fight?");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("yes"))
+            {
+                RandomEnemyGenerator mobGenerator = new RandomEnemyGenerator(player.Level, 'O');
+                List<Enemy> mob = mobGenerator.EnemiesList;
+                BattleEngine battleEngine = new BattleEngine(player, mob);
+                battleEngine.Run();
+                player.CalculateLevelByExperience();
+            }
+            else
+            {
+                PlayAudio.Laugh();
+                PlayAudio.YouPussy();
+                PrintTextSlowedDown("You will live to fight another day, you coward!");
+            }
         }
 
         private static void UseHealthWell()
@@ -793,7 +842,8 @@ namespace Game.Engine
             int manaWellCount = random.Next(world, world * 4);
             int chestCount = random.Next(world, world * (5 - 2));
             int minionCount = random.Next(world * 2, world * 4);
-            var generatedMap = new MapGenerator(size, healtWellCount, manaWellCount, chestCount, minionCount);
+            int mobCount = world;
+            var generatedMap = new MapGenerator(size, healtWellCount, manaWellCount, chestCount, minionCount, mobCount);
             map = generatedMap;
         }
     }

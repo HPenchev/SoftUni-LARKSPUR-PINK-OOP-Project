@@ -16,16 +16,18 @@ namespace Game.Core
         private int healthWellCount;
         private int chestCount;
         private int minionCount;
+        private int mobCount;
         #endregion
 
         #region Constructor
-        public MapGenerator(int size, int healthWellCount, int manaWellCount, int chestCount, int minionCount)
+        public MapGenerator(int size, int healthWellCount, int manaWellCount, int chestCount, int minionCount, int mobCount)
         {
             this.Size = size;
             this.HealthWellCount = healthWellCount;
             this.ManaWellCount = manaWellCount;
             this.ChestCount = chestCount;
             this.MinionCount = minionCount;
+            this.MobCount = mobCount;
             this.CreateMap(this.Size);
         }
         #endregion
@@ -79,6 +81,12 @@ namespace Game.Core
             get { return this.minionCount; }
             set { this.minionCount = value; }
         }
+
+        public int MobCount
+        {
+            get { return this.mobCount; }
+            set { this.mobCount = value; }
+        }
         #endregion
 
         #region Methods
@@ -109,6 +117,7 @@ namespace Game.Core
             this.GenerateHealthWells(random);
             this.GenerateChests(random);
             this.GenerateMinions(random);
+            this.GenerateMobs(random);
         }
 
         private void GenerateBoss(Random random)
@@ -177,7 +186,6 @@ namespace Game.Core
                 }
             }
         }
-        //todo HighLightCharacters
 
         private void GenerateMinions(Random random)
         {
@@ -193,6 +201,24 @@ namespace Game.Core
                 else
                 {
                     this.Map[xRandom, yRandom] = 'M';
+                }
+            }
+        }
+
+        private void GenerateMobs(Random random)
+        {
+            int xRandom, yRandom;
+            for (int i = 0; i < this.MinionCount; i++)
+            {
+                xRandom = random.Next(0, this.Size);
+                yRandom = random.Next(0, this.Size);
+                if (this.Map[xRandom, yRandom] != 'e')
+                {
+                    SetNewPosition('O');
+                }
+                else
+                {
+                    this.Map[xRandom, yRandom] = 'O';
                 }
             }
         }
@@ -278,6 +304,14 @@ namespace Game.Core
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(line[i]);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (line[i] == 'O')
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write(line[i]);
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.White;
