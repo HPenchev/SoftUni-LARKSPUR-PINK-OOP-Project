@@ -9,7 +9,7 @@ using Game.Items.ArmorOfDragon;
 using Game.Items.ArmorOfGandalf;
 using Game.Items.Spells;
 using Game.Static;
-/////todo 284
+
 namespace Game.Engine
 {
     using System;
@@ -21,14 +21,6 @@ namespace Game.Engine
 
     public class Engine
     {
-        //todo map showing ??
-        //todo map testing
-        //todo map update - wells chests, new minions
-        //todo change item
-        //todo update hero stat when euqip
-        //todo Penchev`s methdod for using the potions
-        //todo mapCreepChanging 
-
         private static Player player;
         private static MapGenerator map;
         private static Position playerPos;
@@ -84,7 +76,6 @@ namespace Game.Engine
             }
         }
 
-        //todo shop generate
         private static void NewGameUserInput()
         {
             bool isValid = false;
@@ -515,8 +506,6 @@ namespace Game.Engine
 
         private static void Move(string direction)
         {
-            Console.WriteLine("X = " + playerPos.X); //// TEST OUTPUT
-            Console.WriteLine("Y = " + playerPos.Y); //// TEST OUTPUT
             switch (direction)
             {
                 case "left":
@@ -637,7 +626,6 @@ namespace Game.Engine
         private static void PrintMapBoarderReachedMessage()
         {
             Console.Beep(100, 100);
-            //// !!!!COUPLING!!!! or Console.ReadLine();
             PrintTextSlowedDown("There is only the vast ocean in front of you.\nYou shall not pass.");
         }
 
@@ -835,6 +823,7 @@ namespace Game.Engine
             }
             else
             {
+                Console.Clear();
                 player.HealthPoints += well.Health;
                 well.IsUsed = true;
                 Console.WriteLine("I feel stronger already.");
@@ -852,15 +841,194 @@ namespace Game.Engine
             }
             else
             {
+                Console.Clear();
                 player.Mana += manaWell.Mana;
                 Console.WriteLine("I feel more powerful already.");
                 Console.WriteLine("{0} gained {1} mana points by using a Mana well.", player.Id, manaWell.Mana);
+                Console.WriteLine();
             }
         }
 
         private static void Shop()
         {
-            ////todo SHOOOOOOOOOOP
+            // Generate Shop Items
+            RandomItemGenerator itemGenerator = new RandomItemGenerator(player.Level);
+            List<Item> shopInventory = itemGenerator.AllItems;
+            shopInventory.ForEach(n => n.Level = player.Level);
+            itemGenerator.RandomizeItemsStats(shopInventory);
+
+            // Print Shop Items
+            PlayAudio.WelcomeToTheShop();
+            PrintTextSlowedDown("<---S-H-O-P--->");
+            Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
+            for (int i = 0; i < shopInventory.Count; i++)
+            {
+                Console.WriteLine("{0} ---> {1}  {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
+            }
+            Console.WriteLine("{0}\n", new String('-', 10));
+            
+            // Print Inventory Commands
+            PrintTextSlowedDown("Available Commands:");
+            PrintTextSlowedDown("buy [index]");
+            PrintTextSlowedDown("inspect [index]");
+            PrintTextSlowedDown("sell");
+            PrintTextSlowedDown("print");
+            PrintTextSlowedDown("exit");
+            Console.WriteLine();
+
+            // Execute Commands
+            while (true)
+            {
+                string[] inputParams = Console.ReadLine().Split();
+                string command = inputParams[0];
+                int index;
+                if (command.ToLower().Contains("buy"))
+                {
+                    index = int.Parse(inputParams[1]);
+                    if (index > 0 && index < shopInventory.Count)
+                    {
+                        if (player.Gold >= shopInventory[index].Price)
+                        {
+                            if (player.InventorySize >= shopInventory[index].Size)
+                            {
+                                player.Inventory.Add(shopInventory[index]);
+                                player.Gold -= shopInventory[index].Price;
+                                PrintTextSlowedDown(String.Format("You have bought {0}", shopInventory[index].Id));
+                            }
+                            else
+                            {
+                                PrintTextSlowedDown("You do not have enough free space in inventory.");
+                            }
+                        }
+                        else
+                        {
+                            PlayAudio.NoMoney();
+                            PrintTextSlowedDown("You do not have enough money.");
+                        }
+                    }
+                    else
+                    {
+                        PrintTextSlowedDown("Invalid item index.");
+                    }
+                } // buy
+                if (command.ToLower().Contains("inspect"))
+                {
+                    index = int.Parse(inputParams[1]);
+                    if (index > 0 && index < shopInventory.Count)
+                    {
+                        PrintTextSlowedDown(shopInventory[index].ToString());
+                    }
+                    else
+                    {
+                        PrintTextSlowedDown("Invalid item index.");
+                    }
+                } // inspect
+                if (command.ToLower().Contains("sell"))
+                {
+                    Console.Clear();
+                    PrintTextSlowedDown("<---Your Items--->");
+                    Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
+                    for (int i = 0; i < player.Inventory.Count; i++)
+                    {
+                        Console.WriteLine("{0} Index: {1} Price: {2:F0} gold", player.Inventory[i].Id, i, player.Inventory[i].Price * 0.8M);
+                    }
+                    PrintTextSlowedDown(String.Format("{0}\n", new String('-', 10)));
+                    Console.WriteLine();
+
+                    // print available commands
+                    PrintTextSlowedDown("Available Commands:");
+                    PrintTextSlowedDown("sell [index]");
+                    PrintTextSlowedDown("exit");
+                    string[] sellInput = Console.ReadLine().Split(' ');
+                    string sellMenuCommand = sellInput[0];
+                    if (sellMenuCommand.ToLower().Contains("sell"))
+                    {
+                        int sellIndex = int.Parse(sellInput[1]);
+                        if (sellIndex >= 0 && sellIndex < player.Inventory.Count)
+                        {
+                            if (player.Inventory[sellIndex] is Equipment)
+                            {
+                                if ((player.Inventory[sellIndex] as Equipment).IsEquiped)
+                                {
+                                    PrintTextSlowedDown("This item is equiped.");
+                                    PrintTextSlowedDown("Are you sure you want to sell it?");
+                                    string sellEquipedChoice = Console.ReadLine();
+                                    if (sellEquipedChoice.ToLower().Contains("yes"))
+                                    {
+                                        PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
+                                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
+                                        player.RemoveItemEffects(player.Inventory[sellIndex]);
+                                        player.RemoveItem(player.Inventory[sellIndex]);
+                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
+                                    }
+                                    else
+                                    {
+                                        Console.Clear();
+                                        PrintTextSlowedDown("Too dear for you?");
+                                        PrintTextSlowedDown("Shop Main Menu");
+                                        continue;
+                                    }
+                                }
+                                else
+                                {
+                                    PrintTextSlowedDown("Are you sure you want to sell it?");
+                                    string sellEquipedChoice = Console.ReadLine();
+                                    if (sellEquipedChoice.ToLower().Contains("yes"))
+                                    {
+                                        PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
+                                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
+                                        player.RemoveItem(player.Inventory[sellIndex]);
+                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
+                                    }
+                                    else
+                                    {
+                                        Console.Clear();
+                                        PrintTextSlowedDown("Too dear for you?");
+                                        PrintTextSlowedDown("Shop Main Menu");
+                                        continue;
+                                    }
+                                }
+                            }
+                          
+                        }
+                        else
+                        {
+                            PrintTextSlowedDown("Invalid item index");
+                        }
+                    }
+                    if (sellMenuCommand.ToLower().Contains("exit"))
+                    {
+                        Console.Clear();
+                        PrintTextSlowedDown("You are in the main Shop menu.");
+                        PrintTextSlowedDown("<---S-H-O-P--->");
+                        Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
+                        for (int i = 0; i < shopInventory.Count; i++)
+                        {
+                            Console.WriteLine("{0} Index: {1} Price: {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
+                        }
+                        Console.WriteLine("{0}\n", new String('-', 10));
+                        Console.WriteLine();
+                    }
+                } // sell
+                if (command.ToLower().Contains("print"))
+                {
+                    Console.Clear();
+                    PrintTextSlowedDown("<---S-H-O-P--->");
+                    Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
+                    for (int i = 0; i < shopInventory.Count; i++)
+                    {
+                        Console.WriteLine("{0} Index: {1} Price: {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
+                    }
+                    Console.WriteLine("{0}\n", new String('-', 10));
+                    Console.WriteLine();
+                } // print
+                if (command.ToLower().Contains("exit"))
+                {
+                    Console.Clear();
+                    PrintTextSlowedDown("Goodbye");
+                    break;
+                }
+            } // while
         }
 
         public static void GenerateMapByWorld()

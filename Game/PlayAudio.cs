@@ -31,5 +31,19 @@
             synth.SetOutputToDefaultAudioDevice();
             synth.Speak("You are a pussy.");
         }
+
+        public static void WelcomeToTheShop()
+        {
+            SpeechSynthesizer synth = new SpeechSynthesizer();
+            synth.SetOutputToDefaultAudioDevice();
+            synth.Speak("Hello stranger, welcome to my humble shop.");
+        }
+
+        public static void NoMoney()
+        {
+            SpeechSynthesizer synth = new SpeechSynthesizer();
+            synth.SetOutputToDefaultAudioDevice();
+            synth.Speak("No money, no funny.");
+        }
     }
 }
