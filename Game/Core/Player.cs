@@ -186,7 +186,7 @@ namespace Game.Core
                 if ((item as Equipment).IsEquiped)
                 {
                     (item as Equipment).IsEquiped = false;
-                    RemoveItemEffects(item as Equipment);
+                    RemoveItemEffects(item);
                 }
                 else
                 {
@@ -211,7 +211,7 @@ namespace Game.Core
                 {
                     (item as Weapon).IsEquiped = true;
                     Console.WriteLine("{0} has been equiped.", item.Id);
-                    ApplyItemEffects(item as Equipment);
+                    ApplyItemEffects(item);
                 }
                 else
                 {
@@ -228,7 +228,7 @@ namespace Game.Core
                 {
                     (item as Armor).IsEquiped = true;
                     Console.WriteLine("{0} has been equiped.", item.Id);
-                    ApplyItemEffects(item as Equipment);
+                    ApplyItemEffects(item);
                 }
                 else
                 {
@@ -241,32 +241,43 @@ namespace Game.Core
             }
         }
 
-        private void ApplyItemEffects(Equipment item)
+        public void ApplyItemEffects(Item item)
         {
-            this.AttackPoints += (item as Equipment).AttackPoints;
-            this.AttackSpeed += (item as Equipment).AttackSpeed;
-            this.ChanceToDodge += (item as Equipment).ChanceToDodge;
-            this.CriticalChance += (item as Equipment).CriticalChance;
-            this.CritDamage += (item as Equipment).CriticalDamage;
-            this.DefensePoints += (item as Equipment).DefensePoints;
-            this.HealthPoints += (item as Equipment).HealthPoints;
+            this.AttackPoints += item.AttackPoints;
+            this.DefensePoints += item.DefensePoints;
+            this.HealthPoints += item.HealthPoints;
+            if (item is Equipment)
+            {
+                this.AttackSpeed += (item as Equipment).AttackSpeed;
+                this.ChanceToDodge += (item as Equipment).ChanceToDodge;
+                this.CriticalChance += (item as Equipment).CriticalChance;
+                this.CritDamage += (item as Equipment).CriticalDamage;
+            }
         }
 
-        private void RemoveItemEffects(Equipment item) //Hsa to be set public and made to work with items, not equipment.
+        public void RemoveItemEffects(Item item) //Hsa to be set public and made to work with items, not equipment.
         {
-            this.AttackPoints -= (item as Equipment).AttackPoints;
-            this.AttackSpeed -= (item as Equipment).AttackSpeed;
-            this.ChanceToDodge -= (item as Equipment).ChanceToDodge;
-            this.CriticalChance -= (item as Equipment).CriticalChance;
-            this.CritDamage -= (item as Equipment).CriticalDamage;
-            this.DefensePoints -= (item as Equipment).DefensePoints;
-            if (this.HealthPoints <= (item as Equipment).HealthPoints)
+            //todo remove Spell from inventory
+            this.AttackPoints -= item.AttackPoints;
+            this.DefensePoints -= item.DefensePoints;
+            if (this.HealthPoints <= item.HealthPoints)
             {
                 this.HealthPoints = 1;
             }
             else
             {
-                this.HealthPoints -= (item as Equipment).HealthPoints;
+                this.HealthPoints -= item.HealthPoints;
+            }
+            if (item is Spell)
+            {
+                RemoveItem(item);
+            }
+            if (item is Equipment)
+            {
+                this.AttackSpeed -= (item as Equipment).AttackSpeed;
+                this.ChanceToDodge -= (item as Equipment).ChanceToDodge;
+                this.CriticalChance -= (item as Equipment).CriticalChance;
+                this.CritDamage -= (item as Equipment).CriticalDamage;
             }
         }
 
@@ -347,6 +358,7 @@ namespace Game.Core
         {
             this.HealthPoints += id.HealthPoints;
             this.Mana += id.Mana;
+            RemoveItem(id);
         }
 
         public ICharacter FindTarget(ICharacter enemy)
