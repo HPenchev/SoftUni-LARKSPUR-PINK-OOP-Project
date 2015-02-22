@@ -258,14 +258,14 @@ namespace Game.Engine
                 int index;
                 if (command.ToLower().Contains("inspect"))
                 {
-                    index = int.Parse(inputParams[1]); // todo try-catch or try.Parse
+                    index = int.Parse(inputParams[1]);
                     if (index >= 0 && index < player.Inventory.Count)
                     {
-                        Console.WriteLine(player.Inventory[index].ToString());
+                        PrintTextSlowedDown(player.Inventory[index].ToString());
                     }
                     else
                     {
-                        Console.WriteLine("Invalid item index.");
+                        PrintTextSlowedDown("Invalid item index.");
                     }
                 }
                 else if (command.ToLower().Contains("remove"))
@@ -277,16 +277,12 @@ namespace Game.Engine
                     }
                     else
                     {
-                        Console.WriteLine("Invalid item index.");
+                        PrintTextSlowedDown("Invalid item index.");
                     }
                 }
-                else if (command.ToLower().Contains("unequip"))
+                else if (command.ToLower() == "equip")
                 {
-
-                }
-                else if (command.ToLower().Contains("equip")) // todo refactor this to a method
-                {
-                    index = int.Parse(inputParams[1]); //// todo exception handling
+                    index = int.Parse(inputParams[1]);
                     if (index >= 0 && index < player.Inventory.Count)
                     {
                         Item item = player.Inventory[index];
@@ -302,16 +298,37 @@ namespace Game.Engine
                     }
                     else
                     {
-                        Console.WriteLine("Invalid item index.");
+                        PrintTextSlowedDown("Invalid item index.");
                     }
                 }
-
+                else if (command.ToLower() == "unequip")
+                {
+                    index = int.Parse(inputParams[1]);
+                    if (index >= 0 && index < player.Inventory.Count)
+                    {
+                        Item item = player.Inventory[index];
+                        if (item is Weapon || item is Armor)
+                        {
+                            player.UnequipItem(item);
+                            PrintTextSlowedDown(item.Id + " is now unequiped.");
+                        }
+                        else
+                        {
+                            PrintTextSlowedDown("You can not unequip that item.");
+                        }
+                    }
+                    else
+                    {
+                        PrintTextSlowedDown("Invalid item index.");
+                    }
+                }
                 else if (command.ToLower().Contains("print"))
                 {
                     PrintInventory();
                 }
                 else if (command.Contains("exit"))
                 {
+                    PrintTextSlowedDown("Inventory menu is closed.");
                     break;
                 }
             }
@@ -652,7 +669,6 @@ namespace Game.Engine
             if (answer.ToLower().Contains("yes"))
             {
                 UseManaWell();
-                //todo UPDATE PLAYER POSITION
             }
             else
             {

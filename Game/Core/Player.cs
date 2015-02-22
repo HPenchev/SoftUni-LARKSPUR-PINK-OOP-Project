@@ -192,6 +192,26 @@ namespace Game.Core
             }
         }
 
+        public void UnequipItem(Item item)
+        {
+            if (this.inventory.Contains(item))
+            {
+                if ((item as Equipment).IsEquiped)
+                {
+                    (item as Equipment).IsEquiped = false;
+                    //todo RemoveItemEffects
+                }
+                else
+                {
+                    Console.WriteLine("That item is already unequiped.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("The inventory does not contain that item.");
+            }
+        }
+
         public void EquipItem(Item item)
         {
             if (item is Weapon)
@@ -204,7 +224,7 @@ namespace Game.Core
                 {
                     (item as Weapon).IsEquiped = true;
                     Console.WriteLine("{0} has been equiped.", item.Id);
-                    UpdateHeroStats();
+                    ApplyItemEffects();
                 }
                 else
                 {
@@ -222,7 +242,7 @@ namespace Game.Core
                     (item as Armor).IsEquiped = true;
                     this.inventory.Add(item);
                     Console.WriteLine("{0} has been equiped.", item.Id);
-                    UpdateHeroStats();
+                    ApplyItemEffects();
                 }
                 else
                 {
@@ -249,6 +269,7 @@ namespace Game.Core
         {
             throw new NotImplementedException();
         }
+
 
         public void PickUpItem(List<Item> items)
         {
@@ -290,14 +311,16 @@ namespace Game.Core
             if (inventory.Contains(item))
             {
                 this.inventory.Remove(item);
+                UpdateInventorySpace();
                 Console.WriteLine("{0} has been removed.", item.Id);
-                UpdateHeroStats();
             }
             else
             {
                 Console.WriteLine("No such Item in Inventory.");
             }
         }
+
+
 
         public ICharacter FindTarget(ICharacter enemy)
         {
@@ -306,7 +329,7 @@ namespace Game.Core
 
         public override string ToString()
         {
-            UpdateHeroStats();
+            ApplyItemEffects();
             StringBuilder basePlayer = new StringBuilder();
             basePlayer.Append(base.ToString());
             basePlayer.AppendFormat(
@@ -325,7 +348,7 @@ namespace Game.Core
             return basePlayer.ToString();
         }
 
-        private void UpdateHeroStats()
+        private void ApplyItemEffects()
         {
             foreach (var item in inventory)
             {
