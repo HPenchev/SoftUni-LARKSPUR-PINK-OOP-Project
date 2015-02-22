@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Deployment.Internal;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading;
 using Game.Core.Data;
 using Game.Enemies;
@@ -158,7 +159,7 @@ namespace Game.Engine
             Console.WriteLine("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id);
         }
 
-        private static void DisplayAvailableHeroes()
+        private static void DisplayAvailableHeroes() //todo MAKE THIS PRETIER
         {
             for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
             {
@@ -209,39 +210,51 @@ namespace Game.Engine
                 switch (inputParams[0].ToLower())
                 {
                     case "exit":
+                        Console.Clear();
+                        PrintTextSlowedDown("Goodbye");
+                        PlayAudio.YouPussy();
                         Environment.Exit(0);
                         break;
 
                     case "display-area":
+                        Console.Clear();
                         DisplaySurroundings();
                         break;
 
                     case "stats":
-                        Console.WriteLine(player.ToString());
+                        Console.Clear();
+                        PrintTextSlowedDown(GetPlayerStats());
                         break;
 
                     case "items":
-                        player.Inventory.ForEach(n => Console.WriteLine(n.ToString()));
+                        Console.Clear();
+                        player.Inventory.ForEach(n => Console.WriteLine(n.Id));
                         break;
 
                     case "inventory":
+                        Console.Clear();
                         Inventory();
                         break;
 
                     case "move":
+                        Console.Clear();
                         Move(inputParams[1]);
                         break;
 
                     case "help":
+                        Console.Clear();
                         DisplayCommands();
                         break;
 
-                    case "print": // OR A SCROLL WHICH WILL SHOW THE MAP ONE TIME 
+                    case "print":
+                        Console.Clear();
                         map.PrintMap();
                         break;
 
                     default:
+                        Console.Clear();
                         PrintTextSlowedDown("Invalid command.");
+                        DisplayCommands();
                         break;
                 }
             }
@@ -328,6 +341,7 @@ namespace Game.Engine
                 }
                 else if (command.Contains("exit"))
                 {
+                    Console.Clear();
                     PrintTextSlowedDown("Inventory menu is closed.");
                     break;
                 }
@@ -342,6 +356,22 @@ namespace Game.Engine
             PrintTextSlowedDown("remove [index]");
             PrintTextSlowedDown("print");
             PrintTextSlowedDown("exit");
+        }
+
+        private static string GetPlayerStats()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendFormat("Name: {0} Level: {1} Experience: {2}\n", player.Id, player.Level, player.Experience);
+            builder.AppendFormat("Attack: {0} Defence: {1} Health: {2} Mana {3}\n",
+                                  player.AttackPoints, player.DefensePoints, player.HealthPoints, player.Mana);
+            builder.AppendFormat("All Ressistance: {0}\n", player.AllResistance);
+            builder.AppendFormat("Attack Speed: {0}\n", player.AttackSpeed);
+            builder.AppendFormat("Chance to Dodge: {0}\n", player.ChanceToDodge);
+            builder.AppendFormat("Critical Chance: {0}\n", player.CriticalChance);
+            builder.AppendFormat("Critical Damage: {0}\n", player.CritDamage);
+            builder.AppendFormat("Kills Counter = {0}\n", player.KillCounter);
+            builder.AppendFormat("Gold Available = {0}\n", player.Gold);
+            return builder.ToString();
         }
 
         private static void PrintInventory()
@@ -830,7 +860,7 @@ namespace Game.Engine
 
         private static void Shop()
         {
-            Console.WriteLine("You are in the Shop!");
+            ////todo SHOOOOOOOOOOP
         }
 
         public static void GenerateMapByWorld()

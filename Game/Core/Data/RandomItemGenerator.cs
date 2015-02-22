@@ -1,4 +1,6 @@
-﻿namespace Game.Core.Data
+﻿using Game.Items.Potions;
+
+namespace Game.Core.Data
 {
     using System;
     using System.Collections.Generic;
@@ -29,7 +31,9 @@
             new AxeOfNakov("Axe"),
             new BowOfNakov("Bow"),
             new SwordOfNakov("Sword"),
-            new WandOfNakov("Wand")
+            new WandOfNakov("Wand"),
+            new HealthPotion("Health Potion"),
+            new ManaPotion("Mana Potion")
         };
         private int playerLevel;
         private List<Item> itemsList;
@@ -99,27 +103,41 @@
             Random random = new Random();
             foreach (var item in this.ItemsList)
             {
-                //todo IF ITEM IS POTION
-                item.AttackPoints = item.AttackPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                item.DefensePoints = item.DefensePoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                item.HealthPoints = item.HealthPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                item.Price = item.Price * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                if (item is Equipment)
+                if (item is Potion)
                 {
-                    (item as Equipment).AttackSpeed = (item as Equipment).AttackSpeed * random.Next(Math.Abs(playerLevel - 2),
-                                                                                                             playerLevel + 2);
-                    (item as Equipment).CriticalChance = (item as Equipment).CriticalChance *
-                                                          random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                    (item as Equipment).CriticalDamage = (item as Equipment).CriticalDamage *
-                                                          random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                    (item as Equipment).ChanceToDodge =  (item as Equipment).ChanceToDodge *
-                                                          random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                        
+                    (item as Potion).Price = (item as Potion).Price * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    if (item is HealthPotion)
+                    {
+                        (item as HealthPotion).HealthPoints = item.HealthPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    }
+                    if (item is ManaPotion)
+                    {
+                        (item as ManaPotion).Mana = item.HealthPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    }
                 }
-                if (item is Spell)
+                else
                 {
-                    (item as Spell).ManaCost = (item as Spell).ManaCost *
-                                                random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.AttackPoints = item.AttackPoints*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.DefensePoints = item.DefensePoints*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.HealthPoints = item.HealthPoints*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.Price = item.Price*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    if (item is Equipment)
+                    {
+                        (item as Equipment).AttackSpeed = (item as Equipment).AttackSpeed*
+                                                          random.Next(Math.Abs(playerLevel - 2),
+                                                              playerLevel + 2);
+                        (item as Equipment).CriticalChance = (item as Equipment).CriticalChance*
+                                                             random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                        (item as Equipment).CriticalDamage = (item as Equipment).CriticalDamage*
+                                                             random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                        (item as Equipment).ChanceToDodge = (item as Equipment).ChanceToDodge*
+                                                            random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    }
+                    if (item is Spell)
+                    {
+                        (item as Spell).ManaCost = (item as Spell).ManaCost*
+                                                   random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    }
                 }
             }
         }
