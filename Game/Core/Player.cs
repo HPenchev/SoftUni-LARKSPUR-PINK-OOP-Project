@@ -203,7 +203,6 @@ namespace Game.Core
                 if (!query.Any())
                 {
                     (item as Weapon).IsEquiped = true;
-                    this.inventory.Add(item);
                     Console.WriteLine("{0} has been equiped.", item.Id);
                     UpdateHeroStats();
                 }
