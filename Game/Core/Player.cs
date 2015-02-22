@@ -16,7 +16,6 @@ namespace Game.Core
         private int level;
         private decimal experience;
         private decimal gold;
-        private List<Item> inventory;
         private double mana;
         private double attackSpeed;
         private double allResistance;
@@ -114,18 +113,6 @@ namespace Game.Core
             }
         }
 
-        public List<Item> Inventory
-        {
-            get
-            {
-                return this.inventory;
-            }
-
-            set
-            {
-                this.inventory = value;
-            }
-        }
 
         public double AttackSpeed
         {
@@ -194,12 +181,12 @@ namespace Game.Core
 
         public void UnequipItem(Item item)
         {
-            if (this.inventory.Contains(item))
+            if (this.Inventory.Contains(item))
             {
                 if ((item as Equipment).IsEquiped)
                 {
                     (item as Equipment).IsEquiped = false;
-                    //todo RemoveItemEffects
+                    RemoveItemEffects(item as Equipment);
                 }
                 else
                 {
@@ -216,7 +203,7 @@ namespace Game.Core
         {
             if (item is Weapon)
             {
-                WeaponType currentWeaponType = (item as Weapon).WeaponType;
+                WeaponType currentWeaponType = (item as Weapon).WeaponType; // weapon type check todo
                 var query = this.Inventory
                     .Where(n => n is Weapon && (n as Weapon).IsEquiped)
                     .Select(n => n);
@@ -224,7 +211,7 @@ namespace Game.Core
                 {
                     (item as Weapon).IsEquiped = true;
                     Console.WriteLine("{0} has been equiped.", item.Id);
-                    ApplyItemEffects();
+                    ApplyItemEffects(item as Equipment);
                 }
                 else
                 {
@@ -240,9 +227,8 @@ namespace Game.Core
                 if (!query.Any())
                 {
                     (item as Armor).IsEquiped = true;
-                    this.inventory.Add(item);
                     Console.WriteLine("{0} has been equiped.", item.Id);
-                    ApplyItemEffects();
+                    ApplyItemEffects(item as Equipment);
                 }
                 else
                 {
@@ -252,6 +238,35 @@ namespace Game.Core
             else
             {
                 Console.WriteLine("This item can not be equiped");
+            }
+        }
+
+        private void ApplyItemEffects(Equipment item)
+        {
+            this.AttackPoints += (item as Equipment).AttackPoints;
+            this.AttackSpeed += (item as Equipment).AttackSpeed;
+            this.ChanceToDodge += (item as Equipment).ChanceToDodge;
+            this.CriticalChance += (item as Equipment).CriticalChance;
+            this.CritDamage += (item as Equipment).CriticalDamage;
+            this.DefensePoints += (item as Equipment).DefensePoints;
+            this.HealthPoints += (item as Equipment).HealthPoints;
+        }
+
+        private void RemoveItemEffects(Equipment item)
+        {
+            this.AttackPoints -= (item as Equipment).AttackPoints;
+            this.AttackSpeed -= (item as Equipment).AttackSpeed;
+            this.ChanceToDodge -= (item as Equipment).ChanceToDodge;
+            this.CriticalChance -= (item as Equipment).CriticalChance;
+            this.CritDamage -= (item as Equipment).CriticalDamage;
+            this.DefensePoints -= (item as Equipment).DefensePoints;
+            if (this.HealthPoints <= (item as Equipment).HealthPoints)
+            {
+                this.HealthPoints = 1;
+            }
+            else
+            {
+                this.HealthPoints -= (item as Equipment).HealthPoints;
             }
         }
 
@@ -270,7 +285,6 @@ namespace Game.Core
             throw new NotImplementedException();
         }
 
-
         public void PickUpItem(List<Item> items)
         {
             string answer = string.Empty;
@@ -286,7 +300,7 @@ namespace Game.Core
                     }
                     else
                     {
-                        this.inventory.Add(items[i]);
+                        this.Inventory.Add(items[i]);
                         Console.WriteLine("You have added {0} to your inventory.", items[i].Id);
                     }
                 }
@@ -308,9 +322,9 @@ namespace Game.Core
 
         public void RemoveItem(Item item)
         {
-            if (inventory.Contains(item))
+            if (Inventory.Contains(item))
             {
-                this.inventory.Remove(item);
+                this.Inventory.Remove(item);
                 UpdateInventorySpace();
                 Console.WriteLine("{0} has been removed.", item.Id);
             }
@@ -320,8 +334,6 @@ namespace Game.Core
             }
         }
 
-
-
         public ICharacter FindTarget(ICharacter enemy)
         {
             throw new NotImplementedException();
@@ -329,7 +341,6 @@ namespace Game.Core
 
         public override string ToString()
         {
-            ApplyItemEffects();
             StringBuilder basePlayer = new StringBuilder();
             basePlayer.Append(base.ToString());
             basePlayer.AppendFormat(
@@ -348,24 +359,6 @@ namespace Game.Core
             return basePlayer.ToString();
         }
 
-        private void ApplyItemEffects()
-        {
-            foreach (var item in inventory)
-            {
-                if ((item is Equipment))
-                {
-                    if ((item as Equipment).IsEquiped)
-                    {
-                        this.AttackPoints += item.AttackPoints;
-                        this.HealthPoints += item.HealthPoints;
-                        this.DefensePoints = item.DefensePoints;
-                        this.AttackSpeed += (item as Equipment).AttackSpeed;
-                        this.CriticalChance += (item as Equipment).CriticalChance;
-                        this.CritDamage += (item as Equipment).CriticalDamage;
-                        this.ChanceToDodge += (item as Equipment).ChanceToDodge;
-                    }
-                }
-            }
-        }
+
     }
 }

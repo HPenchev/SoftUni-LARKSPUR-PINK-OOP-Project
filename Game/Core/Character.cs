@@ -14,8 +14,10 @@
         private double attackPoints;
         private double defensePoints;
         private double range;
+        private List<Item> inventory = new List<Item>();
 
-        protected Character(string id) : base(id)
+        protected Character(string id)
+            : base(id)
         {
             this.IsAlive = PlayerConstants.IsAlive;
         }
@@ -56,10 +58,16 @@
             set { this.range = value; }
         }
 
-        public virtual List<Item> Inventory { get; set; } //To be implemented
-
-        public virtual void CastSpell(Spell spell) //To be implemented
+        public List<Item> Inventory
         {
+            get { return this.inventory; }
+            set { this.inventory = value; }
+        }
+
+
+        public virtual void CastSpell(Spell spell) //To be implemented todo
+        {
+
         }
 
         public override string ToString()
