@@ -714,7 +714,7 @@ namespace Game.Engine
         {
             Chest chest = new Chest("Chest");
             RandomItemGenerator itemGenerator = new RandomItemGenerator(player.Level);
-            chest.Items.AddRange(itemGenerator.List);
+            chest.Items.AddRange(itemGenerator.ItemsList);
             PrintTextSlowedDown("The chest has droped " + chest.Items.Count() + " items.");
             player.PickUpItem(chest.Items);
         }
