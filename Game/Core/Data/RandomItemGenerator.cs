@@ -1,19 +1,18 @@
-﻿using Game.Items.Potions;
-
-namespace Game.Core.Data
+﻿namespace Game.Core.Data
 {
     using System;
     using System.Collections.Generic;
+    using Exceptions.CharacterException;
     using Items.ArmorOfDragon;
     using Items.ArmorOfGandalf;
+    using Items.Potions;
     using Items.Spells;
     using Items.WeaponOfNakov;
-    using Exceptions.CharacterException;
 
     public class RandomItemGenerator
     {
         #region Fields
-        protected List<Item> allItems = new List<Item>()
+        private List<Item> allItems = new List<Item>()
         {
             new BeltOfDragon("Belt"),
             new ChestArmorOfDragon("Dragon's Chest"),
@@ -35,6 +34,7 @@ namespace Game.Core.Data
             new HealthPotion("Health Potion"),
             new ManaPotion("Mana Potion")
         };
+
         private int playerLevel;
         private List<Item> itemsList;
         #endregion
@@ -110,6 +110,7 @@ namespace Game.Core.Data
                     {
                         (item as HealthPotion).HealthPoints = item.HealthPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
+
                     if (item is ManaPotion)
                     {
                         (item as ManaPotion).Mana = item.HealthPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
@@ -117,25 +118,25 @@ namespace Game.Core.Data
                 }
                 else
                 {
-                    item.AttackPoints = item.AttackPoints*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                    item.DefensePoints = item.DefensePoints*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                    item.HealthPoints = item.HealthPoints*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                    item.Price = item.Price*random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.AttackPoints = item.AttackPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.DefensePoints = item.DefensePoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.HealthPoints = item.HealthPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    item.Price = item.Price * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     if (item is Equipment)
                     {
-                        (item as Equipment).AttackSpeed = (item as Equipment).AttackSpeed*
-                                                          random.Next(Math.Abs(playerLevel - 2),
-                                                              playerLevel + 2);
-                        (item as Equipment).CriticalChance = (item as Equipment).CriticalChance*
+                        (item as Equipment).AttackSpeed = (item as Equipment).AttackSpeed *
+                                                          random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                        (item as Equipment).CriticalChance = (item as Equipment).CriticalChance *
                                                              random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                        (item as Equipment).CriticalDamage = (item as Equipment).CriticalDamage*
+                        (item as Equipment).CriticalDamage = (item as Equipment).CriticalDamage *
                                                              random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
-                        (item as Equipment).ChanceToDodge = (item as Equipment).ChanceToDodge*
+                        (item as Equipment).ChanceToDodge = (item as Equipment).ChanceToDodge *
                                                             random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
+
                     if (item is Spell)
                     {
-                        (item as Spell).ManaCost = (item as Spell).ManaCost*
+                        (item as Spell).ManaCost = (item as Spell).ManaCost *
                                                    random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
                 }

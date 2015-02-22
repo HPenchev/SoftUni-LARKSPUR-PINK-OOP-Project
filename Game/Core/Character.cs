@@ -1,27 +1,31 @@
 ﻿namespace Game.Core
 {
-    using System.Text;
     using System.Collections.Generic;
+    using System.Text;
     using Data.Constants.PlayerConstatns;
     using Interfaces;
 
     public abstract class Character : GameObject, ICharacter
     {
+        #region Fields
         private bool isAlive;
-
         private double maxHealthPoints;
         private double healthPoints;
         private double attackPoints;
         private double defensePoints;
         private double range;
         private List<Item> inventory = new List<Item>();
+        #endregion
 
+        #region Constructors
         protected Character(string id)
             : base(id)
         {
             this.IsAlive = PlayerConstants.IsAlive;
         }
+        #endregion
 
+        #region Properties
         public double MaxHealthPoints
         {
             get { return this.maxHealthPoints; }
@@ -63,11 +67,11 @@
             get { return this.inventory; }
             set { this.inventory = value; }
         }
+        #endregion
 
-
-        public virtual void CastSpell(Spell spell) //To be implemented todo
+        #region Methods
+        public virtual void CastSpell(Spell spell)
         {
-             
         }
 
         public override string ToString()
@@ -77,5 +81,6 @@
                 "Status: {0},\nHealth points: {1},\nAttack points: {2},\nDefence points: {3},\nRange: {4},\n", this.IsAlive ? "Alive" : "Dead", this.HealthPoints, this.AttackPoints, this.DefensePoints, this.Range);
             return baseCharacter.ToString();
         }
+        #endregion
     }
 }

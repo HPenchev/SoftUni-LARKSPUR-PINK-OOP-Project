@@ -6,16 +6,15 @@
 
     public class Boss : Enemy
     {
+        #region Constructors
         public Boss(string id)
             : base(id)
         {
         }
+        #endregion
 
-        public override ICharacter FindTarget(ICharacter player)
-        {
-            throw new NotImplementedException();
-        }
-
+        #region Methods
+       
         public override void Attack(ICharacter player)
         {
             throw new NotImplementedException();
@@ -25,5 +24,6 @@
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

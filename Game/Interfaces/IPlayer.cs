@@ -19,10 +19,6 @@
 
         void Attack(ICharacter enemy);
 
-        void CastSpell(Spell id);
-
-        void Display(string args); // string args === stats || items
-
         void PickUpItem(List<Item> item);
 
         void RemoveItem(Item item);

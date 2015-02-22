@@ -14,7 +14,8 @@
         #endregion
 
         #region Constructors
-        protected Equipment(string id) : base(id)
+        protected Equipment(string id)
+            : base(id)
         {
             this.AttackSpeed = attackSpeed;
             this.CriticalChance = criticalChance;
@@ -34,11 +35,6 @@
 
             set
             {
-                //if (value < 0)
-                //{
-                //    throw new ValueIsNegativeException("The Attack Speed can not be negative");
-                //}
-
                 this.attackSpeed = value;
             }
         }
@@ -52,11 +48,6 @@
 
             set
             {
-                //if (value < 0)
-                //{
-                //    throw new ValueIsNegativeException("The Critical chance can not be negative.");
-                //}
-
                 this.criticalChance = value;
             }
         }
@@ -70,11 +61,6 @@
 
             set
             {
-                //if (value < 0)
-                //{
-                //    throw new ValueIsNegativeException("The Critical Damage can not be negative.");
-                //}
-
                 this.criticalDamage = value;
             }
         }
@@ -88,11 +74,6 @@
 
             set
             {
-                //if (value < 0)
-                //{
-                //    throw new ValueIsNegativeException("Chance to Dodge can not be negative.");
-                //}
-
                 this.chanceToDodge = value;
             }
         }

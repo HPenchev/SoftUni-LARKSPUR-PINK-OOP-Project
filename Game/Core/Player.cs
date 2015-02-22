@@ -1,16 +1,16 @@
-﻿using System.Linq;
-using Game.Core.Data.Enums;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using Data.Constants.PlayerConstatns;
+    using Data.Enums;
     using Interfaces;
-    //todo check calculate experience
+
     public abstract class Player : Character, IPlayer, IStatsable
     {
+        #region Fields
         private int killCounter;
         private int inventorySize;
         private int level;
@@ -22,7 +22,9 @@ namespace Game.Core
         private double criticalChance;
         private double critDamage;
         private double chanceToDodge;
+        #endregion
 
+        #region Constructors
         protected Player(string id)
             : base(id)
         {
@@ -34,7 +36,9 @@ namespace Game.Core
             this.Inventory = new List<Item>();
             this.KillCounter = PlayerConstants.KillCounter;
         }
+        #endregion
 
+        #region Properties
         public int KillCounter
         {
             get
@@ -113,7 +117,6 @@ namespace Game.Core
             }
         }
 
-
         public double AttackSpeed
         {
             get
@@ -178,7 +181,9 @@ namespace Game.Core
                 this.allResistance = value;
             }
         }
-
+        #endregion
+       
+        #region Methods
         public void UnequipItem(Item item)
         {
             if (this.Inventory.Contains(item))
@@ -243,20 +248,16 @@ namespace Game.Core
 
         public void ApplyItemEffects(Item item)
         {
-
             this.HealthPoints += item.HealthPoints;
 
             if (item is Potion)
             {
                 this.Mana += (item as Potion).Mana;
-
             }
             else
             {
                 this.AttackPoints += item.AttackPoints;
                 this.DefensePoints += item.DefensePoints;
-
-
                 if (item is Equipment)
                 {
                     this.AttackSpeed += (item as Equipment).AttackSpeed;
@@ -267,9 +268,8 @@ namespace Game.Core
             }
         }
 
-        public void RemoveItemEffects(Item item) //Hsa to be set public and made to work with items, not equipment.
+        public void RemoveItemEffects(Item item)
         {
-            //todo remove Spell from inventory
             this.AttackPoints -= item.AttackPoints;
             this.DefensePoints -= item.DefensePoints;
             if (this.HealthPoints <= item.HealthPoints)
@@ -280,10 +280,12 @@ namespace Game.Core
             {
                 this.HealthPoints -= item.HealthPoints;
             }
+
             if (item is Spell)
             {
                 RemoveItem(item);
             }
+
             if (item is Equipment)
             {
                 this.AttackSpeed -= (item as Equipment).AttackSpeed;
@@ -295,16 +297,6 @@ namespace Game.Core
         }
 
         public void Attack(ICharacter enemy)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CastSpell(Spell spell)
-        {
-
-        }
-
-        public void Display(string args)
         {
             throw new NotImplementedException();
         }
@@ -333,8 +325,10 @@ namespace Game.Core
                     Console.WriteLine("It's crap anyway.");
                     continue;
                 }
+
                 Console.WriteLine();
             }
+
             Console.WriteLine();
         }
 
@@ -358,7 +352,6 @@ namespace Game.Core
             }
         }
 
-      
         public ICharacter FindTarget(ICharacter enemy)
         {
             throw new NotImplementedException();
@@ -403,5 +396,6 @@ namespace Game.Core
             this.attackSpeed *= 1.1;
             this.allResistance *= 1.1;
         }
+        #endregion
     }
 }

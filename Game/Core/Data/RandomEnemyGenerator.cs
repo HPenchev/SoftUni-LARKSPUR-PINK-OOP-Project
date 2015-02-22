@@ -82,9 +82,8 @@
                 this.EnemiesList.Add(boss);
             }
 
-            if (this.EnemyType == '0') //// Mob
+            if (this.EnemyType == '0') 
             {
-                //// Add as many minions as the player's level
                 for (int i = 0; i < this.PlayerLevel; i++)
                 {
                     itemGenerator = new RandomItemGenerator(this.PlayerLevel);
@@ -92,13 +91,14 @@
                     minion.Inventory = itemGenerator.ItemsList;
                     this.EnemiesList.Add(minion);
                 }
-                // Add one Boss
+
                 Boss boss = new Boss(DateTime.Now.Millisecond.ToString());
                 itemGenerator = new RandomItemGenerator(this.PlayerLevel);
                 boss.Inventory = itemGenerator.ItemsList;
                 this.EnemiesList.Add(boss);
             }
         }
+
         private void RandomizeEnemiesStats()
         {
             Random random = new Random();

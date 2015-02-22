@@ -7,6 +7,6 @@
                                                      "A race of great Warriors.",
                                                      "Masters of Shapeshifting",
                                                      "Powerful Wizzards"
-                                                   };
+                                                    };
     }
 }

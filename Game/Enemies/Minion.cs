@@ -5,15 +5,14 @@
 
     public class Minion : Enemy
     {
+        #region Constructors
         public Minion(string id)
             : base(id)
         {
         }
+        #endregion
 
-        public override ICharacter FindTarget(ICharacter player)
-        {
-            throw new System.NotImplementedException();
-        }
+        #region Methods
 
         public override void Attack(ICharacter player)
         {
@@ -23,5 +22,6 @@
         public override void DropReward()
         {
         }
+        #endregion
     }
 }

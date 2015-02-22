@@ -1,17 +1,15 @@
-﻿using Game.Core.Data;
-using Game.Items.ArmorOfGandalf;
-using Game.Items.Spells;
-using Game.Items.WeaponOfNakov;
-
-namespace Game.Characters
+﻿namespace Game.Characters
 {
     using System.Text;
     using Core;
+    using Core.Data;
     using Core.Data.Constants.PlayerConstatns;
 
     public class Mage : Player
     {
-        public Mage(string id) : base(id)
+        #region Constructors
+        public Mage(string id)
+            : base(id)
         {
             this.HealthPoints = MageConstants.HealthPoints;
             this.DefensePoints = MageConstants.DefencePoints;
@@ -20,7 +18,9 @@ namespace Game.Characters
             this.Range = MageConstants.Range;
             AddStartingItems();
         }
+        #endregion
 
+        #region Methods
         public override string ToString()
         {
             StringBuilder playerToString = new StringBuilder();
@@ -35,5 +35,6 @@ namespace Game.Characters
             this.Inventory.AddRange(itemGenerator.ItemsList);
             this.UpdateInventorySpace();
         }
+        #endregion
     }
 }
