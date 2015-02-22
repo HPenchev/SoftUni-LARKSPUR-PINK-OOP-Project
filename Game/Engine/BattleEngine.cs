@@ -171,13 +171,7 @@ namespace Game.Engine
                 if (enemy is Boss)
                 {
                     this.Player.Experience += 200;
-                }
-
-                foreach (Spell usedSpell in this.SpellsUsedByPlayer)
-                {
-                    throw new NotImplementedException;
-                    //this.Player.RemoveItemEffects(usedSpell);
-                }
+                }                
             }
         }
     }
