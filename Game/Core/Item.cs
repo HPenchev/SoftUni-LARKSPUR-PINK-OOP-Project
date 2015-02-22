@@ -3,10 +3,10 @@
     using System.Text;
     using Exceptions.ItemException;
     using Interfaces;
-
+    //todo Exceptions
     public abstract class Item : GameObject, IItem 
     {
-        #region Field
+        #region Fields
         private double attackPoints;
         private double healthPoints;
         private double defensePoints;

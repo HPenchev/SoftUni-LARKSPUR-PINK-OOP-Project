@@ -275,9 +275,18 @@ namespace Game.Core
             throw new NotImplementedException();
         }
 
-        public void CastSpell(Spell id)
+        public void CastSpell(Spell spell)
         {
-            throw new NotImplementedException();
+            //todo 
+            //if (this.Mana < spell.ManaCost)
+            //{
+            //    Console.WriteLine("Not enought mana.");
+            //}
+            //else
+            //{
+            //    this.Mana -= spell.ManaCost;
+            //}
+
         }
 
         public void Display(string args)
@@ -334,6 +343,12 @@ namespace Game.Core
             }
         }
 
+        public void UsePotion(Potion id)
+        {
+            this.HealthPoints += id.HealthPoints;
+            this.Mana += id.Mana;
+        }
+
         public ICharacter FindTarget(ICharacter enemy)
         {
             throw new NotImplementedException();
@@ -358,7 +373,6 @@ namespace Game.Core
                 this.KillCounter);
             return basePlayer.ToString();
         }
-
 
     }
 }

@@ -67,7 +67,7 @@
 
         public virtual void CastSpell(Spell spell) //To be implemented todo
         {
-
+             
         }
 
         public override string ToString()

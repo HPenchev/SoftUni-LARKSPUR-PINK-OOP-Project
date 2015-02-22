@@ -62,11 +62,14 @@
     <Compile Include="Core\Enemy.cs" />
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />
+    <Compile Include="Items\Potions\HealthPotion.cs" />
+    <Compile Include="Items\Potions\ManaPotion.cs" />
     <Compile Include="Core\Map.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\Position.cs" />
+    <Compile Include="Core\Potion.cs" />
     <Compile Include="Core\RandomGenerator\RandomGenerator.cs" />
     <Compile Include="Core\Spell.cs" />
     <Compile Include="Core\Weapon.cs" />
@@ -119,7 +122,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram3.cd" />
-    <None Include="ClassDiagram4.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Data\Constants\EnemyConstants\" />
