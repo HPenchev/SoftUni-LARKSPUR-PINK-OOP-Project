@@ -101,7 +101,7 @@ namespace Game.Engine
                         EngineConst.TypeOfHeroes.Contains(heroParameters[0].ToLower()))
                     {
                         isValid = true;
-                        GenerateMapByWord();
+                        GenerateMapByWorld();
                         CreatePlayer(heroParameters);
                     }
 
@@ -833,7 +833,7 @@ namespace Game.Engine
             Console.WriteLine("You are in the Shop!");
         }
 
-        public static void GenerateMapByWord()
+        public static void GenerateMapByWorld()
         {
             //todo
             Random random = new Random();

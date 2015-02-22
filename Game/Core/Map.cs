@@ -208,7 +208,7 @@ namespace Game.Core
         private void GenerateMobs(Random random)
         {
             int xRandom, yRandom;
-            for (int i = 0; i < this.MinionCount; i++)
+            for (int i = 0; i < this.MobCount; i++)
             {
                 xRandom = random.Next(0, this.Size);
                 yRandom = random.Next(0, this.Size);
