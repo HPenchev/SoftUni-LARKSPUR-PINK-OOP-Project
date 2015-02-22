@@ -243,15 +243,27 @@ namespace Game.Core
 
         public void ApplyItemEffects(Item item)
         {
-            this.AttackPoints += item.AttackPoints;
-            this.DefensePoints += item.DefensePoints;
+
             this.HealthPoints += item.HealthPoints;
-            if (item is Equipment)
+
+            if (item is Potion)
             {
-                this.AttackSpeed += (item as Equipment).AttackSpeed;
-                this.ChanceToDodge += (item as Equipment).ChanceToDodge;
-                this.CriticalChance += (item as Equipment).CriticalChance;
-                this.CritDamage += (item as Equipment).CriticalDamage;
+                this.Mana += (item as Potion).Mana;
+
+            }
+            else
+            {
+                this.AttackPoints += item.AttackPoints;
+                this.DefensePoints += item.DefensePoints;
+
+
+                if (item is Equipment)
+                {
+                    this.AttackSpeed += (item as Equipment).AttackSpeed;
+                    this.ChanceToDodge += (item as Equipment).ChanceToDodge;
+                    this.CriticalChance += (item as Equipment).CriticalChance;
+                    this.CritDamage += (item as Equipment).CriticalDamage;
+                }
             }
         }
 
@@ -278,6 +290,7 @@ namespace Game.Core
                 this.ChanceToDodge -= (item as Equipment).ChanceToDodge;
                 this.CriticalChance -= (item as Equipment).CriticalChance;
                 this.CritDamage -= (item as Equipment).CriticalDamage;
+                (item as Equipment).IsEquiped = false;
             }
         }
 
@@ -345,13 +358,7 @@ namespace Game.Core
             }
         }
 
-        public void UsePotion(Potion id)
-        {
-            this.HealthPoints += id.HealthPoints;
-            this.Mana += id.Mana;
-            RemoveItem(id);
-        }
-
+      
         public ICharacter FindTarget(ICharacter enemy)
         {
             throw new NotImplementedException();
@@ -379,7 +386,7 @@ namespace Game.Core
 
         public void CalculateLevelByExperience()
         {
-            if (this.Experience%100 == 0)
+            if (this.Experience % 100 == 0)
             {
                 this.Level++;
                 Console.WriteLine("Level UP! you can check your updated stats!");
