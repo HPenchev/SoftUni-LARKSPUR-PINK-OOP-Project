@@ -958,8 +958,8 @@ namespace Game.Engine
                                         PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
                                                             player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
                                         player.RemoveItemEffects(player.Inventory[sellIndex]);
-                                        player.RemoveItem(player.Inventory[sellIndex]);
                                         player.Gold += player.Inventory[sellIndex].Price * 0.8M;
+                                        player.RemoveItem(player.Inventory[sellIndex]);
                                     }
                                     else
                                     {
@@ -977,8 +977,8 @@ namespace Game.Engine
                                     {
                                         PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
                                                             player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
-                                        player.RemoveItem(player.Inventory[sellIndex]);
                                         player.Gold += player.Inventory[sellIndex].Price * 0.8M;
+                                        player.RemoveItem(player.Inventory[sellIndex]);
                                     }
                                     else
                                     {
