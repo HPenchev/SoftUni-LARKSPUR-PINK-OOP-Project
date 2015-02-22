@@ -956,10 +956,11 @@ namespace Game.Engine
                                     if (sellEquipedChoice.ToLower().Contains("yes"))
                                     {
                                         PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
-                                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
+                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price*0.8M));
                                         player.RemoveItemEffects(player.Inventory[sellIndex]);
-                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
+                                        player.Gold += player.Inventory[sellIndex].Price*0.8M;
                                         player.RemoveItem(player.Inventory[sellIndex]);
+                                        PrintTextSlowedDown("Shop Main Menu");
                                     }
                                     else
                                     {
@@ -976,9 +977,10 @@ namespace Game.Engine
                                     if (sellEquipedChoice.ToLower().Contains("yes"))
                                     {
                                         PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
-                                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
-                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
+                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price*0.8M));
+                                        player.Gold += player.Inventory[sellIndex].Price*0.8M;
                                         player.RemoveItem(player.Inventory[sellIndex]);
+                                        PrintTextSlowedDown("Shop Main Menu");
                                     }
                                     else
                                     {
@@ -989,7 +991,26 @@ namespace Game.Engine
                                     }
                                 }
                             }
-                          
+                            else
+                            {
+                                PrintTextSlowedDown("Are you sure you want to sell it?");
+                                string sellEquipedChoice = Console.ReadLine();
+                                if (sellEquipedChoice.ToLower().Contains("yes"))
+                                {
+                                    PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
+                                        player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
+                                    player.Gold += player.Inventory[sellIndex].Price * 0.8M;
+                                    player.RemoveItem(player.Inventory[sellIndex]);
+                                    PrintTextSlowedDown("Shop Main Menu");
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    PrintTextSlowedDown("Too dear for you?");
+                                    PrintTextSlowedDown("Shop Main Menu");
+                                    continue;
+                                }
+                            }
                         }
                         else
                         {
