@@ -729,6 +729,7 @@ namespace Game.Engine
             BattleEngine battleEngine = new BattleEngine(player, bosses);
             battleEngine.Run();
             world++;
+            player.CalculateLevelByExperience();
         }
 
         private static void FightMinions()
@@ -737,6 +738,7 @@ namespace Game.Engine
             List<Enemy> minions = new List<Enemy>();
             BattleEngine battleEngine = new BattleEngine(player, minions);
             battleEngine.Run();
+            player.CalculateLevelByExperience();
         }
 
         private static void UseHealthWell()

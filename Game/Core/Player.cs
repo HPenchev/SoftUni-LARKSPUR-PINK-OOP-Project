@@ -8,7 +8,7 @@ namespace Game.Core
     using System.Text;
     using Data.Constants.PlayerConstatns;
     using Interfaces;
-
+    //todo check calculate experience
     public abstract class Player : Character, IPlayer, IStatsable
     {
         private int killCounter;
@@ -288,15 +288,6 @@ namespace Game.Core
 
         public void CastSpell(Spell spell)
         {
-            //todo 
-            //if (this.Mana < spell.ManaCost)
-            //{
-            //    Console.WriteLine("Not enought mana.");
-            //}
-            //else
-            //{
-            //    this.Mana -= spell.ManaCost;
-            //}
 
         }
 
@@ -386,5 +377,24 @@ namespace Game.Core
             return basePlayer.ToString();
         }
 
+        public void CalculateLevelByExperience()
+        {
+            if (this.Experience%100 == 0)
+            {
+                this.Level++;
+                Console.WriteLine("Level UP! you can check your updated stats!");
+                LevelUpUpdate();
+            }
+        }
+
+        private void LevelUpUpdate()
+        {
+            this.AttackPoints *= 1.2;
+            this.HealthPoints *= 1.2;
+            this.Mana *= 1.2;
+            this.InventorySize += 2;
+            this.attackSpeed *= 1.1;
+            this.allResistance *= 1.1;
+        }
     }
 }
