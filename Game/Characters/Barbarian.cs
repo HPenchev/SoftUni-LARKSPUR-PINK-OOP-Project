@@ -32,7 +32,7 @@ namespace Game.Characters
         private void AddStartingItems()
         {
             RandomItemGenerator itemGenerator = new RandomItemGenerator(this.Level);
-            this.Inventory.AddRange(itemGenerator.List);
+            this.Inventory.AddRange(itemGenerator.ItemsList);
             this.UpdateInventorySpace();
         }
     }

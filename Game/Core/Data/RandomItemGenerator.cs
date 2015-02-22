@@ -1,16 +1,12 @@
-﻿using System.ComponentModel.Design;
-using Game.Exceptions.CharacterException;
-using Game.Interfaces;
-using Game.Items.ArmorOfDragon;
-using Game.Items.ArmorOfGandalf;
-using Game.Items.Spells;
-using Game.Items.WeaponOfNakov;
-
-
-namespace Game.Core.Data
+﻿namespace Game.Core.Data
 {
     using System;
     using System.Collections.Generic;
+    using Items.ArmorOfDragon;
+    using Items.ArmorOfGandalf;
+    using Items.Spells;
+    using Items.WeaponOfNakov;
+    using Exceptions.CharacterException;
 
     public class RandomItemGenerator
     {
@@ -36,32 +32,27 @@ namespace Game.Core.Data
             new WandOfNakov("Wand")
         };
         private int playerLevel;
-        private List<Item> list;
+        private List<Item> itemsList;
         #endregion
 
+        #region Constructors
         public RandomItemGenerator(int playerLevel)
         {
-            this.list = new List<Item>();
+            this.ItemsList = new List<Item>();
             this.PlayerLevel = playerLevel;
-            Random random = new Random();
-            for (int i = 0; i <= random.Next(this.PlayerLevel + 1, this.PlayerLevel + 3); i++)
-            {
-                int randomItemIndex = random.Next(0, this.allItems.Count);
-                Item item = this.allItems[randomItemIndex];
-                item.Level = playerLevel;
-                while (!list.Contains(item)) ////todo same item type check
-                {
-                    this.list.Add(item);
-                }
-            }
+            GetRandomItems();
+            RandomizeItemsStats();
         }
+        #endregion
 
+        #region Properties
         public int PlayerLevel
         {
             get
             {
                 return this.playerLevel;
             }
+
             set
             {
                 if (value < 0)
@@ -73,17 +64,65 @@ namespace Game.Core.Data
             }
         }
 
-        public List<Item> List
+        public List<Item> ItemsList
         {
             get
             {
-                return this.list;
+                return this.itemsList;
             }
 
             set
             {
-                this.list = value;
+                this.itemsList = value;
             }
         }
+        #endregion
+
+        #region Methods
+        private void GetRandomItems()
+        {
+            Random random = new Random();
+            for (int i = 0; i <= random.Next(Math.Abs(this.PlayerLevel - 2), this.PlayerLevel + 2); i++)
+            {
+                int randomItemIndex = random.Next(0, this.allItems.Count);
+                Item item = this.allItems[randomItemIndex];
+                item.Level = playerLevel;
+                while (!ItemsList.Contains(item))
+                {
+                    this.ItemsList.Add(item);
+                }
+            }
+        }
+
+        private void RandomizeItemsStats()
+        {
+            Random random = new Random();
+            foreach (var item in this.ItemsList)
+            {
+                //todo IF ITEM IS POTION
+                item.AttackPoints = item.AttackPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                item.DefensePoints = item.DefensePoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                item.HealthPoints = item.HealthPoints * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                item.Price = item.Price * random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                if (item is Equipment)
+                {
+                    (item as Equipment).AttackSpeed = (item as Equipment).AttackSpeed * random.Next(Math.Abs(playerLevel - 2),
+                                                                                                             playerLevel + 2);
+                    (item as Equipment).CriticalChance = (item as Equipment).CriticalChance *
+                                                          random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    (item as Equipment).CriticalDamage = (item as Equipment).CriticalDamage *
+                                                          random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                    (item as Equipment).ChanceToDodge =  (item as Equipment).ChanceToDodge *
+                                                          random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                        
+                }
+                if (item is Spell)
+                {
+                    (item as Spell).ManaCost = (item as Spell).ManaCost *
+                                                random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                }
+            }
+        }
+        #endregion
     }
 }
