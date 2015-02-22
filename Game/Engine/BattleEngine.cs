@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Core;
 using Game.Core.RandomGenerator;
+using Game.Enemies;
 
 namespace Game.Engine
 {
@@ -18,6 +19,8 @@ namespace Game.Engine
 
         private List<Enemy> Enemies { get; set; }
 
+        public List<Spell> SpellsUsedByPlayer { get; set; }
+
         public void Run()
         {
             while (true)
@@ -25,12 +28,13 @@ namespace Game.Engine
                 if (this.Player.IsAlive == false)
                 {
                     Console.WriteLine("You are dead");
-                    return;
+                    Engine.MainMenu();
                 }
 
                 if (CheckWhetherAllEnemiesAreDead(this.Enemies))
                 {
                     Console.WriteLine("Congratulations, you are the winner!");
+                    CollectVictoryProfit();
                     return;
                 }
 
@@ -126,6 +130,7 @@ namespace Game.Engine
             }
 
             this.Player.CastSpell(spell);
+            this.SpellsUsedByPlayer.Add(spell);
         }
 
         private List<Spell> GetSpells(Character character)
@@ -154,6 +159,25 @@ namespace Game.Engine
             else
             {
                 enemy.Attack(this.Player);
+            }
+        }
+
+        private void CollectVictoryProfit()
+        {
+            foreach (Enemy enemy in this.Enemies)
+            {
+                this.Player.Gold += enemy.Gold;
+                this.Player.Experience += 100;
+                if (enemy is Boss)
+                {
+                    this.Player.Experience += 200;
+                }
+
+                foreach (Spell usedSpell in this.SpellsUsedByPlayer)
+                {
+                    throw new NotImplementedException;
+                    //this.Player.RemoveItemEffects(usedSpell);
+                }
             }
         }
     }

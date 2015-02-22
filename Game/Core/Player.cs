@@ -252,7 +252,7 @@ namespace Game.Core
             this.HealthPoints += (item as Equipment).HealthPoints;
         }
 
-        private void RemoveItemEffects(Equipment item)
+        private void RemoveItemEffects(Equipment item) //Hsa to be set public and made to work with items, not equipment.
         {
             this.AttackPoints -= (item as Equipment).AttackPoints;
             this.AttackSpeed -= (item as Equipment).AttackSpeed;

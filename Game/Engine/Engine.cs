@@ -39,7 +39,7 @@ namespace Game.Engine
             MainMenu();
         }
 
-        private static void MainMenu()
+        public static void MainMenu()
         {
             while (true)
             {
