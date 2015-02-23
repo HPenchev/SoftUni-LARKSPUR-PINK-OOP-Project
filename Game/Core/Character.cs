@@ -77,13 +77,13 @@
         #endregion
 
         #region Methods
-        public virtual void Attack(Character target)
+        public virtual void Attack(ICharacter target)
         {
             double damage = CalculateDamage(target);
             target.HealthPoints -= damage;
         }
 
-        protected virtual double CalculateDamage(Character target)
+        protected virtual double CalculateDamage(ICharacter target)
         {
             double damage = this.AttackPoints - target.DefensePoints;
             if (damage < 1)

@@ -26,12 +26,12 @@
 
         #region Methods
         
-        public override void Attack(Character player)
+        public override void Attack(ICharacter player)
         {
             base.Attack(player);
         }
 
-        protected override double CalculateDamage(Character target)
+        protected override double CalculateDamage(ICharacter target)
         {
             Player player = (Player)target;
             double dodgeChance = player.ChanceToDodge;

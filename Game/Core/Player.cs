@@ -397,12 +397,12 @@
             }
         }
 
-        public override void Attack(Character target)
+        public override void Attack(ICharacter target)
         {            
             base.Attack(target);
         }
 
-        protected override double CalculateDamage(Character target)
+        protected override double CalculateDamage(ICharacter target)
         {
             target = (Enemy)target;
             double damage = base.CalculateDamage(target);

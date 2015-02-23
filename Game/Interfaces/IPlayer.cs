@@ -17,7 +17,7 @@
 
         List<Item> Inventory { get; set; }
 
-        void Attack(Character enemy);
+        void Attack(ICharacter enemy);
 
         void PickUpItem(List<Item> item);
 

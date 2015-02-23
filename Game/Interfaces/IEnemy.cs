@@ -3,7 +3,7 @@
     using Game.Core;
     public interface IEnemy
     {
-        void Attack(Character player);
+        void Attack(ICharacter player);
 
         void DropReward(); // should drop gold and items
     }
