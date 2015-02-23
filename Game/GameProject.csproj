@@ -50,6 +50,7 @@
     <Compile Include="Characters\Mage.cs" />
     <Compile Include="Core\Armor.cs" />
     <Compile Include="Core\Character.cs" />
+    <Compile Include="Core\Data\Constants\EnemyConstants\EnemyConstants.cs" />
     <Compile Include="Core\Data\Constants\EngineConstants\EngineConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\AmazonConstants.cs" />
     <Compile Include="Core\Data\Constants\PlayerConstatns\BarbarianConstants.cs" />
@@ -141,9 +142,7 @@
     <None Include="App.config" />
     <None Include="ClassDiagram3.cd" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Data\Constants\EnemyConstants\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Images\GameOver.jpg" />
   </ItemGroup>
