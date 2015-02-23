@@ -12,7 +12,7 @@
             this.AttackPoints = 0;
             this.AttackSpeed = 0.25;
             this.ChanceToDodge = 5;
-            this.CriticalChance = 5;
+            this.CriticalChance = 2;
             this.CriticalDamage = 20;
             this.DefensePoints = 100;
             this.HealthPoints = 200;

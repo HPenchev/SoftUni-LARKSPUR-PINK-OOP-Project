@@ -64,6 +64,13 @@
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />
     <Compile Include="Core\RandomGenerator\RandomGenerator.cs" />
+    <Compile Include="Items\ArmorOfDarkness\BeltOfDarkness.cs" />
+    <Compile Include="Items\ArmorOfDarkness\BootsOfDarkness.cs" />
+    <Compile Include="Items\ArmorOfDarkness\ChestArmorOfDarkness.cs" />
+    <Compile Include="Items\ArmorOfDarkness\GlovesOfDarkness.cs" />
+    <Compile Include="Items\ArmorOfDarkness\HelmetOfDarkness.cs" />
+    <Compile Include="Items\ArmorOfDarkness\PantsOfDarkness.cs" />
+    <Compile Include="Items\ArmorOfDarkness\ShieldOfDarkness.cs" />
     <Compile Include="Items\Potions\HealthPotion.cs" />
     <Compile Include="Items\Potions\ManaPotion.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
