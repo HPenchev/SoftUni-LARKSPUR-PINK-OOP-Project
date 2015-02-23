@@ -608,7 +608,6 @@ namespace Game.Engine
             else
             {
                 char currentMapObject = map.Map[playerPos.X, playerPos.Y + 1];
-                Console.WriteLine(currentMapObject);
                 if (currentMapObject != 'e')
                 {
                     ProceesMapElement(currentMapObject);
@@ -866,7 +865,7 @@ namespace Game.Engine
                 Console.WriteLine("{0} ---> {1}  {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
             }
             Console.WriteLine("{0}\n", new String('-', 10));
-            
+
             // Print Inventory Commands
             PrintTextSlowedDown("Available Commands:");
             PrintTextSlowedDown("buy [index]");
@@ -956,9 +955,9 @@ namespace Game.Engine
                                     if (sellEquipedChoice.ToLower().Contains("yes"))
                                     {
                                         PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
-                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price*0.8M));
+                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
                                         player.RemoveItemEffects(player.Inventory[sellIndex]);
-                                        player.Gold += player.Inventory[sellIndex].Price*0.8M;
+                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
                                         player.RemoveItem(player.Inventory[sellIndex]);
                                         PrintTextSlowedDown("Shop Main Menu");
                                     }
@@ -977,8 +976,8 @@ namespace Game.Engine
                                     if (sellEquipedChoice.ToLower().Contains("yes"))
                                     {
                                         PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
-                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price*0.8M));
-                                        player.Gold += player.Inventory[sellIndex].Price*0.8M;
+                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
+                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
                                         player.RemoveItem(player.Inventory[sellIndex]);
                                         PrintTextSlowedDown("Shop Main Menu");
                                     }
