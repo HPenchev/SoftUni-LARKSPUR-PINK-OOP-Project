@@ -79,7 +79,6 @@
             {
                 Boss boss = new Boss(DateTime.Now.Millisecond.ToString());
                 boss.Inventory = itemGenerator.ItemsList;
-               // RandomizeEnemiesStats();
                 this.EnemiesList.Add(boss);
             }
 

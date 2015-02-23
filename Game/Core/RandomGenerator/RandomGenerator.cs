@@ -4,6 +4,6 @@
 
     public static class RandomGenerator
     {
-        public static Random rnd = new Random();
+        public static Random Rnd = new Random();
     }
 }

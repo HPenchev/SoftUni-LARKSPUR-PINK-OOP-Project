@@ -13,12 +13,7 @@
         #endregion
 
         #region Methods
-
-        //public void Attack(ICharacter player)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
+        
         public override void DropReward()
         {
         }

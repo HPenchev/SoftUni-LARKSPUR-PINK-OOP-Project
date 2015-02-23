@@ -15,11 +15,6 @@
 
         #region Methods
        
-        //public override void Attack(ICharacter player)
-        //{
-            
-        //}
-
         public override void DropReward()
         {
             throw new NotImplementedException();

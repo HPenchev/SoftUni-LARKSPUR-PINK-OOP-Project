@@ -6,8 +6,7 @@
     using System.Text;
     using Data.Constants.PlayerConstatns;
     using Data.Enums;
-    using Game.Exceptions.CharacterException;
-    using Game.Core.RandomGenerator;
+    using Exceptions.CharacterException;
     using Interfaces;
 
     public abstract class Player : Character, IPlayer, IStatsable
@@ -184,7 +183,7 @@
             }
         }
         #endregion
-       
+
         #region Methods
         public void UnequipItem(Item item)
         {
@@ -296,7 +295,7 @@
                 this.CritDamage -= (item as Equipment).CriticalDamage;
                 (item as Equipment).IsEquiped = false;
             }
-        }        
+        }
 
         public void PickUpItem(List<Item> items)
         {
@@ -390,24 +389,21 @@
             {
                 throw new InsufficientManaException();
             }
-
             else
             {
                 this.ApplyItemEffects(spell);
             }
         }
-       
 
         protected override double CalculateDamage()
         {
-
             double damage = this.AttackPoints;
 
-            int criticalStrikeChence = RandomGenerator.RandomGenerator.rnd.Next(0, (int)this.CriticalChance*2);
-            
-            if (this.CriticalChance > 8)
+            int criticalStrikeChence = RandomGenerator.RandomGenerator.Rnd.Next(0, (int)this.CriticalChance * 2);
+
+            if (criticalStrikeChence > 8)
             {
-                damage += damage* this.CritDamage;
+                damage += damage * this.CritDamage;
                 Console.WriteLine("Critical!");
             }
 

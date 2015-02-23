@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Speech.Recognition;
-using Game.Core.Data.Constants.EnemyConstants;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
-    using Game.Core.RandomGenerator;
+    using System.Collections.Generic;
+    using Data.Constants.EnemyConstants;
     using Interfaces;
 
     public abstract class Enemy : Character, IEnemy
@@ -40,7 +36,7 @@ namespace Game.Core
         {
             base.Attack(player);
         }
-        
+
         public abstract void DropReward();
         #endregion
     }

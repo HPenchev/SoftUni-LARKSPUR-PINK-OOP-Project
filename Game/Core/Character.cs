@@ -40,13 +40,18 @@
 
         public double HealthPoints
         {
-            get { return this.healthPoints; }
+            get
+            {
+                return this.healthPoints;
+            }
+
             set
             {
                 if (value <= 0)
                 {
                     this.IsAlive = false;
                 }
+
                 this.healthPoints = value;
             }
         }
@@ -88,18 +93,8 @@
             {
                 damage -= target.DefensePoints;
             }
+
             target.HealthPoints -= damage;
-        }
-
-        protected virtual double CalculateDamage()
-        {
-            double damage = this.AttackPoints;
-            if (damage < 1)
-            {
-                damage = 1;
-            }
-
-            return damage;
         }
 
         public override string ToString()
@@ -108,6 +103,17 @@
             baseCharacter.AppendFormat(
                 "Status: {0},\nHealth points: {1},\nAttack points: {2},\nDefence points: {3},\nRange: {4},\n", this.IsAlive ? "Alive" : "Dead", this.HealthPoints, this.AttackPoints, this.DefensePoints, this.Range);
             return baseCharacter.ToString();
+        }
+
+         protected virtual double CalculateDamage()
+        {
+            double damage = this.AttackPoints;
+            if (damage < 1)
+            {
+                damage = 1;
+            }
+
+            return damage;
         }
         #endregion
     }

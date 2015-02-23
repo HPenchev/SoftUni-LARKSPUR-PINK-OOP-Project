@@ -22,7 +22,5 @@
         void PickUpItem(List<Item> item);
 
         void RemoveItem(Item item);
-
-        //ICharacter FindTarget(Character enemy);
     }
 }

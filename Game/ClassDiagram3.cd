@@ -35,8 +35,8 @@
       <FileName>Core\Armor.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Game.Core.Character" Collapsed="true">
-    <Position X="14.75" Y="1.75" Width="1.5" />
+  <Class Name="Game.Core.Character">
+    <Position X="14.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAIQAAACEAEAAgAAQAIAIAAAAACAAAAAwEAAQE=</HashCode>
       <FileName>Core\Character.cs</FileName>
@@ -46,7 +46,7 @@
   <Class Name="Game.Core.Enemy" Collapsed="true">
     <Position X="19.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAQE=</HashCode>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAE=</HashCode>
       <FileName>Core\Enemy.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -83,7 +83,7 @@
   <Class Name="Game.Core.Player" Collapsed="true">
     <Position X="12.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAASBQEAAAQAACAEAABCMAAAAsUAAAIFAIBBICCEcSU=</HashCode>
+      <HashCode>BAASBQEAAAQAACAEAABCMAAAAkUAAAIFAIBBICCEcSU=</HashCode>
       <FileName>Core\Player.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -140,7 +140,7 @@
   <Class Name="Game.Core.RandomGenerator.RandomGenerator" Collapsed="true">
     <Position X="96.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Core\RandomGenerator\RandomGenerator.cs</FileName>
     </TypeIdentifier>
   </Class>
