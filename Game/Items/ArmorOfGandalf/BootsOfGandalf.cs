@@ -10,10 +10,10 @@
         {
             this.Id = "The Boots of Gandalf the gray.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 5;
+            this.AttackSpeed = 0.25;
             this.ChanceToDodge = 5;
             this.CriticalChance = 5;
-            this.CriticalDamage = 25;
+            this.CriticalDamage = 20;
             this.DefensePoints = 100;
             this.HealthPoints = 200;
             this.Level = 4;

@@ -10,7 +10,7 @@
         {
             this.Id = "Helmet forged by fire-breathing dragon.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 1;
+            this.AttackSpeed = 0.10;
             this.ChanceToDodge = 7;
             this.CriticalChance = 2;
             this.CriticalDamage = 15;

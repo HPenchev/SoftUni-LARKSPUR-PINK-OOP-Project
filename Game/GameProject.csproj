@@ -102,7 +102,12 @@
     <Compile Include="Interfaces\IStatsable.cs" />
     <Compile Include="Interfaces\IStatic.cs" />
     <Compile Include="Items\ArmorOfDragon\BeltOfDragon.cs" />
+    <Compile Include="Items\ArmorOfDragon\BootsOfDragon.cs" />
     <Compile Include="Items\ArmorOfDragon\ChestArmorOfDragon.cs" />
+    <Compile Include="Items\ArmorOfDragon\GlovesOfDragon.cs" />
+    <Compile Include="Items\ArmorOfDragon\HelmetOfDragon.cs" />
+    <Compile Include="Items\ArmorOfDragon\PantsOfDragon.cs" />
+    <Compile Include="Items\ArmorOfDragon\ShieldOfDragon.cs" />
     <Compile Include="Items\ArmorOfGandalf\BeltOfGandalf.cs" />
     <Compile Include="Items\ArmorOfGandalf\BootsOfGandalf.cs" />
     <Compile Include="Items\ArmorOfGandalf\ChestArmorOfGandalf.cs" />

@@ -10,7 +10,7 @@
         {
             this.Id = "Shield forged by fire-breathing dragon.";
             this.AttackPoints = 0;
-            this.AttackSpeed = -4;
+            this.AttackSpeed = -0.2;
             this.ChanceToDodge = 23;
             this.CriticalChance = 0;
             this.CriticalDamage = 0;

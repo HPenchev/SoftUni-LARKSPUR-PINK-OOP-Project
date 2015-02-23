@@ -10,7 +10,7 @@
         {
             this.Id = "Gloves forged by fire-breathing dragon.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 2;
+            this.AttackSpeed = 0.1;
             this.ChanceToDodge = 0;
             this.CriticalChance = 3;
             this.CriticalDamage = 15;

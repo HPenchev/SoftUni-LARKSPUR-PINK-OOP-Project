@@ -10,7 +10,7 @@
         {
             this.Id = "The Gloves of Gandalf the gray.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 4;
+            this.AttackSpeed = 0.2;
             this.ChanceToDodge = 0;
             this.CriticalChance = 2;
             this.CriticalDamage = 10;

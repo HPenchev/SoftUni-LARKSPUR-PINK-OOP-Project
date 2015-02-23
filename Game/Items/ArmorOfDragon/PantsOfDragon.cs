@@ -10,7 +10,7 @@
         {
             this.Id = "Pants forged by fire-breathing dragon.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 2;
+            this.AttackSpeed = 0.2;
             this.ChanceToDodge = 2;
             this.CriticalChance = 4;
             this.CriticalDamage = 15;

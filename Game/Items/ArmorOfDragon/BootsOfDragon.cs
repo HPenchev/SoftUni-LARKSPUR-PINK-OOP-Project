@@ -10,7 +10,7 @@
         {
             this.Id = "Boots forged by fire-breathing dragon.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 2;
+            this.AttackSpeed = 0.15;
             this.ChanceToDodge = 12;
             this.CriticalChance = 4;
             this.CriticalDamage = 20;

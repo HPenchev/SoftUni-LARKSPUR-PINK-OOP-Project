@@ -10,7 +10,7 @@
         {
             this.Id = "Belt forged by fire-breathing dragon.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 1;
+            this.AttackSpeed = 0.05;
             this.ChanceToDodge = 0;
             this.CriticalChance = 5;
             this.CriticalDamage = 15;

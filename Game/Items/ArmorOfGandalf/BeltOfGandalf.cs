@@ -10,7 +10,7 @@
         {
             this.Id = "The Belt of Gandalf the gray.";
             this.AttackPoints = 0;
-            this.AttackSpeed = 2;
+            this.AttackSpeed = 0.1;
             this.ChanceToDodge = 1;
             this.CriticalChance = 3;
             this.CriticalDamage = 20;

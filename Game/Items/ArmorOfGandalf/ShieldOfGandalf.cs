@@ -10,7 +10,7 @@
         {
             this.Id = "The Shield of Gandalf the gray.";
             this.AttackPoints = 0;
-            this.AttackSpeed = -2;
+            this.AttackSpeed = -0.2;
             this.ChanceToDodge = 15;
             this.CriticalChance = 0;
             this.CriticalDamage = 0;

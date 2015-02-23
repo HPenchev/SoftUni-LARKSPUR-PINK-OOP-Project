@@ -9,7 +9,7 @@
         {
             this.Id = "The Axe of Justice";
             this.AttackPoints = 100;
-            this.AttackSpeed = 2;
+            this.AttackSpeed = 0.1;
             this.ChanceToDodge = 0;
             this.CriticalChance = 1;
             this.CriticalDamage = 10;
