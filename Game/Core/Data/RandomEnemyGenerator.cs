@@ -19,7 +19,7 @@
             this.PlayerLevel = playerLevel;
             this.EnemyType = enemyType;
             GetRandomEnemies();
-            RandomizeEnemiesStats();
+           RandomizeEnemiesStats(EnemiesList);
         }
         #endregion
 
@@ -79,6 +79,7 @@
             {
                 Boss boss = new Boss(DateTime.Now.Millisecond.ToString());
                 boss.Inventory = itemGenerator.ItemsList;
+               // RandomizeEnemiesStats();
                 this.EnemiesList.Add(boss);
             }
 
@@ -88,8 +89,7 @@
                 {
                     itemGenerator = new RandomItemGenerator(this.PlayerLevel);
                     Minion minion = new Minion(DateTime.Now.Millisecond.ToString());
-                    minion.Inventory = itemGenerator.ItemsList;
-                    this.EnemiesList.Add(minion);
+                  this.EnemiesList.Add(minion);
                 }
 
                 Boss boss = new Boss(DateTime.Now.Millisecond.ToString());
@@ -99,10 +99,10 @@
             }
         }
 
-        private void RandomizeEnemiesStats()
+        private void RandomizeEnemiesStats(List<Enemy> list)
         {
             Random random = new Random();
-            foreach (var enemy in this.EnemiesList)
+            foreach (var enemy in list)
             {
                 enemy.AttackPoints = enemy.AttackPoints * random.Next(Math.Abs(this.PlayerLevel - 2), this.PlayerLevel + 2);
                 enemy.DefensePoints = enemy.DefensePoints * random.Next(Math.Abs(this.PlayerLevel - 2), this.PlayerLevel + 2);
