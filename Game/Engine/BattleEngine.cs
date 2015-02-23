@@ -25,6 +25,13 @@ namespace Game.Engine
         {
             while (true)
             {
+                foreach (Spell spellUsed in this.SpellsUsedByPlayer)
+                {
+                    this.Player.RemoveItemEffects(spellUsed);
+                }
+
+                this.SpellsUsedByPlayer.Clear();
+
                 if (this.Player.IsAlive == false)
                 {
                     Console.WriteLine("You are dead");
@@ -129,14 +136,15 @@ namespace Game.Engine
                 CastSpell();
             }
 
-            this.Player.CastSpell(spell);
+            this.Player.ApplyItemEffects(spell);
             this.SpellsUsedByPlayer.Add(spell);
+            PlayerMove();
         }
 
-        private List<Spell> GetSpells(Character character)
+        private List<Spell> GetSpells(Player player)
         {
             List<Spell> spells =
-                (List<Spell>)from item in character.Inventory
+                (List<Spell>)from item in player.Inventory
                              where item is Spell
                              select item;
             return spells;
@@ -144,22 +152,47 @@ namespace Game.Engine
 
         private void UsePotion()
         {
-            throw new NotImplementedException();
+            List<Potion> potions = GetPotions(this.Player);
+            if (potions == null || potions.Count == 0)
+            {
+                Console.WriteLine("There are no potions to use");
+                PlayerMove();
+            }
+
+            Console.WriteLine("Please enter the id of the potion you want to use:");
+            Potion potion = null;
+            string potionID = Console.ReadLine();
+            foreach (Potion potionInInventory in potions)
+            {
+                if (potionInInventory.Id == potionID)
+                {
+                    potion = potionInInventory;
+                    break;
+                }
+            }
+
+            if (potion == null)
+            {
+                Console.WriteLine("No such potion in inventory. Please choose again");
+                UsePotion();
+            }
+
+            this.Player.ApplyItemEffects(potion);
+            PlayerMove();
         }
 
         private void EnemyMove(Enemy enemy)
         {
-            List<Spell> spells = GetSpells(enemy);
-            int chenceToSpell = RandomGenerator.rnd.Next(10);
-            if (spells.Count > 0 && chenceToSpell < 2)
-            {
-                int spellToUse = RandomGenerator.rnd.Next(spells.Count);
-                enemy.CastSpell(spells[spellToUse]);
-            }
-            else
-            {
-                enemy.Attack(this.Player);
-            }
+            enemy.Attack(this.Player);            
+        }
+
+        private List<Potion> GetPotions(Player player)
+        {
+            List<Potion> potions =
+                (List<Potion>)from item in player.Inventory
+                             where item is Potion
+                             select item;
+            return potions;
         }
 
         private void CollectVictoryProfit()
@@ -171,7 +204,9 @@ namespace Game.Engine
                 if (enemy is Boss)
                 {
                     this.Player.Experience += 200;
-                }                
+                }
+
+                Player.Inventory.AddRange(enemy.Inventory);
             }
         }
     }
