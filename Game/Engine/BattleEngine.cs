@@ -13,6 +13,7 @@ namespace Game.Engine
         {
             this.Player = player;
             this.Enemies = enemies;
+            SpellsUsedByPlayer = new List<Spell>();
         }
 
         private Player Player { get; set; }
