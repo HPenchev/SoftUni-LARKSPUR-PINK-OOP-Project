@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using Game.Core;
 using Game.Core.RandomGenerator;
@@ -125,7 +126,7 @@ namespace Game.Engine
 
         private void CastSpell()
         {            
-            List<Spell> spells = GetSpells(this.Player);
+            IList<Spell> spells = GetSpells(this.Player);
             if (spells == null || spells.Count == 0)
             {
                 Console.WriteLine("There are no spells to cast");
@@ -165,11 +166,7 @@ namespace Game.Engine
 
         private List<Spell> GetSpells(Player player)
         {
-            List<Spell> spells =
-                (List<Spell>)from item in player.Inventory
-                             where item is Spell
-                             select item;
-            return spells;
+            return this.Player.Inventory.OfType<Spell>().Select(item => item as Spell).ToList();
         }
 
         private void UsePotion()
