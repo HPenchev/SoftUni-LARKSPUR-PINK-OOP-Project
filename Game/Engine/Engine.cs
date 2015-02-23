@@ -24,8 +24,8 @@ namespace Game.Engine
         private static Player player;
         private static MapGenerator map;
         private static Position playerPos;
-        private static int world = 1;
-        private static char prevMapElement = 'e';
+        private static int world;
+        private static char prevMapElement;
 
         public void Run()
         {
@@ -172,9 +172,12 @@ namespace Game.Engine
 
         private static void NewGame()
         {
+            world = 1;
+            prevMapElement = 'e';
             NewGameUserInput();
             SetPlayerPos();
             ExecuteCommand();
+
         }
 
         private static void SetPlayerPos()
@@ -754,6 +757,7 @@ namespace Game.Engine
                 battleEngine.Run();
                 world++;
                 player.CalculateLevelByExperience();
+
             }
             else
             {
@@ -775,7 +779,7 @@ namespace Game.Engine
                 List<Enemy> minions = enemyGenerator.EnemiesList;
                 BattleEngine battleEngine = new BattleEngine(player, minions);
                 battleEngine.Run();
-                player.CalculateLevelByExperience();
+                NextWorld();
             }
             else
             {
@@ -784,6 +788,8 @@ namespace Game.Engine
                 PrintTextSlowedDown("You will live to fight another day, you coward!");
             }
         }
+
+
 
         private static void InteractWithMob()
         {
@@ -1064,5 +1070,13 @@ namespace Game.Engine
             var generatedMap = new MapGenerator(size, healtWellCount, manaWellCount, chestCount, minionCount, mobCount);
             map = generatedMap;
         }
+        private static void NextWorld()
+        {
+            player.CalculateLevelByExperience();
+            GenerateMapByWorld();
+            SetPlayerPos();
+            prevMapElement = 'e';
+        }
     }
+
 }

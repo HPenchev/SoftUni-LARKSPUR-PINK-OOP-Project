@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game.Characters.Amazon" Collapsed="true">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Amazon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Characters.Barbarian" Collapsed="true">
+    <Position X="11.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Barbarian.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Characters.Druid" Collapsed="true">
+    <Position X="13.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Druid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Characters.Mage" Collapsed="true">
+    <Position X="15.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Mage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Armor" Collapsed="true">
+    <Position X="58.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAgAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Core\Armor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Character" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAIQAAACEAEAAgAAQAIAIAAAAACAAAAAwEAAQE=</HashCode>
+      <FileName>Core\Character.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.Core.Enemy" Collapsed="true">
+    <Position X="19.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAQE=</HashCode>
+      <FileName>Core\Enemy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.Core.Equipment" Collapsed="true">
+    <Position X="63" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCBAAAIAQAACAEAAAAAAAAAAAAAAIAAIAAAACAgAA=</HashCode>
+      <FileName>Core\Equipment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.GameObject" Collapsed="true">
+    <Position X="48.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Core\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Item" Collapsed="true">
+    <Position X="56.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAQQAAgEAEAIgAAQAIAAEAAAABAAAAAQAAAAA=</HashCode>
+      <FileName>Core\Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.Core.MapGenerator" Collapsed="true">
+    <Position X="98.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>xAAAECAEABEAhAAAAMABAAAAEQAAEAEAAAAQGEAAEAg=</HashCode>
+      <FileName>Core\Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Player" Collapsed="true">
+    <Position X="12.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAASBQEAAAQAACAEAABCMAAAAsUAAAIFAIBBICCEcSU=</HashCode>
+      <FileName>Core\Player.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.Core.Potion" Collapsed="true">
+    <Position X="23.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACA=</HashCode>
+      <FileName>Core\Potion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Spell" Collapsed="true">
+    <Position X="30.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAAAA=</HashCode>
+      <FileName>Core\Spell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Weapon" Collapsed="true">
+    <Position X="86.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Core\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Data.Constants.EnemyConstants.EnemyConstants" Collapsed="true">
+    <Position X="98.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAIAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Core\Data\Constants\EnemyConstants\EnemyConstants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Data.Constants.EngineConstants.EngineConst" Collapsed="true">
+    <Position X="94.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Core\Data\Constants\EngineConstants\EngineConstants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Data.RandomEnemyGenerator" Collapsed="true">
+    <Position X="94.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAABAAAAAAAABABAAAQAAAAAAAAAAAAAACAAAIAgA=</HashCode>
+      <FileName>Core\Data\RandomEnemyGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.Data.RandomItemGenerator" Collapsed="true">
+    <Position X="98.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAIAAAACAAAAAARAAAAEAAAAAAAAAAAAAAAAAAECA=</HashCode>
+      <FileName>Core\Data\RandomItemGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Core.RandomGenerator.RandomGenerator" Collapsed="true">
+    <Position X="96.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\RandomGenerator\RandomGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Draw.DrawImg" Collapsed="true">
+    <Position X="96.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Draw\DrawImg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Enemies.Boss" Collapsed="true">
+    <Position X="20.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enemies\Boss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Enemies.Minion" Collapsed="true">
+    <Position X="18" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enemies\Minion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Engine.BattleEngine" Collapsed="true">
+    <Position X="94.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAIAAAgAAAAAAAAAAEEAAwAAACYAgQAAAAI=</HashCode>
+      <FileName>Engine\BattleEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Engine.Engine" Collapsed="true">
+    <Position X="100" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIlEGEFAALCAIAwAAAACASEQBASaIAAJQAAQAgoYACM=</HashCode>
+      <FileName>Engine\Engine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Example" Collapsed="true">
+    <Position X="96.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Example.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Exceptions.CharacterException.CharacterException" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CharacterException\CharacterException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Exceptions.CharacterException.InsufficientManaException" Collapsed="true">
+    <Position X="2.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CharacterException\InsufficientManaException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Exceptions.CharacterException.NegativePlayerLevelException" Collapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CharacterException\NegativePlayerLevelException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Exceptions.GameException" Collapsed="true">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\GameException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Exceptions.IdIsNullOrEmptyException" Collapsed="true">
+    <Position X="5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\IdIsNullOrEmptyException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Exceptions.ItemException.ItemException" Collapsed="true">
+    <Position X="7.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ItemException\ItemException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Exceptions.ItemException.ValueIsNegativeException" Collapsed="true">
+    <Position X="7.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ItemException\ValueIsNegativeException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDarkness.BeltOfDarkness" Collapsed="true">
+    <Position X="67.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDarkness\BeltOfDarkness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDarkness.BootsOfDarkness" Collapsed="true">
+    <Position X="74.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDarkness\BootsOfDarkness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDarkness.ChestArmorOfDarkness" Collapsed="true">
+    <Position X="78.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDarkness\ChestArmorOfDarkness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDarkness.GlovesOfDarkness" Collapsed="true">
+    <Position X="36" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDarkness\GlovesOfDarkness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDarkness.HelmetOfDarkness" Collapsed="true">
+    <Position X="40.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDarkness\HelmetOfDarkness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDarkness.PantsOfDarkness" Collapsed="true">
+    <Position X="45" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDarkness\PantsOfDarkness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDarkness.ShieldOfDarkness" Collapsed="true">
+    <Position X="49.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDarkness\ShieldOfDarkness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDragon.BeltOfDragon" Collapsed="true">
+    <Position X="54" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDragon\BeltOfDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDragon.BootsOfDragon" Collapsed="true">
+    <Position X="58.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDragon\BootsOfDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDragon.ChestArmorOfDragon" Collapsed="true">
+    <Position X="63" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDragon\ChestArmorOfDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDragon.GlovesOfDragon" Collapsed="true">
+    <Position X="69.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDragon\GlovesOfDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDragon.HelmetOfDragon" Collapsed="true">
+    <Position X="76.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDragon\HelmetOfDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDragon.PantsOfDragon" Collapsed="true">
+    <Position X="81" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDragon\PantsOfDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfDragon.ShieldOfDragon" Collapsed="true">
+    <Position X="38.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfDragon\ShieldOfDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfGandalf.BeltOfGandalf" Collapsed="true">
+    <Position X="42.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfGandalf\BeltOfGandalf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfGandalf.BootsOfGandalf" Collapsed="true">
+    <Position X="47.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfGandalf\BootsOfGandalf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfGandalf.ChestArmorOfGandalf" Collapsed="true">
+    <Position X="51.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfGandalf\ChestArmorOfGandalf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfGandalf.GlovesOfGandalf" Collapsed="true">
+    <Position X="56.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfGandalf\GlovesOfGandalf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfGandalf.HelmetOfGandalf" Collapsed="true">
+    <Position X="60.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfGandalf\HelmetOfGandalf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfGandalf.PantsOfGandalf" Collapsed="true">
+    <Position X="65.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfGandalf\PantsOfGandalf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.ArmorOfGandalf.ShieldOfGandalf" Collapsed="true">
+    <Position X="72" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ArmorOfGandalf\ShieldOfGandalf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.Potions.HealthPotion" Collapsed="true">
+    <Position X="22.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Potions\HealthPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.Potions.ManaPotion" Collapsed="true">
+    <Position X="24.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACA=</HashCode>
+      <FileName>Items\Potions\ManaPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.Spells.SpellOfDefence" Collapsed="true">
+    <Position X="27" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Spells\SpellOfDefence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.Spells.SpellOfHealth" Collapsed="true">
+    <Position X="29.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Spells\SpellOfHealth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.Spells.SpellOfInvulnerability" Collapsed="true">
+    <Position X="31.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Spells\SpellOfInvulnerability.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.Spells.SpellOfRossi" Collapsed="true">
+    <Position X="33.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Spells\SpellOfRossi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.WeaponOfNakov.AxeOfNakov" Collapsed="true">
+    <Position X="83.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\WeaponOfNakov\AxeOfNakov.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.WeaponOfNakov.BowOfNakov" Collapsed="true">
+    <Position X="85.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\WeaponOfNakov\BowOfNakov.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.WeaponOfNakov.SwordOfNakov" Collapsed="true">
+    <Position X="87.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\WeaponOfNakov\SwordOfNakov.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Items.WeaponOfNakov.WandOfNakov" Collapsed="true">
+    <Position X="90" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\WeaponOfNakov\WandOfNakov.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.PlayAudio" Collapsed="true">
+    <Position X="100" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAgAQAAAAAIAAAAAQAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayAudio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game.Static.Chest" Collapsed="true">
+    <Position X="92.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAACAAAAAgAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Static\Chest.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.Static.HealthWell" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAg=</HashCode>
+      <FileName>Static\HealthWell.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game.Static.ManaWell" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQQACA=</HashCode>
+      <FileName>Static\ManaWell.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Struct Name="Game.Core.Position" Collapsed="true">
+    <Position X="96.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAYAA=</HashCode>
+      <FileName>Core\Position.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Game.Core.Data.Constants.PlayerConstatns.AmazonConstants" Collapsed="true">
+    <Position X="94.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAQAAACAAAAAAAAAAIAAAAAAIAAAAAIQAAAgA=</HashCode>
+      <FileName>Core\Data\Constants\PlayerConstatns\AmazonConstants.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Game.Core.Data.Constants.PlayerConstatns.BarbarianConstants" Collapsed="true">
+    <Position X="96.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAQAAACAAAAAAAAAAIAAAAAAIAAAAAIQAAAgA=</HashCode>
+      <FileName>Core\Data\Constants\PlayerConstatns\BarbarianConstants.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Game.Core.Data.Constants.PlayerConstatns.DruidConstants" Collapsed="true">
+    <Position X="98.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAQAAACAAAAAAAAAAIAAAAAAIAAAAAIQAAAgA=</HashCode>
+      <FileName>Core\Data\Constants\PlayerConstatns\DruidConstants.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Game.Core.Data.Constants.PlayerConstatns.MageConstants" Collapsed="true">
+    <Position X="100" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAQAAACAAAAAAAAAAIAAAAAAIAAAAAIQAAAgA=</HashCode>
+      <FileName>Core\Data\Constants\PlayerConstatns\MageConstants.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Game.Core.Data.Constants.PlayerConstatns.PlayerConstants" Collapsed="true">
+    <Position X="94.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAABAAAAAAAAAAAAACAAAAAAAAAAAAAABAAGAAAkA=</HashCode>
+      <FileName>Core\Data\Constants\PlayerConstatns\PlayerConstants.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Game.Interfaces.ICharacter" Collapsed="true">
+    <Position X="94.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Interfaces\ICharacter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.Interfaces.IEnemy" Collapsed="true">
+    <Position X="96.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.Interfaces.IItem" Collapsed="true">
+    <Position X="98.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQQAAgAAAAAAAAAAIAAAAAAABAAAAAQAAAAA=</HashCode>
+      <FileName>Interfaces\IItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.Interfaces.IPlayer" Collapsed="true">
+    <Position X="100" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAFAAAAIiAAQAE=</HashCode>
+      <FileName>Interfaces\IPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.Interfaces.IStatic" Collapsed="true">
+    <Position X="94.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IStatic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Game.Interfaces.IStatsable" Collapsed="true">
+    <Position X="96.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAIAAIAAAAAAEQA=</HashCode>
+      <FileName>Interfaces\IStatsable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Game.Core.Data.Enums.ArmorType" Collapsed="true">
+    <Position X="94.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAABABAAAgAQAAAAACAAAAAAAAAAI=</HashCode>
+      <FileName>Core\Data\Enums\ArmorType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Game.Core.Data.Enums.WeaponType" Collapsed="true">
+    <Position X="96.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAAAAAAIABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Data\Enums\WeaponType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
