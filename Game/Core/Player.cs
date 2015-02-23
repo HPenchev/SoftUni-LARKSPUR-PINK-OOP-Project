@@ -396,21 +396,19 @@
                 this.ApplyItemEffects(spell);
             }
         }
+       
 
-        public override void Attack(ICharacter target)
-        {            
-            base.Attack(target);
-        }
-
-        protected override double CalculateDamage(ICharacter target)
+        protected override double CalculateDamage()
         {
-            target = (Enemy)target;
-            double damage = base.CalculateDamage(target);
 
-            int criticalStrikeChence = RandomGenerator.RandomGenerator.rnd.Next(100);
-            if (this.CriticalChance < criticalStrikeChence)
+            double damage = this.AttackPoints;
+
+            int criticalStrikeChence = RandomGenerator.RandomGenerator.rnd.Next(0, (int)this.CriticalChance*2);
+            
+            if (this.CriticalChance > 8)
             {
-                damage *= 2;
+                damage += damage* this.CritDamage;
+                Console.WriteLine("Critical!");
             }
 
             return damage;

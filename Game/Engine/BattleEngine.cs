@@ -122,6 +122,7 @@ namespace Game.Engine
             }
 
             this.Player.Attack(enemiesAlive[targetedEnemy]);
+            Console.WriteLine(enemiesAlive[targetedEnemy].HealthPoints);
         }
 
         private void CastSpell()

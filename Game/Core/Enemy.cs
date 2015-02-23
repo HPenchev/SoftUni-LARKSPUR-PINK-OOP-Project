@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Speech.Recognition;
 using Game.Core.Data.Constants.EnemyConstants;
 
 namespace Game.Core
 {
     using Game.Core.RandomGenerator;
-    using Interfaces;    
+    using Interfaces;
 
     public abstract class Enemy : Character, IEnemy
     {
@@ -33,26 +35,12 @@ namespace Game.Core
         #endregion
 
         #region Methods
-        
+
         public override void Attack(ICharacter player)
         {
             base.Attack(player);
         }
-
-        protected override double CalculateDamage(ICharacter target)
-        {
-            Player player = (Player)target;
-            double dodgeChance = player.ChanceToDodge;
-            double damage = base.CalculateDamage(player);
-            int chenceToDoge = RandomGenerator.RandomGenerator.rnd.Next(100);
-            if (chenceToDoge < player.ChanceToDodge)
-            {
-                damage = 0;
-            }
-
-            return damage;
-        }
-
+        
         public abstract void DropReward();
         #endregion
     }

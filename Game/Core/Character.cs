@@ -41,9 +41,9 @@
         public double HealthPoints
         {
             get { return this.healthPoints; }
-            set 
+            set
             {
-                if (value <=0)
+                if (value <= 0)
                 {
                     this.IsAlive = false;
                 }
@@ -79,19 +79,27 @@
         #region Methods
         public virtual void Attack(ICharacter target)
         {
-            double damage = CalculateDamage(target);
+            double damage = CalculateDamage();
+            if (target.DefensePoints > damage)
+            {
+                damage = 1;
+            }
+            else
+            {
+                damage -= target.DefensePoints;
+            }
             target.HealthPoints -= damage;
         }
 
-        protected virtual double CalculateDamage(ICharacter target)
+        protected virtual double CalculateDamage()
         {
-            double damage = this.AttackPoints - target.DefensePoints;
+            double damage = this.AttackPoints;
             if (damage < 1)
             {
                 damage = 1;
             }
 
-            return damage;            
+            return damage;
         }
 
         public override string ToString()
