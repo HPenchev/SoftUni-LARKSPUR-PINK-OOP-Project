@@ -17,12 +17,12 @@
 
         List<Item> Inventory { get; set; }
 
-        void Attack(ICharacter enemy);
+        void Attack(Character enemy);
 
         void PickUpItem(List<Item> item);
 
         void RemoveItem(Item item);
 
-        ICharacter FindTarget(ICharacter enemy);
+        //ICharacter FindTarget(Character enemy);
     }
 }

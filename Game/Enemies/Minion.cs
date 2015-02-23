@@ -14,10 +14,10 @@
 
         #region Methods
 
-        public override void Attack(ICharacter player)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public void Attack(ICharacter player)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
         public override void DropReward()
         {

@@ -6,6 +6,8 @@
     using System.Text;
     using Data.Constants.PlayerConstatns;
     using Data.Enums;
+    using Game.Exceptions.CharacterException;
+    using Game.Core.RandomGenerator;
     using Interfaces;
 
     public abstract class Player : Character, IPlayer, IStatsable
@@ -294,12 +296,7 @@
                 this.CritDamage -= (item as Equipment).CriticalDamage;
                 (item as Equipment).IsEquiped = false;
             }
-        }
-
-        public void Attack(ICharacter enemy)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         public void PickUpItem(List<Item> items)
         {
@@ -385,6 +382,38 @@
                 Console.WriteLine("Level UP! you can check your updated stats!");
                 LevelUpUpdate();
             }
+        }
+
+        public void CastSpell(Spell spell)
+        {
+            if (spell.ManaCost > this.Mana)
+            {
+                throw new InsufficientManaException();
+            }
+
+            else
+            {
+                this.ApplyItemEffects(spell);
+            }
+        }
+
+        public override void Attack(Character target)
+        {            
+            base.Attack(target);
+        }
+
+        protected override double CalculateDamage(Character target)
+        {
+            target = (Enemy)target;
+            double damage = base.CalculateDamage(target);
+
+            int criticalStrikeChence = RandomGenerator.RandomGenerator.rnd.Next(100);
+            if (this.CriticalChance < criticalStrikeChence)
+            {
+                damage *= 2;
+            }
+
+            return damage;
         }
 
         private void LevelUpUpdate()

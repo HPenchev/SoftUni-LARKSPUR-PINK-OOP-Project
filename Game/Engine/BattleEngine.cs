@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Core;
 using Game.Core.RandomGenerator;
 using Game.Enemies;
+using Game.Exceptions.CharacterException;
 
 namespace Game.Engine
 {
@@ -46,12 +47,9 @@ namespace Game.Engine
                     return;
                 }
 
-                Console.WriteLine("Current stats:");
+                Console.WriteLine("Player current stats:");
                 Console.WriteLine(this.Player.ToString());
-                foreach (Enemy enemy in this.Enemies)
-                {
-                    Console.WriteLine(enemy.ToString());
-                }
+                foreach (Enemy enemy in this.Enemies)                
 
                 PlayerMove();
                 foreach (Enemy enemy in this.Enemies)
@@ -99,19 +97,34 @@ namespace Game.Engine
 
         private void InitiateAttack()
         {
-            Console.WriteLine("Please enter the ID of the enemy you want to hit");
-            string id = Console.ReadLine();
+            Console.WriteLine("Please selct a number of the enemy you want to attack");
+            List<Enemy> enemiesAlive = new List<Enemy>();
+            foreach (Enemy enemyInList in this.Enemies)
+            {
+                if(enemyInList.IsAlive)
+                {
+                    enemiesAlive.Add(enemyInList);
+                }
+            }
 
-            Character targetedEnemy =
-                (Character)from enemy in this.Enemies
-                           where enemy.Id == id
-                           select enemy;
+            for (int i = 0; i < enemiesAlive.Count; i++)
+            {
+                Console.WriteLine(i + ". " + enemiesAlive[i]);
+            }
 
-            this.Player.Attack(targetedEnemy);
+            int targetedEnemy = -1;
+            bool result = int.TryParse(Console.ReadLine(), out targetedEnemy);
+            if (!result || targetedEnemy < 0 || targetedEnemy >= enemiesAlive.Count)
+            {
+                Console.WriteLine("Invalid number. Please try again!");
+                InitiateAttack();
+            }
+
+            this.Player.Attack(enemiesAlive[targetedEnemy]);
         }
 
         private void CastSpell()
-        {
+        {            
             List<Spell> spells = GetSpells(this.Player);
             if (spells == null || spells.Count == 0)
             {
@@ -119,27 +132,35 @@ namespace Game.Engine
                 PlayerMove();
             }
 
-            Console.WriteLine("Please enter the id of the spell you want to cast:");
-            Spell spell = null;
-            string spellID = Console.ReadLine();
-            foreach (Spell spellInInventory in spells)
+            Console.WriteLine("Please choose a number for the spell you want to cast: ");
+            for (int i = 0; i < spells.Count; i++)
             {
-                if (spellInInventory.Id == spellID)
-                {
-                    spell = spellInInventory;
-                    break;
-                }
+                Console.WriteLine(i + ". " + spells[i]);
             }
 
-            if (spell == null)
+            int spellNumber = -1;
+            bool result = int.TryParse(Console.ReadLine(), out spellNumber);
+            
+
+            if (!result || spellNumber < 0 || spellNumber >= spells.Count)
             {
                 Console.WriteLine("No such spell in inventory. Please choose again");
                 CastSpell();
             }
 
-            this.Player.ApplyItemEffects(spell);
-            this.SpellsUsedByPlayer.Add(spell);
-            PlayerMove();
+            try 
+            {
+                this.Player.CastSpell(spells[spellNumber]);
+                this.SpellsUsedByPlayer.Add(spells[spellNumber]);
+            }
+            catch (InsufficientManaException)
+            {
+                Console.WriteLine("You don't have enough mana for this spell");
+            }
+            finally
+            {
+                PlayerMove();
+            }            
         }
 
         private List<Spell> GetSpells(Player player)
@@ -160,25 +181,22 @@ namespace Game.Engine
                 PlayerMove();
             }
 
-            Console.WriteLine("Please enter the id of the potion you want to use:");
-            Potion potion = null;
-            string potionID = Console.ReadLine();
-            foreach (Potion potionInInventory in potions)
+            Console.WriteLine("Please enter the number of the potion you want to use:");
+            for (int i = 0; i < potions.Count; i++)
             {
-                if (potionInInventory.Id == potionID)
-                {
-                    potion = potionInInventory;
-                    break;
-                }
+                Console.WriteLine(i + ". " + potions[i]);
             }
 
-            if (potion == null)
+            int potionNumber = -1;
+            bool result = int.TryParse(Console.ReadLine(), out potionNumber);
+           
+            if (!result || potionNumber < 0 || potionNumber >= potions.Count)
             {
                 Console.WriteLine("No such potion in inventory. Please choose again");
                 UsePotion();
             }
 
-            this.Player.ApplyItemEffects(potion);
+            this.Player.ApplyItemEffects(potions[potionNumber]);
             PlayerMove();
         }
 
@@ -208,6 +226,7 @@ namespace Game.Engine
                 }
 
                 Player.Inventory.AddRange(enemy.Inventory);
+                Player.KillCounter++;
             }
         }
     }

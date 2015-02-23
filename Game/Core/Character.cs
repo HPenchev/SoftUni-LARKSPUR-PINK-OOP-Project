@@ -41,7 +41,14 @@
         public double HealthPoints
         {
             get { return this.healthPoints; }
-            set { this.healthPoints = value; }
+            set 
+            {
+                if (value <=0)
+                {
+                    this.IsAlive = false;
+                }
+                this.healthPoints = value;
+            }
         }
 
         public double AttackPoints
@@ -70,8 +77,21 @@
         #endregion
 
         #region Methods
-        public virtual void CastSpell(Spell spell)
+        public virtual void Attack(Character target)
         {
+            double damage = CalculateDamage(target);
+            target.HealthPoints -= damage;
+        }
+
+        protected virtual double CalculateDamage(Character target)
+        {
+            double damage = this.AttackPoints - target.DefensePoints;
+            if (damage < 1)
+            {
+                damage = 1;
+            }
+
+            return damage;            
         }
 
         public override string ToString()

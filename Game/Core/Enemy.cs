@@ -1,6 +1,7 @@
 ﻿namespace Game.Core
 {
-    using Interfaces;
+    using Game.Core.RandomGenerator;
+    using Interfaces;    
 
     public abstract class Enemy : Character, IEnemy
     {
@@ -25,7 +26,24 @@
 
         #region Methods
         
-        public abstract void Attack(ICharacter player);
+        public override void Attack(Character player)
+        {
+            base.Attack(player);
+        }
+
+        protected override double CalculateDamage(Character target)
+        {
+            Player player = (Player)target;
+            double dodgeChance = player.ChanceToDodge;
+            double damage = base.CalculateDamage(player);
+            int chenceToDoge = RandomGenerator.RandomGenerator.rnd.Next(100);
+            if (chenceToDoge < player.ChanceToDodge)
+            {
+                damage = 0;
+            }
+
+            return damage;
+        }
 
         public abstract void DropReward();
         #endregion

@@ -1,8 +1,9 @@
 ﻿namespace Game.Interfaces
 {
+    using Game.Core;
     public interface IEnemy
     {
-        void Attack(ICharacter player);
+        void Attack(Character player);
 
         void DropReward(); // should drop gold and items
     }
