@@ -50,9 +50,9 @@ namespace Game.Engine
 
                 Console.WriteLine("Player current stats:");
                 Console.WriteLine(this.Player.ToString());
-                foreach (Enemy enemy in this.Enemies)                
+                foreach (Enemy enemy in this.Enemies)
 
-                PlayerMove();
+                    PlayerMove();
                 foreach (Enemy enemy in this.Enemies)
                 {
                     EnemyMove(enemy);
@@ -102,7 +102,7 @@ namespace Game.Engine
             List<Enemy> enemiesAlive = new List<Enemy>();
             foreach (Enemy enemyInList in this.Enemies)
             {
-                if(enemyInList.IsAlive)
+                if (enemyInList.IsAlive)
                 {
                     enemiesAlive.Add(enemyInList);
                 }
@@ -123,10 +123,11 @@ namespace Game.Engine
 
             this.Player.Attack(enemiesAlive[targetedEnemy]);
             Console.WriteLine(enemiesAlive[targetedEnemy].HealthPoints);
+
         }
 
         private void CastSpell()
-        {            
+        {
             IList<Spell> spells = GetSpells(this.Player);
             if (spells == null || spells.Count == 0)
             {
@@ -142,7 +143,7 @@ namespace Game.Engine
 
             int spellNumber = -1;
             bool result = int.TryParse(Console.ReadLine(), out spellNumber);
-            
+
 
             if (!result || spellNumber < 0 || spellNumber >= spells.Count)
             {
@@ -150,7 +151,7 @@ namespace Game.Engine
                 CastSpell();
             }
 
-            try 
+            try
             {
                 this.Player.CastSpell(spells[spellNumber]);
                 this.SpellsUsedByPlayer.Add(spells[spellNumber]);
@@ -162,7 +163,7 @@ namespace Game.Engine
             finally
             {
                 PlayerMove();
-            }            
+            }
         }
 
         private List<Spell> GetSpells(Player player)
@@ -187,7 +188,7 @@ namespace Game.Engine
 
             int potionNumber = -1;
             bool result = int.TryParse(Console.ReadLine(), out potionNumber);
-           
+
             if (!result || potionNumber < 0 || potionNumber >= potions.Count)
             {
                 Console.WriteLine("No such potion in inventory. Please choose again");
@@ -200,15 +201,15 @@ namespace Game.Engine
 
         private void EnemyMove(Enemy enemy)
         {
-            enemy.Attack(this.Player);            
+            enemy.Attack(this.Player);
         }
 
         private List<Potion> GetPotions(Player player)
         {
             List<Potion> potions =
                 (List<Potion>)from item in player.Inventory
-                             where item is Potion
-                             select item;
+                              where item is Potion
+                              select item;
             return potions;
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using Game.Core.Data;
 using Game.Enemies;
+using Game.Items.ArmorOfDarkness;
 using Game.Items.ArmorOfDragon;
 using Game.Items.ArmorOfGandalf;
 using Game.Items.Spells;

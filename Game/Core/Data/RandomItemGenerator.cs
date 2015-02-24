@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Exceptions.CharacterException;
+    using Items.ArmorOfDarkness;
     using Items.ArmorOfDragon;
     using Items.ArmorOfGandalf;
     using Items.Potions;
@@ -15,15 +16,27 @@
 
         private List<Item> allItems = new List<Item>()
         {
-            new BeltOfDragon("Belt"),
+            new BeltOfDarkness("Belt of Darkness"),
+            new BootsOfDarkness("Boots of Darkness"),
+            new ChestArmorOfDarkness("Chest of Darkness"),
+            new GlovesOfDarkness("Gloves of Darkness"),
+            new HelmetOfDarkness("Helmet of Darkness"),
+            new PantsOfDarkness("Pants of Darkness"),
+            new ShieldOfDarkness("Shield of Darkness"),
+            new BeltOfDragon("Dragon's Belt"),
+            new BootsOfDragon("Dragon's Boots"),
             new ChestArmorOfDragon("Dragon's Chest"),
-            new BeltOfGandalf("Belt"),
-            new BootsOfGandalf("Boots"),
+            new GlovesOfDragon("Dragon's Gloves"),
+            new HelmetOfDragon("Dragon's Helmet"),
+            new PantsOfDragon("Dragon's Pants"),
+            new ShieldOfDragon("Dragon's Shield"),
+            new BeltOfGandalf("Gandalf's Belt"),
+            new BootsOfGandalf("Gandalf's Boots"),
             new ChestArmorOfGandalf("Gandalf's Chest"),
-            new GlovesOfGandalf("Gloves of Gandalf"),
-            new HelmetOfGandalf("Helmet"),
-            new PantsOfGandalf("Pants"),
-            new ShieldOfGandalf("Shield"),
+            new GlovesOfGandalf("Gandalf's Gloves"),
+            new HelmetOfGandalf("Gandalf's Helmet"),
+            new PantsOfGandalf("Gandalf's Pants"),
+            new ShieldOfGandalf("Gandalf's Shield"),
             new SpellOfDefence("Defence Spell"),
             new SpellOfHealth("Health Spell"),
             new SpellOfInvulnerability("Spell of Invulnerability"),

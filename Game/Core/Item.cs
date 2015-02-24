@@ -108,9 +108,9 @@
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder(base.ToString());
-            builder.AppendFormat("Attack Points = {0}\n", this.AttackPoints);
-            builder.AppendFormat("Health Points = {0}\n", this.HealthPoints);
-            builder.AppendFormat("Defense Points = {0}\n", this.DefensePoints);
+            builder.AppendFormat("Attack Points = {0:0}\n", this.AttackPoints);
+            builder.AppendFormat("Health Points = {0:0}\n", this.HealthPoints);
+            builder.AppendFormat("Defense Points = {0:0}\n", this.DefensePoints);
             builder.AppendFormat("Level = {0}\n", this.Level);
             builder.AppendFormat("Price = {0}\n", this.Price);
             builder.AppendFormat("Size = {0}\n", this.Size);

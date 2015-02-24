@@ -96,10 +96,10 @@
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder(base.ToString());
-            builder.AppendFormat("Attack Speed = {0}\n", this.AttackSpeed);
-            builder.AppendFormat("Critical Chance = {0}\n", this.CriticalChance);
-            builder.AppendFormat("Critical Damage = {0}\n", this.CriticalDamage);
-            builder.AppendFormat("Chance to Dodge = {0}\n", this.ChanceToDodge);
+            builder.AppendFormat("Attack Speed = {0:0.00}\n", this.AttackSpeed);
+            builder.AppendFormat("Critical Chance = {0:0}\n", this.CriticalChance);
+            builder.AppendFormat("Critical Damage = {0:0}\n", this.CriticalDamage);
+            builder.AppendFormat("Chance to Dodge = {0:0}\n", this.ChanceToDodge);
             builder.AppendFormat("Is Equiped = {0}\n", this.IsEquiped ? "Yes" : "No");
             return builder.ToString();
         }
