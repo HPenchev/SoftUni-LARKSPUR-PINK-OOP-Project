@@ -27,19 +27,19 @@ namespace Game.Engine
         public void Run()
         {
             while (true)
-            {
+            { 
+                Console.WriteLine("Player current stats:");
+                Console.WriteLine(this.Player.ToString());
+                foreach (Enemy enemy in this.Enemies)
+
+                PlayerMove();
+
                 foreach (Spell spellUsed in this.SpellsUsedByPlayer)
                 {
                     this.Player.RemoveItemEffects(spellUsed);
                 }
 
                 this.SpellsUsedByPlayer.Clear();
-
-                if (this.Player.IsAlive == false)
-                {
-                    Console.WriteLine("You are dead");
-                    Engine.MainMenu();
-                }
 
                 if (CheckWhetherAllEnemiesAreDead(this.Enemies))
                 {
@@ -48,14 +48,15 @@ namespace Game.Engine
                     return;
                 }
 
-                Console.WriteLine("Player current stats:");
-                Console.WriteLine(this.Player.ToString());
-                foreach (Enemy enemy in this.Enemies)
-
-                    PlayerMove();
                 foreach (Enemy enemy in this.Enemies)
                 {
                     EnemyMove(enemy);
+                }
+
+                if (this.Player.IsAlive == false)
+                {
+                    Console.WriteLine("You are dead");
+                    Engine.MainMenu();
                 }
             }
         }
@@ -122,8 +123,7 @@ namespace Game.Engine
             }
 
             this.Player.Attack(enemiesAlive[targetedEnemy]);
-            Console.WriteLine(enemiesAlive[targetedEnemy].HealthPoints);
-
+            Console.WriteLine("Enemy remaining health: " + enemiesAlive[targetedEnemy].HealthPoints);
         }
 
         private void CastSpell()
@@ -206,10 +206,7 @@ namespace Game.Engine
 
         private List<Potion> GetPotions(Player player)
         {
-            List<Potion> potions =
-                (List<Potion>)from item in player.Inventory
-                              where item is Potion
-                              select item;
+            List<Potion> potions = this.Player.Inventory.OfType<Potion>().Select(item => item as Potion).ToList();
             return potions;
         }
 
