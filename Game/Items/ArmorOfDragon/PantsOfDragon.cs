@@ -1,8 +1,11 @@
-﻿namespace Game.Items.ArmorOfDragon
+﻿using System;
+
+namespace Game.Items.ArmorOfDragon
 {
     using Core;
     using Core.Data.Enums;
 
+    [Serializable]
     public class PantsOfDragon : Armor
     {
         public PantsOfDragon(string id)

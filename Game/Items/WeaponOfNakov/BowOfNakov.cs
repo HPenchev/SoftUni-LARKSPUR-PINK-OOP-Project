@@ -1,8 +1,11 @@
-﻿namespace Game.Items.WeaponOfNakov
+﻿using System;
+
+namespace Game.Items.WeaponOfNakov
 {
     using Core;
     using Core.Data.Enums;
 
+    [Serializable]
     public class BowOfNakov : Weapon
     {
         public BowOfNakov(string id)

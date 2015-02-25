@@ -1,8 +1,11 @@
-﻿namespace Game.Items.ArmorOfGandalf
+﻿using System;
+
+namespace Game.Items.ArmorOfGandalf
 {
     using Core;
     using Core.Data.Enums;
 
+    [Serializable]
     public class BootsOfGandalf : Armor
     {
         public BootsOfGandalf(string id)

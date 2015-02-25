@@ -1,10 +1,13 @@
-﻿namespace Game.Core
+﻿using System;
+
+namespace Game.Core
 {
     using System.Collections.Generic;
     using System.Text;
     using Data.Constants.PlayerConstatns;
     using Interfaces;
 
+    [Serializable]
     public abstract class Character : GameObject, ICharacter
     {
         #region Fields

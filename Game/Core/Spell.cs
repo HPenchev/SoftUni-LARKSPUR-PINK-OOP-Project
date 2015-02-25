@@ -1,5 +1,8 @@
 ﻿namespace Game.Core
 {
+    using System;
+
+    [Serializable]
     public abstract class Spell : Item
     {
         private double manaCost;

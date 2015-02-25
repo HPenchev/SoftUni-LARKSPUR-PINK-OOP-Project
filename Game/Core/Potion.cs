@@ -1,7 +1,9 @@
 ﻿namespace Game.Core
 {
+    using System;
     using Exceptions.ItemException;
 
+    [Serializable]
     public abstract class Potion : Item
     {
         private double mana;

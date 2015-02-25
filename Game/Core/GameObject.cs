@@ -1,8 +1,11 @@
-﻿namespace Game.Core
+﻿using System;
+
+namespace Game.Core
 {
     using System.Text;
     using Exceptions;
 
+    [Serializable]
     public abstract class GameObject
     {
         #region Fields

@@ -1,9 +1,12 @@
-﻿namespace Game.Core
+﻿using System;
+
+namespace Game.Core
 {
     using System.Text;
     using Exceptions.ItemException;
     using Interfaces;
-    //todo Exceptions
+
+    [Serializable]
     public abstract class Item : GameObject, IItem 
     {
         #region Fields

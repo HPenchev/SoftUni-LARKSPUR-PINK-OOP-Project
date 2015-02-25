@@ -51,7 +51,6 @@
 
         private int playerLevel;
         private List<Item> itemsList;
-
         #endregion
 
         #region Constructors

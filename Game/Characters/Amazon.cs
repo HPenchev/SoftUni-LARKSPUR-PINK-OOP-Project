@@ -1,10 +1,13 @@
-﻿namespace Game.Characters
+﻿using System;
+
+namespace Game.Characters
 {
     using System.Text;
     using Core;
     using Core.Data;
     using Core.Data.Constants.PlayerConstatns;
-   
+    
+    [Serializable]
     public class Amazon : Player
     {
         #region Constructors

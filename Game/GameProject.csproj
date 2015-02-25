@@ -65,6 +65,7 @@
     <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />
     <Compile Include="Core\RandomGenerator\RandomGenerator.cs" />
+    <Compile Include="Core\SaveGame.cs" />
     <Compile Include="Exceptions\CharacterException\InsufficientManaException.cs" />
     <Compile Include="Items\ArmorOfDarkness\BeltOfDarkness.cs" />
     <Compile Include="Items\ArmorOfDarkness\BootsOfDarkness.cs" />
@@ -140,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram3.cd" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

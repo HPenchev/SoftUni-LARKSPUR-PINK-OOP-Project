@@ -5,10 +5,9 @@ namespace Game.Core
 {
     using System;
 
+    [Serializable]
     public class MapGenerator
     {
-        /* UNFINISHED */
-        //todo check
         #region Fields
         private char[,] map;
         private int size;

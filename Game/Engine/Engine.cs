@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Deployment.Internal;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading;
 using Game.Core.Data;
@@ -20,6 +23,7 @@ namespace Game.Engine
     using Core.Data.Constants.EngineConstants;
     using Interfaces;
 
+    [Serializable]
     public class Engine
     {
         private static Player player;
@@ -27,6 +31,7 @@ namespace Game.Engine
         private static Position playerPos;
         private static int world;
         private static char prevMapElement;
+        private const string saveFile = "save.dat";
 
         public void Run()
         {
@@ -68,7 +73,7 @@ namespace Game.Engine
             }
             else if (mainMenuInput.Contains("2"))
             {
-                LoadGame();
+                Load();
             }
             else if (mainMenuInput.ToLower().Contains("exit"))
             {
@@ -244,6 +249,14 @@ namespace Game.Engine
                     case "print":
                         Console.Clear();
                         map.PrintMap();
+                        break;
+
+                    case "save":
+                        Save();
+                        break;
+
+                    case "load":
+                        Load();
                         break;
 
                     default:
@@ -704,9 +717,10 @@ namespace Game.Engine
 
         public static void PrintTextSlowedDown(string text)
         {
-            ////todo Key Listener, Play music
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.DarkRed;
+            SpeechSynthesizer speech = new SpeechSynthesizer();
+            speech.SpeakAsync(text);
             for (int i = 0; i < text.Length; i++)
             {
                 Thread.Sleep(1);
@@ -1078,6 +1092,70 @@ namespace Game.Engine
             SetPlayerPos();
             prevMapElement = 'e';
         }
-    }
 
+        #region Save and Load
+        public static void Save()
+        {
+
+            SaveGame saveGame = new SaveGame(player, map, playerPos, world, prevMapElement);
+            try
+            {
+                using (Stream stream = File.Open(saveFile, FileMode.Create))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, saveGame);
+                }
+
+                PrintTextSlowedDown("Save Successful!");
+            }
+            catch (AccessViolationException)
+            {
+                PrintTextSlowedDown("Save Failed! File access denied.");
+            }
+            catch (Exception)
+            {
+                PrintTextSlowedDown("Save failed! An unspecified error occurred.");
+            }
+        }
+
+        public static void Load()
+        {
+            SaveGame saveGame;
+            try
+            {
+                using (Stream stream = File.Open(saveFile, FileMode.Open))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    saveGame = (SaveGame)bin.Deserialize(stream);
+                }
+                LoadGame(saveGame);
+                PrintTextSlowedDown("Load Successful");
+            }
+            catch (FileNotFoundException)
+            {
+                PrintTextSlowedDown("No savegame exists!");
+            }
+            catch (AccessViolationException)
+            {
+                PrintTextSlowedDown("Load failed! File access denied.");
+            }
+            catch (Exception)
+            {
+                PrintTextSlowedDown("Load failed! An unspecified error occurred.");
+            }
+        }
+
+        public static void LoadGame(SaveGame saveGame)
+        {
+            player = saveGame.Player;
+            map = saveGame.LastMapState;
+            playerPos = saveGame.PlayerPosition;
+            world = saveGame.LastWorld;
+            prevMapElement = saveGame.PrevMapElement;
+            PrintTextSlowedDown("Load successful.");
+            map.PrintMap();
+            ExecuteCommand();
+        }
+        #endregion
+    }
 }

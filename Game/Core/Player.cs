@@ -9,6 +9,7 @@
     using Exceptions.CharacterException;
     using Interfaces;
 
+    [Serializable]
     public abstract class Player : Character, IPlayer, IStatsable
     {
         #region Fields

@@ -1,7 +1,11 @@
-﻿namespace Game.Items.Potions
+﻿using System;
+
+namespace Game.Items.Potions
 {
     using Core;
     using Exceptions.ItemException;
+
+    [Serializable]
     public class ManaPotion : Potion
     {
         private double mana;

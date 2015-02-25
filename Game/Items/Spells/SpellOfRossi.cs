@@ -1,7 +1,10 @@
-﻿namespace Game.Items.Spells
+﻿using System;
+
+namespace Game.Items.Spells
 {
     using Core;
 
+    [Serializable]
     public class SpellOfRossi : Spell
     {
         public SpellOfRossi(string id) : base(id)

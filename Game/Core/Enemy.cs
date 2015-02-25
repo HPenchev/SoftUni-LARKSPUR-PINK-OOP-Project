@@ -1,9 +1,12 @@
-﻿namespace Game.Core
+﻿using System;
+
+namespace Game.Core
 {
     using System.Collections.Generic;
     using Data.Constants.EnemyConstants;
     using Interfaces;
 
+    [Serializable]
     public abstract class Enemy : Character, IEnemy
     {
         #region Fileds

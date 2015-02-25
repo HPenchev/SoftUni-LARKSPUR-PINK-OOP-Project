@@ -1,8 +1,11 @@
-﻿namespace Game.Items.ArmorOfDarkness
+﻿using System;
+
+namespace Game.Items.ArmorOfDarkness
 {
     using Core;
     using Core.Data.Enums;
 
+    [Serializable]
     public class BootsOfDarkness : Armor
     {
         public BootsOfDarkness(string id)

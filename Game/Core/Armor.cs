@@ -1,8 +1,11 @@
-﻿namespace Game.Core
+﻿using System;
+
+namespace Game.Core
 {
     using System.Text;
     using Data.Enums;
 
+    [Serializable]
     public abstract class Armor : Equipment
     {
         #region Fields

@@ -1,5 +1,8 @@
 ﻿namespace Game.Core
 {
+    using System;
+
+    [Serializable]
     public struct Position
     {
         private int x;
