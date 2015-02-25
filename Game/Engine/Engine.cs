@@ -58,8 +58,8 @@ namespace Game.Engine
 
         private static void PrintMainMenu()
         {
-            PrintTextSlowedDown("Please choose an option:");
-            PrintTextSlowedDown("1 ---> New Game\n" +
+            Print.PrintMessageWithAudio("Please choose an option:");
+            Print.PrintMessage("1 ---> New Game\n" +
                                 "2 ---> Load Game");
         }
 

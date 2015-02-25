@@ -139,6 +139,7 @@
     <Compile Include="Items\WeaponOfNakov\BowOfNakov.cs" />
     <Compile Include="Items\WeaponOfNakov\SwordOfNakov.cs" />
     <Compile Include="Items\WeaponOfNakov\WandOfNakov.cs" />
+    <Compile Include="Print.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PlayAudio.cs" />
     <Compile Include="Static\Chest.cs" />
