@@ -156,18 +156,13 @@ namespace Game.Engine
             Console.WriteLine("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id);
         }
 
-        private static void DisplayAvailableHeroes() //todo MAKE THIS PRETIER
+        private static void DisplayAvailableHeroes()
         {
             for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
             {
                 PrintTextSlowedDown(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
                 PrintTextSlowedDown(EngineConst.HeroDesc[i]);
             }
-        }
-
-        private static void LoadGame()
-        {
-            throw new NotImplementedException();
         }
 
         private static string[] SplitUserInput(string input)
@@ -354,7 +349,7 @@ namespace Game.Engine
                     break;
                 }
             }
-        }
+        } //todo REFACTOR
 
         private static void PrintInventoryCommands()
         {
@@ -651,7 +646,8 @@ namespace Game.Engine
             switch (currmapChar)
             {
                 case 'H':
-                    Shop();
+                    Shop shop = new Shop(player);
+                    shop.Run();
                     break;
 
                 case 'c':
@@ -866,209 +862,6 @@ namespace Game.Engine
                 Console.WriteLine("{0} gained {1} mana points by using a Mana well.", player.Id, manaWell.Mana);
                 Console.WriteLine();
             }
-        }
-
-        private static void Shop()
-        {
-            // Generate Shop Items
-            RandomItemGenerator itemGenerator = new RandomItemGenerator(player.Level);
-            List<Item> shopInventory = itemGenerator.AllItems;
-            shopInventory.ForEach(n => n.Level = player.Level);
-            itemGenerator.RandomizeItemsStats(shopInventory);
-
-            // Print Shop Items
-            PlayAudio.WelcomeToTheShop();
-            PrintTextSlowedDown("<---S-H-O-P--->");
-            Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
-            for (int i = 0; i < shopInventory.Count; i++)
-            {
-                Console.WriteLine("{0} ---> {1}  {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
-            }
-            Console.WriteLine("{0}\n", new String('-', 10));
-
-            // Print Inventory Commands
-            PrintTextSlowedDown("Available Commands:");
-            PrintTextSlowedDown("buy [index]");
-            PrintTextSlowedDown("inspect [index]");
-            PrintTextSlowedDown("sell");
-            PrintTextSlowedDown("print");
-            PrintTextSlowedDown("exit");
-            Console.WriteLine();
-
-            // Execute Commands
-            while (true)
-            {
-                string[] inputParams = Console.ReadLine().Split();
-                string command = inputParams[0];
-                int index;
-                if (command.ToLower().Contains("buy"))
-                {
-                    index = int.Parse(inputParams[1]);
-                    if (index > 0 && index < shopInventory.Count)
-                    {
-                        if (player.Gold >= shopInventory[index].Price)
-                        {
-                            if (player.InventorySize >= shopInventory[index].Size)
-                            {
-                                player.Inventory.Add(shopInventory[index]);
-                                player.Gold -= shopInventory[index].Price;
-                                PrintTextSlowedDown(String.Format("You have bought {0}", shopInventory[index].Id));
-                            }
-                            else
-                            {
-                                PrintTextSlowedDown("You do not have enough free space in inventory.");
-                            }
-                        }
-                        else
-                        {
-                            PlayAudio.NoMoney();
-                            PrintTextSlowedDown("You do not have enough money.");
-                        }
-                    }
-                    else
-                    {
-                        PrintTextSlowedDown("Invalid item index.");
-                    }
-                } // buy
-                if (command.ToLower().Contains("inspect"))
-                {
-                    index = int.Parse(inputParams[1]);
-                    if (index > 0 && index < shopInventory.Count)
-                    {
-                        PrintTextSlowedDown(shopInventory[index].ToString());
-                    }
-                    else
-                    {
-                        PrintTextSlowedDown("Invalid item index.");
-                    }
-                } // inspect
-                if (command.ToLower().Contains("sell"))
-                {
-                    Console.Clear();
-                    PrintTextSlowedDown("<---Your Items--->");
-                    Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
-                    for (int i = 0; i < player.Inventory.Count; i++)
-                    {
-                        Console.WriteLine("{0} Index: {1} Price: {2:F0} gold", player.Inventory[i].Id, i, player.Inventory[i].Price * 0.8M);
-                    }
-                    PrintTextSlowedDown(String.Format("{0}\n", new String('-', 10)));
-                    Console.WriteLine();
-
-                    // print available commands
-                    PrintTextSlowedDown("Available Commands:");
-                    PrintTextSlowedDown("sell [index]");
-                    PrintTextSlowedDown("exit");
-                    string[] sellInput = Console.ReadLine().Split(' ');
-                    string sellMenuCommand = sellInput[0];
-                    if (sellMenuCommand.ToLower().Contains("sell"))
-                    {
-                        int sellIndex = int.Parse(sellInput[1]);
-                        if (sellIndex >= 0 && sellIndex < player.Inventory.Count)
-                        {
-                            if (player.Inventory[sellIndex] is Equipment)
-                            {
-                                if ((player.Inventory[sellIndex] as Equipment).IsEquiped)
-                                {
-                                    PrintTextSlowedDown("This item is equiped.");
-                                    PrintTextSlowedDown("Are you sure you want to sell it?");
-                                    string sellEquipedChoice = Console.ReadLine();
-                                    if (sellEquipedChoice.ToLower().Contains("yes"))
-                                    {
-                                        PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
-                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
-                                        player.RemoveItemEffects(player.Inventory[sellIndex]);
-                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
-                                        player.RemoveItem(player.Inventory[sellIndex]);
-                                        PrintTextSlowedDown("Shop Main Menu");
-                                    }
-                                    else
-                                    {
-                                        Console.Clear();
-                                        PrintTextSlowedDown("Too dear for you?");
-                                        PrintTextSlowedDown("Shop Main Menu");
-                                        continue;
-                                    }
-                                }
-                                else
-                                {
-                                    PrintTextSlowedDown("Are you sure you want to sell it?");
-                                    string sellEquipedChoice = Console.ReadLine();
-                                    if (sellEquipedChoice.ToLower().Contains("yes"))
-                                    {
-                                        PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
-                                            player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
-                                        player.Gold += player.Inventory[sellIndex].Price * 0.8M;
-                                        player.RemoveItem(player.Inventory[sellIndex]);
-                                        PrintTextSlowedDown("Shop Main Menu");
-                                    }
-                                    else
-                                    {
-                                        Console.Clear();
-                                        PrintTextSlowedDown("Too dear for you?");
-                                        PrintTextSlowedDown("Shop Main Menu");
-                                        continue;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                PrintTextSlowedDown("Are you sure you want to sell it?");
-                                string sellEquipedChoice = Console.ReadLine();
-                                if (sellEquipedChoice.ToLower().Contains("yes"))
-                                {
-                                    PrintTextSlowedDown(String.Format("{0} was successfuly sold for {1} gold.",
-                                        player.Inventory[sellIndex].Id, player.Inventory[sellIndex].Price * 0.8M));
-                                    player.Gold += player.Inventory[sellIndex].Price * 0.8M;
-                                    player.RemoveItem(player.Inventory[sellIndex]);
-                                    PrintTextSlowedDown("Shop Main Menu");
-                                }
-                                else
-                                {
-                                    Console.Clear();
-                                    PrintTextSlowedDown("Too dear for you?");
-                                    PrintTextSlowedDown("Shop Main Menu");
-                                    continue;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            PrintTextSlowedDown("Invalid item index");
-                        }
-                    }
-                    if (sellMenuCommand.ToLower().Contains("exit"))
-                    {
-                        Console.Clear();
-                        PrintTextSlowedDown("You are in the main Shop menu.");
-                        PrintTextSlowedDown("<---S-H-O-P--->");
-                        Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
-                        for (int i = 0; i < shopInventory.Count; i++)
-                        {
-                            Console.WriteLine("{0} Index: {1} Price: {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
-                        }
-                        Console.WriteLine("{0}\n", new String('-', 10));
-                        Console.WriteLine();
-                    }
-                } // sell
-                if (command.ToLower().Contains("print"))
-                {
-                    Console.Clear();
-                    PrintTextSlowedDown("<---S-H-O-P--->");
-                    Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
-                    for (int i = 0; i < shopInventory.Count; i++)
-                    {
-                        Console.WriteLine("{0} Index: {1} Price: {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
-                    }
-                    Console.WriteLine("{0}\n", new String('-', 10));
-                    Console.WriteLine();
-                } // print
-                if (command.ToLower().Contains("exit"))
-                {
-                    Console.Clear();
-                    PrintTextSlowedDown("Goodbye");
-                    break;
-                }
-            } // while
         }
 
         public static void GenerateMapByWorld()
