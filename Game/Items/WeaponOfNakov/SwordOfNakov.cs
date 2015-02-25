@@ -1,14 +1,14 @@
-﻿using System;
-
-namespace Game.Items.WeaponOfNakov
+﻿namespace Game.Items.WeaponOfNakov
 {
+    using System;
     using Core;
     using Core.Data.Enums;
 
     [Serializable]
     public class SwordOfNakov : Weapon
     {
-        public SwordOfNakov(string id) : base(id)
+        public SwordOfNakov(string id)
+            : base(id)
         {
             this.Id = "The Sword of Justice";
             this.AttackPoints = 100;

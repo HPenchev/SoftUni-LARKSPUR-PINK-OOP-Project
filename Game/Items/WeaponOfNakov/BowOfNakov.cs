@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Items.WeaponOfNakov
+﻿namespace Game.Items.WeaponOfNakov
 {
+    using System;
     using Core;
     using Core.Data.Enums;
 

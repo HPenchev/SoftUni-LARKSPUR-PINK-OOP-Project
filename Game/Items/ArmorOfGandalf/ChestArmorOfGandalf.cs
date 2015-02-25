@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Items.ArmorOfGandalf
+﻿namespace Game.Items.ArmorOfGandalf
 {
+    using System;
     using Core;
     using Core.Data.Enums;
 
@@ -11,7 +10,7 @@ namespace Game.Items.ArmorOfGandalf
         public ChestArmorOfGandalf(string id)
             : base(id)
         {
-            this.Id = "The Armor of Gandalf the gray.";
+            this.Id = "The Armor of Gandalf the great";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.1;
             this.ChanceToDodge = 10;

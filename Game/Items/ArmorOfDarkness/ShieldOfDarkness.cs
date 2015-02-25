@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Items.ArmorOfDarkness
+﻿namespace Game.Items.ArmorOfDarkness
 {
+    using System;
     using Core;
     using Core.Data.Enums;
 
@@ -11,7 +10,7 @@ namespace Game.Items.ArmorOfDarkness
         public ShieldOfDarkness(string id)
             : base(id)
         {
-            this.Id = "Shield enveloped by darkness found in dragon's dungeons.";
+            this.Id = "Shield covered by darkness found in dragon's dungeons";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.25;
             this.ChanceToDodge = 25;

@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Items.Spells
+﻿namespace Game.Items.Spells
 {
+    using System;
     using Core;
 
     [Serializable]

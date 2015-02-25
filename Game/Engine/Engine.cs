@@ -361,6 +361,7 @@ namespace Game.Engine
             PrintTextSlowedDown("Available Commands:");
             PrintTextSlowedDown("inspect [index]");
             PrintTextSlowedDown("equip [index]");
+            PrintTextSlowedDown("unequip [index]");
             PrintTextSlowedDown("remove [index]");
             PrintTextSlowedDown("print");
             PrintTextSlowedDown("exit");
@@ -804,8 +805,6 @@ namespace Game.Engine
             }
         }
 
-
-
         private static void InteractWithMob()
         {
             PlayAudio.YouAreFucked(); // AUDIO TEST
@@ -1076,7 +1075,7 @@ namespace Game.Engine
         {
             //todo
             Random random = new Random();
-            int size = 8 * random.Next(world, world * 5);
+            int size = 8 * random.Next(5, world * 5);
             int healtWellCount = random.Next(world + 1, world * 5);
             int manaWellCount = random.Next(world, world * 4);
             int chestCount = random.Next(world, world * (5 - 2));
@@ -1085,6 +1084,7 @@ namespace Game.Engine
             var generatedMap = new MapGenerator(size, healtWellCount, manaWellCount, chestCount, minionCount, mobCount);
             map = generatedMap;
         }
+
         private static void NextWorld()
         {
             player.CalculateLevelByExperience();

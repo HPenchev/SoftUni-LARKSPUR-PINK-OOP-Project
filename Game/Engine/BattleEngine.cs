@@ -123,7 +123,7 @@ namespace Game.Engine
             }
 
             this.Player.Attack(enemiesAlive[targetedEnemy]);
-            Console.WriteLine("Enemy remaining health: " + enemiesAlive[targetedEnemy].HealthPoints);
+            Console.WriteLine("Enemy remaining health: {0:0}\n",enemiesAlive[targetedEnemy].HealthPoints);
         }
 
         private void CastSpell()

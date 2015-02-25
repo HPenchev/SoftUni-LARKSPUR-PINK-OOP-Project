@@ -1,13 +1,13 @@
-﻿using System;
-
-namespace Game.Items.Spells
+﻿namespace Game.Items.Spells
 {
+    using System;
     using Core;
 
     [Serializable]
     public class SpellOfRossi : Spell
     {
-        public SpellOfRossi(string id) : base(id)
+        public SpellOfRossi(string id)
+            : base(id)
         {
             this.ManaCost = 5;
             this.AttackPoints = 100;

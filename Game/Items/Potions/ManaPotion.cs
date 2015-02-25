@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Items.Potions
+﻿namespace Game.Items.Potions
 {
+    using System;
     using Core;
     using Exceptions.ItemException;
 

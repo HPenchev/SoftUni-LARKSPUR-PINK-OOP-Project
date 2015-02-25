@@ -9,6 +9,7 @@
     using Items.Potions;
     using Items.Spells;
     using Items.WeaponOfNakov;
+    using Items.WeaponOfLightness;
 
     public class RandomItemGenerator
     {
@@ -41,6 +42,10 @@
             new SpellOfHealth("Health Spell"),
             new SpellOfInvulnerability("Spell of Invulnerability"),
             new SpellOfRossi("Rossi's Spell"),
+            new AxeOfLightness("Axe of Lightness"),
+            new BowOfLightness("Bow of Lightness"),
+            new SwordOfLightness("Sword of Lightness"),
+            new WandOfLightness("WandOfLightness"),
             new AxeOfNakov("Axe"),
             new BowOfNakov("Bow"),
             new SwordOfNakov("Sword"),

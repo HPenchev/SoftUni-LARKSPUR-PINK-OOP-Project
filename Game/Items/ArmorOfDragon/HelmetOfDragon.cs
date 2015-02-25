@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Items.ArmorOfDragon
+﻿namespace Game.Items.ArmorOfDragon
 {
+    using System;
     using Core;
     using Core.Data.Enums;
 
@@ -11,7 +10,7 @@ namespace Game.Items.ArmorOfDragon
         public HelmetOfDragon(string id)
             : base(id)
         {
-            this.Id = "Helmet forged by fire-breathing dragon.";
+            this.Id = "Helmet forged with the breath of fire-breathing dragon";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.10;
             this.ChanceToDodge = 7;

@@ -1,20 +1,19 @@
 ﻿namespace Game.Enemies
 {
-    using System;
     using Core;
     using Interfaces;
 
-    public class Boss : Enemy
+    public class Mob : Enemy
     {
         #region Constructors
-        public Boss(string id)
+        public Mob(string id)
             : base(id)
         {
         }
         #endregion
 
         #region Methods
-       
+
         public override void DropReward()
         {
         }

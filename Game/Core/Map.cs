@@ -317,6 +317,7 @@ namespace Game.Core
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Write(line[i]);
                 }
             }
