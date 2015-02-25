@@ -103,7 +103,7 @@
             Random random = new Random();
             foreach (var enemy in list)
             {
-                enemy.AttackPoints = enemy.AttackPoints * random.Next(Math.Abs(this.PlayerLevel - 2), this.PlayerLevel + 2);
+                enemy.AttackPoints = enemy.AttackPoints * random.Next(Math.Abs(this.PlayerLevel), this.PlayerLevel + 2);
                 enemy.DefensePoints = enemy.DefensePoints * random.Next(Math.Abs(this.PlayerLevel - 2), this.PlayerLevel + 2);
                 enemy.HealthPoints = enemy.HealthPoints * random.Next(Math.Abs(this.PlayerLevel - 2), this.PlayerLevel + 2);
             }

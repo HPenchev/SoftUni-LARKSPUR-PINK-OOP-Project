@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Speech.Recognition;
 
 namespace Game.Core
 {
@@ -85,19 +86,10 @@ namespace Game.Core
         #endregion
 
         #region Methods
-        public virtual void Attack(ICharacter target)
-        {
-            double damage = CalculateDamage();
-            if (target.DefensePoints > damage)
-            {
-                damage = 1;
-            }
-            else
-            {
-                damage -= target.DefensePoints;
-            }
 
-            target.HealthPoints -= damage;
+        public virtual double CalculateDamage(ICharacter targer)
+        {
+            return 0;
         }
 
         public override string ToString()

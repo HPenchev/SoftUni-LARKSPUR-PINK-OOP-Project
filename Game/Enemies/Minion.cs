@@ -18,5 +18,15 @@
         {
         }
         #endregion
+
+        public override double CalculateDamage(ICharacter target)
+        {
+            double damage = this.AttackPoints;
+            if (target.DefensePoints < damage)
+            {
+                damage = 80;
+            }
+            return damage;
+        }
     }
 }

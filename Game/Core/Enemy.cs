@@ -19,6 +19,7 @@ namespace Game.Core
         {
             this.AttackPoints = EnemyConstants.EnemyStartingAttackPoints;
             this.Gold = EnemyConstants.EnemyStartingGold;
+            //deffecnce points to a dd
             this.HealthPoints = EnemyConstants.EnemyStartingHealthPoints;
             this.Inventory = new List<Item>();
             this.IsAlive = true;
@@ -35,9 +36,14 @@ namespace Game.Core
 
         #region Methods
 
-        public override void Attack(ICharacter player)
+        public override double CalculateDamage(ICharacter target)
         {
-            base.Attack(player);
+            double damage = this.AttackPoints;
+            if (target.DefensePoints < damage)
+            {
+                damage = 99;
+            }
+            return damage;
         }
 
         public abstract void DropReward();

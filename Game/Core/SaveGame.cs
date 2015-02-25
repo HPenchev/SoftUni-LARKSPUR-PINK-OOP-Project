@@ -3,7 +3,7 @@
     using System;
 
     [Serializable]
-    public class SaveGame
+    public class SaveGame : Engine.Engine
     {
         #region Field
         private Player player;

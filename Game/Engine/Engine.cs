@@ -765,7 +765,7 @@ namespace Game.Engine
             {
                 RandomEnemyGenerator enemyGenerator = new RandomEnemyGenerator(player.Level, 'B');
                 List<Enemy> bosses = enemyGenerator.EnemiesList;
-                BattleEngine battleEngine = new BattleEngine(player, bosses);
+                BattleEngineV2 battleEngine = new BattleEngineV2(player, bosses);
                 battleEngine.Run();
                 world++;
                 player.CalculateLevelByExperience();
@@ -789,7 +789,7 @@ namespace Game.Engine
             {
                 RandomEnemyGenerator enemyGenerator = new RandomEnemyGenerator(player.Level, 'M');
                 List<Enemy> minions = enemyGenerator.EnemiesList;
-                BattleEngine battleEngine = new BattleEngine(player, minions);
+                BattleEngineV2 battleEngine = new BattleEngineV2(player, minions);
                 battleEngine.Run();
                 NextWorld();
             }
@@ -811,7 +811,7 @@ namespace Game.Engine
             {
                 RandomEnemyGenerator mobGenerator = new RandomEnemyGenerator(player.Level, 'O');
                 List<Enemy> mob = mobGenerator.EnemiesList;
-                BattleEngine battleEngine = new BattleEngine(player, mob);
+                BattleEngineV2 battleEngine = new BattleEngineV2(player, mob);
                 battleEngine.Run();
                 player.CalculateLevelByExperience();
             }
