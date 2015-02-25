@@ -47,7 +47,7 @@ namespace Game.Engine
                 Console.Clear();
                 if (String.IsNullOrWhiteSpace(mainMenuInput))
                 {
-                    PrintTextSlowedDown("Invalid Menu Choice.");
+                    Print.PrintMessageWithAudio("Invalid Menu Choice.");
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace Game.Engine
         {
             if (mainMenuInput.Contains("1"))
             {
-                PrintTextSlowedDown("Please enter Hero class and the Hero's name. [mage] [Gandalf]");
+                Print.PrintMessage("Please enter Hero class and the Hero's name. [mage] [Gandalf]");
                 DisplayAvailableHeroes();
                 NewGame();
             }
@@ -77,7 +77,7 @@ namespace Game.Engine
             }
             else if (mainMenuInput.ToLower().Contains("exit"))
             {
-                PrintTextSlowedDown("Goodbye.");
+                Print.PrintMessageWithAudio("Goodbye.");
                 Environment.Exit(0);
             }
         }
@@ -106,7 +106,7 @@ namespace Game.Engine
                     if (heroParameters.Contains("exit"))
                     {
                         Console.WriteLine();
-                        PrintTextSlowedDown("Goodbye");
+                        Print.PrintMessageWithAudio("Goodbye");
                         Environment.Exit(0);
                     }
 
@@ -121,8 +121,8 @@ namespace Game.Engine
         private static void PrintNewGameMenuInvalidInputMessage()
         {
             Console.Clear();
-            PrintTextSlowedDown("Invalid input.");
-            PrintTextSlowedDown("Please enter: [hero type] [name]");
+            Print.PrintMessageWithAudio("Invalid input.");
+            Print.PrintMessage("Please enter: [hero type] [name]");
             DisplayAvailableHeroes();
             Console.WriteLine();
         }
@@ -153,15 +153,15 @@ namespace Game.Engine
 
             string playerType = player.GetType().ToString().Replace("Game.Characters.", string.Empty);
             Console.Clear();
-            Console.WriteLine("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id);
+            Print.PrintMessageWithAudio(String.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
         }
 
         private static void DisplayAvailableHeroes()
         {
             for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
             {
-                PrintTextSlowedDown(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
-                PrintTextSlowedDown(EngineConst.HeroDesc[i]);
+                Print.PrintMessage(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
+                Print.PrintMessage(EngineConst.HeroDesc[i]);
             }
         }
 
@@ -206,7 +206,7 @@ namespace Game.Engine
                 {
                     case "exit":
                         Console.Clear();
-                        PrintTextSlowedDown("Goodbye");
+                        Print.PrintMessageWithAudio("Goodbye");
                         PlayAudio.YouPussy();
                         Environment.Exit(0);
                         break;
@@ -218,7 +218,7 @@ namespace Game.Engine
 
                     case "stats":
                         Console.Clear();
-                        PrintTextSlowedDown(GetPlayerStats());
+                        Print.PrintMessage(GetPlayerStats());
                         break;
 
                     case "items":
@@ -256,7 +256,7 @@ namespace Game.Engine
 
                     default:
                         Console.Clear();
-                        PrintTextSlowedDown("Invalid command.");
+                        Print.PrintMessageWithAudio("Invalid command.");
                         DisplayCommands();
                         break;
                 }
@@ -277,11 +277,11 @@ namespace Game.Engine
                     index = int.Parse(inputParams[1]);
                     if (index >= 0 && index < player.Inventory.Count)
                     {
-                        PrintTextSlowedDown(player.Inventory[index].ToString());
+                        Print.PrintMessageWithAudio(player.Inventory[index].ToString());
                     }
                     else
                     {
-                        PrintTextSlowedDown("Invalid item index.");
+                        Print.PrintMessageWithAudio("Invalid item index.");
                     }
                 }
                 else if (command.ToLower().Contains("remove"))
@@ -293,7 +293,7 @@ namespace Game.Engine
                     }
                     else
                     {
-                        PrintTextSlowedDown("Invalid item index.");
+                        Print.PrintMessageWithAudio("Invalid item index.");
                     }
                 }
                 else if (command.ToLower() == "equip")
@@ -305,16 +305,16 @@ namespace Game.Engine
                         if (item is Weapon || item is Armor)
                         {
                             player.EquipItem(item);
-                            PrintTextSlowedDown(item.Id + " is now equiped.");
+                            Print.PrintMessageWithAudio(item.Id + " is now equiped.");
                         }
                         else
                         {
-                            PrintTextSlowedDown("You can not equip that item.");
+                            Print.PrintMessageWithAudio("You can not equip that item.");
                         }
                     }
                     else
                     {
-                        PrintTextSlowedDown("Invalid item index.");
+                        Print.PrintMessageWithAudio("Invalid item index.");
                     }
                 }
                 else if (command.ToLower() == "unequip")
@@ -326,16 +326,16 @@ namespace Game.Engine
                         if (item is Weapon || item is Armor)
                         {
                             player.UnequipItem(item);
-                            PrintTextSlowedDown(item.Id + " is now unequiped.");
+                            Print.PrintMessageWithAudio(item.Id + " is now unequiped.");
                         }
                         else
                         {
-                            PrintTextSlowedDown("You can not unequip that item.");
+                            Print.PrintMessageWithAudio("You can not unequip that item.");
                         }
                     }
                     else
                     {
-                        PrintTextSlowedDown("Invalid item index.");
+                        Print.PrintMessageWithAudio("Invalid item index.");
                     }
                 }
                 else if (command.ToLower().Contains("print"))
@@ -345,7 +345,7 @@ namespace Game.Engine
                 else if (command.Contains("exit"))
                 {
                     Console.Clear();
-                    PrintTextSlowedDown("Inventory menu is closed.");
+                    Print.PrintMessageWithAudio("Inventory menu is closed.");
                     break;
                 }
             }
@@ -353,13 +353,13 @@ namespace Game.Engine
 
         private static void PrintInventoryCommands()
         {
-            PrintTextSlowedDown("Available Commands:");
-            PrintTextSlowedDown("inspect [index]");
-            PrintTextSlowedDown("equip [index]");
-            PrintTextSlowedDown("unequip [index]");
-            PrintTextSlowedDown("remove [index]");
-            PrintTextSlowedDown("print");
-            PrintTextSlowedDown("exit");
+            Print.PrintMessageWithAudio("Available Commands:");
+            Print.PrintMessage("inspect [index]");
+            Print.PrintMessage("equip [index]");
+            Print.PrintMessage("unequip [index]");
+            Print.PrintMessage("remove [index]");
+            Print.PrintMessage("print");
+            Print.PrintMessage("exit");
         }
 
         private static string GetPlayerStats()
@@ -382,13 +382,13 @@ namespace Game.Engine
         {
             if (player.Inventory.Count == 0)
             {
-                PrintTextSlowedDown("Your Inventory is Empty.");
+                Print.PrintMessageWithAudio("Your Inventory is Empty.");
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("{0}", new String('-', 10));
-                PrintTextSlowedDown("I-N-V-E-N-T-O-R-Y");
+                Print.PrintMessage("I-N-V-E-N-T-O-R-Y");
                 for (int i = 0; i < player.Inventory.Count; i++)
                 {
                     Console.WriteLine("{0} ---> {1}", player.Inventory[i].Id, i);
@@ -401,17 +401,17 @@ namespace Game.Engine
         {
             Console.WriteLine();
             Console.WriteLine("{0}", new string('-', 10));
-            PrintTextSlowedDown("move up");
-            PrintTextSlowedDown("move left");
-            PrintTextSlowedDown("move down");
-            PrintTextSlowedDown("move left");
-            PrintTextSlowedDown("display-area");
-            PrintTextSlowedDown("inventory");
-            PrintTextSlowedDown("items");
-            PrintTextSlowedDown("stats");
-            PrintTextSlowedDown("help");
-            PrintTextSlowedDown("print");
-            PrintTextSlowedDown("exit");
+            Print.PrintMessage("move up");
+            Print.PrintMessage("move left");
+            Print.PrintMessage("move down");
+            Print.PrintMessage("move left");
+            Print.PrintMessage("display-area");
+            Print.PrintMessage("inventory");
+            Print.PrintMessage("items");
+            Print.PrintMessage("stats");
+            Print.PrintMessage("help");
+            Print.PrintMessage("print");
+            Print.PrintMessage("exit");
             Console.WriteLine("{0}", new string('-', 10));
             Console.WriteLine();
         }
@@ -638,7 +638,7 @@ namespace Game.Engine
         private static void PrintMapBoarderReachedMessage()
         {
             Console.Beep(100, 100);
-            PrintTextSlowedDown("There is only the vast ocean in front of you.\nYou shall not pass.");
+            Print.PrintMessageWithAudio("There is only the vast ocean in front of you.\nYou shall not pass.");
         }
 
         private static void ProceesMapElement(char currmapChar)
@@ -679,9 +679,9 @@ namespace Game.Engine
         private static void InteractWithHealthWell()
         {
             PlayAudio.YouLuckyBastard(); // AUDIO TEST
-            PrintTextSlowedDown("You lucky bastard...");
-            PrintTextSlowedDown("You have stumbled upon a Health Well.");
-            PrintTextSlowedDown("Do you want to drink from it?");
+            Print.PrintMessageWithAudio("You lucky bastard...");
+            Print.PrintMessageWithAudio("You have stumbled upon a Health Well.");
+            Print.PrintMessageWithAudio("Do you want to drink from it?");
             string answer = Console.ReadLine();
             if (answer.ToLower().Contains("yes"))
             {
@@ -689,7 +689,7 @@ namespace Game.Engine
             }
             else
             {
-                PrintTextSlowedDown("Good choice, this health well can be useful later on.");
+                Print.PrintMessageWithAudio("Good choice, this health well can be useful later on.");
             }
             Console.WriteLine();
         }
@@ -697,9 +697,9 @@ namespace Game.Engine
         private static void InteractWithManaWell()
         {
             PlayAudio.YouLuckyBastard();  // AUDIO TEST
-            PrintTextSlowedDown("You lucky bastard...");
-            PrintTextSlowedDown("You have stumbled upon a Mana Well.");
-            PrintTextSlowedDown("Do you want to drink from it?");
+            Print.PrintMessageWithAudio("You lucky bastard...");
+            Print.PrintMessageWithAudio("You have stumbled upon a Mana Well.");
+            Print.PrintMessageWithAudio("Do you want to drink from it?");
             string answer = Console.ReadLine();
             if (answer.ToLower().Contains("yes"))
             {
@@ -707,32 +707,16 @@ namespace Game.Engine
             }
             else
             {
-                PrintTextSlowedDown("Good choice, this mana well can be useful later on.");
+                Print.PrintMessageWithAudio("Good choice, this mana well can be useful later on.");
             }
             Console.WriteLine();
         }
-
-        public static void PrintTextSlowedDown(string text)
-        {
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            SpeechSynthesizer speech = new SpeechSynthesizer();
-            speech.SpeakAsync(text);
-            for (int i = 0; i < text.Length; i++)
-            {
-                Thread.Sleep(1);
-                Console.Write(text[i]);
-            }
-            Console.ResetColor();
-            Console.WriteLine();
-        }
-
         private static void InteractWithChest()
         {
             PlayAudio.YouLuckyBastard();  // AUDIO TEST
-            PrintTextSlowedDown("You lucky bastard...");
-            PrintTextSlowedDown("You have stumbled upon a Chest.");
-            PrintTextSlowedDown("Do you want to open it?");
+            Print.PrintMessageWithAudio("You lucky bastard...");
+            Print.PrintMessageWithAudio("You have stumbled upon a Chest.");
+            Print.PrintMessageWithAudio("Do you want to open it?");
             string input = Console.ReadLine();
             if (input.ToLower().Contains("yes"))
             {
@@ -741,7 +725,7 @@ namespace Game.Engine
             }
             else
             {
-                PrintTextSlowedDown("Good choice, this chest can be useful later on.");
+                Print.PrintMessageWithAudio("Good choice, this chest can be useful later on.");
             }
             Console.WriteLine();
         }
@@ -751,15 +735,15 @@ namespace Game.Engine
             Chest chest = new Chest("Chest");
             RandomItemGenerator itemGenerator = new RandomItemGenerator(player.Level);
             chest.Items.AddRange(itemGenerator.ItemsList);
-            PrintTextSlowedDown("The chest has droped " + chest.Items.Count() + " items.");
+            Print.PrintMessageWithAudio("The chest has droped " + chest.Items.Count() + " items.");
             player.PickUpItem(chest.Items);
         }
 
         private static void InteractWithBoss()
         {
             PlayAudio.YouAreFucked(); // AUDIO TEST
-            PrintTextSlowedDown("You have encountered a BOSS!");
-            PrintTextSlowedDown("Do you want to fight?");
+            Print.PrintMessageWithAudio("You have encountered a BOSS!");
+            Print.PrintMessageWithAudio("Do you want to fight?");
             string input = Console.ReadLine();
             if (input.ToLower().Contains("yes"))
             {
@@ -775,15 +759,15 @@ namespace Game.Engine
             {
                 PlayAudio.Laugh();
                 PlayAudio.YouPussy();
-                PrintTextSlowedDown("You will live to fight another day, you coward!");
+                Print.PrintMessageWithAudio("You will live to fight another day, you coward!");
             }
         }
 
         private static void InteractWithMinions()
         {
             PlayAudio.YouAreFucked(); // AUDIO TEST
-            PrintTextSlowedDown("You have encountered a Minion!");
-            PrintTextSlowedDown("Do you want to fight?");
+            Print.PrintMessageWithAudio("You have encountered a Minion!");
+            Print.PrintMessageWithAudio("Do you want to fight?");
             string input = Console.ReadLine();
             if (input.ToLower().Contains("yes"))
             {
@@ -797,15 +781,15 @@ namespace Game.Engine
             {
                 PlayAudio.Laugh();
                 PlayAudio.YouPussy();
-                PrintTextSlowedDown("You will live to fight another day, you coward!");
+                Print.PrintMessageWithAudio("You will live to fight another day, you coward!");
             }
         }
 
         private static void InteractWithMob()
         {
             PlayAudio.YouAreFucked(); // AUDIO TEST
-            PrintTextSlowedDown("You have encountered a Mob!");
-            PrintTextSlowedDown("Do you want to fight?");
+            Print.PrintMessageWithAudio("You have encountered a Mob!");
+            Print.PrintMessageWithAudio("Do you want to fight?");
             string input = Console.ReadLine();
             if (input.ToLower().Contains("yes"))
             {
@@ -819,7 +803,7 @@ namespace Game.Engine
             {
                 PlayAudio.Laugh();
                 PlayAudio.YouPussy();
-                PrintTextSlowedDown("You will live to fight another day, you coward!");
+                Print.PrintMessageWithAudio("You will live to fight another day, you coward!");
             }
         }
 
@@ -828,12 +812,12 @@ namespace Game.Engine
             HealthWell well = new HealthWell(DateTime.Now.Millisecond.ToString());
             if (well.IsUsed)
             {
-                PrintTextSlowedDown("This Health well has been used and It is empty.");
+                Print.PrintMessageWithAudio("This Health well has been used and It is empty.");
                 Console.WriteLine();
             }
             else if (player.HealthPoints == player.MaxHealthPoints)
             {
-                PrintTextSlowedDown("Your health is full and you can not use that health well.");
+                Print.PrintMessageWithAudio("Your health is full and you can not use that health well.");
                 Console.WriteLine();
             }
             else
@@ -841,8 +825,8 @@ namespace Game.Engine
                 Console.Clear();
                 player.HealthPoints += well.Health;
                 well.IsUsed = true;
-                Console.WriteLine("I feel stronger already.");
-                Console.WriteLine("{0} gained {1} health points by using a Health well.", player.Id, well.Health);
+                Print.PrintMessageWithAudio("I feel stronger already.");
+                Print.PrintMessageWithAudio(String.Format("{0} gained {1} health points by using a Health well.", player.Id, well.Health));
                 Console.WriteLine();
             }
         }
@@ -852,18 +836,19 @@ namespace Game.Engine
             ManaWell manaWell = new ManaWell(DateTime.Now.Millisecond.ToString());
             if (manaWell.IsUsed)
             {
-                Console.WriteLine("This Mana well has been used and It is empty.");
+                Print.PrintMessageWithAudio("This Mana well has been used and It is empty.");
             }
             else
             {
                 Console.Clear();
                 player.Mana += manaWell.Mana;
-                Console.WriteLine("I feel more powerful already.");
-                Console.WriteLine("{0} gained {1} mana points by using a Mana well.", player.Id, manaWell.Mana);
+                Print.PrintMessageWithAudio("I feel more powerful already.");
+                Print.PrintMessageWithAudio(String.Format("{0} gained {1} mana points by using a Mana well.", player.Id, manaWell.Mana));
                 Console.WriteLine();
             }
         }
 
+        #region Map
         public static void GenerateMapByWorld()
         {
             //todo
@@ -885,6 +870,7 @@ namespace Game.Engine
             SetPlayerPos();
             prevMapElement = 'e';
         }
+        #endregion 
 
         #region Save and Load
         public static void Save()
@@ -899,15 +885,15 @@ namespace Game.Engine
                     bin.Serialize(stream, saveGame);
                 }
 
-                PrintTextSlowedDown("Save Successful!");
+                Print.PrintMessageWithAudio("Save Successful!");
             }
             catch (AccessViolationException)
             {
-                PrintTextSlowedDown("Save Failed! File access denied.");
+                Print.PrintMessageWithAudio("Save Failed! File access denied.");
             }
             catch (Exception)
             {
-                PrintTextSlowedDown("Save failed! An unspecified error occurred.");
+                Print.PrintMessageWithAudio("Save failed! An unspecified error occurred.");
             }
         }
 
@@ -922,19 +908,19 @@ namespace Game.Engine
                     saveGame = (SaveGame)bin.Deserialize(stream);
                 }
                 LoadGame(saveGame);
-                PrintTextSlowedDown("Load Successful");
+                Print.PrintMessageWithAudio("Load Successful");
             }
             catch (FileNotFoundException)
             {
-                PrintTextSlowedDown("No savegame exists!");
+                Print.PrintMessageWithAudio("No savegame exists!");
             }
             catch (AccessViolationException)
             {
-                PrintTextSlowedDown("Load failed! File access denied.");
+                Print.PrintMessageWithAudio("Load failed! File access denied.");
             }
             catch (Exception)
             {
-                PrintTextSlowedDown("Load failed! An unspecified error occurred.");
+                Print.PrintMessageWithAudio("Load failed! An unspecified error occurred.");
             }
         }
 
@@ -945,7 +931,7 @@ namespace Game.Engine
             playerPos = saveGame.PlayerPosition;
             world = saveGame.LastWorld;
             prevMapElement = saveGame.PrevMapElement;
-            PrintTextSlowedDown("Load successful.");
+            Print.PrintMessageWithAudio("Load successful.");
             map.PrintMap();
             ExecuteCommand();
         }
