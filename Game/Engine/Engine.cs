@@ -151,6 +151,9 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("You fucking cheater, you shall burn in hell.");
                 player.Gold = 999999999;
+                player.HealthPoints = 999999;
+                player.DefensePoints = 999999;
+                player.AttackPoints = 99999;
             }
         }
 
@@ -198,6 +201,7 @@ namespace Game.Engine
                         break;
 
                     case "move":
+                    case "go":
                         Console.Clear();
                         Move(inputParams[1]);
                         break;
@@ -796,10 +800,10 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("Save Failed! File access denied.");
             }
-            //catch (Exception)
-            //{
-            //    Print.PrintMessageWithAudio("Save failed! An unspecified error occurred.");
-            //}
+            catch (Exception)
+            {
+                Print.PrintMessageWithAudio("Save failed! An unspecified error occurred.");
+            }
         }
 
         public static void Load()
@@ -823,10 +827,10 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("Load failed! File access denied.");
             }
-            //catch (Exception)
-            //{
-            //    Print.PrintMessageWithAudio("Load failed! An unspecified error occurred.");
-            //}
+            catch (Exception)
+            {
+                Print.PrintMessageWithAudio("Load failed! An unspecified error occurred.");
+            }
         }
 
         public static void LoadGame(SaveGame saveGame)
