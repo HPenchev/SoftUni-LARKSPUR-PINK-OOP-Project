@@ -1,27 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Deployment.Internal;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Speech.Synthesis;
-using System.Text;
-using System.Threading;
-using Game.Core.Data;
-using Game.Enemies;
-using Game.Items.ArmorOfDarkness;
-using Game.Items.ArmorOfDragon;
-using Game.Items.ArmorOfGandalf;
-using Game.Items.Spells;
-using Game.Static;
-
-namespace Game.Engine
+﻿namespace Game.Engine
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Text;
     using Characters;
     using Core;
     using Core.Data.Constants.EngineConstants;
-    using Interfaces;
+    using Core.Data;
+    using Static;
 
     [Serializable]
     public class Engine
@@ -54,13 +43,6 @@ namespace Game.Engine
                     ExecuteMainMenu(mainMenuInput);
                 }
             }
-        }
-
-        private static void PrintMainMenu()
-        {
-            Print.PrintMessageWithAudio("Please choose an option:");
-            Print.PrintMessage("1 ---> New Game\n" +
-                                "2 ---> Load Game");
         }
 
         private static void ExecuteMainMenu(string mainMenuInput)
@@ -118,15 +100,6 @@ namespace Game.Engine
             }
         }
 
-        private static void PrintNewGameMenuInvalidInputMessage()
-        {
-            Console.Clear();
-            Print.PrintMessageWithAudio("Invalid input.");
-            Print.PrintMessage("Please enter: [hero type] [name]");
-            DisplayAvailableHeroes();
-            Console.WriteLine();
-        }
-
         private static void CreatePlayer(string[] inputParams)
         {
             switch (inputParams[0].ToLower())
@@ -154,15 +127,6 @@ namespace Game.Engine
             string playerType = player.GetType().ToString().Replace("Game.Characters.", string.Empty);
             Console.Clear();
             Print.PrintMessageWithAudio(String.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
-        }
-
-        private static void DisplayAvailableHeroes()
-        {
-            for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
-            {
-                Print.PrintMessage(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
-                Print.PrintMessage(EngineConst.HeroDesc[i]);
-            }
         }
 
         private static string[] SplitUserInput(string input)
@@ -349,18 +313,8 @@ namespace Game.Engine
                     break;
                 }
             }
-        } //todo REFACTOR
-
-        private static void PrintInventoryCommands()
-        {
-            Print.PrintMessageWithAudio("Available Commands:");
-            Print.PrintMessage("inspect [index]");
-            Print.PrintMessage("equip [index]");
-            Print.PrintMessage("unequip [index]");
-            Print.PrintMessage("remove [index]");
-            Print.PrintMessage("print");
-            Print.PrintMessage("exit");
         }
+
 
         private static string GetPlayerStats()
         {
@@ -378,145 +332,42 @@ namespace Game.Engine
             return builder.ToString();
         }
 
-        private static void PrintInventory()
+        private static void ProceesMapElement(char currmapChar)
         {
-            if (player.Inventory.Count == 0)
-            {
-                Print.PrintMessageWithAudio("Your Inventory is Empty.");
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("{0}", new String('-', 10));
-                Print.PrintMessage("I-N-V-E-N-T-O-R-Y");
-                for (int i = 0; i < player.Inventory.Count; i++)
-                {
-                    Console.WriteLine("{0} ---> {1}", player.Inventory[i].Id, i);
-                }
-                Console.WriteLine("{0}", new String('-', 10));
-            }
-        }
-
-        private static void DisplayCommands()
-        {
-            Console.WriteLine();
-            Console.WriteLine("{0}", new string('-', 10));
-            Print.PrintMessage("move up");
-            Print.PrintMessage("move left");
-            Print.PrintMessage("move down");
-            Print.PrintMessage("move left");
-            Print.PrintMessage("display-area");
-            Print.PrintMessage("inventory");
-            Print.PrintMessage("items");
-            Print.PrintMessage("stats");
-            Print.PrintMessage("help");
-            Print.PrintMessage("print");
-            Print.PrintMessage("exit");
-            Console.WriteLine("{0}", new string('-', 10));
-            Console.WriteLine();
-        }
-
-        private static void DisplaySurroundings()
-        {
-            int x = playerPos.X;
-            int y = playerPos.Y;
-
-            if (y == 0 && x != 0 && x != map.Size - 1)
-            {
-                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: Sea");
-                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
-            }
-            else if (y == map.Size - 1 && x != 0 && x != map.Size - 1)
-            {
-                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: Sea");
-            }
-            else if (x == 0 && y != 0 && y != map.Size - 1)
-            {
-                Console.WriteLine("Up: Sea");
-                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
-            }
-            else if (x == map.Size - 1 && y != 0 && y != map.Size - 1)
-            {
-                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: Sea");
-                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
-            }
-            else if (x == map.Size - 1 && y == map.Size - 1)
-            {
-                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: Sea");
-                Console.WriteLine("Lelft: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: Sea");
-            }
-            else if (x == map.Size - 1 && y == 0)
-            {
-                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: Sea");
-                Console.WriteLine("Left: Sea");
-                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
-            }
-            else if (x == 0 && y == map.Size - 1)
-            {
-                Console.WriteLine("Up: Sea");
-                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right: Sea");
-            }
-            else if (x == 0 && y == 0)
-            {
-                Console.WriteLine("Up: Sea");
-                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: Sea");
-                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
-            }
-            else
-            {
-                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
-                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
-                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
-                Console.WriteLine("Right {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
-            }
-        }
-
-        private static string PrintGameObjectPosition(char mapChar)
-        {
-            switch (mapChar)
+            switch (currmapChar)
             {
                 case 'H':
-                    return "Shop";
-
-                case 'e':
-                    return "Grass";
-
-                case 'B':
-                    return "Big Boss";
-
-                case 'm':
-                    return "Mana well";
-
-                case 'M':
-                    return "Minion";
-
-                case 'h':
-                    return "Health well";
+                    Shop shop = new Shop(player);
+                    shop.Run();
+                    break;
 
                 case 'c':
-                    return "Chest";
+                    InteractWithChest();
+                    break;
+
+                case 'm':
+                    InteractWithManaWell();
+                    break;
+
+                case 'h':
+                    InteractWithHealthWell();
+                    break;
+
+                case 'M':
+                    InteractWithMinions();
+                    break;
+
+                case 'B':
+                    InteractWithBoss();
+                    break;
 
                 case 'O':
-                    return "Mob";
+                    InteractWithMob();
+                    break;
             }
-            return null;
         }
 
+        #region Movement
         private static void Move(string direction)
         {
             switch (direction)
@@ -634,6 +485,24 @@ namespace Game.Engine
                 Console.WriteLine();
             }
         }
+        #endregion
+
+        #region Print Messages
+        private static void PrintMainMenu()
+        {
+            Print.PrintMessageWithAudio("Please choose an option:");
+            Print.PrintMessage("1 ---> New Game\n" +
+                                "2 ---> Load Game");
+        }
+
+        private static void PrintNewGameMenuInvalidInputMessage()
+        {
+            Console.Clear();
+            Print.PrintMessageWithAudio("Invalid input.");
+            Print.PrintMessage("Please enter: [hero type] [name]");
+            DisplayAvailableHeroes();
+            Console.WriteLine();
+        }
 
         private static void PrintMapBoarderReachedMessage()
         {
@@ -641,104 +510,167 @@ namespace Game.Engine
             Print.PrintMessageWithAudio("There is only the vast ocean in front of you.\nYou shall not pass.");
         }
 
-        private static void ProceesMapElement(char currmapChar)
+        private static string PrintGameObjectPosition(char mapChar)
         {
-            switch (currmapChar)
+            switch (mapChar)
             {
                 case 'H':
-                    Shop shop = new Shop(player);
-                    shop.Run();
-                    break;
+                    return "Shop";
 
-                case 'c':
-                    InteractWithChest();
-                    break;
-
-                case 'm':
-                    InteractWithManaWell();
-                    break;
-
-                case 'h':
-                    InteractWithHealthWell();
-                    break;
-
-                case 'M':
-                    InteractWithMinions();
-                    break;
+                case 'e':
+                    return "Grass";
 
                 case 'B':
-                    InteractWithBoss();
-                    break;
+                    return "Big Boss";
+
+                case 'm':
+                    return "Mana well";
+
+                case 'M':
+                    return "Minion";
+
+                case 'h':
+                    return "Health well";
+
+                case 'c':
+                    return "Chest";
 
                 case 'O':
-                    InteractWithMob();
-                    break;
+                    return "Mob";
             }
+            return null;
         }
 
-        private static void InteractWithHealthWell()
+        private static void PrintInventory()
         {
-            PlayAudio.YouLuckyBastard(); // AUDIO TEST
-            Print.PrintMessageWithAudio("You lucky bastard...");
-            Print.PrintMessageWithAudio("You have stumbled upon a Health Well.");
-            Print.PrintMessageWithAudio("Do you want to drink from it?");
-            string answer = Console.ReadLine();
-            if (answer.ToLower().Contains("yes"))
+            if (player.Inventory.Count == 0)
             {
-                UseHealthWell();
+                Print.PrintMessageWithAudio("Your Inventory is Empty.");
             }
             else
             {
-                Print.PrintMessageWithAudio("Good choice, this health well can be useful later on.");
+                Console.Clear();
+                Console.WriteLine("{0}", new String('-', 10));
+                Print.PrintMessage("I-N-V-E-N-T-O-R-Y");
+                for (int i = 0; i < player.Inventory.Count; i++)
+                {
+                    Console.WriteLine("{0} ---> {1}", player.Inventory[i].Id, i);
+                }
+                Console.WriteLine("{0}", new String('-', 10));
             }
+        }
+
+        private static void DisplayCommands()
+        {
+            Console.WriteLine();
+            Console.WriteLine("{0}", new string('-', 10));
+            Print.PrintMessage("move up");
+            Print.PrintMessage("move left");
+            Print.PrintMessage("move down");
+            Print.PrintMessage("move left");
+            Print.PrintMessage("display-area");
+            Print.PrintMessage("inventory");
+            Print.PrintMessage("items");
+            Print.PrintMessage("stats");
+            Print.PrintMessage("help");
+            Print.PrintMessage("print");
+            Print.PrintMessage("exit");
+            Console.WriteLine("{0}", new string('-', 10));
             Console.WriteLine();
         }
 
-        private static void InteractWithManaWell()
+        private static void DisplaySurroundings()
         {
-            PlayAudio.YouLuckyBastard();  // AUDIO TEST
-            Print.PrintMessageWithAudio("You lucky bastard...");
-            Print.PrintMessageWithAudio("You have stumbled upon a Mana Well.");
-            Print.PrintMessageWithAudio("Do you want to drink from it?");
-            string answer = Console.ReadLine();
-            if (answer.ToLower().Contains("yes"))
+            int x = playerPos.X;
+            int y = playerPos.Y;
+
+            if (y == 0 && x != 0 && x != map.Size - 1)
             {
-                UseManaWell();
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: Sea");
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
+            }
+            else if (y == map.Size - 1 && x != 0 && x != map.Size - 1)
+            {
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: Sea");
+            }
+            else if (x == 0 && y != 0 && y != map.Size - 1)
+            {
+                Console.WriteLine("Up: Sea");
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
+            }
+            else if (x == map.Size - 1 && y != 0 && y != map.Size - 1)
+            {
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: Sea");
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
+            }
+            else if (x == map.Size - 1 && y == map.Size - 1)
+            {
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: Sea");
+                Console.WriteLine("Lelft: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: Sea");
+            }
+            else if (x == map.Size - 1 && y == 0)
+            {
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: Sea");
+                Console.WriteLine("Left: Sea");
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
+            }
+            else if (x == 0 && y == map.Size - 1)
+            {
+                Console.WriteLine("Up: Sea");
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right: Sea");
+            }
+            else if (x == 0 && y == 0)
+            {
+                Console.WriteLine("Up: Sea");
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: Sea");
+                Console.WriteLine("Right: {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
             else
             {
-                Print.PrintMessageWithAudio("Good choice, this mana well can be useful later on.");
+                Console.WriteLine("Up: {0}", PrintGameObjectPosition(map.Map[x - 1, y]));
+                Console.WriteLine("Down: {0}", PrintGameObjectPosition(map.Map[x + 1, y]));
+                Console.WriteLine("Left: {0}", PrintGameObjectPosition(map.Map[x, y - 1]));
+                Console.WriteLine("Right {0}", PrintGameObjectPosition(map.Map[x, y + 1]));
             }
-            Console.WriteLine();
-        }
-        private static void InteractWithChest()
-        {
-            PlayAudio.YouLuckyBastard();  // AUDIO TEST
-            Print.PrintMessageWithAudio("You lucky bastard...");
-            Print.PrintMessageWithAudio("You have stumbled upon a Chest.");
-            Print.PrintMessageWithAudio("Do you want to open it?");
-            string input = Console.ReadLine();
-            if (input.ToLower().Contains("yes"))
-            {
-                UseChest();
-                player.UpdateInventorySpace();
-            }
-            else
-            {
-                Print.PrintMessageWithAudio("Good choice, this chest can be useful later on.");
-            }
-            Console.WriteLine();
         }
 
-        private static void UseChest()
+        private static void DisplayAvailableHeroes()
         {
-            Chest chest = new Chest("Chest");
-            RandomItemGenerator itemGenerator = new RandomItemGenerator(player.Level);
-            chest.Items.AddRange(itemGenerator.ItemsList);
-            Print.PrintMessageWithAudio("The chest has droped " + chest.Items.Count() + " items.");
-            player.PickUpItem(chest.Items);
+            for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
+            {
+                Print.PrintMessage(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
+                Print.PrintMessage(EngineConst.HeroDesc[i]);
+            }
         }
 
+        private static void PrintInventoryCommands()
+        {
+            Print.PrintMessageWithAudio("Available Commands:");
+            Print.PrintMessage("inspect [index]");
+            Print.PrintMessage("equip [index]");
+            Print.PrintMessage("unequip [index]");
+            Print.PrintMessage("remove [index]");
+            Print.PrintMessage("print");
+            Print.PrintMessage("exit");
+        }
+        #endregion
+
+        #region Enemy Interaction
         private static void InteractWithBoss()
         {
             PlayAudio.YouAreFucked(); // AUDIO TEST
@@ -787,7 +719,7 @@ namespace Game.Engine
 
         private static void InteractWithMob()
         {
-            PlayAudio.YouAreFucked(); // AUDIO TEST
+            PlayAudio.YouAreFucked();
             Print.PrintMessageWithAudio("You have encountered a Mob!");
             Print.PrintMessageWithAudio("Do you want to fight?");
             string input = Console.ReadLine();
@@ -805,6 +737,56 @@ namespace Game.Engine
                 PlayAudio.YouPussy();
                 Print.PrintMessageWithAudio("You will live to fight another day, you coward!");
             }
+        }
+        #endregion
+
+        #region Chest
+        private static void InteractWithChest()
+        {
+            PlayAudio.YouLuckyBastard(); // AUDIO TEST
+            Print.PrintMessageWithAudio("You lucky bastard...");
+            Print.PrintMessageWithAudio("You have stumbled upon a Chest.");
+            Print.PrintMessageWithAudio("Do you want to open it?");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("yes"))
+            {
+                UseChest();
+                player.UpdateInventorySpace();
+            }
+            else
+            {
+                Print.PrintMessageWithAudio("Good choice, this chest can be useful later on.");
+            }
+            Console.WriteLine();
+        }
+
+        private static void UseChest()
+        {
+            Chest chest = new Chest("Chest");
+            RandomItemGenerator itemGenerator = new RandomItemGenerator(player.Level);
+            chest.Items.AddRange(itemGenerator.ItemsList);
+            Print.PrintMessageWithAudio("The chest has droped " + chest.Items.Count() + " items.");
+            player.PickUpItem(chest.Items);
+        }
+        #endregion
+
+        #region HealthWell
+        private static void InteractWithHealthWell()
+        {
+            PlayAudio.YouLuckyBastard(); // AUDIO TEST
+            Print.PrintMessageWithAudio("You lucky bastard...");
+            Print.PrintMessageWithAudio("You have stumbled upon a Health Well.");
+            Print.PrintMessageWithAudio("Do you want to drink from it?");
+            string answer = Console.ReadLine();
+            if (answer.ToLower().Contains("yes"))
+            {
+                UseHealthWell();
+            }
+            else
+            {
+                Print.PrintMessageWithAudio("Good choice, this health well can be useful later on.");
+            }
+            Console.WriteLine();
         }
 
         private static void UseHealthWell()
@@ -826,9 +808,30 @@ namespace Game.Engine
                 player.HealthPoints += well.Health;
                 well.IsUsed = true;
                 Print.PrintMessageWithAudio("I feel stronger already.");
-                Print.PrintMessageWithAudio(String.Format("{0} gained {1} health points by using a Health well.", player.Id, well.Health));
+                Print.PrintMessageWithAudio(String.Format("{0} gained {1} health points by using a Health well.",
+                    player.Id, well.Health));
                 Console.WriteLine();
             }
+        }
+        #endregion
+
+        #region ManaWell
+        private static void InteractWithManaWell()
+        {
+            PlayAudio.YouLuckyBastard(); // AUDIO TEST
+            Print.PrintMessageWithAudio("You lucky bastard...");
+            Print.PrintMessageWithAudio("You have stumbled upon a Mana Well.");
+            Print.PrintMessageWithAudio("Do you want to drink from it?");
+            string answer = Console.ReadLine();
+            if (answer.ToLower().Contains("yes"))
+            {
+                UseManaWell();
+            }
+            else
+            {
+                Print.PrintMessageWithAudio("Good choice, this mana well can be useful later on.");
+            }
+            Console.WriteLine();
         }
 
         private static void UseManaWell()
@@ -843,10 +846,12 @@ namespace Game.Engine
                 Console.Clear();
                 player.Mana += manaWell.Mana;
                 Print.PrintMessageWithAudio("I feel more powerful already.");
-                Print.PrintMessageWithAudio(String.Format("{0} gained {1} mana points by using a Mana well.", player.Id, manaWell.Mana));
+                Print.PrintMessageWithAudio(String.Format("{0} gained {1} mana points by using a Mana well.", player.Id,
+                    manaWell.Mana));
                 Console.WriteLine();
             }
         }
+        #endregion
 
         #region Map
         public static void GenerateMapByWorld()
