@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Game.Core.Data;
+    using Data;
 
     public class Shop
     {
@@ -325,7 +325,7 @@
         private void ExecuteUserInput(string[] input)
         {
             string command = input[0];
-            switch (command)
+            switch (command.ToLower())
             {
                 case "buy":
                     Buy(input);

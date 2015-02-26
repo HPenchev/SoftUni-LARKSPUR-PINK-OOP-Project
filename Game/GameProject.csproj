@@ -63,6 +63,7 @@
     <Compile Include="Core\Data\RandomItemGenerator.cs" />
     <Compile Include="Core\Enemy.cs" />
     <Compile Include="Core\Equipment.cs" />
+    <Compile Include="Core\Inventory.cs" />
     <Compile Include="Core\Item.cs" />
     <Compile Include="Core\RandomGenerator\RandomGenerator.cs" />
     <Compile Include="Core\SaveGame.cs" />

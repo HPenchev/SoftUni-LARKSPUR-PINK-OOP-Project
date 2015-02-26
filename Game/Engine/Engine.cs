@@ -29,94 +29,6 @@
             MainMenu();
         }
 
-        private static void Inventory()
-        {
-            PrintInventory();
-            while (true)
-            {
-                PrintInventoryCommands();
-                string[] inputParams = Console.ReadLine().Split();
-                string command = inputParams[0];
-                int index;
-                if (command.ToLower().Contains("inspect"))
-                {
-                    index = int.Parse(inputParams[1]);
-                    if (index >= 0 && index < player.Inventory.Count)
-                    {
-                        Print.PrintMessageWithAudio(player.Inventory[index].ToString());
-                    }
-                    else
-                    {
-                        Print.PrintMessageWithAudio("Invalid item index.");
-                    }
-                }
-                else if (command.ToLower().Contains("remove"))
-                {
-                    index = int.Parse(inputParams[1]);
-                    if (index >= 0 && index < player.Inventory.Count)
-                    {
-                        player.RemoveItem(player.Inventory[index]);
-                    }
-                    else
-                    {
-                        Print.PrintMessageWithAudio("Invalid item index.");
-                    }
-                }
-                else if (command.ToLower() == "equip")
-                {
-                    index = int.Parse(inputParams[1]);
-                    if (index >= 0 && index < player.Inventory.Count)
-                    {
-                        Item item = player.Inventory[index];
-                        if (item is Weapon || item is Armor)
-                        {
-                            player.EquipItem(item);
-                            Print.PrintMessageWithAudio(item.Id + " is now equiped.");
-                        }
-                        else
-                        {
-                            Print.PrintMessageWithAudio("You can not equip that item.");
-                        }
-                    }
-                    else
-                    {
-                        Print.PrintMessageWithAudio("Invalid item index.");
-                    }
-                }
-                else if (command.ToLower() == "unequip")
-                {
-                    index = int.Parse(inputParams[1]);
-                    if (index >= 0 && index < player.Inventory.Count)
-                    {
-                        Item item = player.Inventory[index];
-                        if (item is Weapon || item is Armor)
-                        {
-                            player.UnequipItem(item);
-                            Print.PrintMessageWithAudio(item.Id + " is now unequiped.");
-                        }
-                        else
-                        {
-                            Print.PrintMessageWithAudio("You can not unequip that item.");
-                        }
-                    }
-                    else
-                    {
-                        Print.PrintMessageWithAudio("Invalid item index.");
-                    }
-                }
-                else if (command.ToLower().Contains("print"))
-                {
-                    PrintInventory();
-                }
-                else if (command.Contains("exit"))
-                {
-                    Console.Clear();
-                    Print.PrintMessageWithAudio("Inventory menu is closed.");
-                    break;
-                }
-            }
-        }
-
         #region NewGame
         private static void NewGameUserInput()
         {
@@ -269,7 +181,8 @@
 
                     case "inventory":
                         Console.Clear();
-                        Inventory();
+                        Inventory inventory = new Inventory(player);
+                        inventory.Run();
                         break;
 
                     case "move":
@@ -479,25 +392,6 @@
             return null;
         }
 
-        private static void PrintInventory()
-        {
-            if (player.Inventory.Count == 0)
-            {
-                Print.PrintMessageWithAudio("Your Inventory is Empty.");
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("{0}", new String('-', 10));
-                Print.PrintMessage("I-N-V-E-N-T-O-R-Y");
-                for (int i = 0; i < player.Inventory.Count; i++)
-                {
-                    Console.WriteLine("{0} ---> {1}", player.Inventory[i].Id, i);
-                }
-                Console.WriteLine("{0}", new String('-', 10));
-            }
-        }
-
         private static void DisplayCommands()
         {
             Console.WriteLine();
@@ -594,17 +488,6 @@
                 Print.PrintMessage(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
                 Print.PrintMessage(EngineConst.HeroDesc[i]);
             }
-        }
-
-        private static void PrintInventoryCommands()
-        {
-            Print.PrintMessageWithAudio("Available Commands:");
-            Print.PrintMessage("inspect [index]");
-            Print.PrintMessage("equip [index]");
-            Print.PrintMessage("unequip [index]");
-            Print.PrintMessage("remove [index]");
-            Print.PrintMessage("print");
-            Print.PrintMessage("exit");
         }
 
         private static string GetPlayerStats()

@@ -197,12 +197,12 @@
                 }
                 else
                 {
-                    Console.WriteLine("That item is already unequiped.");
+                    Print.PrintMessageWithAudio("That item is already unequiped.");
                 }
             }
             else
             {
-                Console.WriteLine("The inventory does not contain that item.");
+                Print.PrintMessageWithAudio("The inventory does not contain that item.");
             }
         }
 
@@ -210,41 +210,40 @@
         {
             if (item is Weapon)
             {
-                WeaponType currentWeaponType = (item as Weapon).WeaponType; // weapon type check todo
                 var query = this.Inventory
-                    .Where(n => n is Weapon && (n as Weapon).IsEquiped)
-                    .Select(n => n);
+                           .Where(n => n is Weapon && (n as Weapon).IsEquiped)
+                           .Select(n => n);
                 if (!query.Any())
                 {
                     (item as Weapon).IsEquiped = true;
-                    Console.WriteLine("{0} has been equiped.", item.Id);
+                    Print.PrintMessageWithAudio(String.Format("{0} has been equiped.", item.Id));
                     ApplyItemEffects(item);
                 }
                 else
                 {
-                    Console.WriteLine("You can not equip two items of the same type.");
+                    Print.PrintMessageWithAudio("You can not equip two items of the same type.");
                 }
             }
             else if (item is Armor)
             {
                 ArmorType currentArmorType = (item as Armor).ArmorType;
                 var query = this.Inventory
-                    .Where(n => n is Armor && (n as Armor).IsEquiped && currentArmorType == (n as Armor).ArmorType)
-                    .Select(n => n);
+                            .Where(n => n is Armor && (n as Armor).IsEquiped && currentArmorType == (n as Armor).ArmorType)
+                            .Select(n => n);
                 if (!query.Any())
                 {
                     (item as Armor).IsEquiped = true;
-                    Console.WriteLine("{0} has been equiped.", item.Id);
+                    Print.PrintMessageWithAudio(String.Format("{0} has been equiped.", item.Id));
                     ApplyItemEffects(item);
                 }
                 else
                 {
-                    Console.WriteLine("You can not equip two items of the same type.");
+                    Print.PrintMessageWithAudio("You can not equip two items of the same type.");
                 }
             }
             else
             {
-                Console.WriteLine("This item can not be equiped");
+                Print.PrintMessageWithAudio("This item can not be equiped");
             }
         }
 
@@ -298,29 +297,28 @@
             }
         }
 
-
         public void PickUpItem(List<Item> items)
         {
             string answer = string.Empty;
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine("Do you want to add {0} to your inventory.", items[i].Id);
+                Print.PrintMessageWithAudio(String.Format("Do you want to add {0} to your inventory.", items[i].Id));
                 answer = Console.ReadLine();
                 if (answer.ToLower().Contains("yes"))
                 {
                     if (this.InventorySize - items[i].Size <= 0)
                     {
-                        Console.WriteLine("Your Inventory is Full.\nPlease remove something.");
+                       Print.PrintMessageWithAudio("Your Inventory is Full.\nPlease remove something.");
                     }
                     else
                     {
                         this.Inventory.Add(items[i]);
-                        Console.WriteLine("You have added {0} to your inventory.", items[i].Id);
+                        Print.PrintMessageWithAudio(String.Format("You have added {0} to your inventory.", items[i].Id));
                     }
                 }
                 else
                 {
-                    Console.WriteLine("It's crap anyway.");
+                    Print.PrintMessageWithAudio("It's crap anyway.");
                     continue;
                 }
 
@@ -342,11 +340,11 @@
             {
                 this.Inventory.Remove(item);
                 UpdateInventorySpace();
-                Console.WriteLine("{0} has been removed.", item.Id);
+                Print.PrintMessageWithAudio(String.Format("{0} has been removed.", item.Id));
             }
             else
             {
-                Console.WriteLine("No such Item in Inventory.");
+                Print.PrintMessageWithAudio("No such Item in Inventory.");
             }
         }
 
@@ -397,7 +395,6 @@
             }
         }
 
-
         public override double CalculateDamage(ICharacter target)
         {
             double damage = CalculateDamage() + this.AttackSpeed * 0.53;
@@ -417,7 +414,7 @@
             if (criticalStrikeChence > 8)
             {
                 damage += damage + 30 *this.CritDamage;
-                Console.WriteLine("Critical!");
+                Print.PrintMessageWithAudio("Critical!");
             }
 
             return damage;
@@ -425,6 +422,7 @@
 
         private void LevelUpUpdate()
         {
+            Print.PrintMessageWithAudio("Level UP!");
             this.AttackPoints *= 1.2;
             this.HealthPoints *= 1.2;
             this.Mana *= 1.2;
@@ -432,8 +430,6 @@
             this.attackSpeed *= 1.1;
             this.allResistance *= 1.1;
         }
-
-
         #endregion
     }
 }
