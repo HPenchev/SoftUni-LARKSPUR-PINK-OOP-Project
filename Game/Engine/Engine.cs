@@ -124,7 +124,7 @@ namespace Game.Engine
             {
                 case "mage":
                     player = new Mage(inputParams[1]);
-                    checkForHack(inputParams[1]);
+                    CheckForHack(inputParams[1]);
                     break;
 
                 case "amazon":
@@ -145,10 +145,11 @@ namespace Game.Engine
             Print.PrintMessageWithAudio(String.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
         }
 
-        private static void checkForHack(string name)
+        private static void CheckForHack(string name)
         {
             if (name.ToLower().Equals("gandalf_"))
             {
+                Print.PrintMessageWithAudio("You fucking cheater, you shall burn in hell.");
                 player.Gold = 999999999;
             }
         }

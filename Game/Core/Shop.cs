@@ -199,110 +199,29 @@
 
         private void Buy(string[] input)
         {
-            if (IsValidInteger(input[1]))
+            if (input.Length > 1)
             {
-                if (IsIndexInRange(int.Parse(input[1]), this.ShopInventory.Count))
+                if (IsValidInteger(input[1]))
                 {
-                    Item item = this.ShopInventory[int.Parse(input[1])];
-                    if (IsPlayerGoldSufficient(this.Player.Gold, item.Price))
+                    if (IsIndexInRange(int.Parse(input[1]), this.ShopInventory.Count))
                     {
-                        if (IsPlayerInventorySpaceSufficient(this.Player, item))
+                        Item item = this.ShopInventory[int.Parse(input[1])];
+                        if (IsPlayerGoldSufficient(this.Player.Gold, item.Price))
                         {
-                            this.Player.Inventory.Add(item);
-                            this.Player.Gold -= item.Price;
-                            Print.PrintMessageWithAudio(String.Format("You have successfuly bought {0}", item.Id));
-                        }
-                        else
-                        {
-                            Print.PrintMessageWithAudio("You do not have enough free inventory space available.");
-                        }
-                    }
-                    else
-                    {
-                        Print.PrintMessageWithAudio("You do not have enough gold to buy this item.");
-                    }
-                }
-                else
-                {
-                    Print.PrintMessageWithAudio("Invalid index. Please enter an index in range.");
-                }
-            }
-            else
-            {
-                Print.PrintMessageWithAudio("Invalid index. Please enter a valid integer number.");
-            }
-        }
-
-        private void Sell()
-        {
-            PrintPlayerInventory(this.Player);
-            PrintSellMenuChoices();
-            string[] sellMenuUserInput = GetUserInput();
-            if (!sellMenuUserInput.Contains("exit"))
-            {
-                if (IsValidInteger(sellMenuUserInput[1]))
-                {
-                    int index = int.Parse(sellMenuUserInput[1]);
-                    if (IsIndexInRange(index, this.ShopInventory.Count))
-                    {
-                        Item item = this.Player.Inventory[index];
-                        if (item is Equipment)
-                        {
-                            if ((item as Equipment).IsEquiped)
+                            if (IsPlayerInventorySpaceSufficient(this.Player, item))
                             {
-                                Print.PrintMessageWithAudio("This item is equiped.");
-                                Print.PrintMessageWithAudio("Are you sure you want to sell it?");
-                                string choice = Console.ReadLine();
-                                if (choice.ToLower().Contains("yes"))
-                                {
-                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.",
-                                                                              item.Id, item.Price * 0.8M));
-                                    this.Player.RemoveItemEffects(item);
-                                    this.Player.Gold += item.Price;
-                                    this.Player.RemoveItem(item);
-                                    PrintPlayerInventory(this.Player);
-                                    PrintSellMenuChoices();
-                                }
-                                else
-                                {
-                                    Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
-                                }
+                                this.Player.Inventory.Add(item);
+                                this.Player.Gold -= item.Price;
+                                Print.PrintMessageWithAudio(String.Format("You have successfuly bought {0}", item.Id));
                             }
                             else
                             {
-                                Print.PrintMessageWithAudio("Are you sure you want to sell it?");
-                                string choice = Console.ReadLine();
-                                if (choice.ToLower().Contains("yes"))
-                                {
-                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.",
-                                                                              item.Id, item.Price * 0.8M));
-                                    this.Player.Gold += item.Price;
-                                    this.Player.RemoveItem(item);
-                                    PrintPlayerInventory(this.Player);
-                                    PrintSellMenuChoices();
-                                }
-                                else
-                                {
-                                    Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
-                                }
+                                Print.PrintMessageWithAudio("You do not have enough free inventory space available.");
                             }
                         }
                         else
                         {
-                            Print.PrintMessageWithAudio("Are you sure you want to sell it?");
-                            string choice = Console.ReadLine();
-                            if (choice.ToLower().Contains("yes"))
-                            {
-                                Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M));
-                                this.Player.Gold += item.Price;
-                                this.Player.RemoveItem(item);
-                                PrintPlayerInventory(this.Player);
-                                PrintSellMenuChoices();
-                            }
-                            else
-                            {
-                                Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
-                            }
+                            Print.PrintMessageWithAudio("You do not have enough gold to buy this item.");
                         }
                     }
                     else
@@ -317,28 +236,133 @@
             }
             else
             {
-                PrintShopItems();
-                PrintShopCommands();
+                Print.PrintMessage("Invalid input.");
+            }
+        }
+
+        private void Sell()
+        {
+            PrintPlayerInventory(this.Player);
+            PrintSellMenuChoices();
+            string[] sellMenuUserInput = GetUserInput();
+            if (sellMenuUserInput.Length > 1)
+            {
+                if (!sellMenuUserInput.Contains("exit"))
+                {
+                    if (IsValidInteger(sellMenuUserInput[1]))
+                    {
+                        int index = int.Parse(sellMenuUserInput[1]);
+                        if (IsIndexInRange(index, this.ShopInventory.Count))
+                        {
+                            Item item = this.Player.Inventory[index];
+                            if (item is Equipment)
+                            {
+                                if ((item as Equipment).IsEquiped)
+                                {
+                                    Print.PrintMessageWithAudio("This item is equiped.");
+                                    Print.PrintMessageWithAudio("Are you sure you want to sell it?");
+                                    string choice = Console.ReadLine();
+                                    if (choice.ToLower().Contains("yes"))
+                                    {
+                                        Print.PrintMessageWithAudio(
+                                            String.Format("{0} was successfuly sold for {1} gold.",
+                                                item.Id, item.Price*0.8M));
+                                        this.Player.RemoveItemEffects(item);
+                                        this.Player.Gold += item.Price;
+                                        this.Player.RemoveItem(item);
+                                        PrintPlayerInventory(this.Player);
+                                        PrintSellMenuChoices();
+                                    }
+                                    else
+                                    {
+                                        Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
+                                    }
+                                }
+                                else
+                                {
+                                    Print.PrintMessageWithAudio("Are you sure you want to sell it?");
+                                    string choice = Console.ReadLine();
+                                    if (choice.ToLower().Contains("yes"))
+                                    {
+                                        Print.PrintMessageWithAudio(
+                                            String.Format("{0} was successfuly sold for {1} gold.",
+                                                item.Id, item.Price*0.8M));
+                                        this.Player.Gold += item.Price;
+                                        this.Player.RemoveItem(item);
+                                        PrintPlayerInventory(this.Player);
+                                        PrintSellMenuChoices();
+                                    }
+                                    else
+                                    {
+                                        Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Print.PrintMessageWithAudio("Are you sure you want to sell it?");
+                                string choice = Console.ReadLine();
+                                if (choice.ToLower().Contains("yes"))
+                                {
+                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.",
+                                        item.Id, item.Price*0.8M));
+                                    this.Player.Gold += item.Price;
+                                    this.Player.RemoveItem(item);
+                                    PrintPlayerInventory(this.Player);
+                                    PrintSellMenuChoices();
+                                }
+                                else
+                                {
+                                    Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Print.PrintMessageWithAudio("Invalid index. Please enter an index in range.");
+                        }
+                    }
+                    else
+                    {
+                        Print.PrintMessageWithAudio("Invalid index. Please enter a valid integer number.");
+                    }
+                }
+                else
+                {
+                    PrintShopItems();
+                    PrintShopCommands();
+                }
+            }
+            else
+            {
+                Print.PrintMessage("Invalid input.");
             }
         }
 
         private void Inspect(string[] input)
         {
-            if (IsValidInteger(input[1]))
+            if (input.Length > 1)
             {
-                int index = int.Parse(input[1]);
-                if (IsIndexInRange(index, this.ShopInventory.Count))
+                if (IsValidInteger(input[1]))
                 {
-                    Print.PrintMessageWithAudio(this.ShopInventory[index].ToString());
+                    int index = int.Parse(input[1]);
+                    if (IsIndexInRange(index, this.ShopInventory.Count))
+                    {
+                        Print.PrintMessage(this.ShopInventory[index].ToString());
+                    }
+                    else
+                    {
+                        Print.PrintMessageWithAudio("Invalid item index.");
+                    }
                 }
                 else
                 {
-                    Print.PrintMessageWithAudio("Invalid item index.");
+                    Print.PrintMessageWithAudio("Please enter a valid integer number.");
                 }
             }
             else
             {
-                Print.PrintMessageWithAudio("Please enter a valid integer number.");
+                Print.PrintMessage("Invalid input.");
             }
         }
 

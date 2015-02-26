@@ -176,126 +176,154 @@ namespace Game.Core
 
         private void Inspect(string[] input)
         {
-            if (IsValidInteger(input[1]))
+            if (input.Length > 1)
             {
-                int index = int.Parse(input[1]);
-                if (IsIndexInRange(index, this.Player.Inventory.Count))
+                if (IsValidInteger(input[1]))
                 {
-                    Print.PrintMessageWithAudio(player.Inventory[index].ToString());
+                    int index = int.Parse(input[1]);
+                    if (IsIndexInRange(index, this.Player.Inventory.Count))
+                    {
+                        Print.PrintMessage(player.Inventory[index].ToString());
+                    }
+                    else
+                    {
+                        Print.PrintMessageWithAudio("Invalid item index.");
+                    }
                 }
                 else
                 {
-                    Print.PrintMessageWithAudio("Invalid item index.");
+                    Print.PrintMessageWithAudio("Please enter a valid integer number.");
                 }
             }
             else
             {
-                Print.PrintMessageWithAudio("Please enter a valid integer number.");
+                Print.PrintMessage("Invalid input.");
             }
         }
 
         private void Remove(string[] input)
         {
-            if (IsValidInteger(input[1]))
+            if (input.Length > 1)
             {
-                int index = int.Parse(input[1]);
-                if (IsIndexInRange(index, this.Player.Inventory.Count))
+                if (IsValidInteger(input[1]))
                 {
-                    Item item = this.Player.Inventory[index];
-                    if (IsEquiped(item))
+                    int index = int.Parse(input[1]);
+                    if (IsIndexInRange(index, this.Player.Inventory.Count))
                     {
-                        Print.PrintMessageWithAudio("This item is equiped.");
-                        Print.PrintMessageWithAudio("Are you sure you want to remove it?");
-                        string choice = Console.ReadLine();
-                        if (choice.ToLower().Contains("yes"))
+                        Item item = this.Player.Inventory[index];
+                        if (IsEquiped(item))
                         {
-                            this.Player.RemoveItem(item);
+                            Print.PrintMessageWithAudio("This item is equiped.");
+                            Print.PrintMessageWithAudio("Are you sure you want to remove it?");
+                            string choice = Console.ReadLine();
+                            if (choice.ToLower().Contains("yes"))
+                            {
+                                this.Player.RemoveItem(item);
+                            }
+                            else
+                            {
+                                Print.PrintMessageWithAudio("Good, you can find that item useful later on.");
+                            }
                         }
                         else
                         {
-                            Print.PrintMessageWithAudio("Good, you can find that item useful later on.");
+                            Print.PrintMessageWithAudio("Are you sure you want to remove it?");
+                            string choice = Console.ReadLine();
+                            if (choice.ToLower().Contains("yes"))
+                            {
+                                this.Player.RemoveItem(item);
+                            }
+                            else
+                            {
+                                Print.PrintMessageWithAudio("Good, you can find that item useful later on.");
+                            }
                         }
                     }
                     else
                     {
-                        Print.PrintMessageWithAudio("Are you sure you want to remove it?");
-                        string choice = Console.ReadLine();
-                        if (choice.ToLower().Contains("yes"))
-                        {
-                            this.Player.RemoveItem(item);
-                        }
-                        else
-                        {
-                            Print.PrintMessageWithAudio("Good, you can find that item useful later on.");
-                        }
+                        Print.PrintMessageWithAudio("Invalid item index.");
                     }
                 }
                 else
                 {
-                    Print.PrintMessageWithAudio("Invalid item index.");
+                    Print.PrintMessageWithAudio("Please enter a valid integer number.");
                 }
             }
             else
             {
-                Print.PrintMessageWithAudio("Please enter a valid integer number.");
+                Print.PrintMessage("Invalid input.");
             }
         }
 
         private void Unequip(string[] input)
         {
-            if (IsValidInteger(input[1]))
+            if (input.Length > 1)
             {
-                int index = int.Parse(input[1]);
-                if (IsIndexInRange(index, this.Player.Inventory.Count))
+                if (IsValidInteger(input[1]))
                 {
-                    Item item = player.Inventory[index];
-                    if (item is Weapon || item is Armor)
+                    int index = int.Parse(input[1]);
+                    if (IsIndexInRange(index, this.Player.Inventory.Count))
                     {
-                        player.UnequipItem(item);
-                        Print.PrintMessageWithAudio(item.Id + " is now unequiped.");
+                        Item item = player.Inventory[index];
+                        if (item is Weapon || item is Armor)
+                        {
+                            player.UnequipItem(item);
+                            Print.PrintMessageWithAudio(item.Id + " is now unequiped.");
+                        }
+                        else
+                        {
+                            Print.PrintMessageWithAudio("You can not unequip that item.");
+                        }
                     }
                     else
                     {
-                        Print.PrintMessageWithAudio("You can not unequip that item.");
+                        Print.PrintMessageWithAudio("Invalid item index.");
                     }
                 }
                 else
                 {
-                    Print.PrintMessageWithAudio("Invalid item index.");
+                    Print.PrintMessageWithAudio("Please enter a valid integer number.");
                 }
             }
             else
             {
-                Print.PrintMessageWithAudio("Please enter a valid integer number.");
+                Print.PrintMessage("Invalid input.");
             }
         }
 
         private void Equip(string[] input)
         {
-            if (IsValidInteger(input[1]))
+            if (input.Length > 1)
             {
-                int index = int.Parse(input[1]);
-                if (IsIndexInRange(index, this.Player.Inventory.Count))
+                if (IsValidInteger(input[1]))
                 {
-                    Item item = player.Inventory[index];
-                    if (item is Weapon || item is Armor)
+                    int index = int.Parse(input[1]);
+                    if (IsIndexInRange(index, this.Player.Inventory.Count))
                     {
-                        player.EquipItem(item);
-                        Print.PrintMessageWithAudio(item.Id + " is now equiped.");
+                        Item item = player.Inventory[index];
+                        if (item is Weapon || item is Armor)
+                        {
+                            player.EquipItem(item);
+                            Print.PrintMessageWithAudio(item.Id + " is now equiped.");
+                        }
+                        else
+                        {
+                            Print.PrintMessageWithAudio("You can not equip that item.");
+                        }
                     }
                     else
                     {
-                        Print.PrintMessageWithAudio("You can not equip that item.");
+                        Print.PrintMessageWithAudio("Invalid item index.");
                     }
                 }
                 else
                 {
-                    Print.PrintMessageWithAudio("Invalid item index.");
+                    Print.PrintMessageWithAudio("Please enter a valid integer number.");
                 }
             }
             else
             {
-                Print.PrintMessageWithAudio("Please enter a valid integer number.");
+                Print.PrintMessage("Invalid input.");
             }
         }
         #endregion
