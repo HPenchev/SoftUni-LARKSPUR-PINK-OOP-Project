@@ -255,7 +255,7 @@
             if (item is Potion)
             {
                 this.Mana += (item as Potion).Mana;
-                this.HealthPoints += (item as Potion).HealthPoints;
+               //this.HealthPoints += (item as Potion).HealthPoints;
             }
             else
             {

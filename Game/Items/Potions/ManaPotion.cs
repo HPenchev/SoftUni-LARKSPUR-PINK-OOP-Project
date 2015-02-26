@@ -11,6 +11,7 @@
         public ManaPotion(string id)
             : base(id)
         {
+            this.Mana = 100;
         }
 
         public double Mana

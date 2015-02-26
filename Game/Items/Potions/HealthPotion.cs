@@ -9,6 +9,7 @@
         public HealthPotion(string id)
             : base(id)
         {
+            this.HealthPoints = 100;
         }
     }
 }

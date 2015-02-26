@@ -117,14 +117,16 @@
                                              random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     if (item is HealthPotion)
                     {
-                        (item as HealthPotion).HealthPoints = item.HealthPoints *
-                                                              random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                        (item as HealthPotion).HealthPoints = 100;
+                        //item.HealthPoints *
+                        //                                  random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
 
                     if (item is ManaPotion)
                     {
-                        (item as ManaPotion).Mana = item.HealthPoints *
-                                                    random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
+                        (item as ManaPotion).Mana = 100;
+                        //item.HealthPoints *
+                        //                        random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
                 }
                 else

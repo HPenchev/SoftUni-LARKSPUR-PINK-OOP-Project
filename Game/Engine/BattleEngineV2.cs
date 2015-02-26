@@ -28,7 +28,7 @@ namespace Game.Engine
 
         internal void Run()
         {
-            
+
             GetItems();
             while (enemies.Count >= 0)
             {
@@ -64,10 +64,12 @@ namespace Game.Engine
 
         private void PlayerTurn(Enemy enemy)
         {
+            Console.WriteLine("Hero health: {0}, Enemy health: {1}", player.HealthPoints, enemy.HealthPoints);
 
             bool isTunEnd = false;
-            if (isTunEnd == false)
+            while (isTunEnd == false)
             {
+
                 string playerAttackType = Console.ReadLine();
                 switch (playerAttackType)
                 {
@@ -87,8 +89,8 @@ namespace Game.Engine
                     default:
                         Console.WriteLine("invalid command. Please try again"); break;
                 }
+
             }
-            
 
         }
 
@@ -103,6 +105,8 @@ namespace Game.Engine
                 player.ApplyItemEffects(manaPotions[0]);
                 Console.WriteLine("Mana potion used. Hero mana: {0}", player.Mana);
                 player.RemoveItem(manaPotions[0]);
+                manaPotions.Remove(manaPotions[0]);
+               
             }
         }
 
@@ -117,6 +121,8 @@ namespace Game.Engine
                 player.ApplyItemEffects(healthPotions[0]);
                 Console.WriteLine("Health potion used. Hero health: {0}", player.HealthPoints);
                 player.RemoveItem(healthPotions[0]);
+                healthPotions.Remove(healthPotions[0]);
+                
             }
         }
 
@@ -164,10 +170,11 @@ namespace Game.Engine
             if (enemy.HealthPoints <= 0)
             {
                 Console.WriteLine("Enemy Died");
+                player.Experience += (decimal)enemy.HealthPoints;
                 enemies.Remove(enemy);
             }
             ShowStats(enemy);
-            
+
         }
 
         private void EnemyTurn(List<Enemy> enemies)
