@@ -304,7 +304,6 @@ namespace Game.Core
                         if (item is Weapon || item is Armor)
                         {
                             player.EquipItem(item);
-                            Print.PrintMessageWithAudio(item.Id + " is now equiped.");
                         }
                         else
                         {

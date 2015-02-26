@@ -195,10 +195,6 @@
                     (item as Equipment).IsEquiped = false;
                     RemoveItemEffects(item);
                 }
-                else
-                {
-                    Print.PrintMessageWithAudio("That item is already unequiped.");
-                }
             }
             else
             {
@@ -216,7 +212,6 @@
                 if (!query.Any())
                 {
                     (item as Weapon).IsEquiped = true;
-                    Print.PrintMessageWithAudio(String.Format("{0} has been equiped.", item.Id));
                     ApplyItemEffects(item);
                 }
                 else
