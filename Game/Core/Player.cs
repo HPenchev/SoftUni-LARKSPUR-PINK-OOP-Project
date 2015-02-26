@@ -393,10 +393,7 @@
         public override double CalculateDamage(ICharacter target)
         {
             double damage = CalculateDamage() + this.AttackSpeed * 0.53;
-            if (target.DefensePoints < damage)
-            {
-                damage = 30;
-            }
+            
             return damage;
         }
 

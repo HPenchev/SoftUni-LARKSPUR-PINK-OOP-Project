@@ -31,7 +31,7 @@ namespace Game.Engine
         {
 
             GetItems();
-            while (enemies.Count >= 0)
+            while (enemies.Any())
             {
                 int choice = SelectEnemy();
                 Fight(choice);
@@ -60,7 +60,11 @@ namespace Game.Engine
         private void Fight(int choice)
         {
             PlayerTurn(enemies[choice]);
-            EnemyTurn(enemies);
+            if (enemies.Any())
+            {
+                EnemyTurn(enemies);
+            }
+
         }
 
         private void PlayerTurn(Enemy enemy)
@@ -68,7 +72,7 @@ namespace Game.Engine
             Print.PrintMessage(String.Format("Hero health: {0}, Enemy health: {1}", player.HealthPoints, enemy.HealthPoints));
 
             bool isTunEnd = false;
-            while (isTunEnd == false)
+            while (isTunEnd == false && enemies.Any())
             {
                 ShowCommands();
                 string playerAttackType = Console.ReadLine();
@@ -91,7 +95,7 @@ namespace Game.Engine
                         Print.PrintMessage(player.ToString());
                         break;
                     default:
-                        Print.PrintMessage("invalid command. Please try again"); 
+                        Print.PrintMessage("invalid command. Please try again");
                         break;
                 }
 
@@ -108,7 +112,7 @@ namespace Game.Engine
         {
             if (manaPotions.Count == 0 || manaPotions == null)
             {
-           Print.PrintMessageWithAudio("there are no mana potions in the inventory");
+                Print.PrintMessageWithAudio("there are no mana potions in the inventory");
             }
             else
             {
@@ -175,15 +179,21 @@ namespace Game.Engine
         private void PlayerHit(Enemy enemy)
         {
             enemy.HealthPoints -= player.CalculateDamage(enemy);
+            player.Experience += (decimal)player.CalculateDamage(enemy);
             lastUsedSpells.ForEach(n => player.RemoveItemEffects(n));
             lastUsedSpells.Clear();
             if (enemy.HealthPoints <= 0)
             {
                 Print.PrintMessageWithAudio("Enemy Died");
-                player.Experience += (decimal)enemy.HealthPoints;
+                player.KillCounter++;
+                player.PickUpItem(enemy.Inventory);
                 enemies.Remove(enemy);
             }
-            ShowStats(enemy);
+            if (enemies.Any())
+            {
+                ShowStats(enemy);
+
+            }
 
         }
 
@@ -200,7 +210,6 @@ namespace Game.Engine
                 player.IsAlive = false;
                 Print.PrintMessageWithAudio("You are dead");
                 Print.PrintMessage("Press any key to continue.....");
-                //string key = Console.ReadLine();
                 Console.Clear();
                 Engine engine = new Engine();
                 engine.Run();
