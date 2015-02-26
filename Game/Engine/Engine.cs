@@ -23,6 +23,9 @@ namespace Game.Engine
         private static Position playerPosition;
         private static int world;
         private static char previousMapElement;
+        private static Position specialElementPOs;
+        private static bool isMapEnementForRemove;
+      
         private const string saveFile = "save.dat";
         #endregion
 
@@ -274,9 +277,14 @@ namespace Game.Engine
                 {
                     ProceesMapElement(currentMapObject);
                 }
-
+             
                 map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
                 previousMapElement = map.Map[playerPosition.X - 1, playerPosition.Y];
+                if (isMapEnementForRemove)
+                {
+                    previousMapElement = 'e';
+                    isMapEnementForRemove = false;
+                }
                 map.Map[playerPosition.X - 1, playerPosition.Y] = 'P';
                 playerPosition.X--;
                 map.PrintMap();
@@ -297,9 +305,14 @@ namespace Game.Engine
                 {
                     ProceesMapElement(currentMapObject);
                 }
-
+              
                 map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
                 previousMapElement = map.Map[playerPosition.X + 1, playerPosition.Y];
+                if (isMapEnementForRemove)
+                {
+                    previousMapElement = 'e';
+                    isMapEnementForRemove = false;
+                }
                 map.Map[playerPosition.X + 1, playerPosition.Y] = 'P';
                 map.PrintMap();
                 Console.WriteLine();
@@ -323,6 +336,11 @@ namespace Game.Engine
 
                 map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
                 previousMapElement = map.Map[playerPosition.X, playerPosition.Y - 1];
+                if (isMapEnementForRemove)
+                {
+                    previousMapElement = 'e';
+                    isMapEnementForRemove = false;
+                }
                 map.Map[playerPosition.X, playerPosition.Y - 1] = 'P';
                 playerPosition.Y--;
                 map.PrintMap();
@@ -343,9 +361,14 @@ namespace Game.Engine
                 {
                     ProceesMapElement(currentMapObject);
                 }
-
+             
                 map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
                 previousMapElement = map.Map[playerPosition.X, playerPosition.Y + 1];
+                if (isMapEnementForRemove)
+                {
+                    previousMapElement = 'e';
+                    isMapEnementForRemove = false;
+                }
                 map.Map[playerPosition.X, playerPosition.Y + 1] = 'P';
                 playerPosition.Y++;
                 map.PrintMap();
@@ -536,8 +559,15 @@ namespace Game.Engine
                 List<Enemy> bosses = enemyGenerator.EnemiesList;
                 BattleEngineV2 battleEngine = new BattleEngineV2(player, bosses);
                 battleEngine.Run();
+                if (player.IsAlive)
+                {
+                    isMapEnementForRemove = true;
+                }
+              
                 world++;
                 player.CalculateLevelByExperience();
+                NextWorld();
+
 
             }
             else
@@ -560,7 +590,10 @@ namespace Game.Engine
                 List<Enemy> minions = enemyGenerator.EnemiesList;
                 BattleEngineV2 battleEngine = new BattleEngineV2(player, minions);
                 battleEngine.Run();
-                NextWorld();
+                if (player.IsAlive)
+                {
+                    isMapEnementForRemove = true;
+                }
             }
             else
             {
@@ -582,6 +615,10 @@ namespace Game.Engine
                 List<Enemy> mob = mobGenerator.EnemiesList;
                 BattleEngineV2 battleEngine = new BattleEngineV2(player, mob);
                 battleEngine.Run();
+                if (player.IsAlive)
+                {
+                    isMapEnementForRemove = true;
+                }
                 player.CalculateLevelByExperience();
             }
             else
@@ -605,6 +642,7 @@ namespace Game.Engine
             {
                 UseChest();
                 player.UpdateInventorySpace();
+                isMapEnementForRemove = true;
             }
             else
             {
@@ -634,6 +672,7 @@ namespace Game.Engine
             if (answer.ToLower().Contains("yes"))
             {
                 UseHealthWell();
+                isMapEnementForRemove = true;
             }
             else
             {
@@ -679,6 +718,7 @@ namespace Game.Engine
             if (answer.ToLower().Contains("yes"))
             {
                 UseManaWell();
+                isMapEnementForRemove = true;
             }
             else
             {
@@ -717,11 +757,13 @@ namespace Game.Engine
                     break;
 
                 case 'c':
+                   
                     InteractWithChest();
                     break;
 
                 case 'm':
                     InteractWithManaWell();
+
                     break;
 
                 case 'h':
@@ -746,7 +788,7 @@ namespace Game.Engine
         {
             //todo
             Random random = new Random();
-            int size = 8 * random.Next(5, world * 5);
+            int size = 4* random.Next(5, world * 5);
             int healtWellCount = random.Next(world + 1, world * 5);
             int manaWellCount = random.Next(world, world * 4);
             int chestCount = random.Next(world, world * (5 - 2));
@@ -779,7 +821,7 @@ namespace Game.Engine
             SetPlayerPos();
             previousMapElement = 'e';
         }
-        #endregion 
+        #endregion
 
         #region Save and Load
         public static void Save()
@@ -845,5 +887,5 @@ namespace Game.Engine
             ExecuteCommand();
         }
         #endregion
-    }
+    } 
 }
