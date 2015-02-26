@@ -82,9 +82,9 @@
                 this.EnemiesList.Add(boss);
             }
 
-            if (this.EnemyType == '0') 
+            if (this.EnemyType == 'O') 
             {
-                for (int i = 0; i < this.PlayerLevel; i++)
+                for (int i = 0; i <= this.PlayerLevel; i++)
                 {
                     itemGenerator = new RandomItemGenerator(this.PlayerLevel);
                     Minion minion = new Minion(DateTime.Now.Millisecond.ToString());
