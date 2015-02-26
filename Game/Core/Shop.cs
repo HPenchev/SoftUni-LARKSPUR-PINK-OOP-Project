@@ -95,12 +95,12 @@
 
         private void PrintShopCommands()
         {
-            Console.WriteLine("Available Commands:");
-            Console.WriteLine("buy [index]");
-            Console.WriteLine("inspect [index]");
-            Console.WriteLine("sell");
-            Console.WriteLine("print");
-            Console.WriteLine("exit");
+            Print.PrintMessageWithAudio("Available Commands:");
+            Print.PrintMessage("buy [index]");
+            Print.PrintMessage("inspect [index]");
+            Print.PrintMessage("sell");
+            Print.PrintMessage("print");
+            Print.PrintMessage("exit");
             Console.WriteLine();
         }
 
@@ -121,20 +121,20 @@
             }
             else
             {
-                Console.WriteLine("You do not have any items in your inventory.");
+                Print.PrintMessageWithAudio("You do not have any items in your inventory.");
             }
         }
 
         private void PrintSellMenuChoices()
         {
-            Console.WriteLine("Available Commands:");
-            Console.WriteLine("sell [index]");
-            Console.WriteLine("exit");
+            Print.PrintMessageWithAudio("Available Commands:");
+            Print.PrintMessage("sell [index]");
+            Print.PrintMessage("exit");
         }
 
         private string[] GetUserInput()
         {
-            Console.WriteLine("Awaiting input...");
+            Print.PrintMessageWithAudio("Awaiting input...");
             string[] input = Console.ReadLine().Split(' ');
             Console.WriteLine();
             return input;
@@ -197,27 +197,27 @@
                         {
                             this.Player.Inventory.Add(item);
                             this.Player.Gold -= item.Price;
-                            Console.WriteLine("You have successfuly bought {0}", item.Id);
+                            Print.PrintMessageWithAudio(String.Format("You have successfuly bought {0}", item.Id));
                             this.ShopInventory.Remove(item);
                         }
                         else
                         {
-                            Console.WriteLine("You do not have enough free inventory space available.");       
+                            Print.PrintMessageWithAudio("You do not have enough free inventory space available.");       
                         }
                     }
                     else
                     {
-                        Console.WriteLine("You do not have enough gold to buy this item.");
+                        Print.PrintMessageWithAudio("You do not have enough gold to buy this item.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid index. Please enter an index in range.");
+                    Print.PrintMessageWithAudio("Invalid index. Please enter an index in range.");
                 }
             }
             else
             {
-                Console.WriteLine("Invalid index. Please enter a valid integer number.");
+                Print.PrintMessageWithAudio("Invalid index. Please enter a valid integer number.");
             }
         }
 
@@ -238,12 +238,13 @@
                         {
                             if ((item as Equipment).IsEquiped)
                             {
-                                Console.WriteLine("This item is equiped.");
-                                Console.WriteLine("Are you sure you want to sell it?");
+                                Print.PrintMessageWithAudio("This item is equiped.");
+                                Print.PrintMessageWithAudio("Are you sure you want to sell it?");
                                 string choice = Console.ReadLine();
                                 if (choice.ToLower().Contains("yes"))
                                 {
-                                    Console.WriteLine("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M);
+                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.",
+                                                                              item.Id, item.Price * 0.8M));
                                     this.Player.RemoveItemEffects(item);
                                     this.Player.Gold += item.Price;
                                     this.Player.RemoveItem(item);
@@ -252,16 +253,17 @@
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Good choice, you may find this item useful.");
+                                    Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("Are you sure you want to sell it?");
+                                Print.PrintMessageWithAudio("Are you sure you want to sell it?");
                                 string choice = Console.ReadLine();
                                 if (choice.ToLower().Contains("yes"))
                                 {
-                                    Console.WriteLine("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M);
+                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold."
+                                                                , item.Id, item.Price * 0.8M));
                                     this.Player.Gold += item.Price;
                                     this.Player.RemoveItem(item);
                                     PrintPlayerInventory(this.Player);
@@ -269,18 +271,18 @@
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Good choice, you may find this item useful.");
+                                    Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
                                 }
                             }
 
                         }
                         else
                         {
-                            Console.WriteLine("Are you sure you want to sell it?");
+                            Print.PrintMessageWithAudio("Are you sure you want to sell it?");
                             string choice = Console.ReadLine();
                             if (choice.ToLower().Contains("yes"))
                             {
-                                Console.WriteLine("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M);
+                                Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M));
                                 this.Player.Gold += item.Price;
                                 this.Player.RemoveItem(item);
                                 PrintPlayerInventory(this.Player);
@@ -288,18 +290,18 @@
                             }
                             else
                             {
-                                Console.WriteLine("Good choice, you may find this item useful.");
+                                Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
                             }
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Invalid index. Please enter an index in range.");
+                        Print.PrintMessageWithAudio("Invalid index. Please enter an index in range.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid index. Please enter a valid integer number.");
+                    Print.PrintMessageWithAudio("Invalid index. Please enter a valid integer number.");
                 }
             }
             else
@@ -328,7 +330,7 @@
 
 
                 default:
-                    Console.WriteLine("Invalid command.");
+                    Print.PrintMessageWithAudio("Invalid command.");
                     break;
             }
 
