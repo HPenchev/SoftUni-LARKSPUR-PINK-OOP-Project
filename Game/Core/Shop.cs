@@ -243,7 +243,7 @@
                 if (IsValidInteger(sellMenuUserInput[1]))
                 {
                     int index = int.Parse(sellMenuUserInput[1]);
-                    if (IsIndexInRange(index, this.Player.Inventory.Count))
+                    if (IsIndexInRange(index, this.ShopInventory.Count))
                     {
                         Item item = this.Player.Inventory[index];
                         if (item is Equipment)
@@ -322,6 +322,27 @@
             }
         }
 
+        private void Inspect(string[] input)
+        {
+            if (IsValidInteger(input[1]))
+            {
+                int index = int.Parse(input[1]);
+                if (IsIndexInRange(index, this.ShopInventory.Count))
+                {
+                    Print.PrintMessageWithAudio(this.ShopInventory[index].ToString());
+                }
+                else
+                {
+                    Print.PrintMessageWithAudio("Invalid item index.");
+                }
+            }
+            else
+            {
+                Print.PrintMessageWithAudio("Please enter a valid integer number.");
+            }
+        }
+
+
         private void ExecuteUserInput(string[] input)
         {
             string command = input[0];
@@ -333,6 +354,15 @@
 
                 case "sell":
                     Sell();
+                    break;
+
+                case "inspect":
+                    Inspect(input);
+                    break;
+
+                case "print":
+                    PrintShopItems();
+                    PrintShopCommands();
                     break;
 
                 case "exit":

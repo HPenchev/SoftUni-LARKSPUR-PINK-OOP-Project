@@ -795,10 +795,10 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("Save Failed! File access denied.");
             }
-            catch (Exception)
-            {
-                Print.PrintMessageWithAudio("Save failed! An unspecified error occurred.");
-            }
+            //catch (Exception)
+            //{
+            //    Print.PrintMessageWithAudio("Save failed! An unspecified error occurred.");
+            //}
         }
 
         public static void Load()
@@ -822,10 +822,10 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("Load failed! File access denied.");
             }
-            catch (Exception)
-            {
-                Print.PrintMessageWithAudio("Load failed! An unspecified error occurred.");
-            }
+            //catch (Exception)
+            //{
+            //    Print.PrintMessageWithAudio("Load failed! An unspecified error occurred.");
+            //}
         }
 
         public static void LoadGame(SaveGame saveGame)
