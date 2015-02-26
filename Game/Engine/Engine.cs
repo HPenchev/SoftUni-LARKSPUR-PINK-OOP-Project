@@ -15,216 +15,18 @@
     [Serializable]
     public class Engine
     {
+        #region Fields
         private static Player player;
         private static MapGenerator map;
-        private static Position playerPos;
+        private static Position playerPosition;
         private static int world;
-        private static char prevMapElement;
+        private static char previousMapElement;
         private const string saveFile = "save.dat";
+        #endregion
 
         public void Run()
         {
             MainMenu();
-        }
-
-        public static void MainMenu()
-        {
-            while (true)
-            {
-                PrintMainMenu();
-                var mainMenuInput = Console.ReadLine();
-                Console.Clear();
-                if (String.IsNullOrWhiteSpace(mainMenuInput))
-                {
-                    Print.PrintMessageWithAudio("Invalid Menu Choice.");
-                }
-                else
-                {
-                    ExecuteMainMenu(mainMenuInput);
-                }
-            }
-        }
-
-        private static void ExecuteMainMenu(string mainMenuInput)
-        {
-            if (mainMenuInput.Contains("1"))
-            {
-                Print.PrintMessage("Please enter Hero class and the Hero's name. [mage] [Gandalf]");
-                DisplayAvailableHeroes();
-                NewGame();
-            }
-            else if (mainMenuInput.Contains("2"))
-            {
-                Load();
-            }
-            else if (mainMenuInput.ToLower().Contains("exit"))
-            {
-                Print.PrintMessageWithAudio("Goodbye.");
-                Environment.Exit(0);
-            }
-        }
-
-        private static void NewGameUserInput()
-        {
-            bool isValid = false;
-            while (!isValid)
-            {
-                string newGameMenuUserInput = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(newGameMenuUserInput))
-                {
-                    PrintNewGameMenuInvalidInputMessage();
-                }
-                else
-                {
-                    string[] heroParameters = SplitUserInput(newGameMenuUserInput.Trim());
-                    if (player == null && heroParameters.Length >= 2 &&
-                        EngineConst.TypeOfHeroes.Contains(heroParameters[0].ToLower()))
-                    {
-                        isValid = true;
-                        GenerateMapByWorld();
-                        CreatePlayer(heroParameters);
-                    }
-
-                    if (heroParameters.Contains("exit"))
-                    {
-                        Console.WriteLine();
-                        Print.PrintMessageWithAudio("Goodbye");
-                        Environment.Exit(0);
-                    }
-
-                    if (!isValid && !heroParameters.Contains("exit"))
-                    {
-                        PrintNewGameMenuInvalidInputMessage();
-                    }
-                }
-            }
-        }
-
-        private static void CreatePlayer(string[] inputParams)
-        {
-            switch (inputParams[0].ToLower())
-            {
-                case "mage":
-                    player = new Mage(inputParams[1]);
-                    break;
-
-                case "amazon":
-                    player = new Amazon(inputParams[1]);
-                    break;
-
-                case "druid":
-                    player = new Druid(inputParams[1]);
-                    break;
-
-                case "barbarian":
-                    player = new Barbarian(inputParams[1]);
-                    break;
-
-                default:
-                    break;
-            }
-
-            string playerType = player.GetType().ToString().Replace("Game.Characters.", string.Empty);
-            Console.Clear();
-            Print.PrintMessageWithAudio(String.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
-        }
-
-        private static string[] SplitUserInput(string input)
-        {
-            string[] userParams = input.Split(' ');
-            return userParams;
-        }
-
-        private static void NewGame()
-        {
-            world = 1;
-            prevMapElement = 'e';
-            NewGameUserInput();
-            SetPlayerPos();
-            ExecuteCommand();
-
-        }
-
-        private static void SetPlayerPos()
-        {
-            map.PrintMap();
-            for (int i = 0; i < map.Size; i++)
-            {
-                for (int j = 0; j < map.Size; j++)
-                {
-                    if (map.Map[i, j] == 'P')
-                    {
-                        playerPos.Y = j;
-                        playerPos.X = i;
-                    }
-                }
-            }
-        }
-
-        private static void ExecuteCommand()
-        {
-            while (true)
-            {
-                string[] inputParams = SplitUserInput(Console.ReadLine());
-                switch (inputParams[0].ToLower())
-                {
-                    case "exit":
-                        Console.Clear();
-                        Print.PrintMessageWithAudio("Goodbye");
-                        PlayAudio.YouPussy();
-                        Environment.Exit(0);
-                        break;
-
-                    case "display-area":
-                        Console.Clear();
-                        DisplaySurroundings();
-                        break;
-
-                    case "stats":
-                        Console.Clear();
-                        Print.PrintMessage(GetPlayerStats());
-                        break;
-
-                    case "items":
-                        Console.Clear();
-                        player.Inventory.ForEach(n => Console.WriteLine(n.Id));
-                        break;
-
-                    case "inventory":
-                        Console.Clear();
-                        Inventory();
-                        break;
-
-                    case "move":
-                        Console.Clear();
-                        Move(inputParams[1]);
-                        break;
-
-                    case "help":
-                        Console.Clear();
-                        DisplayCommands();
-                        break;
-
-                    case "print":
-                        Console.Clear();
-                        map.PrintMap();
-                        break;
-
-                    case "save":
-                        Save();
-                        break;
-
-                    case "load":
-                        Load();
-                        break;
-
-                    default:
-                        Console.Clear();
-                        Print.PrintMessageWithAudio("Invalid command.");
-                        DisplayCommands();
-                        break;
-                }
-            }
         }
 
         private static void Inventory()
@@ -315,57 +117,193 @@
             }
         }
 
-
-        private static string GetPlayerStats()
+        #region NewGame
+        private static void NewGameUserInput()
         {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendFormat("Name: {0} Level: {1} Experience: {2}\n", player.Id, player.Level, player.Experience);
-            builder.AppendFormat("Attack: {0} Defence: {1} Health: {2} Mana {3}\n",
-                                  player.AttackPoints, player.DefensePoints, player.HealthPoints, player.Mana);
-            builder.AppendFormat("All Ressistance: {0}\n", player.AllResistance);
-            builder.AppendFormat("Attack Speed: {0}\n", player.AttackSpeed);
-            builder.AppendFormat("Chance to Dodge: {0}\n", player.ChanceToDodge);
-            builder.AppendFormat("Critical Chance: {0}\n", player.CriticalChance);
-            builder.AppendFormat("Critical Damage: {0}\n", player.CritDamage);
-            builder.AppendFormat("Kills Counter = {0}\n", player.KillCounter);
-            builder.AppendFormat("Gold Available = {0}\n", player.Gold);
-            return builder.ToString();
-        }
-
-        private static void ProceesMapElement(char currmapChar)
-        {
-            switch (currmapChar)
+            bool isValid = false;
+            while (!isValid)
             {
-                case 'H':
-                    Shop shop = new Shop(player);
-                    shop.Run();
-                    break;
+                string newGameMenuUserInput = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(newGameMenuUserInput))
+                {
+                    PrintNewGameMenuInvalidInputMessage();
+                }
+                else
+                {
+                    string[] heroParameters = SplitUserInput(newGameMenuUserInput.Trim());
+                    if (player == null && heroParameters.Length >= 2 &&
+                        EngineConst.TypeOfHeroes.Contains(heroParameters[0].ToLower()))
+                    {
+                        isValid = true;
+                        GenerateMapByWorld();
+                        CreatePlayer(heroParameters);
+                    }
 
-                case 'c':
-                    InteractWithChest();
-                    break;
+                    if (heroParameters.Contains("exit"))
+                    {
+                        Console.WriteLine();
+                        Print.PrintMessageWithAudio("Goodbye");
+                        Environment.Exit(0);
+                    }
 
-                case 'm':
-                    InteractWithManaWell();
-                    break;
-
-                case 'h':
-                    InteractWithHealthWell();
-                    break;
-
-                case 'M':
-                    InteractWithMinions();
-                    break;
-
-                case 'B':
-                    InteractWithBoss();
-                    break;
-
-                case 'O':
-                    InteractWithMob();
-                    break;
+                    if (!isValid && !heroParameters.Contains("exit"))
+                    {
+                        PrintNewGameMenuInvalidInputMessage();
+                    }
+                }
             }
         }
+
+        private static void NewGame()
+        {
+            world = 1;
+            previousMapElement = 'e';
+            NewGameUserInput();
+            SetPlayerPos();
+            ExecuteCommand();
+        }
+        #endregion
+
+        #region MainMenu
+        public static void MainMenu()
+        {
+            while (true)
+            {
+                PrintMainMenu();
+                var mainMenuInput = Console.ReadLine();
+                Console.Clear();
+                if (String.IsNullOrWhiteSpace(mainMenuInput))
+                {
+                    Print.PrintMessageWithAudio("Invalid Menu Choice.");
+                }
+                else
+                {
+                    ExecuteMainMenu(mainMenuInput);
+                }
+            }
+        }
+
+        private static void ExecuteMainMenu(string mainMenuInput)
+        {
+            if (mainMenuInput.Contains("1"))
+            {
+                Print.PrintMessage("Please enter Hero class and the Hero's name. [mage] [Gandalf]");
+                DisplayAvailableHeroes();
+                NewGame();
+            }
+            else if (mainMenuInput.Contains("2"))
+            {
+                Load();
+            }
+            else if (mainMenuInput.ToLower().Contains("exit"))
+            {
+                Print.PrintMessageWithAudio("Goodbye.");
+                Environment.Exit(0);
+            }
+        }
+        #endregion
+
+        #region PlayerCreation
+        private static void CreatePlayer(string[] inputParams)
+        {
+            switch (inputParams[0].ToLower())
+            {
+                case "mage":
+                    player = new Mage(inputParams[1]);
+                    break;
+
+                case "amazon":
+                    player = new Amazon(inputParams[1]);
+                    break;
+
+                case "druid":
+                    player = new Druid(inputParams[1]);
+                    break;
+
+                case "barbarian":
+                    player = new Barbarian(inputParams[1]);
+                    break;
+            }
+
+            string playerType = player.GetType().ToString().Replace("Game.Characters.", string.Empty);
+            Console.Clear();
+            Print.PrintMessageWithAudio(String.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
+        }
+
+        private static string[] SplitUserInput(string input)
+        {
+            string[] userParams = input.Split(' ');
+            return userParams;
+        }
+        #endregion
+
+        #region Command Exection
+        private static void ExecuteCommand()
+        {
+            while (true)
+            {
+                string[] inputParams = SplitUserInput(Console.ReadLine());
+                switch (inputParams[0].ToLower())
+                {
+                    case "exit":
+                        Console.Clear();
+                        Print.PrintMessageWithAudio("Goodbye");
+                        PlayAudio.YouPussy();
+                        Environment.Exit(0);
+                        break;
+
+                    case "display-area":
+                        Console.Clear();
+                        DisplaySurroundings();
+                        break;
+
+                    case "stats":
+                        Console.Clear();
+                        Print.PrintMessage(GetPlayerStats());
+                        break;
+
+                    case "items":
+                        Console.Clear();
+                        player.Inventory.ForEach(n => Console.WriteLine(n.Id));
+                        break;
+
+                    case "inventory":
+                        Console.Clear();
+                        Inventory();
+                        break;
+
+                    case "move":
+                        Console.Clear();
+                        Move(inputParams[1]);
+                        break;
+
+                    case "help":
+                        Console.Clear();
+                        DisplayCommands();
+                        break;
+
+                    case "print":
+                        Console.Clear();
+                        map.PrintMap();
+                        break;
+
+                    case "save":
+                        Save();
+                        break;
+
+                    case "load":
+                        Load();
+                        break;
+
+                    default:
+                        Console.Clear();
+                        Print.PrintMessageWithAudio("Invalid command.");
+                        DisplayCommands();
+                        break;
+                }
+            }
+        }
+        #endregion
 
         #region Movement
         private static void Move(string direction)
@@ -396,22 +334,22 @@
 
         private static void MoveUp()
         {
-            if (playerPos.X <= 0)
+            if (playerPosition.X <= 0)
             {
                 PrintMapBoarderReachedMessage();
             }
             else
             {
-                char currentMapObject = map.Map[playerPos.X - 1, playerPos.Y];
+                char currentMapObject = map.Map[playerPosition.X - 1, playerPosition.Y];
                 if (currentMapObject != 'e')
                 {
                     ProceesMapElement(currentMapObject);
                 }
 
-                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
-                prevMapElement = map.Map[playerPos.X - 1, playerPos.Y];
-                map.Map[playerPos.X - 1, playerPos.Y] = 'P';
-                playerPos.X--;
+                map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
+                previousMapElement = map.Map[playerPosition.X - 1, playerPosition.Y];
+                map.Map[playerPosition.X - 1, playerPosition.Y] = 'P';
+                playerPosition.X--;
                 map.PrintMap();
                 Console.WriteLine();
             }
@@ -419,45 +357,45 @@
 
         private static void MoveDown()
         {
-            if (playerPos.X > map.Size - 2)
+            if (playerPosition.X > map.Size - 2)
             {
                 PrintMapBoarderReachedMessage();
             }
             else
             {
-                char currentMapObject = map.Map[playerPos.X + 1, playerPos.Y];
+                char currentMapObject = map.Map[playerPosition.X + 1, playerPosition.Y];
                 if (currentMapObject != 'e')
                 {
                     ProceesMapElement(currentMapObject);
                 }
 
-                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
-                prevMapElement = map.Map[playerPos.X + 1, playerPos.Y];
-                map.Map[playerPos.X + 1, playerPos.Y] = 'P';
+                map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
+                previousMapElement = map.Map[playerPosition.X + 1, playerPosition.Y];
+                map.Map[playerPosition.X + 1, playerPosition.Y] = 'P';
                 map.PrintMap();
                 Console.WriteLine();
-                playerPos.X++;
+                playerPosition.X++;
             }
         }
 
         private static void MoveLeft()
         {
-            if (playerPos.Y <= 0)
+            if (playerPosition.Y <= 0)
             {
                 PrintMapBoarderReachedMessage();
             }
             else
             {
-                char currentMapObject = map.Map[playerPos.X, playerPos.Y - 1];
+                char currentMapObject = map.Map[playerPosition.X, playerPosition.Y - 1];
                 if (currentMapObject != 'e')
                 {
                     ProceesMapElement(currentMapObject);
                 }
 
-                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
-                prevMapElement = map.Map[playerPos.X, playerPos.Y - 1];
-                map.Map[playerPos.X, playerPos.Y - 1] = 'P';
-                playerPos.Y--;
+                map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
+                previousMapElement = map.Map[playerPosition.X, playerPosition.Y - 1];
+                map.Map[playerPosition.X, playerPosition.Y - 1] = 'P';
+                playerPosition.Y--;
                 map.PrintMap();
                 Console.WriteLine();
             }
@@ -465,22 +403,22 @@
 
         private static void MoveRight()
         {
-            if (playerPos.Y >= map.Size - 1)
+            if (playerPosition.Y >= map.Size - 1)
             {
                 PrintMapBoarderReachedMessage();
             }
             else
             {
-                char currentMapObject = map.Map[playerPos.X, playerPos.Y + 1];
+                char currentMapObject = map.Map[playerPosition.X, playerPosition.Y + 1];
                 if (currentMapObject != 'e')
                 {
                     ProceesMapElement(currentMapObject);
                 }
 
-                map.Map[playerPos.X, playerPos.Y] = prevMapElement;
-                prevMapElement = map.Map[playerPos.X, playerPos.Y + 1];
-                map.Map[playerPos.X, playerPos.Y + 1] = 'P';
-                playerPos.Y++;
+                map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
+                previousMapElement = map.Map[playerPosition.X, playerPosition.Y + 1];
+                map.Map[playerPosition.X, playerPosition.Y + 1] = 'P';
+                playerPosition.Y++;
                 map.PrintMap();
                 Console.WriteLine();
             }
@@ -581,8 +519,8 @@
 
         private static void DisplaySurroundings()
         {
-            int x = playerPos.X;
-            int y = playerPos.Y;
+            int x = playerPosition.X;
+            int y = playerPosition.Y;
 
             if (y == 0 && x != 0 && x != map.Size - 1)
             {
@@ -668,12 +606,28 @@
             Print.PrintMessage("print");
             Print.PrintMessage("exit");
         }
+
+        private static string GetPlayerStats()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendFormat("Name: {0} Level: {1} Experience: {2}\n", player.Id, player.Level, player.Experience);
+            builder.AppendFormat("Attack: {0} Defence: {1} Health: {2} Mana {3}\n",
+                                  player.AttackPoints, player.DefensePoints, player.HealthPoints, player.Mana);
+            builder.AppendFormat("All Ressistance: {0}\n", player.AllResistance);
+            builder.AppendFormat("Attack Speed: {0}\n", player.AttackSpeed);
+            builder.AppendFormat("Chance to Dodge: {0}\n", player.ChanceToDodge);
+            builder.AppendFormat("Critical Chance: {0}\n", player.CriticalChance);
+            builder.AppendFormat("Critical Damage: {0}\n", player.CritDamage);
+            builder.AppendFormat("Kills Counter = {0}\n", player.KillCounter);
+            builder.AppendFormat("Gold Available = {0}\n", player.Gold);
+            return builder.ToString();
+        }
         #endregion
 
         #region Enemy Interaction
         private static void InteractWithBoss()
         {
-            PlayAudio.YouAreFucked(); // AUDIO TEST
+            PlayAudio.YouAreFucked();
             Print.PrintMessageWithAudio("You have encountered a BOSS!");
             Print.PrintMessageWithAudio("Do you want to fight?");
             string input = Console.ReadLine();
@@ -697,7 +651,7 @@
 
         private static void InteractWithMinions()
         {
-            PlayAudio.YouAreFucked(); // AUDIO TEST
+            PlayAudio.YouAreFucked();
             Print.PrintMessageWithAudio("You have encountered a Minion!");
             Print.PrintMessageWithAudio("Do you want to fight?");
             string input = Console.ReadLine();
@@ -854,6 +808,41 @@
         #endregion
 
         #region Map
+        private static void ProceesMapElement(char currmapChar)
+        {
+            switch (currmapChar)
+            {
+                case 'H':
+                    Shop shop = new Shop(player);
+                    shop.Run();
+                    break;
+
+                case 'c':
+                    InteractWithChest();
+                    break;
+
+                case 'm':
+                    InteractWithManaWell();
+                    break;
+
+                case 'h':
+                    InteractWithHealthWell();
+                    break;
+
+                case 'M':
+                    InteractWithMinions();
+                    break;
+
+                case 'B':
+                    InteractWithBoss();
+                    break;
+
+                case 'O':
+                    InteractWithMob();
+                    break;
+            }
+        }
+
         public static void GenerateMapByWorld()
         {
             //todo
@@ -868,12 +857,28 @@
             map = generatedMap;
         }
 
+        private static void SetPlayerPos()
+        {
+            map.PrintMap();
+            for (int i = 0; i < map.Size; i++)
+            {
+                for (int j = 0; j < map.Size; j++)
+                {
+                    if (map.Map[i, j] == 'P')
+                    {
+                        playerPosition.Y = j;
+                        playerPosition.X = i;
+                    }
+                }
+            }
+        }
+
         private static void NextWorld()
         {
             player.CalculateLevelByExperience();
             GenerateMapByWorld();
             SetPlayerPos();
-            prevMapElement = 'e';
+            previousMapElement = 'e';
         }
         #endregion 
 
@@ -881,7 +886,7 @@
         public static void Save()
         {
 
-            SaveGame saveGame = new SaveGame(player, map, playerPos, world, prevMapElement);
+            SaveGame saveGame = new SaveGame(player, map, playerPosition, world, previousMapElement);
             try
             {
                 using (Stream stream = File.Open(saveFile, FileMode.Create))
@@ -933,9 +938,9 @@
         {
             player = saveGame.Player;
             map = saveGame.LastMapState;
-            playerPos = saveGame.PlayerPosition;
+            playerPosition = saveGame.PlayerPosition;
             world = saveGame.LastWorld;
-            prevMapElement = saveGame.PrevMapElement;
+            previousMapElement = saveGame.PrevMapElement;
             Print.PrintMessageWithAudio("Load successful.");
             map.PrintMap();
             ExecuteCommand();

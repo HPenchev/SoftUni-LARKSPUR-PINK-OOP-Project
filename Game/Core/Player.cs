@@ -255,7 +255,6 @@
             if (item is Potion)
             {
                 this.Mana += (item as Potion).Mana;
-               //this.HealthPoints += (item as Potion).HealthPoints;
             }
             else
             {
@@ -298,7 +297,6 @@
                 (item as Equipment).IsEquiped = false;
             }
         }
-
 
 
         public void PickUpItem(List<Item> items)
@@ -400,12 +398,6 @@
         }
 
 
-        //public double Attack(ICharacter enemy)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
         public override double CalculateDamage(ICharacter target)
         {
             double damage = CalculateDamage() + this.AttackSpeed * 0.53;
@@ -415,10 +407,7 @@
             }
             return damage;
         }
-        /// <summary>
-        /// /////////ashfahsiouhasfu todo
-        /// </summary>
-        /// <returns></returns>
+
         protected override double CalculateDamage()
         {
             double damage = this.AttackPoints;
@@ -443,6 +432,8 @@
             this.attackSpeed *= 1.1;
             this.allResistance *= 1.1;
         }
+
+
         #endregion
     }
 }
