@@ -188,6 +188,8 @@ namespace Game.Engine
             if (player.HealthPoints <= 0)
             {
                 Console.WriteLine("You are dead");
+                Console.WriteLine("Press any key to continue.....");
+                string key = Console.ReadLine();
                 Console.Clear();
                 Engine engine = new Engine();
                 engine.Run();

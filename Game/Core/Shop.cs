@@ -75,6 +75,16 @@
         #endregion
 
         #region Methods
+        public void Run()
+        {
+            PrintShopItems();
+            PrintShopCommands();
+            while (this.IsInShop)
+            {
+                string[] input = GetUserInput();
+                ExecuteUserInput(input);
+            }
+        }
 
         private void EqualizeItemAndPlayerLevel()
         {
@@ -90,6 +100,7 @@
             {
                 Console.WriteLine("{0} ---> {1}  {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
             }
+
             Console.WriteLine("{0}\n", new String('-', 10));
         }
 
@@ -113,9 +124,10 @@
                 Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
                 for (int i = 0; i < player.Inventory.Count; i++)
                 {
-                    Console.WriteLine("{0} Index: {1} Price: {2:F0} gold", player.Inventory[i].Id, i,
-                        player.Inventory[i].Price*0.8M);
+                    Console.WriteLine("{0} Index: {1} Price: {2:F0} gold",
+                                      player.Inventory[i].Id, i, player.Inventory[i].Price * 0.8M);
                 }
+
                 Console.WriteLine((String.Format("{0}\n", new String('-', 10))));
                 Console.WriteLine();
             }
@@ -182,7 +194,7 @@
             {
                 return false;
             }
-        } //todo CHECK because inventory space is auto updated
+        }
 
         private void Buy(string[] input)
         {
@@ -262,8 +274,8 @@
                                 string choice = Console.ReadLine();
                                 if (choice.ToLower().Contains("yes"))
                                 {
-                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold."
-                                                                , item.Id, item.Price * 0.8M));
+                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.",
+                                                                              item.Id, item.Price * 0.8M));
                                     this.Player.Gold += item.Price;
                                     this.Player.RemoveItem(item);
                                     PrintPlayerInventory(this.Player);
@@ -274,7 +286,6 @@
                                     Print.PrintMessageWithAudio("Good choice, you may find this item useful.");
                                 }
                             }
-
                         }
                         else
                         {
@@ -328,24 +339,9 @@
                     this.IsInShop = false;
                     break;
 
-
                 default:
                     Print.PrintMessageWithAudio("Invalid command.");
                     break;
-            }
-
-           
-            
-        }
-
-        public void Run()
-        {
-            PrintShopItems();
-            PrintShopCommands();
-            while (this.IsInShop)
-            {
-                string[] input = GetUserInput();
-                ExecuteUserInput(input);
             }
         }
         #endregion

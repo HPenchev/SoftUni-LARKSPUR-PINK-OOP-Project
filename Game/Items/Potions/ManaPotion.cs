@@ -8,8 +8,7 @@
     public class ManaPotion : Potion
     {
         private double mana;
-        public ManaPotion(string id)
-            : base(id)
+        public ManaPotion(string id) : base(id)
         {
             this.Mana = 100;
         }
