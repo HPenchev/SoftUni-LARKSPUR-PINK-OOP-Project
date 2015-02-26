@@ -117,14 +117,15 @@
                                              random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     if (item is HealthPotion)
                     {
-                        (item as HealthPotion).HealthPoints = 100;
+                        (item as HealthPotion).HealthPoints = ((item as HealthPotion).HealthPoints * PlayerLevel) / 2;
                         //item.HealthPoints *
                         //                                  random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
 
                     if (item is ManaPotion)
                     {
-                        (item as ManaPotion).Mana = 100;
+                        (item as ManaPotion).Mana = ((item as ManaPotion).Mana * PlayerLevel) / 2;
+                        //100;
                         //item.HealthPoints *
                         //                        random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
@@ -155,7 +156,7 @@
             }
         }
 
-         private void GetRandomItems()
+        private void GetRandomItems()
         {
             Random random = new Random();
             for (int i = 0; i <= random.Next(Math.Abs(this.PlayerLevel - 2), this.PlayerLevel + 2); i++)

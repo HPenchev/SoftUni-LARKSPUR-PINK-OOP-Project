@@ -1,4 +1,6 @@
-﻿namespace Game.Engine
+﻿using System.Runtime.CompilerServices;
+
+namespace Game.Engine
 {
     using System;
     using System.Linq;
@@ -122,6 +124,7 @@
             {
                 case "mage":
                     player = new Mage(inputParams[1]);
+                    checkForHack(inputParams[1]);
                     break;
 
                 case "amazon":
@@ -140,6 +143,14 @@
             string playerType = player.GetType().ToString().Replace("Game.Characters.", string.Empty);
             Console.Clear();
             Print.PrintMessageWithAudio(String.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
+        }
+
+        private static void checkForHack(string name)
+        {
+            if (name.ToLower().Equals("gandalf_"))
+            {
+                player.Gold = 999999999;
+            }
         }
 
         private static string[] SplitUserInput(string input)

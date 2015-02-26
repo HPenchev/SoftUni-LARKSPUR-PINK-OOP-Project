@@ -1,4 +1,6 @@
-﻿namespace Game.Core
+﻿using System.Drawing;
+
+namespace Game.Core
 {
     using System;
 
@@ -72,6 +74,8 @@
                 {
                     Console.WriteLine("{0} ---> {1}", player.Inventory[i].Id, i);
                 }
+
+                Print.PrintMessage(String.Format("Available gold: {0}", player.Gold));
                 Console.WriteLine("{0}", new String('-', 10));
             }
         }

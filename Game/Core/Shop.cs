@@ -101,6 +101,7 @@
                 Console.WriteLine("{0} ---> {1}  {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
             }
 
+            Print.PrintMessage(String.Format("Available gold: {0}", player.Gold));
             Console.WriteLine("{0}\n", new String('-', 10));
         }
 
@@ -210,11 +211,10 @@
                             this.Player.Inventory.Add(item);
                             this.Player.Gold -= item.Price;
                             Print.PrintMessageWithAudio(String.Format("You have successfuly bought {0}", item.Id));
-                            this.ShopInventory.Remove(item);
                         }
                         else
                         {
-                            Print.PrintMessageWithAudio("You do not have enough free inventory space available.");       
+                            Print.PrintMessageWithAudio("You do not have enough free inventory space available.");
                         }
                     }
                     else
