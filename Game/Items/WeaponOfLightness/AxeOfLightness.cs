@@ -10,7 +10,7 @@
         public AxeOfLightness(string id)
             : base(id)
         {
-            this.Id = "Axe made from the core of a fallen star";
+            this.Id = "Axe Of Lightness";
             this.AttackPoints = 125;
             this.AttackSpeed = 0;
             this.ChanceToDodge = 0;

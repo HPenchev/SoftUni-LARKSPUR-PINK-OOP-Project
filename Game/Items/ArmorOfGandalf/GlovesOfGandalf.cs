@@ -10,7 +10,7 @@
         public GlovesOfGandalf(string id)
             : base(id)
         {
-            this.Id = "The Gloves of Gandalf the great";
+            this.Id = "Gloves Of Gandalf";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.2;
             this.ChanceToDodge = 0;

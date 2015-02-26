@@ -12,7 +12,7 @@ namespace Game.Core
         #region Fields
         private double attackPoints;
         private double healthPoints;
-        private double defensePoints;
+        private double defencePoints;
         private int level;
         private decimal price;
         private int size;
@@ -26,7 +26,7 @@ namespace Game.Core
             this.Price = price;
             this.Size = size;
             this.HealthPoints = healthPoints;
-            this.DefensePoints = defensePoints;
+            this.DefensePoints = defencePoints;
         }
         #endregion
 
@@ -47,9 +47,9 @@ namespace Game.Core
 
         public double DefensePoints
         {
-            get { return this.defensePoints; }
+            get { return this.defencePoints; }
 
-            set { this.defensePoints = value; }
+            set { this.defencePoints = value; }
         }
 
         public int Level

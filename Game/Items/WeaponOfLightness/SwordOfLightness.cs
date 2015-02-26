@@ -10,7 +10,7 @@
         public SwordOfLightness(string id)
             : base(id)
         {
-            this.Id = "Sword made from the core of fallen star";
+            this.Id = "Sword Of Lightness";
             this.AttackPoints = 125;
             this.AttackSpeed = 0;
             this.ChanceToDodge = 0;

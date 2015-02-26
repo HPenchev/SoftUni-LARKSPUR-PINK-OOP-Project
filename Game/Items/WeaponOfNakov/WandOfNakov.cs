@@ -10,7 +10,7 @@
         public WandOfNakov(string id)
             : base(id)
         {
-            this.Id = "The Wand of Justice";
+            this.Id = "Wand Of Nakov";
             this.AttackPoints = 100;
             this.AttackSpeed = 0.1;
             this.ChanceToDodge = 0;

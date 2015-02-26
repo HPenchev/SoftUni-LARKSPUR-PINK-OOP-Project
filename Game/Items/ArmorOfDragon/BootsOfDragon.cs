@@ -10,7 +10,7 @@
         public BootsOfDragon(string id)
             : base(id)
         {
-            this.Id = "Boots forged with the breath of fire-breathing dragon";
+            this.Id = "Boots Of Dragon";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.15;
             this.ChanceToDodge = 8;

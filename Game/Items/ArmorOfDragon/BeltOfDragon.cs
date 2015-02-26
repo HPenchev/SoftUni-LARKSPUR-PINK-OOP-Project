@@ -10,7 +10,7 @@
         public BeltOfDragon(string id)
             : base(id)
         {
-            this.Id = "Belt forged with the breath of fire-breathing dragon";
+            this.Id = "Belt Of Dragon";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.05;
             this.ChanceToDodge = 0;

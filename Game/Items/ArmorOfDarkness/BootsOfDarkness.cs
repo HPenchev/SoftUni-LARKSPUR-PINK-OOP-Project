@@ -10,7 +10,7 @@
         public BootsOfDarkness(string id)
             : base(id)
         {
-            this.Id = "Boots covered by darkness found dragon's dungeons";
+            this.Id = "Boots Of Darkness";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.10;
             this.ChanceToDodge = 12;

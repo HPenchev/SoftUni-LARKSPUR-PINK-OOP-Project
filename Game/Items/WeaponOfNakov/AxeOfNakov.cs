@@ -10,7 +10,7 @@
         public AxeOfNakov(string id)
             : base(id)
         {
-            this.Id = "The Axe of Justice";
+            this.Id = "Axe Of Nakov";
             this.AttackPoints = 100;
             this.AttackSpeed = 0.1;
             this.ChanceToDodge = 0;

@@ -10,7 +10,7 @@
         public PantsOfDragon(string id)
             : base(id)
         {
-            this.Id = "Pants forged with the breath of fire-breathing dragon";
+            this.Id = "Pants Of Dragon";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.2;
             this.ChanceToDodge = 2;

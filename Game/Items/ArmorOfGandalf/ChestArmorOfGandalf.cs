@@ -10,7 +10,7 @@
         public ChestArmorOfGandalf(string id)
             : base(id)
         {
-            this.Id = "The Armor of Gandalf the great";
+            this.Id = "Chest Armor Of Gandalf";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.1;
             this.ChanceToDodge = 10;

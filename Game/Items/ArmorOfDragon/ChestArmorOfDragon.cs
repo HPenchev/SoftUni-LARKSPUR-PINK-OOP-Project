@@ -10,7 +10,7 @@
         public ChestArmorOfDragon(string id)
             : base(id)
         {
-            this.Id = "Armor forged with the breath of fire-breathing dragon";
+            this.Id = "Chest Armor Of Dragon";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.05;
             this.ChanceToDodge = 8;

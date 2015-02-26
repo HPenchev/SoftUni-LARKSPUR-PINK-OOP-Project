@@ -10,7 +10,7 @@
         public BeltOfDarkness(string id)
             : base(id)
         {
-            this.Id = "Belt covered by darkness found in dragon's dungeons";
+            this.Id = "Belt Of Darkness";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.15;
             this.ChanceToDodge = 0;

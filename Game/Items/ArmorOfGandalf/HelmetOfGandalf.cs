@@ -10,7 +10,7 @@
         public HelmetOfGandalf(string id)
             : base(id)
         {
-            this.Id = "The Helmet of Gandalf the great";
+            this.Id = "Helmet Of Gandalf";
             this.AttackPoints = 0;
             this.AttackSpeed = 0;
             this.ChanceToDodge = 3;

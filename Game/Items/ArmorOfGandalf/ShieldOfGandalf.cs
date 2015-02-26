@@ -10,7 +10,7 @@
         public ShieldOfGandalf(string id)
             : base(id)
         {
-            this.Id = "The Shield of Gandalf the great";
+            this.Id = "Shield Of Gandalf";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.2;
             this.ChanceToDodge = 15;

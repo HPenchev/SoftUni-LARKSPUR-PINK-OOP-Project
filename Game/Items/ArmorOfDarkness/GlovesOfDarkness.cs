@@ -10,7 +10,7 @@
         public GlovesOfDarkness(string id)
             : base(id)
         {
-            this.Id = "Gloves covered in darkness found in dragon's dungeons";
+            this.Id = "Gloves Of Darkness";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.1;
             this.ChanceToDodge = 0;

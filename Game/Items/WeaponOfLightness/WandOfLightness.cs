@@ -10,7 +10,7 @@
         public WandOfLightness(string id)
             : base(id)
         {
-            this.Id = "Wand made from the core of fallen star";
+            this.Id = "Wand Of Lightness";
             this.AttackPoints = 125;
             this.AttackSpeed = 0;
             this.ChanceToDodge = 0;

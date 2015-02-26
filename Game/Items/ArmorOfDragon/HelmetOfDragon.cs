@@ -10,7 +10,7 @@
         public HelmetOfDragon(string id)
             : base(id)
         {
-            this.Id = "Helmet forged with the breath of fire-breathing dragon";
+            this.Id = "Helmet Of Dragon";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.10;
             this.ChanceToDodge = 7;

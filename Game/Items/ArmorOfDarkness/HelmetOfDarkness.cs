@@ -10,7 +10,7 @@
         public HelmetOfDarkness(string id)
             : base(id)
         {
-            this.Id = "Helmet covered by darkness found in dragon's dungeons";
+            this.Id = "Helmet Of Darkness";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.15;
             this.ChanceToDodge = 10;

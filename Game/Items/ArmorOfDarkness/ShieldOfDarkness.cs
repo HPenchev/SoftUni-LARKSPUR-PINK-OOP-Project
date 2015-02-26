@@ -10,7 +10,7 @@
         public ShieldOfDarkness(string id)
             : base(id)
         {
-            this.Id = "Shield covered by darkness found in dragon's dungeons";
+            this.Id = "Shield Of Darkness";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.25;
             this.ChanceToDodge = 25;

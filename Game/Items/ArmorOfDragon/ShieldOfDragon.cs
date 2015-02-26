@@ -10,7 +10,7 @@
         public ShieldOfDragon(string id)
             : base(id)
         {
-            this.Id = "Shield forged with the breath of fire-breathing dragon";
+            this.Id = "Shield Of Dragon";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.2;
             this.ChanceToDodge = 20;

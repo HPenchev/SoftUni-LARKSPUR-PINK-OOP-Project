@@ -10,7 +10,7 @@
         public ChestArmorOfDarkness(string id)
             : base(id)
         {
-            this.Id = "Armor covered by darkness found in dragon's dungeons";
+            this.Id = "Chest Armor Of Darkness";
             this.AttackPoints = 0;
             this.AttackSpeed = -0.1;
             this.ChanceToDodge = 15;

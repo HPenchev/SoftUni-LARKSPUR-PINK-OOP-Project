@@ -10,7 +10,7 @@
         public BeltOfGandalf(string id)
             : base(id)
         {
-            this.Id = "The Belt of Gandalf the great";
+            this.Id = "Belt Of Gandalf";
             this.AttackPoints = 0;
             this.AttackSpeed = 0.1;
             this.ChanceToDodge = 1;

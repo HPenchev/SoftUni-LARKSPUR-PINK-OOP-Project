@@ -10,7 +10,7 @@
         public SwordOfNakov(string id)
             : base(id)
         {
-            this.Id = "The Sword of Justice";
+            this.Id = "Sword Of Nakov";
             this.AttackPoints = 100;
             this.AttackSpeed = 0.1;
             this.ChanceToDodge = 0;
