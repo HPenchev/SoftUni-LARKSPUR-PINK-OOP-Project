@@ -15,6 +15,7 @@
                 Thread.Sleep(30);
                 Console.Write(text[i]);
             }
+
             Console.ResetColor();
             Console.WriteLine();
         }
@@ -30,6 +31,7 @@
                 Thread.Sleep(30);
                 Console.Write(text[i]);
             }
+
             Console.ResetColor();
             Console.WriteLine();
         }

@@ -228,7 +228,7 @@
                 if (!query.Any())
                 {
                     (item as Armor).IsEquiped = true;
-                    Print.PrintMessageWithAudio(String.Format("{0} has been equiped.", item.Id));
+                    Print.PrintMessageWithAudio(string.Format("{0} has been equiped.", item.Id));
                     ApplyItemEffects(item);
                 }
                 else
@@ -297,18 +297,18 @@
             string answer = string.Empty;
             for (int i = 0; i < items.Count; i++)
             {
-                Print.PrintMessageWithAudio(String.Format("Do you want to add {0} to your inventory.", items[i].Id));
+                Print.PrintMessageWithAudio(string.Format("Do you want to add {0} to your inventory.", items[i].Id));
                 answer = Console.ReadLine();
                 if (answer.ToLower().Contains("yes"))
                 {
                     if (this.InventorySize - items[i].Size <= 0)
                     {
-                       Print.PrintMessageWithAudio("Your Inventory is Full.\nPlease remove something.");
+                        Print.PrintMessageWithAudio("Your Inventory is Full.\nPlease remove something.");
                     }
                     else
                     {
                         this.Inventory.Add(items[i]);
-                        Print.PrintMessageWithAudio(String.Format("You have added {0} to your inventory.", items[i].Id));
+                        Print.PrintMessageWithAudio(string.Format("You have added {0} to your inventory.", items[i].Id));
                     }
                 }
                 else
@@ -335,7 +335,7 @@
             {
                 this.Inventory.Remove(item);
                 UpdateInventorySpace();
-                Print.PrintMessageWithAudio(String.Format("{0} has been removed.", item.Id));
+                Print.PrintMessageWithAudio(string.Format("{0} has been removed.", item.Id));
             }
             else
             {
@@ -392,8 +392,8 @@
 
         public override double CalculateDamage(ICharacter target)
         {
-            double damage = CalculateDamage() + this.AttackSpeed * 0.53;
-            
+            double damage = CalculateDamage() + (this.AttackSpeed * 0.53);
+
             return damage;
         }
 
@@ -405,7 +405,7 @@
 
             if (criticalStrikeChence > 8)
             {
-                damage += damage + 30 *this.CritDamage;
+                damage += damage + (30 * this.CritDamage);
                 Print.PrintMessageWithAudio("Critical!");
             }
 

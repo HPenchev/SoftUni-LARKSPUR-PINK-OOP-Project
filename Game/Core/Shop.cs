@@ -101,8 +101,8 @@
                 Console.WriteLine("{0} ---> {1}  {2} gold", shopInventory[i].Id, i, shopInventory[i].Price);
             }
 
-            Print.PrintMessage(String.Format("Available gold: {0}", player.Gold));
-            Console.WriteLine("{0}\n", new String('-', 10));
+            Print.PrintMessage(string.Format("Available gold: {0}", player.Gold));
+            Console.WriteLine("{0}\n", new string('-', 10));
         }
 
         private void PrintShopCommands()
@@ -125,11 +125,10 @@
                 Console.WriteLine("{0} ---> Index[{1}] Price[{2}]", "Item", "ID", "Price");
                 for (int i = 0; i < player.Inventory.Count; i++)
                 {
-                    Console.WriteLine("{0} Index: {1} Price: {2:F0} gold",
-                                      player.Inventory[i].Id, i, player.Inventory[i].Price * 0.8M);
+                    Console.WriteLine("{0} Index: {1} Price: {2:F0} gold", player.Inventory[i].Id, i, player.Inventory[i].Price * 0.8M);
                 }
 
-                Console.WriteLine((String.Format("{0}\n", new String('-', 10))));
+                Console.WriteLine(string.Format("{0}\n", new string('-', 10)));
                 Console.WriteLine();
             }
             else
@@ -212,7 +211,7 @@
                             {
                                 this.Player.Inventory.Add(item);
                                 this.Player.Gold -= item.Price;
-                                Print.PrintMessageWithAudio(String.Format("You have successfuly bought {0}", item.Id));
+                                Print.PrintMessageWithAudio(string.Format("You have successfuly bought {0}", item.Id));
                             }
                             else
                             {
@@ -264,9 +263,7 @@
                                     string choice = Console.ReadLine();
                                     if (choice.ToLower().Contains("yes"))
                                     {
-                                        Print.PrintMessageWithAudio(
-                                            String.Format("{0} was successfuly sold for {1} gold.",
-                                                item.Id, item.Price * 0.8M));
+                                        Print.PrintMessageWithAudio(string.Format("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M));
                                         this.Player.RemoveItemEffects(item);
                                         this.Player.Gold += item.Price;
                                         this.Player.RemoveItem(item);
@@ -284,9 +281,7 @@
                                     string choice = Console.ReadLine();
                                     if (choice.ToLower().Contains("yes"))
                                     {
-                                        Print.PrintMessageWithAudio(
-                                            String.Format("{0} was successfuly sold for {1} gold.",
-                                                item.Id, item.Price * 0.8M));
+                                        Print.PrintMessageWithAudio(string.Format("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M));
                                         this.Player.Gold += item.Price;
                                         this.Player.RemoveItem(item);
                                         PrintPlayerInventory(this.Player);
@@ -304,8 +299,7 @@
                                 string choice = Console.ReadLine();
                                 if (choice.ToLower().Contains("yes"))
                                 {
-                                    Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.",
-                                        item.Id, item.Price * 0.8M));
+                                    Print.PrintMessageWithAudio(string.Format("{0} was successfuly sold for {1} gold.", item.Id, item.Price * 0.8M));
                                     this.Player.Gold += item.Price;
                                     this.Player.RemoveItem(item);
                                     PrintPlayerInventory(this.Player);
