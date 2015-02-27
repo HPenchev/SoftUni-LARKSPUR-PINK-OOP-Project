@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Game.Characters;
-using Game.Core;
-using Game.Interfaces;
-using Game.Items.Potions;
-
-namespace Game.Engine
+﻿namespace Game.Engine
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Core;
+    using Items.Potions;
+
     public class BattleEngineV2
     {
         private static Player player;
@@ -21,15 +14,15 @@ namespace Game.Engine
         private static List<HealthPotion> healthPotions = new List<HealthPotion>();
         private static List<ManaPotion> manaPotions = new List<ManaPotion>();
         private static List<Spell> lastUsedSpells = new List<Spell>();
-        public BattleEngineV2(Player Inplayer, List<Enemy> Inenemies)
+
+        public BattleEngineV2(Player inPlayer, List<Enemy> inEnemies)
         {
-            player = Inplayer;
-            enemies = Inenemies;
+            player = inPlayer;
+            enemies = inEnemies;
         }
 
         internal void Run()
         {
-
             GetItems();
             while (enemies.Any())
             {
@@ -38,6 +31,11 @@ namespace Game.Engine
             }
         }
 
+        private static void ShowStats(Enemy enemy)
+        {
+            Print.PrintMessage(string.Format("Hero healthpoints: {0}, Enemy healthpoints: {1}", player.HealthPoints, enemy.HealthPoints));
+        }
+        
         private void GetItems()
         {
             foreach (var item in player.Inventory)
@@ -46,10 +44,12 @@ namespace Game.Engine
                 {
                     spells.Add(item as Spell);
                 }
+
                 if (item is HealthPotion)
                 {
                     healthPotions.Add(item as HealthPotion);
                 }
+
                 if (item is ManaPotion)
                 {
                     manaPotions.Add(item as ManaPotion);
@@ -64,12 +64,11 @@ namespace Game.Engine
             {
                 EnemyTurn(enemies);
             }
-
         }
 
         private void PlayerTurn(Enemy enemy)
         {
-            Print.PrintMessage(String.Format("Hero health: {0}, Enemy health: {1}", player.HealthPoints, enemy.HealthPoints));
+            Print.PrintMessage(string.Format("Hero health: {0}, Enemy health: {1}", player.HealthPoints, enemy.HealthPoints));
 
             bool isTunEnd = false;
             while (isTunEnd == false && enemies.Any())
@@ -98,9 +97,7 @@ namespace Game.Engine
                         Print.PrintMessage("invalid command. Please try again");
                         break;
                 }
-
             }
-
         }
 
         private void ShowCommands()
@@ -117,10 +114,9 @@ namespace Game.Engine
             else
             {
                 player.ApplyItemEffects(manaPotions[0]);
-                Print.PrintMessage(String.Format("Mana potion used. Hero mana: {0}", player.Mana));
+                Print.PrintMessage(string.Format("Mana potion used. Hero mana: {0}", player.Mana));
                 player.RemoveItem(manaPotions[0]);
                 manaPotions.Remove(manaPotions[0]);
-
             }
         }
 
@@ -133,10 +129,9 @@ namespace Game.Engine
             else
             {
                 player.ApplyItemEffects(healthPotions[0]);
-                Print.PrintMessage(String.Format("Health potion used. Hero health: {0}", player.HealthPoints));
+                Print.PrintMessage(string.Format("Health potion used. Hero health: {0}", player.HealthPoints));
                 player.RemoveItem(healthPotions[0]);
                 healthPotions.Remove(healthPotions[0]);
-
             }
         }
 
@@ -150,8 +145,9 @@ namespace Game.Engine
             {
                 for (int i = 0; i < spells.Count; i++)
                 {
-                    Print.PrintMessage(String.Format("ID: [{0}], Name: {1}", i, spells[i].Id));
+                    Print.PrintMessage(string.Format("ID: [{0}], Name: {1}", i, spells[i].Id));
                 }
+
                 string userSepllChoice = Console.ReadLine();
                 int spellId;
                 if (int.TryParse(userSepllChoice, out spellId))
@@ -160,7 +156,7 @@ namespace Game.Engine
                     {
                         if (spells[spellId].ManaCost <= player.Mana)
                         {
-                            Print.PrintMessage(String.Format("Spell {0} has been used.", spells[spellId].Id));
+                            Print.PrintMessage(string.Format("Spell {0} has been used.", spells[spellId].Id));
                             player.ApplyItemEffects(spells[spellId]);
                             Print.PrintMessage(player.ToString());
                             lastUsedSpells.Add(spells[spellId]);
@@ -173,7 +169,6 @@ namespace Game.Engine
                     }
                 }
             }
-
         }
 
         private void PlayerHit(Enemy enemy)
@@ -189,12 +184,11 @@ namespace Game.Engine
                 player.PickUpItem(enemy.Inventory);
                 enemies.Remove(enemy);
             }
+
             if (enemies.Any())
             {
                 ShowStats(enemy);
-
             }
-
         }
 
         private void EnemyTurn(List<Enemy> enemies)
@@ -204,6 +198,7 @@ namespace Game.Engine
             {
                 enemiesDamage += enemy.CalculateDamage(player) - player.AllResistance;
             }
+
             player.HealthPoints -= enemiesDamage;
             if (player.HealthPoints <= 0)
             {
@@ -215,21 +210,16 @@ namespace Game.Engine
                 engine.Run();
             }
         }
-
-        private static void ShowStats(Enemy enemy)
-        {
-            Print.PrintMessage(String.Format("Hero healthpoints: {0}, Enemy healthpoints: {1}",
-                player.HealthPoints, enemy.HealthPoints));
-        }
-
+        
         private int SelectEnemy()
         {
             while (true)
             {
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                    Print.PrintMessage(String.Format("ID: [{0}], Enemy healthpoints: {1}, Enemy attackpoints {2}", i, enemies[i].HealthPoints, enemies[i].AttackPoints));
+                    Print.PrintMessage(string.Format("ID: [{0}], Enemy healthpoints: {1}, Enemy attackpoints {2}", i, enemies[i].HealthPoints, enemies[i].AttackPoints));
                 }
+
                 Print.PrintMessageWithAudio("Please select enemy to attack: ");
                 int selectedPlayer;
                 if (int.TryParse(Console.ReadLine(), out selectedPlayer))
@@ -239,6 +229,7 @@ namespace Game.Engine
                         return selectedPlayer;
                     }
                 }
+
                 Print.PrintMessage("Please enter a valid number");
             }
         }

@@ -1,32 +1,28 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Game.Engine
+﻿namespace Game.Engine
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
     using Characters;
     using Core;
-    using Core.Data.Constants.EngineConstants;
     using Core.Data;
+    using Core.Data.Constants.EngineConstants;
     using Static;
 
     [Serializable]
     public class Engine
     {
         #region Fields
+        private const string SaveFile = "save.dat";
         private static Player player;
         private static MapGenerator map;
         private static Position playerPosition;
         private static int world;
         private static char previousMapElement;
-        private static Position specialElementPOs;
         private static bool isMapEnementForRemove;
-      
-        private const string saveFile = "save.dat";
         #endregion
 
         public void Run()
@@ -89,7 +85,7 @@ namespace Game.Engine
                 PrintMainMenu();
                 var mainMenuInput = Console.ReadLine();
                 Console.Clear();
-                if (String.IsNullOrWhiteSpace(mainMenuInput))
+                if (string.IsNullOrWhiteSpace(mainMenuInput))
                 {
                     Print.PrintMessageWithAudio("Invalid Menu Choice.");
                 }
@@ -145,7 +141,7 @@ namespace Game.Engine
 
             string playerType = player.GetType().ToString().Replace("Game.Characters.", string.Empty);
             Console.Clear();
-            Print.PrintMessageWithAudio(String.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
+            Print.PrintMessageWithAudio(string.Format("A new {0} has been created. His name is {1}", playerType, (player as GameObject).Id));
         }
 
         private static void CheckForHack(string name)
@@ -277,7 +273,7 @@ namespace Game.Engine
                 {
                     ProceesMapElement(currentMapObject);
                 }
-             
+
                 map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
                 previousMapElement = map.Map[playerPosition.X - 1, playerPosition.Y];
                 if (isMapEnementForRemove)
@@ -285,6 +281,7 @@ namespace Game.Engine
                     previousMapElement = 'e';
                     isMapEnementForRemove = false;
                 }
+
                 map.Map[playerPosition.X - 1, playerPosition.Y] = 'P';
                 playerPosition.X--;
                 map.PrintMap();
@@ -305,7 +302,7 @@ namespace Game.Engine
                 {
                     ProceesMapElement(currentMapObject);
                 }
-              
+
                 map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
                 previousMapElement = map.Map[playerPosition.X + 1, playerPosition.Y];
                 if (isMapEnementForRemove)
@@ -313,6 +310,7 @@ namespace Game.Engine
                     previousMapElement = 'e';
                     isMapEnementForRemove = false;
                 }
+
                 map.Map[playerPosition.X + 1, playerPosition.Y] = 'P';
                 map.PrintMap();
                 Console.WriteLine();
@@ -341,6 +339,7 @@ namespace Game.Engine
                     previousMapElement = 'e';
                     isMapEnementForRemove = false;
                 }
+
                 map.Map[playerPosition.X, playerPosition.Y - 1] = 'P';
                 playerPosition.Y--;
                 map.PrintMap();
@@ -361,7 +360,7 @@ namespace Game.Engine
                 {
                     ProceesMapElement(currentMapObject);
                 }
-             
+
                 map.Map[playerPosition.X, playerPosition.Y] = previousMapElement;
                 previousMapElement = map.Map[playerPosition.X, playerPosition.Y + 1];
                 if (isMapEnementForRemove)
@@ -369,6 +368,7 @@ namespace Game.Engine
                     previousMapElement = 'e';
                     isMapEnementForRemove = false;
                 }
+
                 map.Map[playerPosition.X, playerPosition.Y + 1] = 'P';
                 playerPosition.Y++;
                 map.PrintMap();
@@ -428,6 +428,7 @@ namespace Game.Engine
                 case 'O':
                     return "Mob";
             }
+
             return null;
         }
 
@@ -524,7 +525,7 @@ namespace Game.Engine
         {
             for (int i = 0; i < EngineConst.TypeOfHeroes.Length; i++)
             {
-                Print.PrintMessage(String.Format("{0}", EngineConst.TypeOfHeroes[i]));
+                Print.PrintMessage(string.Format("{0}", EngineConst.TypeOfHeroes[i]));
                 Print.PrintMessage(EngineConst.HeroDesc[i]);
             }
         }
@@ -533,8 +534,7 @@ namespace Game.Engine
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendFormat("Name: {0} Level: {1} Experience: {2}\n", player.Id, player.Level, player.Experience);
-            builder.AppendFormat("Attack: {0} Defence: {1} Health: {2} Mana {3}\n",
-                                  player.AttackPoints, player.DefensePoints, player.HealthPoints, player.Mana);
+            builder.AppendFormat("Attack: {0} Defence: {1} Health: {2} Mana {3}\n", player.AttackPoints, player.DefensePoints, player.HealthPoints, player.Mana);
             builder.AppendFormat("All Ressistance: {0}\n", player.AllResistance);
             builder.AppendFormat("Attack Speed: {0}\n", player.AttackSpeed);
             builder.AppendFormat("Chance to Dodge: {0}\n", player.ChanceToDodge);
@@ -563,12 +563,10 @@ namespace Game.Engine
                 {
                     isMapEnementForRemove = true;
                 }
-              
+
                 world++;
                 player.CalculateLevelByExperience();
                 NextWorld();
-
-
             }
             else
             {
@@ -619,6 +617,7 @@ namespace Game.Engine
                 {
                     isMapEnementForRemove = true;
                 }
+
                 player.CalculateLevelByExperience();
             }
             else
@@ -648,6 +647,7 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("Good choice, this chest can be useful later on.");
             }
+
             Console.WriteLine();
         }
 
@@ -678,6 +678,7 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("Good choice, this health well can be useful later on.");
             }
+
             Console.WriteLine();
         }
 
@@ -700,8 +701,7 @@ namespace Game.Engine
                 player.HealthPoints += well.Health;
                 well.IsUsed = true;
                 Print.PrintMessageWithAudio("I feel stronger already.");
-                Print.PrintMessageWithAudio(String.Format("{0} gained {1} health points by using a Health well.",
-                    player.Id, well.Health));
+                Print.PrintMessageWithAudio(string.Format("{0} gained {1} health points by using a Health well.", player.Id, well.Health));
                 Console.WriteLine();
             }
         }
@@ -724,6 +724,7 @@ namespace Game.Engine
             {
                 Print.PrintMessageWithAudio("Good choice, this mana well can be useful later on.");
             }
+
             Console.WriteLine();
         }
 
@@ -739,8 +740,7 @@ namespace Game.Engine
                 Console.Clear();
                 player.Mana += manaWell.Mana;
                 Print.PrintMessageWithAudio("I feel more powerful already.");
-                Print.PrintMessageWithAudio(String.Format("{0} gained {1} mana points by using a Mana well.", player.Id,
-                    manaWell.Mana));
+                Print.PrintMessageWithAudio(string.Format("{0} gained {1} mana points by using a Mana well.", player.Id, manaWell.Mana));
                 Console.WriteLine();
             }
         }
@@ -757,7 +757,7 @@ namespace Game.Engine
                     break;
 
                 case 'c':
-                   
+
                     InteractWithChest();
                     break;
 
@@ -786,9 +786,8 @@ namespace Game.Engine
 
         public static void GenerateMapByWorld()
         {
-            //todo
             Random random = new Random();
-            int size = 4* random.Next(5, world * 5);
+            int size = 4 * random.Next(5, world * 5);
             int healtWellCount = random.Next(world + 1, world * 5);
             int manaWellCount = random.Next(world, world * 4);
             int chestCount = random.Next(world, world * (5 - 2));
@@ -821,16 +820,16 @@ namespace Game.Engine
             SetPlayerPos();
             previousMapElement = 'e';
         }
+
         #endregion
 
         #region Save and Load
         public static void Save()
         {
-
             SaveGame saveGame = new SaveGame(player, map, playerPosition, world, previousMapElement);
             try
             {
-                using (Stream stream = File.Open(saveFile, FileMode.Create))
+                using (Stream stream = File.Open(SaveFile, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, saveGame);
@@ -853,11 +852,12 @@ namespace Game.Engine
             SaveGame saveGame;
             try
             {
-                using (Stream stream = File.Open(saveFile, FileMode.Open))
+                using (Stream stream = File.Open(SaveFile, FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     saveGame = (SaveGame)bin.Deserialize(stream);
                 }
+
                 LoadGame(saveGame);
                 Print.PrintMessageWithAudio("Load Successful");
             }
@@ -887,5 +887,5 @@ namespace Game.Engine
             ExecuteCommand();
         }
         #endregion
-    } 
+    }
 }
