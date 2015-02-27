@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
+    using System;
     using System.Collections.Generic;
     using Data.Constants.EnemyConstants;
     using Interfaces;
@@ -19,7 +18,6 @@ namespace Game.Core
         {
             this.AttackPoints = EnemyConstants.EnemyStartingAttackPoints;
             this.Gold = EnemyConstants.EnemyStartingGold;
-            //deffecnce points to a dd
             this.HealthPoints = EnemyConstants.EnemyStartingHealthPoints;
             this.Inventory = new List<Item>();
             this.IsAlive = true;
@@ -43,6 +41,7 @@ namespace Game.Core
             {
                 damage = 99;
             }
+
             return damage;
         }
 

@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Game.Characters
+﻿namespace Game.Characters
 {
+    using System;
     using System.Text;
     using Core;
     using Core.Data;

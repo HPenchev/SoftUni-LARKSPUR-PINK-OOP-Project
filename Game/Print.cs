@@ -1,8 +1,8 @@
 ﻿namespace Game
 {
     using System;
-    using System.Threading;
     using System.Speech.Synthesis;
+    using System.Threading;
 
     public static class Print
     {

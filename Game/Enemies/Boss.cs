@@ -1,6 +1,5 @@
 ﻿namespace Game.Enemies
 {
-    using System;
     using Core;
     using Interfaces;
 
@@ -22,6 +21,7 @@
             {
                 damage = 80;
             }
+
             return damage;
         }
 

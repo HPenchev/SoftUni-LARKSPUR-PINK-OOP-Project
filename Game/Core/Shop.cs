@@ -266,7 +266,7 @@
                                     {
                                         Print.PrintMessageWithAudio(
                                             String.Format("{0} was successfuly sold for {1} gold.",
-                                                item.Id, item.Price*0.8M));
+                                                item.Id, item.Price * 0.8M));
                                         this.Player.RemoveItemEffects(item);
                                         this.Player.Gold += item.Price;
                                         this.Player.RemoveItem(item);
@@ -286,7 +286,7 @@
                                     {
                                         Print.PrintMessageWithAudio(
                                             String.Format("{0} was successfuly sold for {1} gold.",
-                                                item.Id, item.Price*0.8M));
+                                                item.Id, item.Price * 0.8M));
                                         this.Player.Gold += item.Price;
                                         this.Player.RemoveItem(item);
                                         PrintPlayerInventory(this.Player);
@@ -305,7 +305,7 @@
                                 if (choice.ToLower().Contains("yes"))
                                 {
                                     Print.PrintMessageWithAudio(String.Format("{0} was successfuly sold for {1} gold.",
-                                        item.Id, item.Price*0.8M));
+                                        item.Id, item.Price * 0.8M));
                                     this.Player.Gold += item.Price;
                                     this.Player.RemoveItem(item);
                                     PrintPlayerInventory(this.Player);
@@ -365,7 +365,6 @@
                 Print.PrintMessage("Invalid input.");
             }
         }
-
 
         private void ExecuteUserInput(string[] input)
         {

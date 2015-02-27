@@ -26,6 +26,7 @@
             {
                 damage = 80;
             }
+
             return damage;
         }
     }

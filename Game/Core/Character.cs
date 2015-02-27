@@ -1,8 +1,6 @@
-﻿using System;
-using System.Speech.Recognition;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
+    using System;
     using System.Collections.Generic;
     using System.Text;
     using Data.Constants.PlayerConstatns;

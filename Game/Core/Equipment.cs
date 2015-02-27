@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Game.Core
+﻿namespace Game.Core
 {
+    using System;
     using System.Text;
-    using Exceptions.ItemException;
 
     [Serializable]
     public abstract class Equipment : Item

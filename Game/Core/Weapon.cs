@@ -1,7 +1,7 @@
 ﻿namespace Game.Core
 {
-    using Data.Enums;
     using System;
+    using Data.Enums;
 
     [Serializable]
     public abstract class Weapon : Equipment

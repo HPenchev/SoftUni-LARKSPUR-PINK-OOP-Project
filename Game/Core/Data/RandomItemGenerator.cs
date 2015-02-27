@@ -8,8 +8,8 @@
     using Items.ArmorOfGandalf;
     using Items.Potions;
     using Items.Spells;
-    using Items.WeaponOfNakov;
     using Items.WeaponOfLightness;
+    using Items.WeaponOfNakov;
 
     public class RandomItemGenerator
     {
@@ -118,16 +118,11 @@
                     if (item is HealthPotion)
                     {
                         (item as HealthPotion).HealthPoints = ((item as HealthPotion).HealthPoints * PlayerLevel) / 2;
-                        //item.HealthPoints *
-                        //                                  random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
 
                     if (item is ManaPotion)
                     {
                         (item as ManaPotion).Mana = ((item as ManaPotion).Mana * PlayerLevel) / 2;
-                        //100;
-                        //item.HealthPoints *
-                        //                        random.Next(Math.Abs(playerLevel - 2), playerLevel + 2);
                     }
                 }
                 else
