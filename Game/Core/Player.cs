@@ -212,6 +212,7 @@
                 if (!query.Any())
                 {
                     (item as Weapon).IsEquiped = true;
+                    Print.PrintMessageWithAudio(string.Format("{0} has been equiped.", item.Id));
                     ApplyItemEffects(item);
                 }
                 else

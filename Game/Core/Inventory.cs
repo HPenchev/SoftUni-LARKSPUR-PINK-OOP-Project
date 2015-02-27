@@ -121,19 +121,30 @@ namespace Game.Core
         {
             if (item is Equipment)
             {
-                if ((item as Weapon).IsEquiped || (item as Armor).IsEquiped)
+                if (item is Weapon)
                 {
-                    return true;
+                    if ((item as Weapon).IsEquiped)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
+                if (item is Armor)
                 {
-                    return false;
+                    if ((item as Armor).IsEquiped)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         private void ExecuteUserInput(string[] input)
@@ -161,7 +172,7 @@ namespace Game.Core
                     PrintInventory();
                     PrintInventoryCommands();
                     break;
-                    
+
                 case "exit":
                     Print.PrintMessageWithAudio("Exiting inventory.");
                     this.IsInInventory = false;

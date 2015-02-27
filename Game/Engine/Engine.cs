@@ -1,4 +1,6 @@
-﻿namespace Game.Engine
+﻿using Game.Draw;
+
+namespace Game.Engine
 {
     using System;
     using System.Collections.Generic;
@@ -80,6 +82,7 @@
         #region MainMenu
         public static void MainMenu()
         {
+            DrawImg.Draw("../../Images/menu.jpg", string.Empty);
             while (true)
             {
                 PrintMainMenu();
