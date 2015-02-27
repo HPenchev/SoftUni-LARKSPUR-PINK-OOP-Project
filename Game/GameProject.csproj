@@ -92,11 +92,8 @@
     <Compile Include="Draw\DrawImg.cs" />
     <Compile Include="Enemies\Boss.cs" />
     <Compile Include="Enemies\Minion.cs" />
-    <Compile Include="Engine\BattleEngine.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="Engine\Engine.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Exceptions\CharacterException\CharacterException.cs" />
     <Compile Include="Exceptions\CharacterException\NegativePlayerLevelException.cs" />

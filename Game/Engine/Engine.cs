@@ -202,7 +202,14 @@
                     case "move":
                     case "go":
                         Console.Clear();
-                        Move(inputParams[1]);
+                        if (inputParams.Length == 2)
+                        {
+                            Move(inputParams[1]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("invalid move command");
+                        }
                         break;
 
                     case "help":
